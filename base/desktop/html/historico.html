@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHealth - Histórico Médico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/historico.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">hub</span>
+            </div>
+            <div class="header-title">
+                <h1>PetHealth</h1>
+                <p>Tutor - Maria Silva</p>
+            </div>
+        </div>
+        <a href="#" class="logout-btn">
+            <span class="material-symbols-outlined">logout</span> Sair
+        </a>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>Histórico Médico</h2>
+            <p>Registros de consultas, exames e medicamentos</p>
+        </div>
+
+        <section class="summary-grid">
+            <div class="summary-card">
+                <span class="material-symbols-outlined summary-icon icon-blue">stethoscope</span>
+                <div class="summary-info">
+                    <h3>2</h3>
+                    <p>Consultas</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <span class="material-symbols-outlined summary-icon icon-purple">science</span>
+                <div class="summary-info">
+                    <h3>1</h3>
+                    <p>Exames</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <span class="material-symbols-outlined summary-icon icon-green">pill</span>
+                <div class="summary-info">
+                    <h3>1</h3>
+                    <p>Medicamentos</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="tabs-container">
+            <div class="tab active">Todos</div>
+            <div class="tab">Consultas</div>
+            <div class="tab">Exames</div>
+            <div class="tab">Medicamentos</div>
+        </div>
+
+        <section class="history-list">
+            
+            <div class="history-card">
+                <div class="history-header">
+                    <div class="history-title-area">
+                        <div class="history-icon bg-blue">
+                            <span class="material-symbols-outlined">stethoscope</span>
+                        </div>
+                        <div class="history-title">
+                            <h4>Consulta de rotina</h4>
+                            <p>14/02/2026</p>
+                        </div>
+                    </div>
+                    <div class="badge-outline">Consulta</div>
+                </div>
+                <div class="history-description">
+                    Check-up anual. Pet apresenta ótima saúde geral.
+                </div>
+                <div class="history-details">
+                    <div><strong>Veterinário:</strong> Dra. Ana Silva</div>
+                    <div><strong>Local:</strong> Clínica Veterinária PetCare</div>
+                </div>
+                <div class="history-obs">
+                    <strong>Obs:</strong> Peso: 12.5kg. Temperatura: 38.5°C
+                </div>
+            </div>
+
+            <div class="history-card">
+                <div class="history-header">
+                    <div class="history-title-area">
+                        <div class="history-icon bg-purple">
+                            <span class="material-symbols-outlined">science</span>
+                        </div>
+                        <div class="history-title">
+                            <h4>Exame de sangue completo</h4>
+                            <p>19/01/2026</p>
+                        </div>
+                    </div>
+                    <div class="badge-outline">Exame</div>
+                </div>
+                <div class="history-description">
+                    Hemograma completo e bioquímica.
+                </div>
+                <div class="history-details">
+                    <div><strong>Veterinário:</strong> Dr. Carlos Santos</div>
+                    <div><strong>Local:</strong> Laboratório VetLab</div>
+                </div>
+                <div class="history-obs">
+                    <strong>Obs:</strong> Todos os valores dentro da normalidade
+                </div>
+            </div>
+
+            <div class="history-card">
+                <div class="history-header">
+                    <div class="history-title-area">
+                        <div class="history-icon bg-green">
+                            <span class="material-symbols-outlined">pill</span>
+                        </div>
+                        <div class="history-title">
+                            <h4>Vermífugo</h4>
+                            <p>09/12/2025</p>
+                        </div>
+                    </div>
+                    <div class="badge-outline">Medicamento</div>
+                </div>
+                <div class="history-description">
+                    Administração de vermífugo de amplo espectro
+                </div>
+                <div class="history-details">
+                    <div><strong>Veterinário:</strong> Dra. Ana Silva</div>
+                    <div><strong>Local:</strong> Clínica Veterinária PetCare</div>
+                </div>
+                <div class="history-obs">
+                    <strong>Obs:</strong> Próxima dose em 3 meses
+                </div>
+            </div>
+
+            <div class="history-card">
+                <div class="history-header">
+                    <div class="history-title-area">
+                        <div class="history-icon bg-blue">
+                            <span class="material-symbols-outlined">stethoscope</span>
+                        </div>
+                        <div class="history-title">
+                            <h4>Consulta dermatológica</h4>
+                            <p>04/11/2025</p>
+                        </div>
+                    </div>
+                    <div class="badge-outline">Consulta</div>
+                </div>
+                <div class="history-description">
+                    Avaliação de alergia sazonal
+                </div>
+                <div class="history-details">
+                    <div><strong>Veterinário:</strong> Dra. Mariana Costa</div>
+                    <div><strong>Local:</strong> Clínica Veterinária DermaPet</div>
+                </div>
+                <div class="history-obs">
+                    <strong>Obs:</strong> Prescrito antialérgico por 15 dias
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            Início
+        </a>
+        <a href="vacinas.html" class="nav-item">
+            <span class="material-symbols-outlined">vaccines</span>
+            Vacinas
+        </a>
+        <a href="historico.html" class="nav-item">
+            <span class="material-symbols-outlined">description</span>
+            Histórico
+        </a>
+        <a href="procedimentos.html" class="nav-item">
+            <span class="material-symbols-outlined">show_chart</span>
+            Procedimentos
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="material-symbols-outlined">chat</span>
+            Chat
+        </a>
+        <a href="perfil.html" class="nav-item active-bordered">
+            <span class="material-symbols-outlined">person</span>
+            Perfil
+        </a>
+    </nav>
+
+
+    <button class="fab">?</button>
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Home Tutor</title>
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Ícones Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
+
+    <style>
+        
+        :root {
+            --bg-app: #eef4f9;
+            --primary-blue: #0056b3;
+            --secondary-blue: #0066cc;
+            --text-dark: #1e3a5f;
+            --text-light: #64748b;
+            --card-bg: #ffffff;
+            --btn-blue: #0056b3;
+            
+            /* Cores dos ícones de ação */
+            --icon-carteira-bg: #0066cc;
+            --icon-vacinas-bg: #004080;
+            --icon-consultas-bg: #e65c00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #d0dce8; /* Fundo mais escuro atrás do container do app */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Container que simula a tela do celular */
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            min-height: 100vh;
+            background-color: var(--bg-app);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Espaço do menu inferior */
+        }
+
+        /* HEADER AZUL */
+        .main-header {
+            background: linear-gradient(to bottom, var(--primary-blue), var(--secondary-blue));
+            border-radius: 0 0 24px 24px;
+            padding: 32px 24px 24px 24px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+        }
+
+        .header-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-icon {
+            font-size: 28px;
+        }
+
+        .header-text h1 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .notification-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ÁREA DE CONTEÚDO */
+        .content-area {
+            padding: 24px 20px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        /* CARD DO PET */
+        .pet-card {
+            background: linear-gradient(to bottom, #f8fbff, #ffffff);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.03);
+            cursor: pointer;
+        }
+
+        .pet-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pet-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .pet-info p {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* GRUPO EXPANDIDO DO PET (Ações) */
+        .pet-actions-group {
+            margin-bottom: 16px;
+        }
+
+        .pet-actions-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: -4px; /* Sobe um pouco para ficar mais perto do card */
+            margin-bottom: 12px;
+        }
+
+        .action-btn {
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 16px;
+            padding: 16px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .action-btn:active {
+            transform: scale(0.96);
+        }
+
+        .action-icon-wrapper {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .action-icon-wrapper.carteira { background-color: var(--icon-carteira-bg); }
+        .action-icon-wrapper.vacinas { background-color: var(--icon-vacinas-bg); }
+        .action-icon-wrapper.consultas { background-color: var(--icon-consultas-bg); }
+
+        .action-icon-wrapper .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .action-btn span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* BOTÃO ADICIONAR PET */
+        .btn-add-pet {
+            background-color: var(--btn-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 24px;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+            cursor: pointer;
+        }
+
+        .btn-add-pet .material-symbols-outlined {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* MENU INFERIOR */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 24px 24px 0 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 16px 0;
+            box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #a0aec0;
+            text-decoration: none;
+        }
+
+        .nav-item .material-symbols-outlined {
+            font-size: 24px;
+        }
+
+        .nav-item span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: var(--primary-blue);
+        }
+
+    
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Cabeçalho -->
+        <header class="main-header">
+            <div class="header-user-info">
+                <span class="material-symbols-outlined header-icon">cruelty_free</span>
+                <div class="header-text">
+                    <h1>Olá, Jhon!</h1>
+                    <p>Seus Pets</p>
+                </div>
+            </div>
+            <span class="material-symbols-outlined notification-icon">notifications</span>
+        </header>
+
+        <!-- Área Central -->
+        <main class="content-area">
+            <h2 class="section-title">Seus Pets</h2>
+
+            <!-- Grupo Expandido do Thor (Com Botões de Ação) -->
+            <div class="pet-actions-group">
+                <a href="./carteira.html">
+                    <div class="pet-card">
+                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=150" alt="Thor" class="pet-image">
+                    <div class="pet-info">
+                        <h3>Thor</h3>
+                        <p>Golden Retriever • 3 anos</p>
+                    </div>
+                </div>
+                </a>
+
+                <div class="pet-actions-row">
+                    <button class="action-btn">
+                        <div class="action-icon-wrapper carteira">
+                            <span class="material-symbols-outlined">folder</span>
+                        </div>
+                        <span>Carteira</span>
+                    </button>
+                    
+                    <button class="action-btn">
+                        <div class="action-icon-wrapper vacinas">
+                            <span class="material-symbols-outlined">vaccines</span>
+                        </div>
+                        <span>Vacinas</span>
+                    </button>
+                    
+                    <button class="action-btn">
+                        <div class="action-icon-wrapper consultas">
+                            <span class="material-symbols-outlined">medical_services</span>
+                        </div>
+                        <span>Consultas</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Simples da Luna -->
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=150" alt="Luna" class="pet-image">
+                <div class="pet-info">
+                    <h3>Luna</h3>
+                    <p>Shih Tzu • 5 anos</p>
+                </div>
+            </div>
+
+            <!-- Botão Adicionar Pet -->
+            <button class="btn-add-pet">
+                <span class="material-symbols-outlined">add</span>
+                Adicionar Pet
+            </button>
+        </main>
+
+        <!-- Menu de Navegação Inferior -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <span class="material-symbols-outlined">home</span>
+                <span>Início</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-symbols-outlined">topic</span>
+                <span>Carteira</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-symbols-outlined">call</span>
+                <span>Contato</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-symbols-outlined">person</span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+
+    </div>
+
+</body>
+</html>

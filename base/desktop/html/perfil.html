@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHealth - Perfil do Pet</title>
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ícones Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/perfil.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">hub</span>
+            </div>
+            <div class="header-title">
+                <h1>PetHealth</h1>
+                <p>Tutor - Maria Silva</p>
+            </div>
+        </div>
+        <a href="#" class="logout-btn">
+            <span class="material-symbols-outlined">logout</span> Sair
+        </a>
+    </header>
+
+    <main>
+        <div class="page-header-container">
+            <div class="page-header">
+                <h2>Perfil do Pet</h2>
+                <p>Informações completas sobre seu pet</p>
+            </div>
+            <button class="btn-primary">
+                <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                Editar Perfil
+            </button>
+        </div>
+
+        <!-- Identity Card -->
+        <section class="card identity-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=200&h=200" alt="Max" class="identity-img">
+            <div class="identity-info">
+                <h3>Max</h3>
+                <p>Golden Retriever • 3 anos</p>
+                <div class="id-number">ID: 123456789012345</div>
+            </div>
+        </section>
+
+        <!-- Informações Básicas -->
+        <section class="card">
+            <h4 class="section-title">Informações Básicas</h4>
+            
+            <div class="form-grid">
+                <div>
+                    <label class="form-label">Nome</label>
+                    <div class="form-value">Max</div>
+                </div>
+                <div>
+                    <label class="form-label">Espécie</label>
+                    <div class="form-value">Cachorro</div>
+                </div>
+                <div>
+                    <label class="form-label">Raça</label>
+                    <div class="form-value">Golden Retriever</div>
+                </div>
+                <div>
+                    <label class="form-label">Data de Nascimento</label>
+                    <div class="form-value">15/01/2023</div>
+                </div>
+                <div>
+                    <label class="form-label">Sexo</label>
+                    <div class="form-value">Macho</div>
+                </div>
+                <div>
+                    <label class="form-label">Cor</label>
+                    <div class="form-value">Dourado</div>
+                </div>
+                <div>
+                    <label class="form-label">Peso (kg)</label>
+                    <div class="form-value">12.5</div>
+                </div>
+                <div>
+                    <label class="form-label">Castrado</label>
+                    <div class="form-value">Sim</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informações Médicas -->
+        <section class="card">
+            <h4 class="section-title">Informações Médicas</h4>
+            
+            <div class="form-grid">
+                <div>
+                    <label class="form-label">Microchip</label>
+                    <div class="form-value">123456789012345</div>
+                </div>
+                <div>
+                    <label class="form-label">Tipo Sanguíneo</label>
+                    <div class="form-value">DEA 1.1 Positivo</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label class="form-label">Alergias</label>
+                <div class="form-value">Nenhuma alergia conhecida</div>
+            </div>
+            <div class="form-row">
+                <label class="form-label">Necessidades Especiais</label>
+                <div class="form-value">Nenhuma necessidade especial</div>
+            </div>
+        </section>
+
+        <!-- Contatos -->
+        <section class="card">
+            <h4 class="section-title">Contatos</h4>
+            
+            <div class="form-row">
+                <label class="form-label">Clínica Veterinária</label>
+                <div class="form-value">Clínica Veterinária PetCare</div>
+            </div>
+            <div class="form-row">
+                <label class="form-label">Telefone da Clínica</label>
+                <div class="form-value">(11) 98765-4321</div>
+            </div>
+            <div class="form-row">
+                <label class="form-label">Contato de Emergência</label>
+                <div class="form-value">Maria Silva - (11) 91234-5678</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            Início
+        </a>
+        <a href="vacinas.html" class="nav-item">
+            <span class="material-symbols-outlined">vaccines</span>
+            Vacinas
+        </a>
+        <a href="historico.html" class="nav-item">
+            <span class="material-symbols-outlined">description</span>
+            Histórico
+        </a>
+        <a href="procedimentos.html" class="nav-item">
+            <span class="material-symbols-outlined">show_chart</span>
+            Procedimentos
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="material-symbols-outlined">chat</span>
+            Chat
+        </a>
+        <a href="perfil.html" class="nav-item active-bordered">
+            <span class="material-symbols-outlined">person</span>
+            Perfil
+        </a>
+    </nav>
+
+    <!-- Floating Help Button -->
+    <button class="fab">?</button>
+
+</body>
+</html>

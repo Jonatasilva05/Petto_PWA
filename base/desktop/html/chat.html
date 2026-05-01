@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHealth - Chat</title>
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ícones Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/chat.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">hub</span>
+            </div>
+            <div class="header-title">
+                <h1>PetHealth</h1>
+                <p>Tutor - Maria Silva</p>
+            </div>
+        </div>
+        <a href="#" class="logout-btn">
+            <span class="material-symbols-outlined">logout</span> Sair
+        </a>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>Chat</h2>
+            <p>Converse diretamente com o veterinário</p>
+        </div>
+
+        <div class="chat-container">
+            <!-- Doctor Header -->
+            <div class="chat-doctor-header">
+                <!-- Imagem ilustrativa como na primeira tela do chat -->
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150&h=150" alt="Dr. Carlos Santos" class="doctor-avatar">
+                <div class="doctor-info">
+                    <h3>Dr. Carlos Santos</h3>
+                    <p>Veterinário</p>
+                </div>
+            </div>
+
+            <!-- Messages List -->
+            <div class="chat-messages">
+                
+                <div class="date-separator">
+                    <span>24/03/2026</span>
+                </div>
+
+                <!-- Msg 1: Incoming -->
+                <div class="message-row incoming">
+                    <div class="msg-avatar avatar-d">D</div>
+                    <div class="msg-content">
+                        <span class="msg-sender">Dr. Carlos Santos</span>
+                        <div class="msg-bubble">
+                            Olá! Tudo bem com o Max após a última consulta?
+                        </div>
+                        <span class="msg-time">09:30</span>
+                    </div>
+                </div>
+
+                <!-- Msg 2: Outgoing -->
+                <div class="message-row outgoing">
+                    <div class="msg-avatar avatar-m">M</div>
+                    <div class="msg-content">
+                        <div class="msg-bubble">
+                            Olá, doutor! Sim, ele está muito bem. Mais animado e brincalhão.
+                        </div>
+                        <span class="msg-time">10:15</span>
+                    </div>
+                </div>
+
+                <!-- Msg 3: Outgoing -->
+                <div class="message-row outgoing">
+                    <div class="msg-avatar avatar-m">M</div>
+                    <div class="msg-content">
+                        <div class="msg-bubble">
+                            Gostaria de agendar a cirurgia de castração que conversamos.
+                        </div>
+                        <span class="msg-time">10:16</span>
+                    </div>
+                </div>
+
+                <!-- Msg 4: Incoming -->
+                <div class="message-row incoming">
+                    <div class="msg-avatar avatar-d">D</div>
+                    <div class="msg-content">
+                        <span class="msg-sender">Dr. Carlos Santos</span>
+                        <div class="msg-bubble">
+                            Ótimo! Que bom saber. Sobre a cirurgia, temos disponibilidade para amanhã às 09h. Funciona para você?
+                        </div>
+                        <span class="msg-time">10:45</span>
+                    </div>
+                </div>
+
+                <!-- Msg 5: Incoming -->
+                <div class="message-row incoming">
+                    <div class="msg-avatar avatar-d">D</div>
+                    <div class="msg-content">
+                        <span class="msg-sender">Dr. Carlos Santos</span>
+                        <div class="msg-bubble">
+                            Preciso que o Max esteja em jejum de 12 horas antes do procedimento. Vou enviar as orientações completas por aqui.
+                        </div>
+                        <span class="msg-time">10:46</span>
+                    </div>
+                </div>
+
+                <!-- Msg 6: Outgoing -->
+                <div class="message-row outgoing">
+                    <div class="msg-avatar avatar-m">M</div>
+                    <div class="msg-content">
+                        <div class="msg-bubble">
+                            Perfeito! Amanhã às 09h está ótimo. Vou seguir todas as orientações.
+                        </div>
+                        <span class="msg-time">11:20</span>
+                    </div>
+                </div>
+
+                <!-- Msg 7: Incoming -->
+                <div class="message-row incoming">
+                    <div class="msg-avatar avatar-d">D</div>
+                    <div class="msg-content">
+                        <span class="msg-sender">Dr. Carlos Santos</span>
+                        <div class="msg-bubble">
+                            Excelente! Vou acompanhar todo o procedimento e enviar atualizações em tempo real por aqui. Qualquer dúvida, estou à disposição!
+                        </div>
+                        <span class="msg-time">11:25</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Chat Input Bar -->
+            <div class="chat-input-area">
+                <div class="action-icon">
+                    <span class="material-symbols-outlined">attach_file</span>
+                </div>
+                <div class="action-icon">
+                    <span class="material-symbols-outlined">image</span>
+                </div>
+                
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Digite sua mensagem...">
+                </div>
+
+                <button class="btn-send">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+   <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            Início
+        </a>
+        <a href="vacinas.html" class="nav-item">
+            <span class="material-symbols-outlined">vaccines</span>
+            Vacinas
+        </a>
+        <a href="historico.html" class="nav-item">
+            <span class="material-symbols-outlined">description</span>
+            Histórico
+        </a>
+        <a href="procedimentos.html" class="nav-item">
+            <span class="material-symbols-outlined">show_chart</span>
+            Procedimentos
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="material-symbols-outlined">chat</span>
+            Chat
+        </a>
+        <a href="perfil.html" class="nav-item active-bordered">
+            <span class="material-symbols-outlined">person</span>
+            Perfil
+        </a>
+    </nav>
+
+    <!-- Floating Help Button -->
+    <button class="fab">?</button>
+
+</body>
+</html>

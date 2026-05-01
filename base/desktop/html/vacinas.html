@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHealth - Vacinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/vacinas.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">hub</span>
+            </div>
+            <div class="header-title">
+                <h1>PetHealth</h1>
+                <p>Tutor - Maria Silva</p>
+            </div>
+        </div>
+        <a href="#" class="logout-btn">
+            <span class="material-symbols-outlined">logout</span> Sair
+        </a>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>Carteira de Vacinação</h2>
+            <p>Histórico completo de vacinas</p>
+        </div>
+
+        <section class="summary-grid">
+            <div class="summary-card">
+                <div class="summary-icon green">
+                    <span class="material-symbols-outlined">check_circle</span>
+                </div>
+                <div class="summary-info">
+                    <h3>3</h3>
+                    <p>Vacinas em dia</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon yellow">
+                    <span class="material-symbols-outlined">error</span>
+                </div>
+                <div class="summary-info">
+                    <h3>1</h3>
+                    <p>Reforços próximos</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="vaccine-card">
+            <div class="vaccine-header">
+                <div class="vaccine-title-area">
+                    <div class="vaccine-icon">
+                        <span class="material-symbols-outlined">vaccines</span>
+                    </div>
+                    <div class="vaccine-title">
+                        <h4>V8 (Óctupla)</h4>
+                        <p>Aplicada em 14/02/2025</p>
+                    </div>
+                </div>
+                <div class="badge badge-success">Completa</div>
+            </div>
+            <div class="vaccine-details">
+                <div class="detail-item"><strong>Lote:</strong> LOT12345</div>
+                <div class="detail-item"><strong>Veterinário:</strong> Dra. Ana Silva</div>
+                <div class="detail-item"><strong>Clínica:</strong> Clínica Veterinária PetCare</div>
+                <div class="detail-item"><strong>Próxima dose:</strong> 14/02/2026</div>
+            </div>
+            <div class="alert-box">
+                <span class="material-symbols-outlined" style="font-size: 18px;">info</span>
+                Agende o reforço com antecedência
+            </div>
+        </div>
+
+        <div class="vaccine-card warning">
+            <div class="vaccine-header">
+                <div class="vaccine-title-area">
+                    <div class="vaccine-icon">
+                        <span class="material-symbols-outlined">vaccines</span>
+                    </div>
+                    <div class="vaccine-title">
+                        <h4>Antirrábica</h4>
+                        <p>Aplicada em 09/03/2025</p>
+                    </div>
+                </div>
+                <div class="badge badge-warning">Reforço em breve</div>
+            </div>
+            <div class="vaccine-details">
+                <div class="detail-item"><strong>Lote:</strong> LOT67890</div>
+                <div class="detail-item"><strong>Veterinário:</strong> Dr. Carlos Santos</div>
+                <div class="detail-item"><strong>Clínica:</strong> Clínica Veterinária PetCare</div>
+                <div class="detail-item"><strong>Próxima dose:</strong> 14/04/2026</div>
+            </div>
+            <div class="alert-box">
+                <span class="material-symbols-outlined" style="font-size: 18px;">info</span>
+                Agende o reforço com antecedência
+            </div>
+        </div>
+
+        <div class="vaccine-card">
+            <div class="vaccine-header">
+                <div class="vaccine-title-area">
+                    <div class="vaccine-icon">
+                        <span class="material-symbols-outlined">vaccines</span>
+                    </div>
+                    <div class="vaccine-title">
+                        <h4>Giárdia</h4>
+                        <p>Aplicada em 19/04/2025</p>
+                    </div>
+                </div>
+                <div class="badge badge-success">Completa</div>
+            </div>
+            <div class="vaccine-details">
+                <div class="detail-item"><strong>Lote:</strong> LOT24680</div>
+                <div class="detail-item"><strong>Veterinário:</strong> Dra. Ana Silva</div>
+                <div class="detail-item"><strong>Clínica:</strong> Clínica Veterinária PetCare</div>
+                </div>
+        </div>
+
+        <div class="vaccine-card">
+            <div class="vaccine-header">
+                <div class="vaccine-title-area">
+                    <div class="vaccine-icon">
+                        <span class="material-symbols-outlined">vaccines</span>
+                    </div>
+                    <div class="vaccine-title">
+                        <h4>Leishmaniose</h4>
+                        <p>Aplicada em 14/05/2025</p>
+                    </div>
+                </div>
+                <div class="badge badge-success">Completa</div>
+            </div>
+            <div class="vaccine-details">
+                <div class="detail-item"><strong>Lote:</strong> LOT13579</div>
+                <div class="detail-item"><strong>Veterinário:</strong> Dr. Carlos Santos</div>
+                <div class="detail-item"><strong>Clínica:</strong> Clínica Veterinária PetCare</div>
+                <div class="detail-item"><strong>Próxima dose:</strong> 14/05/2026</div>
+            </div>
+            <div class="alert-box">
+                <span class="material-symbols-outlined" style="font-size: 18px;">info</span>
+                Agende o reforço com antecedência
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            Início
+        </a>
+        <a href="vacinas.html" class="nav-item">
+            <span class="material-symbols-outlined">vaccines</span>
+            Vacinas
+        </a>
+        <a href="historico.html" class="nav-item">
+            <span class="material-symbols-outlined">description</span>
+            Histórico
+        </a>
+        <a href="procedimentos.html" class="nav-item">
+            <span class="material-symbols-outlined">show_chart</span>
+            Procedimentos
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="material-symbols-outlined">chat</span>
+            Chat
+        </a>
+        <a href="perfil.html" class="nav-item active-bordered">
+            <span class="material-symbols-outlined">person</span>
+            Perfil
+        </a>
+    </nav>
+
+
+    <button class="fab">?</button>
+
+</body>
+</html>

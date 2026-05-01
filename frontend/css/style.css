@@ -273,3 +273,179 @@ input:not(.input-wrapper input) { margin-bottom: 15px; }
     background: #f8f9fa;
     border-radius: 0 0 20px 24px;
 }
+
+/* --- NOVO LAYOUT DA HOME (TUTOR) --- */
+.has-bottom-nav {
+    padding-bottom: 80px; /* Espaço para a barra inferior */
+}
+
+/* Cabeçalho Azul Curvado */
+.tutor-header-curved {
+    background-color: var(--button-bg); /* Azul principal */
+    color: white;
+    padding: 30px 20px 40px 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-top: -20px; /* Compensa o padding geral do #app se houver */
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.greeting-container h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.greeting-container .subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.icon-crown, .icon-profile {
+    font-size: 24px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Corpo do Dashboard */
+.dashboard-body {
+    padding: 10px 0;
+}
+.section-label {
+    font-size: 16px;
+    color: #555;
+    margin: 15px 0;
+}
+
+/* Novo Card do Pet */
+.pet-card-main {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #ffffff, #f0f4f8);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: 1px solid #e9eef3;
+    position: relative;
+    z-index: 2;
+}
+
+.pet-card-main .pet-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.pet-card-main h3 {
+    margin: 0 0 5px 0;
+    color: var(--button-bg);
+    font-size: 18px;
+}
+
+.pet-card-main p {
+    margin: 0;
+    color: #7A8C99;
+    font-size: 13px;
+}
+
+/* Botões de Ação (Sanfona) */
+.pet-card-actions {
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 25px 15px 15px 15px;
+    border-radius: 0 0 20px 20px;
+    margin-top: -20px; /* Fica debaixo do card principal */
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    border: 1px solid #e9eef3;
+    border-top: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.pet-card-actions.show {
+    max-height: 100px;
+    opacity: 1;
+}
+
+.action-btn {
+    flex: 1;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 10px 5px;
+    margin: 0 5px;
+    font-size: 12px;
+    color: var(--button-bg);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.action-btn .icon { font-size: 18px; }
+
+/* Botão Adicionar Pet */
+.btn-add-pet-large {
+    margin-top: 10px;
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 18px;
+}
+
+/* Barra de Navegação Inferior */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #A9B4BC;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.nav-item .nav-icon { font-size: 22px; margin-bottom: 4px; }
+.nav-item.active { color: var(--primary); font-weight: bold; }
+
+/* Form Cadastro Pet */
+.simple-header { display: flex; align-items: center; margin-bottom: 20px; }
+.btn-icon-back { background: none; border: none; color: var(--primary); font-size: 16px; font-weight: bold; margin-right: 15px; cursor: pointer;}
+.photo-upload-container { display: flex; justify-content: center; margin-bottom: 20px; }
+.photo-circle { width: 100px; height: 100px; border-radius: 50%; background: #e9eef3; display: flex; justify-content: center; align-items: center; color: #7A8C99; cursor: pointer; border: 2px dashed #ccc; }
+.input-row { display: flex; gap: 10px; margin-bottom: 15px; }
+.select-input { flex: 1; padding: 15px; border: 1px solid #ccc; border-radius: 12px; background-color: #f9f9f9; font-size: 16px; }

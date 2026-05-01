@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetHealth Dashboard</title>
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ícones Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">hub</span>
+            </div>
+            <div class="header-title">
+                <h1>PetHealth</h1>
+                <p>Tutor - Maria Silva</p>
+            </div>
+        </div>
+        <a href="#" class="logout-btn">
+            <span class="material-symbols-outlined">logout</span> Sair
+        </a>
+    </header>
+
+    <main>
+        <!-- Profile Card -->
+        <section class="card profile-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=150&h=150" alt="Cachorro Max" class="profile-img">
+            <div class="profile-info">
+                <h2>Max</h2>
+                <p>Golden Retriever • 3 anos</p>
+                <div class="badge badge-success">
+                    <span class="material-symbols-outlined">favorite</span> Saudável
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid 1 -->
+        <section class="stats-grid">
+            <div class="card stat-card">
+                <h3>Peso</h3>
+                <div class="value">12.5 kg</div>
+            </div>
+            <div class="card stat-card">
+                <h3>Última consulta</h3>
+                <div class="value">15/02/2026</div>
+            </div>
+            <div class="card stat-card">
+                <h3>Vacinas</h3>
+                <div class="value">Em dia</div>
+                <div class="badge badge-success">OK</div>
+            </div>
+            <div class="card stat-card">
+                <h3>Vermifugação</h3>
+                <div class="value">Próxima em 30 dias</div>
+                <div class="badge badge-warning">Atenção</div>
+            </div>
+        </section>
+
+        <!-- Events List -->
+        <section class="card">
+            <div class="events-card-title">
+                <span class="material-symbols-outlined">calendar_today</span> Próximos Eventos
+            </div>
+            <div class="event-list">
+                <div class="event-item">
+                    <div class="event-icon">
+                        <span class="material-symbols-outlined">info</span>
+                    </div>
+                    <div class="event-info">
+                        <h4>Reforço da vacina antirrábica</h4>
+                        <p>14/04/2026 • Em -16 dias</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-icon">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </div>
+                    <div class="event-info">
+                        <h4>Consulta de rotina</h4>
+                        <p>19/04/2026 • Em -11 dias</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="event-info">
+                        <h4>Vermifugação</h4>
+                        <p>09/05/2026 • Em 9 dias</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Totals Grid -->
+        <section class="totals-grid">
+            <div class="card total-card">
+                <div class="total-number blue">8</div>
+                <div class="total-label">Vacinas Aplicadas</div>
+            </div>
+            <div class="card total-card">
+                <div class="total-number green">12</div>
+                <div class="total-label">Consultas Realizadas</div>
+            </div>
+            <div class="card total-card">
+                <div class="total-number purple">3</div>
+                <div class="total-label">Anos de Saúde</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            Início
+        </a>
+        <a href="vacinas.html" class="nav-item">
+            <span class="material-symbols-outlined">vaccines</span>
+            Vacinas
+        </a>
+        <a href="historico.html" class="nav-item">
+            <span class="material-symbols-outlined">description</span>
+            Histórico
+        </a>
+        <a href="procedimentos.html" class="nav-item">
+            <span class="material-symbols-outlined">show_chart</span>
+            Procedimentos
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="material-symbols-outlined">chat</span>
+            Chat
+        </a>
+        <a href="perfil.html" class="nav-item active-bordered">
+            <span class="material-symbols-outlined">person</span>
+            Perfil
+        </a>
+    </nav>
+
+    <!-- Floating Help Button -->
+    <button class="fab">?</button>
+
+</body>
+</html>

@@ -94,25 +94,104 @@
         </section>
 
         <!-- DASHBOARD: TUTOR -->
-        <section id="tutor-dashboard" class="view-section hidden">
-            <div class="dashboard-header">
-                <h2>Olá, <span id="tutor-name-display"></span>!</h2>
-                <button id="btn-logout-tutor" class="btn-logout">Sair</button>
+        <!-- DASHBOARD: TUTOR (HOME) -->
+        <section id="tutor-dashboard" class="view-section hidden has-bottom-nav">
+            <!-- Cabeçalho Curvado -->
+            <div class="tutor-header-curved">
+                <div class="header-top">
+                    <span class="icon-crown">👑</span>
+                    <div class="greeting-container">
+                        <h2 id="tutor-name-display">Olá!</h2>
+                        <span class="subtitle">Seus Pets</span>
+                    </div>
+                    <button class="icon-profile" id="btn-tutor-profile">👤</button>
+                </div>
             </div>
             
-            <!-- ESSA DIV É OBRIGATÓRIA PARA OS PETS APARECEREM -->
-            <div id="pet-list-container"></div>
-            
-            <!-- Estado Vazio (Baseado no seu React Native) -->
-            <div class="empty-state">
-                <img src="./assets/icons/icon-192x192.png" alt="Pet" class="empty-image" onerror="this.style.display='none'">
-                <h3>Nenhum pet por aqui</h3>
-                <p>Vamos registrar o seu primeiro amigo?</p>
-                <button class="btn-secondary">Registrar primeiro pet</button>
-            </div>
+            <!-- Corpo do Dashboard -->
+            <div class="dashboard-body">
+                <h3 class="section-label">Seus Pets</h3>
+                
+                <div id="pet-list-container">
+                    <!-- Cards dos Pets renderizados via JS -->
+                </div>
+                
+                <div class="empty-state hidden" id="tutor-empty-state">
+                    <img src="./assets/images/cachorro.png" alt="Pet" class="empty-image" onerror="this.style.display='none'">
+                    <h3>Nenhum pet por aqui</h3>
+                    <p>Vamos registrar o seu primeiro amigo?</p>
+                </div>
 
-            <!-- Botão Flutuante -->
-            <button class="fab" id="btn-add-pet">+</button>
+                <!-- Botão Adicionar Pet (Igual à imagem) -->
+                <button id="btn-go-add-pet" class="btn-primary btn-add-pet-large">
+                    <span class="icon">＋</span> Adicionar Pet
+                </button>
+            </div>
+            
+            <!-- Barra de Navegação Inferior -->
+            <nav class="bottom-nav">
+                <button class="nav-item active">
+                    <span class="nav-icon">🏠</span><br><span>Início</span>
+                </button>
+                <button class="nav-item">
+                    <span class="nav-icon">🪪</span><br><span>Carteira</span>
+                </button>
+                <button class="nav-item">
+                    <span class="nav-icon">📞</span><br><span>Contato</span>
+                </button>
+                <button class="nav-item" id="btn-logout-tutor">
+                    <span class="nav-icon">⚙️</span><br><span>Sair</span>
+                </button>
+            </nav>
+        </section>
+
+        <!-- TELA: CADASTRAR PET -->
+        <section id="cadastrar-pet-view" class="view-section hidden">
+            <div class="simple-header">
+                <button id="btn-back-home" class="btn-icon-back">⬅ Voltar</button>
+                <h2>Cadastrar Pet</h2>
+            </div>
+            
+            <div class="form-body">
+                <div class="photo-upload-container">
+                    <div class="photo-circle" id="pet-photo-preview">
+                        <span>📷 Add Foto</span>
+                    </div>
+                    <input type="file" id="reg-pet-foto" accept="image/*" class="hidden">
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="text" id="reg-pet-nome" placeholder="Nome do Pet">
+                </div>
+                
+                <div class="input-row">
+                    <select id="reg-pet-especie" class="select-input">
+                        <option value="" disabled selected>Espécie</option>
+                        <option value="Cachorro">Cachorro</option>
+                        <option value="Gato">Gato</option>
+                    </select>
+                    <input type="text" id="reg-pet-raca" placeholder="Raça">
+                </div>
+
+                <div class="input-row">
+                    <input type="number" id="reg-pet-idade" placeholder="Idade" inputmode="numeric">
+                    <select id="reg-pet-idade-und" class="select-input">
+                        <option value="anos">Anos</option>
+                        <option value="meses">Meses</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <select id="reg-pet-sexo" class="select-input">
+                        <option value="" disabled selected>Sexo</option>
+                        <option value="M">Macho</option>
+                        <option value="F">Fêmea</option>
+                    </select>
+                    <input type="number" id="reg-pet-peso" placeholder="Peso (kg)" step="0.1">
+                </div>
+
+                <button id="btn-save-pet" class="btn-primary" style="margin-top: 20px;">Salvar Pet</button>
+            </div>
         </section>
 
         <!-- DASHBOARD: VETERINÁRIO (Baseado em VetDashboardScreen) -->
