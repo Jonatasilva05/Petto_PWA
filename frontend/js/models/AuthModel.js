@@ -52,6 +52,25 @@ export class AuthModel {
         return true;
     }
 
+        // Adicione dentro da classe AuthModel no frontend
+    async fetchPacientes() {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/vet/pacientes`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error('Erro ao buscar pacientes');
+        return await response.json();
+    }
+
+    async fetchPacienteDetail(petId) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/vet/pacientes/${petId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error('Erro ao buscar prontuário');
+        return await response.json();
+    }
+
     logout() {
         localStorage.removeItem('auth-token-petto');
         localStorage.removeItem('user-role');

@@ -1,7 +1,10 @@
 export class AuthController {
-    constructor(model, view) {
+    constructor(model, view, petController) { // Recebe o petController
         this.model = model;
         this.view = view;
+        this.petController = petController; // Guarda a referência
+
+        this.view.bindLoginEvent(this.handleLogin.bind(this));  
 
         this.view.bindLoginEvent(this.handleLogin.bind(this));
         this.view.bindRegisterFinal(this.handleRegisterSubmit.bind(this));
@@ -13,12 +16,18 @@ export class AuthController {
         this.checkSession();
     }
 
-    checkSession() {
+    async checkSession() {
         if(this.model.isLoggedIn()) {
             const role = localStorage.getItem('user-role');
             const name = localStorage.getItem('user-name') || '';
             this.view.setupDashboard(role, name);
-            if (role === 'veterinario') this.loadVetDashboard();
+            
+            // Se for tutor, carrega os pets automaticamente ao abrir o app
+            if (role === 'tutor') {
+                await this.petController.loadDashboard();
+            } else if (role === 'veterinario') {
+                this.loadVetDashboard();
+            }
         } else {
             this.view.switchScreen('login');
         }
@@ -37,17 +46,24 @@ export class AuthController {
         this.view.setLoading('btn-login', true);
         try {
             const data = await this.model.login(email, senha);
-            this.view.showToast(`Olá, ${localStorage.getItem('user-name')}!`, 'success');
+            const userName = localStorage.getItem('user-name');
+            this.view.showToast(`Olá, ${userName}!`, 'success');
             
-            if (data.role === 'veterinario') await this.loadVetDashboard();
-            else this.view.setupDashboard(data.role, localStorage.getItem('user-name'));
+            this.view.setupDashboard(data.role, userName);
+
+            // A MÁGICA AQUI: Se for tutor, manda o outro controller carregar os pets
+            if (data.role === 'tutor') {
+                await this.petController.loadDashboard();
+            } else if (data.role === 'veterinario') {
+                await this.loadVetDashboard();
+            }
         } catch (e) {
             this.view.showToast(e.message, 'error');
         } finally {
             this.view.setLoading('btn-login', false);
         }
     }
-
+    
     async loadVetDashboard() {
         this.view.switchScreen('vet');
         try {

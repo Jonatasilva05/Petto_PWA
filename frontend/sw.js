@@ -5,10 +5,7 @@ const urlsToCache = [
   './',
   './index.html',
   './css/style.css',
-  './js/app.js',
-  './js/models/AuthModel.js',
-  './js/view/AuthView.js', 
-  './js/controllers/AuthController.js'
+  './js/app.js'
 ];
 
 self.addEventListener('install', event => {
