@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetCare - Emergência 24h</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --bg-light: #e8f0f8;
+        --primary-blue: #2d6da6;
+        --emergency-red: #e74c3c;
+        --emergency-red-light: #f5b7b1;
+        --text-dark: #1a2b3c;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e0e5ec;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 20px;
+    }
+    .mobile-frame {
+        width: 375px;
+        height: 812px;
+        background-color: var(--bg-light);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    
+    /* Top Logo */
+    .top-logo {
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-blue);
+    }
+    .top-logo i { font-size: 28px; }
+
+    /* Title */
+    .title {
+        font-size: 28px;
+        font-weight: 800;
+        color: black;
+        margin: 20px 0 40px 0;
+        letter-spacing: 0.5px;
+    }
+
+    /* Emergency Button */
+    .btn-outer-ring {
+        width: 220px;
+        height: 220px;
+        background-color: var(--emergency-red-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+        margin-bottom: 40px;
+    }
+    .btn-inner {
+        width: 180px;
+        height: 180px;
+        background-color: var(--emergency-red);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1.2;
+        box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
+        cursor: pointer;
+    }
+
+    /* Map Card */
+    .map-card {
+        width: 90%;
+        height: 180px;
+        background-color: white;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80'); /* Placeholder Mapa */
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Map Elements */
+    .map-tooltip {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        color: var(--text-dark);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        white-space: nowrap;
+    }
+    .map-tooltip::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px 5px 0;
+        border-style: solid;
+        border-color: white transparent transparent transparent;
+    }
+    .map-pin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--emergency-red);
+        font-size: 30px;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .map-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: white;
+        text-align: center;
+        padding: 12px 0;
+        font-size: 14px;
+        color: var(--text-dark);
+        font-weight: 500;
+    }
+
+    /* Bottom Info */
+    .info-footer {
+        text-align: center;
+        margin-top: auto;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+    }
+    .info-footer h3 { margin: 0 0 5px 0; font-size: 16px; font-weight: bold; }
+    .info-footer p { margin: 0; font-size: 14px; color: #555; }
+
+    /* Bottom Nav */
+    .bottom-nav {
+        width: 100%;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 15px 0;
+        border-top: 1px solid #eaeaea;
+    }
+    .nav-item {
+        color: #99aab5;
+        font-size: 24px;
+    }
+    .nav-item.active { color: var(--primary-blue); }
+
+</style>
+</head>
+<body>
+
+<div class="mobile-frame">
+    
+    <div class="top-logo">
+        <i class="fa-solid fa-heart"></i> PetCare+
+    </div>
+
+    <div class="title">EMERGÊNCIA 24h</div>
+
+    <div class="btn-outer-ring">
+        <div class="btn-inner">
+            PEDIR<br>AJUDA<br>IMEDIATA
+        </div>
+    </div>
+
+    <div class="map-card">
+        <div class="map-tooltip">VetCare 24h - 5 min</div>
+        <i class="fa-solid fa-location-dot map-pin"></i>
+        <div class="map-footer">Seu prontuário será enviado ao chegar</div>
+    </div>
+
+    <div class="info-footer">
+        <h3>Atendimento 24h</h3>
+        <p>Tempo Médio Resposta: 15min</p>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active"><i class="fa-solid fa-house"></i></div>
+        <div class="nav-item"><i class="fa-solid fa-calendar-days"></i></div>
+        <div class="nav-item"><i class="fa-solid fa-paw"></i></div>
+        <div class="nav-item"><i class="fa-solid fa-user"></i></div>
+    </div>
+</div>
+
+</body>
+</html>

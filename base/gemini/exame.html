@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetCare - Histórico (Exames)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-blue: #0b5ed7;
+        --bg-color: #f8faff;
+        --text-dark: #1a1a1a;
+        --text-muted: #6c757d;
+        --exam-color: #0dcaf0;
+        --exam-bg: #e0f8fd;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #dbe3ed;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 20px;
+    }
+    .mobile-frame {
+        width: 375px;
+        height: 812px;
+        background-color: var(--bg-color);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .header-top {
+        display: flex; justify-content: space-between; align-items: center; padding: 30px 20px 10px;
+    }
+    .header-top h1 { margin: 0; font-size: 24px; color: var(--text-dark); }
+    .btn-clear {
+        background: white; border: 1px solid #dee2e6; padding: 8px 12px; border-radius: 8px; color: var(--primary-blue); font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px;
+    }
+    .subtitle { padding: 0 20px; color: var(--text-muted); font-size: 14px; margin-bottom: 15px; }
+
+    .filters-container { padding: 0 20px; margin-bottom: 20px; }
+    .filters { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
+    
+    .filter-tab {
+        background: white; border: 1px solid #dee2e6; padding: 10px 20px; border-radius: 8px; font-size: 14px; color: var(--text-dark); white-space: nowrap; cursor: pointer;
+    }
+    .filter-tab.active {
+        background-color: var(--primary-blue); color: white; border-color: var(--primary-blue); font-weight: bold;
+    }
+
+    .list-container {
+        flex: 1; background: white; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 10px 20px; overflow-y: auto; box-shadow: 0 -2px 10px rgba(0,0,0,0.02);
+    }
+    .list-item { display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #f0f0f0; }
+    .list-item:last-child { border-bottom: none; }
+    
+    .item-icon {
+        width: 36px; height: 36px; background-color: var(--exam-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-right: 15px; flex-shrink: 0;
+    }
+    .item-details { flex: 1; }
+    .item-details h3 { margin: 0 0 5px 0; font-size: 15px; color: var(--text-dark); }
+    .item-details p { margin: 0; font-size: 12px; color: var(--text-muted); }
+    
+    .badge-status {
+        background-color: var(--exam-bg); color: #087990; padding: 5px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; margin-right: 10px;
+    }
+    .arrow-icon { color: #ccc; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="mobile-frame">
+    <div class="header-top">
+        <h1>Histórico</h1>
+        <div class="btn-clear"><i class="fa-solid fa-filter-circle-xmark"></i> Limpar filtros</div>
+    </div>
+    
+    <div class="subtitle">Filtrado por: Exames</div>
+
+    <div class="filters-container">
+        <div class="filters">
+            <div class="filter-tab">Tudo</div>
+            <div class="filter-tab">Vacinas</div>
+            <div class="filter-tab active">Exames</div>
+            <div class="filter-tab">Alergias</div>
+            <div class="filter-tab">Medicamentos</div>
+        </div>
+    </div>
+
+    <div class="list-container">
+        <div class="list-item">
+            <div class="item-icon"><i class="fa-solid fa-file-medical"></i></div>
+            <div class="item-details">
+                <h3>Hemograma Completo</h3>
+                <p>Realizado em 02/05/2026</p>
+            </div>
+            <div class="badge-status">Normal</div>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </div>
+
+        <div class="list-item">
+            <div class="item-icon"><i class="fa-solid fa-microscope"></i></div>
+            <div class="item-details">
+                <h3>Exame de Fezes (Parasitológico)</h3>
+                <p>Realizado em 15/04/2026</p>
+            </div>
+            <div class="badge-status">Normal</div>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </div>
+
+        <div class="list-item">
+            <div class="item-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="item-details">
+                <h3>Ecocardiograma</h3>
+                <p>Realizado em 10/01/2026</p>
+            </div>
+            <div class="badge-status">Concluído</div>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

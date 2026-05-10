@@ -3,13 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'none'; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+
     <title>PetHealth - Procedimentos</title>
-    <!-- Fonte Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Ícones Material Symbols Outlined -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/procedimentos.css">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --primary-blue: #2563eb;
+            --primary-blue-light: #eff6ff;
+            --success-green: #10b981;
+            --success-green-light: #d1fae5;
+            --pending-gray: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding-bottom: 80px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .security-badge {
+            color: var(--success-green);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-weight: 600;
+        }
+        .security-badge .material-symbols-outlined { font-size: 12px; }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .logout-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* PROCEDURE CARDS */
+        .procedure-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .procedure-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        .procedure-title h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .procedure-title p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .badge-status {
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-andamento {
+            background-color: var(--primary-blue-light);
+            color: var(--primary-blue);
+        }
+
+        .status-concluido {
+            background-color: var(--success-green-light);
+            color: var(--success-green);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            bottom: 16px;
+            left: 15px; /* Center of 32px icon */
+            width: 2px;
+            background-color: var(--border-color);
+            z-index: 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 4px solid var(--card-bg); /* Creates a gap effect on the line */
+        }
+
+        .timeline-icon .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* Icon States */
+        .icon-done { 
+            color: var(--success-green); 
+            background-color: var(--success-green-light); 
+        }
+        
+        .icon-active { 
+            color: var(--primary-blue); 
+            background-color: var(--primary-blue-light); 
+        }
+        
+        .icon-pending { 
+            color: var(--text-secondary); 
+            background-color: var(--pending-gray); 
+        }
+
+        /* Timeline Content */
+        .timeline-content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .timeline-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .timeline-time {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Active Badge */
+        .badge-agora {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            height: fit-content;
+            margin-top: 2px;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 11px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        /* Padronizado com as outras telas */
+        .nav-item.active {
+            color: var(--primary-blue);
+            background-color: var(--primary-blue-light);
+            font-weight: 600;
+        }
+
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background-color: #374151;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 11;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-nav { overflow-x: auto; justify-content: flex-start; }
+            .nav-item { min-width: 80px; }
+            .timeline-content-wrapper { flex-direction: column; }
+            .badge-agora { margin-top: 8px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,7 +335,12 @@
             </div>
             <div class="header-title">
                 <h1>PetHealth</h1>
-                <p>Tutor - Maria Silva</p>
+                <p>
+                    Tutor - Maria Silva • 
+                    <span class="security-badge">
+                        <span class="material-symbols-outlined">lock</span> App Protegido
+                    </span>
+                </p>
             </div>
         </div>
         <a href="#" class="logout-btn">
@@ -34,12 +354,11 @@
             <p>Timeline detalhada de cada procedimento</p>
         </div>
 
-        <!-- Cirurgia Card -->
         <section class="procedure-card">
             <div class="procedure-header">
                 <div class="procedure-title">
                     <h3>Cirurgia de Castração</h3>
-                    <p>23/03/2026 • Dr. Carlos Santos</p>
+                    <p>10/05/2026 • Dr. Carlos Santos</p>
                 </div>
                 <div class="badge-status status-andamento">Em Andamento</div>
             </div>
@@ -141,7 +460,6 @@
             </div>
         </section>
 
-        <!-- Tratamento Dentário Card -->
         <section class="procedure-card">
             <div class="procedure-header">
                 <div class="procedure-title">
@@ -210,7 +528,6 @@
 
     </main>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <span class="material-symbols-outlined">home</span>
@@ -224,11 +541,11 @@
             <span class="material-symbols-outlined">description</span>
             Histórico
         </a>
-        <a href="procedimentos.html" class="nav-item">
+        <a href="procedimentos.html" class="nav-item active">
             <span class="material-symbols-outlined">show_chart</span>
             Procedimentos
         </a>
-        <a href="chat.html" class="nav-item active-bordered">
+        <a href="chat.html" class="nav-item">
             <span class="material-symbols-outlined">chat</span>
             Chat
         </a>
@@ -238,7 +555,6 @@
         </a>
     </nav>
 
-    <!-- Floating Help Button -->
     <button class="fab">?</button>
 
 </body>

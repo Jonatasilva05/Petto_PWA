@@ -3,13 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'none'; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+
     <title>PetHealth - Chat</title>
-    <!-- Fonte Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Ícones Material Symbols Outlined -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/chat.css">
+    <style>
+        
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --primary-blue: #2563eb;
+            --primary-blue-light: #eff6ff;
+            
+            --success-green: #10b981;
+            
+            --chat-bubble-in: #f3f4f6;
+            --chat-bubble-out: #2563eb;
+            --avatar-blue: #3b82f6;
+            --avatar-purple: #a855f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding-bottom: 80px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-title h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .security-badge {
+            color: var(--success-green);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-weight: 600;
+        }
+        .security-badge .material-symbols-outlined { font-size: 12px; }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* CHAT CONTAINER */
+        .chat-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* CHAT HEADER (Doctor Info) */
+        .chat-doctor-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .doctor-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .doctor-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .doctor-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* MESSAGES AREA */
+        .chat-messages {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background-color: #ffffff;
+            min-height: 400px;
+        }
+
+        .date-separator {
+            text-align: center;
+            margin: 8px 0;
+        }
+
+        .date-separator span {
+            background-color: #f3f4f6;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 16px;
+        }
+
+        /* Message Rows */
+        .message-row {
+            display: flex;
+            gap: 12px;
+            max-width: 80%;
+        }
+
+        .message-row.incoming {
+            align-self: flex-start;
+        }
+
+        .message-row.outgoing {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        /* Avatars in Chat */
+        .msg-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .avatar-d { background-color: var(--avatar-blue); }
+        .avatar-m { background-color: var(--avatar-purple); }
+
+        /* Message Content */
+        .msg-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-row.outgoing .msg-content {
+            align-items: flex-end;
+        }
+
+        .msg-sender {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            padding: 0 4px;
+        }
+
+        /* Bubbles */
+        .msg-bubble {
+            padding: 12px 16px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .incoming .msg-bubble {
+            background-color: var(--chat-bubble-in);
+            color: var(--text-primary);
+            border-radius: 0 16px 16px 16px;
+        }
+
+        .outgoing .msg-bubble {
+            background-color: var(--chat-bubble-out);
+            color: white;
+            border-radius: 16px 0 16px 16px;
+        }
+
+        .msg-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+
+        /* INPUT AREA */
+        .chat-input-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+        }
+
+        .action-icon {
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-icon:hover {
+            color: var(--text-primary);
+        }
+
+        .input-wrapper {
+            flex: 1;
+            background-color: #f3f4f6;
+            border-radius: 24px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #9ca3af;
+        }
+
+        .btn-send {
+            background-color: var(--primary-blue-light);
+            color: var(--primary-blue);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-send:hover {
+            background-color: #dbeafe;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 11px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-item.active {
+            color: var(--primary-blue);
+            background-color: var(--primary-blue-light);
+            font-weight: 600;
+        }
+
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background-color: #374151;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 11;
+        }
+
+        @media (max-width: 768px) {
+            .message-row { max-width: 95%; }
+            .bottom-nav { overflow-x: auto; justify-content: flex-start; }
+            .nav-item { min-width: 80px; }
+            .chat-input-area { padding: 12px 16px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,7 +399,12 @@
             </div>
             <div class="header-title">
                 <h1>PetHealth</h1>
-                <p>Tutor - Maria Silva</p>
+                <p>
+                    Tutor - Maria Silva • 
+                    <span class="security-badge">
+                        <span class="material-symbols-outlined">lock</span> App Protegido
+                    </span>
+                </p>
             </div>
         </div>
         <a href="#" class="logout-btn">
@@ -35,9 +419,7 @@
         </div>
 
         <div class="chat-container">
-            <!-- Doctor Header -->
             <div class="chat-doctor-header">
-                <!-- Imagem ilustrativa como na primeira tela do chat -->
                 <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150&h=150" alt="Dr. Carlos Santos" class="doctor-avatar">
                 <div class="doctor-info">
                     <h3>Dr. Carlos Santos</h3>
@@ -45,14 +427,12 @@
                 </div>
             </div>
 
-            <!-- Messages List -->
             <div class="chat-messages">
                 
                 <div class="date-separator">
-                    <span>24/03/2026</span>
+                    <span>09/05/2026</span>
                 </div>
 
-                <!-- Msg 1: Incoming -->
                 <div class="message-row incoming">
                     <div class="msg-avatar avatar-d">D</div>
                     <div class="msg-content">
@@ -64,7 +444,6 @@
                     </div>
                 </div>
 
-                <!-- Msg 2: Outgoing -->
                 <div class="message-row outgoing">
                     <div class="msg-avatar avatar-m">M</div>
                     <div class="msg-content">
@@ -75,7 +454,6 @@
                     </div>
                 </div>
 
-                <!-- Msg 3: Outgoing -->
                 <div class="message-row outgoing">
                     <div class="msg-avatar avatar-m">M</div>
                     <div class="msg-content">
@@ -86,7 +464,6 @@
                     </div>
                 </div>
 
-                <!-- Msg 4: Incoming -->
                 <div class="message-row incoming">
                     <div class="msg-avatar avatar-d">D</div>
                     <div class="msg-content">
@@ -98,7 +475,6 @@
                     </div>
                 </div>
 
-                <!-- Msg 5: Incoming -->
                 <div class="message-row incoming">
                     <div class="msg-avatar avatar-d">D</div>
                     <div class="msg-content">
@@ -110,7 +486,6 @@
                     </div>
                 </div>
 
-                <!-- Msg 6: Outgoing -->
                 <div class="message-row outgoing">
                     <div class="msg-avatar avatar-m">M</div>
                     <div class="msg-content">
@@ -121,7 +496,6 @@
                     </div>
                 </div>
 
-                <!-- Msg 7: Incoming -->
                 <div class="message-row incoming">
                     <div class="msg-avatar avatar-d">D</div>
                     <div class="msg-content">
@@ -135,7 +509,6 @@
 
             </div>
 
-            <!-- Chat Input Bar -->
             <div class="chat-input-area">
                 <div class="action-icon">
                     <span class="material-symbols-outlined">attach_file</span>
@@ -156,8 +529,7 @@
         </div>
     </main>
 
-   <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
+   <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <span class="material-symbols-outlined">home</span>
             Início
@@ -174,17 +546,16 @@
             <span class="material-symbols-outlined">show_chart</span>
             Procedimentos
         </a>
-        <a href="chat.html" class="nav-item">
+        <a href="chat.html" class="nav-item active">
             <span class="material-symbols-outlined">chat</span>
             Chat
         </a>
-        <a href="perfil.html" class="nav-item active-bordered">
+        <a href="perfil.html" class="nav-item">
             <span class="material-symbols-outlined">person</span>
             Perfil
         </a>
     </nav>
 
-    <!-- Floating Help Button -->
     <button class="fab">?</button>
 
 </body>
