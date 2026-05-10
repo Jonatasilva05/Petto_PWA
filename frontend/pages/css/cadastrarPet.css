@@ -1,0 +1,284 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-blue: #4890F0;
+    --primary-dark: #274472;
+    --success: #28a745;
+    --bg-color: #f4f7fb;
+    --card-bg: #ffffff;
+    --text-dark: #333;
+    --text-muted: #777;
+    --border-color: #e0e0e0;
+}
+
+body, html {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mobile-frame {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* Header */
+.header {
+    background-color: var(--card-bg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.header-title {
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    color: var(--primary-blue);
+    margin-right: 60px; /* Balance the back button */
+}
+
+/* Progress Bar */
+.progress-container {
+    height: 6px;
+    background-color: #e0e5ec;
+    width: 100%;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-blue);
+    transition: width 0.3s ease;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.step-section {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Photo Upload */
+.photo-upload-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.photo-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 55px;
+    background-color: var(--card-bg);
+    border: 2px dashed #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-placeholder i { font-size: 24px; margin-bottom: 5px; color: var(--primary-blue); }
+.photo-placeholder span { font-size: 12px; }
+
+/* Inputs */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.label-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.checkbox-label {
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    font-weight: 400 !important;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+input[type="text"], input[type="number"], input[type="date"], select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    outline: none;
+    transition: border 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-blue);
+}
+
+input:disabled, select:disabled {
+    background-color: #e9ecef;
+    color: #999;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+}
+
+/* Sex Selection */
+.sex-selection {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-sex {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-sex.active[data-value="M"] {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.btn-sex.active[data-value="F"] {
+    background-color: #e91e63;
+    color: white;
+    border-color: #e91e63;
+}
+
+/* Toggle Group (Sim/Não/Não Sei) */
+.toggle-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-toggle {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-toggle.active {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.btn-add-item {
+    background: rgba(72, 144, 240, 0.1);
+    color: var(--primary-blue);
+    border: 1px dashed var(--primary-blue);
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.section-hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* Footer Actions */
+.footer-actions {
+    padding: 15px 20px;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+}
+
+.footer-actions button {
+    flex: 1;
+    padding: 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.footer-actions button:active { transform: scale(0.98); }
+
+.btn-primary { background-color: var(--primary-blue); color: white; }
+.btn-secondary { background-color: #e0e5ec; color: var(--text-dark); }
+.btn-success { background-color: var(--success); color: white; }
+
+.hidden { display: none !important; }

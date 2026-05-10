@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Cadastrar Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/cadastrarPet.css">
+</head>
+<body>
+    <div class="mobile-frame">
+        <!-- Header -->
+        <header class="header">
+            <button class="btn-back" id="btn-back" onclick="history.back()">
+                <i class="fa-solid fa-chevron-left"></i> Cancelar
+            </button>
+            <h1 class="header-title">Cadastro do Pet</h1>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar" style="width: 25%;"></div>
+        </div>
+
+        <!-- Conteúdo do Formulário -->
+        <main class="content">
+            <form id="form-cadastrar-pet">
+                
+                <!-- ETAPA 1: Dados Básicos -->
+                <section class="step-section active" id="step-1">
+                    <div class="photo-upload-container">
+                        <input type="file" id="pet-photo-input" accept="image/*" hidden>
+                        <div class="photo-placeholder" id="photo-preview-container">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Foto do Pet</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Nome do Pet</label>
+                        <input type="text" id="pet-nome" placeholder="Ex: Bob" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Espécie</label>
+                        <select id="pet-especie" required>
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="Cachorro">Cachorro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Raça</label>
+                        <select id="pet-raca" disabled required>
+                            <option value="" disabled selected>Selecione a espécie primeiro...</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- ETAPA 2: Idade, Sexo e Detalhes -->
+                <section class="step-section hidden" id="step-2">
+                    <div class="input-group label-flex">
+                        <label>Data de Nascimento</label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="check-nao-sei-data"> Não sei a data
+                        </label>
+                    </div>
+                    <div class="input-group" id="container-data-nasc">
+                        <input type="date" id="pet-data-nasc">
+                    </div>
+
+                    <div class="hidden" id="container-idade-aprox">
+                        <div class="input-group">
+                            <label>Idade Aproximada</label>
+                            <div class="flex-row">
+                                <input type="number" id="pet-idade-valor" placeholder="Ex: 5" style="flex: 1;">
+                                <select id="pet-idade-unidade" style="width: 100px; margin-left: 10px;">
+                                    <option value="anos">Anos</option>
+                                    <option value="meses">Meses</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Sexo</label>
+                        <div class="sex-selection">
+                            <button type="button" class="btn-sex" data-value="M" id="btn-sex-m"><i class="fa-solid fa-mars"></i> Macho</button>
+                            <button type="button" class="btn-sex" data-value="F" id="btn-sex-f"><i class="fa-solid fa-venus"></i> Fêmea</button>
+                        </div>
+                        <input type="hidden" id="pet-sexo" required>
+                    </div>
+
+                    <div class="input-group label-flex">
+                        <label>Peso (kg)</label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="check-nao-sei-peso"> Não sei
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" step="0.1" id="pet-peso" placeholder="Opcional. Ex: 12.5">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Cor Principal</label>
+                        <input type="text" id="pet-cor" placeholder="Opcional. Ex: Dourado">
+                    </div>
+                </section>
+
+                <!-- ETAPA 3: Vacinas -->
+                <section class="step-section hidden" id="step-3">
+                    <div class="input-group">
+                        <label>O pet já foi vacinado?</label>
+                        <div class="toggle-group">
+                            <button type="button" class="btn-toggle" data-group="vacina" data-value="sim">Sim</button>
+                            <button type="button" class="btn-toggle" data-group="vacina" data-value="nao">Não</button>
+                            <button type="button" class="btn-toggle active" data-group="vacina" data-value="nao_sei">Não Sei</button>
+                        </div>
+                        <input type="hidden" id="pet-vacinado" value="nao_sei">
+                    </div>
+
+                    <div id="vacinas-container" class="hidden">
+                        <p class="section-hint">Adicione as vacinas que o pet já tomou:</p>
+                        <button type="button" class="btn-add-item"><i class="fa-solid fa-plus-circle"></i> Adicionar Vacina</button>
+                        <div id="lista-vacinas" class="items-list"></div>
+                    </div>
+                </section>
+
+                <!-- ETAPA 4: Medicamentos -->
+                <section class="step-section hidden" id="step-4">
+                    <div class="input-group">
+                        <label>O pet toma alguma medicação?</label>
+                        <div class="toggle-group">
+                            <button type="button" class="btn-toggle" data-group="med" data-value="sim">Sim</button>
+                            <button type="button" class="btn-toggle" data-group="med" data-value="nao">Não</button>
+                            <button type="button" class="btn-toggle active" data-group="med" data-value="nao_sei">Não Sei</button>
+                        </div>
+                        <input type="hidden" id="pet-medicado" value="nao_sei">
+                    </div>
+
+                    <div id="meds-container" class="hidden">
+                        <p class="section-hint">Adicione os medicamentos atuais:</p>
+                        <button type="button" class="btn-add-item"><i class="fa-solid fa-plus-circle"></i> Adicionar Medicamento</button>
+                        <div id="lista-meds" class="items-list"></div>
+                    </div>
+                </section>
+            </form>
+        </main>
+
+        <!-- Footer Actions -->
+        <footer class="footer-actions">
+            <button type="button" class="btn-secondary hidden" id="btn-prev">Voltar</button>
+            <button type="button" class="btn-primary" id="btn-next">Avançar</button>
+            <button type="button" class="btn-success hidden" id="btn-finish">Finalizar Cadastro</button>
+        </footer>
+    </div>
+
+    <script type="module" src="./js/cadastrarPet.js"></script>
+</body>
+</html>

@@ -1,17 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="./manifest.json">
-    <title>Petto - Gestão de Saúde Animal</title>
-    <!-- Google Fonts para Poppins -->
+    <title>Petto - Acesso</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <!-- Container para Toasts -->
     <div id="toast-container"></div>
 
     <div id="app">
@@ -37,7 +34,6 @@
             <p class="bottom-text">Não tem conta? <a href="#" id="link-go-register" class="link-text">Cadastre-se aqui</a></p>
         </section>
 
-        <!-- TELA DE CADASTRO (Mantendo o estilo consistente) -->
         <section id="register-view" class="view-section hidden">
             <h1 class="logo-small">Petto</h1>
             <h2 class="section-title">Crie sua conta</h2>
@@ -55,7 +51,6 @@
                     <span class="toggle-password" id="toggle-reg-pass">👁️</span>
                 </div>
                 
-                <!-- Força da Senha -->
                 <div class="password-strength">
                     <div class="strength-bars">
                         <div id="bar-1" class="bar"></div>
@@ -76,7 +71,6 @@
                     <label for="reg-is-vet">Eu sou Veterinário(a)</label>
                 </div>
 
-                <!-- Campos específicos para Vet -->
                 <div id="vet-fields" class="hidden-fields">
                     <div class="input-wrapper"><input type="text" id="reg-cpf" placeholder="CPF"></div>
                     <div class="input-wrapper"><input type="text" id="reg-crmv" placeholder="CRMV (ex: 12345-SP)"></div>
@@ -98,72 +92,6 @@
 
             <button id="btn-register-final" class="btn-primary">Registrar</button>
             <p class="bottom-text">Já tem conta? <a href="#" id="link-go-login" class="link-text">Entrar</a></p>
-        </section>
-
-
-        <section id="tutor-dashboard" class="view-section hidden" style="height: 100vh; max-height: 100vh; padding: 0; background-color: var(--bg-color); max-width: 100%;">
-            <!-- Top Header -->
-            <div class="top-header">
-                <div class="user-greeting">
-                    <img src="./assets/image/cachorro.png" alt="User Avatar" class="user-avatar" id="tutor-avatar-display">
-                    <div>
-                        <p style="font-size: 14px; opacity: 0.9; margin: 0;">Bem-vindo(a),</p>
-                        <h2 style="font-size: 20px; margin: 0;" id="tutor-name-display">Tutor</h2>
-                    </div>
-                </div>
-                <div class="header-actions">
-                    <button class="icon-btn"><span class="icon-bell">🔔</span></button>
-                    <button class="icon-btn" id="btn-logout-tutor"><span class="icon-logout">🚪</span></button>
-                </div>
-            </div>
-
-            <!-- Container Principal com Scroll -->
-            <div class="scroll-container" style="padding: 20px; padding-bottom: 90px; height: calc(100vh - 150px);">
-                <h2 class="section-title" style="color: var(--text-dark); text-align: left; font-weight: 700; font-size: 24px; margin-bottom: 20px;">Meus Pets</h2>
-                
-                <div id="pet-list-container">
-                    <!-- Pets Renderizados Pelo JS (PetView.js) -->
-                </div>
-
-                <!-- Estado Vazio -->
-                <div id="tutor-empty-state" class="empty-state hidden">
-                    <img src="./assets/image/cachorro.png" alt="Nenhum pet" style="width: 150px; opacity: 0.5; margin-bottom: 20px;">
-                    <h3 style="color: var(--text-dark);">Nenhum pet encontrado</h3>
-                    <p style="color: var(--text-muted);">Comece adicionando seu primeiro companheiro!</p>
-                    <button class="btn-primary" id="btn-add-first-pet" style="margin-top: 20px; width: auto; padding: 10px 20px;">Registrar primeiro pet</button>
-                </div>
-            </div>
-
-            <!-- Botão Flutuante (FAB) -->
-            <button class="fab" id="btn-go-add-pet">+</button>
-
-            <!-- Bottom Navigation -->
-            <div class="bottom-nav">
-                <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
-                <div class="nav-item"><span class="nav-icon">📅</span>Agenda</div>
-                <div class="nav-item"><span class="nav-icon">💬</span>Chat</div>
-                <div class="nav-item"><span class="nav-icon">👤</span>Perfil</div>
-            </div>
-        </section>
-
-        <section id="vet-dashboard" class="view-section hidden">
-            <header class="dash-header">
-                <div>
-                    <h2>Dr(a). <span id="vet-name-display"></span> 🩺</h2>
-                    <p>Painel de Atendimento Veterinário</p>
-                </div>
-                <button id="btn-logout-vet" class="btn-logout">Sair</button>
-            </header>
-            
-            <div id="pacientes-list-container" class="scroll-container">
-                <!-- Pacientes -->
-            </div>
-
-            <div id="vet-empty-state" class="empty-state hidden">
-                <div class="empty-icon">🏥</div>
-                <h3>Nenhum paciente vinculado</h3>
-                <p>Peça ao tutor para vincular você no app.</p>
-            </div>
         </section>
     </div>
 

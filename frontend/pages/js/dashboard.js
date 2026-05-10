@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
+    document.getElementById('btn-go-add-pet').addEventListener('click', () => {
+        window.location.href = './cadastrar-pet.html';
+    });
+
     // 4. Inicializa os Pets
     const petApp = new PetController(new PetModel(), new PetView(), mockAuthController);
     await petApp.loadDashboard();
