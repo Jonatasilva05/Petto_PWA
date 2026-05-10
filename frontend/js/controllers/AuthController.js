@@ -49,12 +49,11 @@ export class AuthController {
             const userName = localStorage.getItem('user-name');
             this.view.showToast(`Olá, ${userName}!`, 'success');
             
-            this.view.setupDashboard(data.role, userName);
-
-            // A MÁGICA AQUI: Se for tutor, manda o outro controller carregar os pets
+            // A MÁGICA DA NOVA ESTRUTURA: Redirecionar em vez de apenas trocar classe
             if (data.role === 'tutor') {
-                await this.petController.loadDashboard();
+                window.location.href = './pages/dashboard.html'; 
             } else if (data.role === 'veterinario') {
+                this.view.setupDashboard(data.role, userName);
                 await this.loadVetDashboard();
             }
         } catch (e) {

@@ -1,0 +1,2 @@
+agora inicie o servidor com 
+npm run dev em ver de start

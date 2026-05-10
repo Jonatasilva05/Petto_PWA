@@ -23,6 +23,10 @@ export class PetController {
             document.getElementById('reg-pet-foto')?.click();
         });
 
+        document.getElementById('btn-add-first-pet')?.addEventListener('click', () => {
+            this.authController.view.switchScreen('cadastrar-pet-view');
+        });
+
         // Enviar o formulário
         document.getElementById('btn-save-pet')?.addEventListener('click', this.handleSavePet.bind(this));
     }

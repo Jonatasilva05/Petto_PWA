@@ -1,23 +1,52 @@
 import { AuthModel } from './models/AuthModel.js';
-import { AuthView } from './view/AuthView.js'; 
+import { AuthView } from './view/AuthView.js';
 import { AuthController } from './controllers/AuthController.js';
 
 import { PetModel } from './models/PetModel.js';
 import { PetView } from './view/PetView.js';
 import { PetController } from './controllers/PetController.js';
 
-// 1. Inicializa o Controller de Pets primeiro
-const petApp = new PetController(new PetModel(), new PetView());
+/* =========================================
+   INSTÂNCIAS MVC
+========================================= */
 
-// 2. Inicializa o AuthController PASSANDO o petApp como dependência
-// Isso permite que o AuthController mande carregar os pets após o login
-const authApp = new AuthController(new AuthModel(), new AuthView(), petApp);
+// Pet Controller
+const petApp = new PetController(
+    new PetModel(),
+    new PetView()
+);
 
-// 3. Registrar o Service Worker (Essencial para PWA)
+// Auth Controller
+const authApp = new AuthController(
+    new AuthModel(),
+    new AuthView(),
+    petApp
+);
+
+// Injeta AuthController no PetController
+petApp.authController = authApp;
+
+/* =========================================
+   SERVICE WORKER
+========================================= */
+
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => console.log('✅ Service Worker Ativo!'))
-      .catch(err => console.log('❌ Erro no SW:', err));
-  });
+
+    window.addEventListener('load', async () => {
+
+        try {
+
+            const registration = await navigator.serviceWorker.register('./sw.js');
+
+            console.log('✅ Service Worker ativo!');
+            console.log('📦 Scope:', registration.scope);
+
+        } catch (error) {
+
+            console.error('❌ Erro ao registrar SW:', error);
+
+        }
+
+    });
+
 }

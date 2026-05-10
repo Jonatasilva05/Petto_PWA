@@ -6,7 +6,12 @@ const pool = mysql.createPool({
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: 'petto_pwa',
-    connectionLimit: 10
+
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+
+    charset: 'utf8mb4'
 });
 
 module.exports = pool;

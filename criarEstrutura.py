@@ -1,8 +1,15 @@
 import os
 
+# pastas que serão ignoradas
+PASTAS_IGNORADAS = {"node_modules", ".git", "__pycache__"}
+
 def gerar_estrutura(pasta_raiz, arquivo_saida="estrutura.txt"):
     with open(arquivo_saida, "w", encoding="utf-8") as f:
         for raiz, dirs, arquivos in os.walk(pasta_raiz):
+
+            # remove pastas ignoradas
+            dirs[:] = [d for d in dirs if d not in PASTAS_IGNORADAS]
+
             # nível de profundidade
             nivel = raiz.replace(pasta_raiz, "").count(os.sep)
             indentacao = "│   " * nivel
@@ -26,7 +33,7 @@ def gerar_estrutura(pasta_raiz, arquivo_saida="estrutura.txt"):
 # ===== USO =====
 if __name__ == "__main__":
     caminho = input("Digite o caminho da pasta: ").strip()
-    
+
     if os.path.exists(caminho):
         gerar_estrutura(caminho)
     else:

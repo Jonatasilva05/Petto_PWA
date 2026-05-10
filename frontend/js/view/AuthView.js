@@ -83,7 +83,7 @@ export class AuthView {
             const card = document.createElement('div');
             card.className = 'paciente-card';
             card.innerHTML = `
-                <img src="${p.foto_url ? 'http://localhost:3000' + p.foto_url : './assets/image/cachorro.png'}" class="pet-thumb">
+                <img src="${p.foto_url ? p.foto_url : './assets/image/cachorro.png'}" class="pet-thumb">
                 <div class="card-info"><strong>${p.nome}</strong><span>Tutor: ${p.nome_tutor}</span></div>
                 <span class="chevron">❯</span>
             `;

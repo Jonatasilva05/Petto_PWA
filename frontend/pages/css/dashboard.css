@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-blue: #4890F0;
+    --primary-dark: #274472;
+    --bg-color: #f4f7fb;
+    --text-dark: #333;
+    --text-muted: #9aa5b1;
+}
+
+/* O corpo agora ocupa 100% da tela e a cor de fundo cinza foi removida */
+body, html {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Trava o fundo, o scroll acontece apenas no meio */
+}
+
+/* Sem limites (max-width), ocupa toda a largura do telemóvel */
+.mobile-frame {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* --- Header Reduzido --- */
+.header {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 15px 20px 20px; /* Padding reduzido para não ficar tão alto */
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+.top-bar {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 12px;
+    text-align: center; /* Centrado como no seu txt original */
+    letter-spacing: 1px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.greeting-text h1 { 
+    font-size: 20px; /* Fonte reduzida */
+    margin-bottom: 2px; 
+    font-weight: 700; 
+    display: flex;
+    align-items: center;
+}
+
+.greeting-text p { 
+    font-size: 13px; 
+    color: #d1e3f8; /* Cor original mais clara */
+}
+
+.btn-logout {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+.btn-logout:active { background: rgba(255,255,255,0.3); }
+
+/* --- Content --- */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Scroll do telemóvel fica aqui */
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+/* --- FAB (Botão flutuante) --- */
+.fab {
+    position: absolute;
+    bottom: 85px; right: 20px;
+    width: 60px; height: 60px;
+    border-radius: 30px;
+    background-color: var(--primary-blue);
+    color: white;
+    font-size: 24px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(72, 144, 240, 0.4);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* --- Navegação Inferior --- */
+.bottom-nav {
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 25px 0;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.nav-item i { font-size: 22px; }
+.nav-item.active { color: var(--primary-dark); }
+
+/* --- Empty State (Ajuste da foto do cãozinho) --- */
+.empty-state { text-align: center; margin-top: 30px; }
+
+.empty-img { 
+    width: 120px; 
+    height: 120px; 
+    border-radius: 60px; /* Deixa a imagem redonda */
+    object-fit: cover; /* Evita que a foto fique esticada/amassada */
+    opacity: 0.9; 
+    margin-bottom: 15px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.empty-state h3 { color: var(--text-dark); margin-bottom: 5px; font-size: 18px; }
+.empty-state p { color: var(--text-muted); font-size: 13px; }
+
+.btn-primary { 
+    background: var(--primary-blue); 
+    color: white; 
+    border: none; 
+    padding: 14px 25px; 
+    border-radius: 25px; 
+    margin-top: 20px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    width: 100%; 
+    box-shadow: 0 4px 10px rgba(72,144,240,0.3); 
+}
+.hidden { display: none !important; }

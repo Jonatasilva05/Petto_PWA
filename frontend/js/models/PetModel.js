@@ -1,6 +1,6 @@
 export class PetModel {
     constructor() {
-        this.apiUrl = 'http://localhost:3000/api';
+        this.apiUrl = '/api'; 
     }
 
     async getPets() {

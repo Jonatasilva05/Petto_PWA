@@ -1,4 +1,4 @@
-const CACHE_NAME = 'petto-cache-v1';
+const CACHE_NAME = 'petto-cache-v2';
 
 // Usando caminhos relativos para evitar erros 404
 const urlsToCache = [

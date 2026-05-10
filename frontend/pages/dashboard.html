@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+    <div class="mobile-frame">
+        <header class="header">
+            <div class="top-bar">HOME / INÍCIO</div>
+            <div class="user-info">
+                <div class="greeting-text">
+                    <h1><i class="fa-solid fa-crown" style="font-size: 18px; margin-right: 5px;"></i> Olá, <span id="tutor-name-display">Carregando...</span>!</h1>
+                    <p>Seus Pets</p>
+                </div>
+                <button id="btn-logout" class="btn-logout">
+                    <i class="fa-solid fa-door-open"></i> Sair
+                </button>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="section-title">Meus Pets</div>
+            
+            <div id="pet-list-container"></div>
+            
+            <div id="tutor-empty-state" class="empty-state hidden">
+                <img src="../assets/image/cachorro.png" alt="Sem pets" class="empty-img">
+                <h3>Nenhum pet por aqui</h3>
+                <p>Vamos registrar o seu primeiro amigo?</p>
+                <button class="btn-primary" id="btn-add-first">Registrar primeiro pet</button>
+            </div>
+        </main>
+
+        <button class="fab" id="btn-go-add-pet"><i class="fa-solid fa-plus"></i></button>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active"><i class="fa-solid fa-house"></i><span>Home</span></div>
+            <div class="nav-item"><i class="fa-solid fa-calendar-days"></i><span>Calendário</span></div>
+            <div class="nav-item"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
+            <div class="nav-item"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+        </nav>
+    </div>
+
+    <script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>
