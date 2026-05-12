@@ -1,152 +1,352 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PET+ Splash Screen</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>PETTO Splash Screen</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Fonte mais moderna e amigável -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
 <style>
-    :root {
-        --primary-blue: #004b9b; /* Azul escuro do coração/texto */
-        --light-blue: #3282b8; /* Azul claro do "+" */
-        --bg-color: #ffffff;
-        --progress-bg: #e0e5ec;
-    }
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #dbe3ed;
-        display: flex;
-        justify-content: center;
-        margin: 0;
-        padding: 20px;
-    }
-    .mobile-frame {
-        width: 375px;
-        height: 812px;
-        background-color: var(--bg-color);
-        border-radius: 30px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    /* Background Paws Pattern */
-    .bg-paws {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        z-index: 1;
-        pointer-events: none;
-        overflow: hidden;
-    }
-    .bg-paw {
-        position: absolute;
-        color: #eaf2fa;
-        font-size: 40px;
-        transform: rotate(-20deg);
-    }
-    /* Positioning some random paws */
-    .bg-paw:nth-child(1) { top: 10%; left: 10%; font-size: 30px; transform: rotate(15deg); }
-    .bg-paw:nth-child(2) { top: 25%; left: 80%; font-size: 45px; transform: rotate(-30deg); }
-    .bg-paw:nth-child(3) { top: 60%; left: -5%; font-size: 50px; transform: rotate(45deg); }
-    .bg-paw:nth-child(4) { top: 55%; left: 75%; font-size: 60px; transform: rotate(-10deg); }
-    .bg-paw:nth-child(5) { top: 85%; left: 30%; font-size: 35px; transform: rotate(20deg); }
-    .bg-paw:nth-child(6) { top: 5%; left: 60%; font-size: 25px; transform: rotate(-40deg); }
 
-    /* Main Content */
-    .content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+:root{
+    --primary: #2E7D32;
+    --primary-dark: #1B5E20;
+    --secondary: #66BB6A;
+    --accent: #A5D6A7;
+
+    --text-dark: #183153;
+    --text-light: #6B7280;
+
+    --bg: #F4FFF6;
+    --white: #FFFFFF;
+
+    --shadow: 0 15px 40px rgba(46,125,50,0.18);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background: linear-gradient(180deg,#DFF7E3 0%, #F4FFF6 100%);
+    font-family: 'Poppins', sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* FRAME MOBILE */
+
+.mobile-frame{
+    width:375px;
+    height:812px;
+    background: var(--bg);
+    border-radius:38px;
+    overflow:hidden;
+    position:relative;
+    box-shadow: var(--shadow);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* BACKGROUND */
+
+.background-glow{
+    position:absolute;
+    width:280px;
+    height:280px;
+    background: radial-gradient(circle, rgba(102,187,106,0.25) 0%, rgba(102,187,106,0) 70%);
+    top:-60px;
+    right:-60px;
+}
+
+.background-glow-2{
+    position:absolute;
+    width:240px;
+    height:240px;
+    background: radial-gradient(circle, rgba(46,125,50,0.12) 0%, rgba(46,125,50,0) 70%);
+    bottom:-80px;
+    left:-60px;
+}
+
+/* PATAS */
+
+.bg-paws{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    opacity:0.07;
+}
+
+.bg-paw{
+    position:absolute;
+    color: var(--primary);
+}
+
+.bg-paw:nth-child(1){
+    top:8%;
+    left:12%;
+    font-size:30px;
+    transform:rotate(-15deg);
+}
+
+.bg-paw:nth-child(2){
+    top:20%;
+    right:10%;
+    font-size:42px;
+    transform:rotate(20deg);
+}
+
+.bg-paw:nth-child(3){
+    top:48%;
+    left:-3%;
+    font-size:55px;
+    transform:rotate(35deg);
+}
+
+.bg-paw:nth-child(4){
+    top:58%;
+    right:6%;
+    font-size:65px;
+    transform:rotate(-15deg);
+}
+
+.bg-paw:nth-child(5){
+    bottom:10%;
+    left:25%;
+    font-size:40px;
+    transform:rotate(20deg);
+}
+
+/* CONTEÚDO */
+
+.content{
+    position:relative;
+    z-index:5;
+    width:100%;
+    padding:32px;
+    text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* LOGO */
+
+.logo-wrapper{
+    width:150px;
+    height:150px;
+
+    border-radius:40px;
+
+    background:
+        linear-gradient(145deg, #ffffff, #E9F7EC);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:
+        0 12px 30px rgba(46,125,50,0.15);
+
+    margin-bottom:28px;
+
+    animation: floating 3s ease-in-out infinite;
+}
+
+.logo-wrapper img{
+    width:110px;
+    object-fit:contain;
+}
+
+/* TITULO */
+
+.brand-title{
+    font-size:48px;
+    font-weight:800;
+    letter-spacing:-1px;
+
+    color: var(--primary-dark);
+
+    line-height:1;
+}
+
+.brand-title span{
+    color: var(--secondary);
+}
+
+.subtitle{
+    margin-top:14px;
+
+    font-size:17px;
+    line-height:1.6;
+
+    color: var(--text-light);
+
+    max-width:290px;
+    font-weight:500;
+}
+
+/* DESTAQUE */
+
+.highlight-box{
+    margin-top:32px;
+
+    background: rgba(255,255,255,0.75);
+
+    border:1px solid rgba(102,187,106,0.18);
+
+    backdrop-filter: blur(10px);
+
+    padding:18px 20px;
+
+    border-radius:24px;
+
+    width:100%;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+.highlight-box p{
+    color: var(--text-dark);
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    font-weight:500;
+}
+
+.highlight-box strong{
+    color: var(--primary-dark);
+}
+
+.loading-area{
+    width:100%;
+    margin-top:50px;
+}
+
+.loading-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.loading-text,
+.loading-percent{
+    font-size:14px;
+    font-weight:600;
+    color: var(--text-light);
+}
+
+.progress-container{
+    width:100%;
+    height:12px;
+    background:#DDEBDD;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+
+    background: linear-gradient(
+        90deg,
+        var(--primary-dark),
+        var(--primary),
+        var(--secondary)
+    );
+
+    transition: width .08s linear;
+}
+
+/* FOOTER */
+
+.footer{
+    position:absolute;
+    bottom:28px;
+
+    color:#9CA3AF;
+    font-size:12px;
+    font-weight:500;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes loading{
+    0%{
+        width:0%;
     }
 
-    /* Logo Heart/Paw */
-    .logo-container {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .fa-heart.base {
-        color: var(--primary-blue);
-        font-size: 110px;
-        position: absolute;
-    }
-    .fa-paw.inner {
-        color: white;
-        font-size: 55px;
-        position: absolute;
-        margin-top: -5px; /* Adjusting center */
+    35%{
+        width:35%;
     }
 
-    /* Brand Text */
-    .brand-title {
-        font-size: 42px;
-        font-weight: 900;
-        margin: 0;
-        color: var(--primary-blue);
-        letter-spacing: -1px;
-    }
-    .brand-title span {
-        color: #1890ff; /* Light blue plus */
-    }
-    .brand-subtitle {
-        font-size: 16px;
-        color: #555;
-        font-weight: 500;
-        margin-top: 5px;
-        margin-bottom: 60px;
+    65%{
+        width:70%;
     }
 
-    /* Loading Area */
-    .loading-text {
-        font-size: 13px;
-        color: #666;
-        margin-bottom: 10px;
-        font-weight: bold;
+    100%{
+        width:100%;
     }
-    
-    .progress-container {
-        width: 60%;
-        height: 10px;
-        background-color: var(--progress-bg);
-        border-radius: 10px;
-        overflow: hidden;
+}
+
+@keyframes floating{
+    0%{
+        transform:translateY(0px);
     }
 
-    .progress-bar {
-        height: 100%;
-        background-color: #1890ff;
-        border-radius: 10px;
-        width: 0%;
-        /* ANIMAÇÃO AQUI */
-        animation: loadProgress 3s ease-in-out infinite;
+    50%{
+        transform:translateY(-8px);
     }
 
-    /* Keyframes para animar a barra */
-    @keyframes loadProgress {
-        0% { width: 0%; }
-        50% { width: 70%; }
-        100% { width: 100%; }
+    100%{
+        transform:translateY(0px);
     }
+}
+
+@keyframes pulse{
+    0%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:0.5;
+    }
+
+    100%{
+        opacity:1;
+    }
+}
 
 </style>
 </head>
+
 <body>
 
 <div class="mobile-frame">
+
+    <div class="background-glow"></div>
+    <div class="background-glow-2"></div>
+
     <div class="bg-paws">
-        <i class="fa-solid fa-paw bg-paw"></i>
         <i class="fa-solid fa-paw bg-paw"></i>
         <i class="fa-solid fa-paw bg-paw"></i>
         <i class="fa-solid fa-paw bg-paw"></i>
@@ -155,20 +355,73 @@
     </div>
 
     <div class="content">
-        <div class="logo-container">
-            <i class="fa-solid fa-heart base"></i>
-            <i class="fa-solid fa-paw inner"></i>
+
+        <!-- LOGO -->
+        <div class="logo-wrapper">
+            <img src="./iconSemFundoSemNome.png" alt="Logo PETTO">
         </div>
-        
-        <h1 class="brand-title">PET<span>+</span></h1>
-        <p class="brand-subtitle">Cuidando de quem você<br>ama</p>
-        
-        <div class="loading-text">Carregando...</div>
-        <div class="progress-container">
-            <div class="progress-bar"></div>
+
+        <!-- TÍTULO -->
+        <h1 class="brand-title">
+            PET<span>TO</span>
+        </h1>
+
+        <!-- SLOGAN -->
+        <p class="subtitle">
+            Tudo o que seu pet precisa.
+        </p>
+
+        <!-- LOADING -->
+        <div class="loading-area">
+
+            <div class="loading-top">
+                <span class="loading-text">
+                    Carregando...
+                </span>
+
+                <span class="loading-percent" id="percent">
+                    0%
+                </span>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
         </div>
+
     </div>
+
+    <div class="footer">
+        PETTO © 2026
+    </div>
+
 </div>
+
+<script>
+
+    const progressBar = document.getElementById("progressBar");
+    const percentText = document.getElementById("percent");
+
+    let progress = 0;
+
+    const interval = setInterval(() => {
+
+        progress++;
+
+        progressBar.style.width = progress + "%";
+        percentText.innerText = progress + "%";
+
+        if(progress >= 100){
+            clearInterval(interval);
+
+            window.location.href = "./home.html";
+        }
+
+        }, 
+    30);
+
+</script>
 
 </body>
 </html>

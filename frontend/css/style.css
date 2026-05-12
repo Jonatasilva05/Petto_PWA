@@ -8,7 +8,7 @@
 :root {
     --primary-color: #274472;
     --accent-color: #4CAF50;
-    --bg-overlay: rgba(0, 0, 0, 0.55);
+    --bg-overlay: rgba(0, 0, 0, 0.42);
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --text-white: #ffffff;
@@ -101,7 +101,7 @@ body, html {
     display: flex;
     align-items: center;
     padding: 5px 15px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     position: relative; /* Adicionado para prender o olhinho */
 }
 

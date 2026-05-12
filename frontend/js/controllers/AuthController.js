@@ -54,7 +54,7 @@ export class AuthController {
             // Segura o redirecionamento por 1 segundo (1000 milissegundos) para dar tempo de ver o Toast
             setTimeout(async () => {
                 if (data.role === 'tutor') {
-                    window.location.href = './pages/dashboard.html'; 
+                    window.location.href = './pages/carregamento.html'; 
                 } else if (data.role === 'veterinario') {
                     this.view.setupDashboard(data.role, userName);
                     await this.loadVetDashboard();
