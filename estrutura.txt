@@ -97,8 +97,12 @@
 │   │   │   │   ├── AuthView.js
 │   │   │   │   ├── PetView.js
 │   │   ├── pages/
+│   │   │   ├── cadastrarPet.html
 │   │   │   ├── dashboard.html
+│   │   │   ├── assets/
 │   │   │   ├── css/
+│   │   │   │   ├── cadastrarPet.css
 │   │   │   │   ├── dashboard.css
 │   │   │   ├── js/
+│   │   │   │   ├── cadastrarPet.js
 │   │   │   │   ├── dashboard.js

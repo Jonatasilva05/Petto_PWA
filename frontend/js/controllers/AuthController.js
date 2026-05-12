@@ -47,15 +47,20 @@ export class AuthController {
         try {
             const data = await this.model.login(email, senha);
             const userName = localStorage.getItem('user-name');
+            
+            // Mostra o aviso
             this.view.showToast(`Olá, ${userName}!`, 'success');
             
-            // A MÁGICA DA NOVA ESTRUTURA: Redirecionar em vez de apenas trocar classe
-            if (data.role === 'tutor') {
-                window.location.href = './pages/dashboard.html'; 
-            } else if (data.role === 'veterinario') {
-                this.view.setupDashboard(data.role, userName);
-                await this.loadVetDashboard();
-            }
+            // Segura o redirecionamento por 1 segundo (1000 milissegundos) para dar tempo de ver o Toast
+            setTimeout(async () => {
+                if (data.role === 'tutor') {
+                    window.location.href = './pages/dashboard.html'; 
+                } else if (data.role === 'veterinario') {
+                    this.view.setupDashboard(data.role, userName);
+                    await this.loadVetDashboard();
+                }
+            }, 1000);
+
         } catch (e) {
             this.view.showToast(e.message, 'error');
         } finally {

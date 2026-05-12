@@ -114,7 +114,14 @@ export class AuthView {
         t.className = `toast ${type}`;
         t.innerText = msg;
         this.toastContainer?.appendChild(t);
-        setTimeout(() => t.remove(), 3000);
+
+        // Efeito de saída após 3 segundos
+        setTimeout(() => {
+            t.style.opacity = '0';
+            t.style.transform = 'translateY(-20px)';
+            t.style.transition = 'all 0.5s ease';
+            setTimeout(() => t.remove(), 500);
+        }, 3000);
     }
 
     setLoading(id, isL, txt = 'Entrar') {
