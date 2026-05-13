@@ -12,12 +12,17 @@
 <body>
     <div class="mobile-frame">
         <header class="header">
-            <div class="top-bar">HOME / INÍCIO</div>
-            <div class="user-info">
-                <div class="greeting-text">
-                    <h1><i class="fa-solid fa-crown" style="font-size: 18px; margin-right: 5px;"></i> Olá, <span id="tutor-name-display">Carregando...</span>!</h1>
-                    <p>Seus Pets</p>
+            <div class="header-content">
+                <div class="brand-info">
+                    <img src="./assets/logo/iconBrancaSemFundoSemNome.png" alt="Petto Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <i class="fa-solid fa-hand-holding-heart fallback-logo" style="display: none;"></i>
+                    
+                    <div class="title-text">
+                        <h1>Petto</h1>
+                        <p>Página Inicial - Seus Pets</p>
+                    </div>
                 </div>
+                
                 <button id="btn-logout" class="btn-logout">
                     <i class="fa-solid fa-door-open"></i> Sair
                 </button>

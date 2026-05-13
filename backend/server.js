@@ -5,6 +5,10 @@ const cors = require('cors');
 const os = require('os');
 const path = require('path');
 const qrcode = require('qrcode-terminal');
+const readline = require('readline');
+
+const livereload = require('livereload');
+const connectLiveReload = require('connect-livereload');
 
 const pool = require('./config/db');
 
@@ -16,10 +20,35 @@ const app = express();
 const port = 3000;
 
 /* =========================================
+   LIVE RELOAD
+========================================= */
+
+const liveReloadServer = livereload.createServer({
+    exts: ['html', 'css', 'js']
+});
+
+liveReloadServer.watch([
+    path.join(__dirname, '../frontend')
+]);
+
+// força reload automático no navegador/celular
+liveReloadServer.server.once('connection', () => {
+
+    setTimeout(() => {
+
+        liveReloadServer.refresh('/');
+
+    }, 100);
+});
+
+/* =========================================
    CONFIGURAÇÕES GERAIS
 ========================================= */
 
 app.use(cors());
+
+// LIVE RELOAD
+app.use(connectLiveReload());
 
 // FORÇA UTF-8 NO JSON
 app.use(express.json({
@@ -38,10 +67,12 @@ app.use(express.urlencoded({
 const frontendPath = path.join(__dirname, '../frontend');
 
 app.use(express.static(frontendPath, {
+
     setHeaders: (res, filePath) => {
 
         // HTML
         if (filePath.endsWith('.html')) {
+
             res.setHeader(
                 'Content-Type',
                 'text/html; charset=utf-8'
@@ -50,6 +81,7 @@ app.use(express.static(frontendPath, {
 
         // JS
         else if (filePath.endsWith('.js')) {
+
             res.setHeader(
                 'Content-Type',
                 'application/javascript; charset=utf-8'
@@ -58,6 +90,7 @@ app.use(express.static(frontendPath, {
 
         // CSS
         else if (filePath.endsWith('.css')) {
+
             res.setHeader(
                 'Content-Type',
                 'text/css; charset=utf-8'
@@ -66,6 +99,7 @@ app.use(express.static(frontendPath, {
 
         // JSON
         else if (filePath.endsWith('.json')) {
+
             res.setHeader(
                 'Content-Type',
                 'application/json; charset=utf-8'
@@ -87,7 +121,10 @@ app.use('/api/vet', vetRoutes);
 ========================================= */
 
 app.get('/teste', (req, res) => {
-    res.send('Olá João, vacinação, cão, coração, ação, informação');
+
+    res.send(
+        'Olá João, vacinação, cão, coração, ação, informação'
+    );
 });
 
 /* =========================================
@@ -115,6 +152,7 @@ const getLocalIp = () => {
 
                 // Ignora VirtualBox
                 if (!alias.address.startsWith('192.168.56.')) {
+
                     return alias.address;
                 }
             }
@@ -125,8 +163,10 @@ const getLocalIp = () => {
 };
 
 /* =========================================
-   START SERVER
+   SERVIDOR
 ========================================= */
+
+let server;
 
 const startServer = async () => {
 
@@ -135,27 +175,56 @@ const startServer = async () => {
         // TESTE BANCO
         await pool.query('SELECT 1');
 
+        console.clear();
+
         console.log('✅ Conexão com o banco estabelecida.');
 
-        app.listen(port, '0.0.0.0', () => {
+        server = app.listen(port, '0.0.0.0', () => {
 
             const ipLocal = getLocalIp();
 
             const urlMobile = `http://${ipLocal}:${port}`;
             const urlDesktop = `http://localhost:${port}`;
 
-            console.log(`\n🚀 Servidor Petto ativo na porta ${port}`);
+            console.log(
+                `\n🚀 Servidor Petto ativo na porta ${port}`
+            );
+
             console.log(`💻 PC: ${urlDesktop}`);
 
-            console.log('\n=========================================');
+            console.log(
+                '\n========================================='
+            );
+
             console.log('📱 Escaneie no celular');
-            console.log('=========================================\n');
+
+            console.log(
+                '=========================================\n'
+            );
 
             qrcode.generate(urlMobile, {
                 small: true
             });
 
             console.log(`\n🌐 Wi-Fi: ${urlMobile}\n`);
+
+            console.log(
+                '========================================='
+            );
+
+            console.log('⌨️  COMANDOS');
+
+            console.log(
+                '========================================='
+            );
+
+            console.log('R = Reiniciar servidor');
+
+            console.log('CTRL + C = Encerrar');
+
+            console.log(
+                '=========================================\n'
+            );
         });
 
     } catch (error) {
@@ -165,5 +234,51 @@ const startServer = async () => {
         process.exit(1);
     }
 };
+
+/* =========================================
+   RESTART COM TECLA "R"
+========================================= */
+
+readline.emitKeypressEvents(process.stdin);
+
+if (process.stdin.isTTY) {
+
+    process.stdin.setRawMode(true);
+}
+
+process.stdin.on('keypress', async (str, key) => {
+
+    // CTRL + C
+    if (key.ctrl && key.name === 'c') {
+
+        console.log('\n🛑 Encerrando servidor...\n');
+
+        process.exit();
+    }
+
+    // RESTART
+    if (key.name === 'r') {
+
+        console.log('\n🔄 Reiniciando servidor...\n');
+
+        if (server) {
+
+            server.close(async () => {
+
+                console.log('✅ Servidor parado.');
+
+                await startServer();
+            });
+
+        } else {
+
+            await startServer();
+        }
+    }
+});
+
+/* =========================================
+   INICIAR
+========================================= */
 
 startServer();

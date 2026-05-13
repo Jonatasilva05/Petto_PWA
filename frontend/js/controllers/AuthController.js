@@ -129,11 +129,17 @@ export class AuthController {
         this.view.setLoading(btnId, true);
         try {
             await this.model.cadastrar(data);
-            this.view.showToast('Sucesso! Faça login.', 'success');
-            this.view.switchScreen('login');
+            this.view.showToast('Sucesso! Redirecionando para login...', 'success');
+            
+            // Aguarda 1.5 segundos para o usuário ler o Toast, depois volta pra login
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1500); 
+
         } catch (e) {
             this.view.showToast(e.message, 'error');
-        } finally {
+            // Remove o estado de carregamento apenas se der erro, 
+            // no sucesso ele continua "carregando" até mudar de página.
             this.view.setLoading(btnId, false, txt);
         }
     }

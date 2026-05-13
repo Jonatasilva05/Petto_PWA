@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Petto - Criar Conta</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./css/registroTutor.css"> </head>
+<link rel="stylesheet" href="./css/registroTutor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 
 <body>
 
@@ -13,6 +15,10 @@
 
 <div id="app">
     <section id="register-view" class="view-section active">
+        <button type="button" class="top-back-button" onclick="window.location.href='../index.html'" title="Voltar para Login">
+            <i class="fa-solid fa-door-open"></i>
+        </button>
+
         <h1 class="logo-small">Petto</h1>
         <h2 class="section-title">Crie sua conta</h2>
 
@@ -84,14 +90,9 @@
             </div>
         </div>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
         <button id="btn-register-final" class="btn-primary">Registrar</button>
 
-        <button type="button" class="btn-door" onclick="window.location.href='../index.html'">
-            <i class="fa-solid fa-door-open"></i> Já tenho conta (Entrar)
-        </button>
-    </section>
+        </section>
 </div>
 
 <script type="module" src="../js/app.js"></script>

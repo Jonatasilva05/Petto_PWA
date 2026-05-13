@@ -178,10 +178,11 @@ input::-ms-clear {
     font-size:17px;
     font-weight:700;
     cursor:pointer;
-    margin-top:10px;
     transition: transform .2s, opacity .2s;
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     flex-shrink:0;
+    margin-top: 10px;
+    margin-bottom: 35px;
 }
 
 .btn-primary:hover{
@@ -523,7 +524,7 @@ input::-ms-clear {
 @media (max-height: 700px){
 
     .view-section{
-        padding-top:20px;
+        padding: 26px 18px calc(40px + env(safe-area-inset-bottom, 0px));
     }
 
     .logo-small{
@@ -580,36 +581,44 @@ input::-ms-clear {
     transform: scale(0.98);
 }
 
-/* --- BOTÃO DE PORTA (VOLTAR) --- */
-.btn-door {
+/* --- BOTÃO VOLTAR (TOPO) --- */
+.top-back-button {
+    position: absolute;
+    top: 25px;
+    left: 20px;
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 18px;
-    padding: 16px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 15px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px; /* Espaço entre o ícone e o texto */
+    font-size: 20px;
+    cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    z-index: 100;
 }
 
-.btn-door i {
-    font-size: 18px;
-    opacity: 0.9;
+.top-back-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
 }
 
-.btn-door:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
+.top-back-button:active {
+    transform: scale(0.95);
 }
 
-.btn-door:active {
-    transform: scale(0.98);
+/* Opcional: Garante que a logo não bata no botão em telas muito estreitas */
+@media (max-width: 480px){
+    .top-back-button {
+        top: 20px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
 }
