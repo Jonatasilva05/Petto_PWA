@@ -2,8 +2,6 @@
 │   ├── .gitignore
 │   ├── criarEstrutura.py
 │   ├── estrutura.txt
-│   ├── idea.txt
-│   ├── Notas.txt
 │   ├── backend/
 │   │   ├── .env
 │   │   ├── package-lock.json
@@ -17,6 +15,8 @@
 │   │   │   ├── 10-05/
 │   │   │   │   ├── petto_pwa.sql
 │   │   │   ├── 12-05/
+│   │   │   │   ├── petto_pwa.sql
+│   │   │   ├── 13-05/
 │   │   │   │   ├── petto_pwa.sql
 │   │   │   ├── 30-04/
 │   │   │   │   ├── petto.sql
@@ -100,12 +100,12 @@
 │   │   │   │   ├── AuthView.js
 │   │   │   │   ├── PetView.js
 │   │   ├── pages/
-│   │   │   ├── cadastrarPet.html
 │   │   │   ├── carregamento.html
 │   │   │   ├── dashboard.html
 │   │   │   ├── registroTutor.html
 │   │   │   ├── assets/
 │   │   │   │   ├── image/
+│   │   │   │   │   ├── abracaCao.png
 │   │   │   │   │   ├── fundo_login.jpeg
 │   │   │   │   ├── logo/
 │   │   │   │   │   ├── icon.jpg
@@ -115,6 +115,15 @@
 │   │   │   │   │   ├── iconSemFundoMaior.png
 │   │   │   │   │   ├── iconSemFundoMenorComNome.png
 │   │   │   │   │   ├── iconSemFundoSemNome.png
+│   │   │   ├── cadastroPet/
+│   │   │   │   ├── cadastrarPet1.html
+│   │   │   │   ├── cadastrarPet2.html
+│   │   │   │   ├── css/
+│   │   │   │   │   ├── cadastrarPet.css
+│   │   │   │   │   ├── cadastrarPet1.css
+│   │   │   │   ├── js/
+│   │   │   │   │   ├── cadastrarPet.js
+│   │   │   │   │   ├── cadastrarPet1.js
 │   │   │   ├── css/
 │   │   │   │   ├── cadastrarPet.css
 │   │   │   │   ├── carregamento.css
@@ -124,3 +133,10 @@
 │   │   │   │   ├── cadastrarPet.js
 │   │   │   │   ├── carregamento.js
 │   │   │   │   ├── dashboard.js
+│   ├── notas/
+│   │   ├── cadastrarPet.html
+│   │   ├── idea.txt
+│   │   ├── Notas.txt
+│   │   ├── script.js
+│   │   ├── style.css
+│   │   ├── tes.html

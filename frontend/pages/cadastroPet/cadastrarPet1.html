@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Cadastro do Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/cadastrarPet1.css">
+</head>
+<body>
+
+<div class="mobile-frame">
+    <header class="top-header">
+        <div class="header-content">
+            <span class="btn-cancelar" onclick="window.location.href='../dashboard.html'">Cancelar</span>
+            <h2 class="header-title">Cadastro do Pet</h2>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </header>
+
+    <main class="steps-container">
+        
+        <div class="step-section active" id="step-1">
+            <div class="photo-upload-container">
+                <div class="photo-circle">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>Foto do Pet</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Nome do Pet</label>
+                <input type="text" id="pet-nome" placeholder="Ex: Bob">
+            </div>
+
+            <div class="input-group">
+                <label>Espécie</label>
+                <div class="custom-select" onclick="openBottomSheet('sheet-especie')">
+                    <span id="txt-especie">Selecione...</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Raça</label>
+                <div class="custom-select" onclick="openBottomSheet('sheet-raca')">
+                    <span id="txt-raca">Selecione...</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-section hidden" id="step-2">
+            <div class="input-group header-checkbox">
+                <label>Data de Nascimento</label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="check-nao-sei-data"> Não sei a data
+                </label>
+            </div>
+            
+            <div id="container-data-nasc" class="input-group">
+                <input type="date" id="pet-data-nasc">
+            </div>
+
+            <div id="container-idade-aprox" class="hidden">
+                <label>Idade Aproximada</label>
+                <div class="idade-aprox-row">
+                    <input type="number" id="pet-idade" placeholder="Ex: 5">
+                    <div class="toggle-idade">
+                        <button class="btn-toggle-idade" data-tipo="meses">Meses</button>
+                        <button class="btn-toggle-idade active" data-tipo="anos">Anos</button>
+                    </div>
+                </div>
+                
+                <div class="input-group header-checkbox mt-15">
+                    <label>e Meses (opcional)</label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-nao-sei-meses"> Não sei
+                    </label>
+                </div>
+                <input type="number" id="pet-meses-extra" placeholder="Ex: 3">
+            </div>
+
+            <div class="input-group mt-15">
+                <label>Sexo</label>
+                <div class="sex-buttons">
+                    <button class="btn-sex" id="btn-macho" data-value="Macho"><i class="fa-solid fa-mars" style="color:#4890F0"></i> Macho</button>
+                    <button class="btn-sex" id="btn-femea" data-value="Fêmea"><i class="fa-solid fa-venus" style="color:#F0487D"></i> Fêmea</button>
+                </div>
+                <input type="hidden" id="pet-sexo">
+            </div>
+
+            <div class="input-group header-checkbox mt-15">
+                <label>Peso (kg)</label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="check-nao-sei-peso"> Não sei
+                </label>
+            </div>
+            <input type="number" id="pet-peso" placeholder="Opcional. Ex: 12.5">
+
+            <div class="input-group mt-15">
+                <label>Cor Principal</label>
+                <input type="text" id="pet-cor" placeholder="Opcional. Ex: Dourado">
+            </div>
+        </div>
+
+        <div class="step-section hidden" id="step-3">
+            <p class="question-text">O pet já foi vacinado?</p>
+            <div class="vaccine-options">
+                <button class="btn-vacina-opt" data-group="vacina" data-value="sim">Sim</button>
+                <button class="btn-vacina-opt" data-group="vacina" data-value="nao">Não</button>
+                <button class="btn-vacina-opt active" data-group="vacina" data-value="naosei">Não Sei</button>
+            </div>
+            <input type="hidden" id="pet-vacinado" value="naosei">
+
+            <div id="area-selecionar-vacinas" class="hidden">
+                <button class="btn-add-vaccine" onclick="openBottomSheet('sheet-vacina')">
+                    <i class="fa-solid fa-circle-plus"></i> Selecionar Vacinas
+                </button>
+
+                <div id="lista-vacinas-selecionadas" class="mt-15"></div>
+            </div>
+        </div>
+
+        <div class="step-section hidden" id="step-4">
+            <p class="question-text">O pet toma alguma medicação?</p>
+            <div class="vaccine-options">
+                <button class="btn-vacina-opt" data-group="med" data-value="sim">Sim</button>
+                <button class="btn-vacina-opt" data-group="med" data-value="nao">Não</button>
+                <button class="btn-vacina-opt active" data-group="med" data-value="naosei">Não Sei</button>
+            </div>
+            <input type="hidden" id="pet-medicado" value="naosei">
+        </div>
+
+    </main>
+
+    <footer class="bottom-nav-buttons">
+        <button class="btn-secondary hidden" id="btn-prev">Voltar</button>
+        <button class="btn-primary" id="btn-next">Avançar</button>
+        <button class="btn-success hidden" id="btn-finish">Finalizar Cadastro</button>
+    </footer>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="bottom-sheet" id="sheet-especie">
+    <div class="sheet-handle"></div>
+    <h3 class="sheet-title">Selecione a Espécie</h3>
+    <input type="text" class="sheet-search" placeholder="Pesquisar...">
+    <ul class="sheet-list">
+        <li onclick="selectItem('especie', 'Cachorro 🐶')">Cachorro 🐶</li>
+        <li onclick="selectItem('especie', 'Gato 🐱')">Gato 🐱</li>
+        <li onclick="selectItem('especie', 'Pássaro 🐦')">Pássaro 🐦</li>
+        <li onclick="selectItem('especie', 'Roedor 🐹')">Roedor 🐹</li>
+        <li onclick="selectItem('especie', 'Peixe 🐠')">Peixe 🐠</li>
+        <li onclick="selectItem('especie', 'Tartaruga 🐢')">Tartaruga 🐢</li>
+        <li onclick="selectItem('especie', 'Outro')">Outro</li>
+    </ul>
+    <button class="btn-primary sheet-confirm" onclick="closeBottomSheet()">Confirmar</button>
+</div>
+
+<div class="bottom-sheet" id="sheet-raca">
+    <div class="sheet-handle"></div>
+    <h3 class="sheet-title">Selecione a Raça</h3>
+    <input type="text" class="sheet-search" placeholder="Pesquisar...">
+    <ul class="sheet-list">
+        <li onclick="selectItem('raca', 'Não sei a raça')">Não sei a raça</li>
+        <li onclick="selectItem('raca', 'Vira-lata (SRD)')">Vira-lata (SRD)</li>
+        <li onclick="selectItem('raca', 'Abissínio')">Abissínio</li>
+        <li onclick="selectItem('raca', 'Angorá')">Angorá</li>
+        <li onclick="selectItem('raca', 'Bengal')">Bengal</li>
+        <li onclick="selectItem('raca', 'Golden Retriever')">Golden Retriever</li>
+    </ul>
+    <button class="btn-primary sheet-confirm" onclick="closeBottomSheet()">Confirmar</button>
+</div>
+
+<div class="bottom-sheet" id="sheet-vacina">
+    <div class="sheet-handle"></div>
+    <h3 class="sheet-title">Selecione as Vacinas</h3>
+    <input type="text" class="sheet-search" placeholder="Pesquisar...">
+    <ul class="sheet-list">
+        <li>
+            <span>Polivalente Felina V4 ou V5</span>
+            <input type="checkbox" class="vacina-check" value="Polivalente Felina V4 ou V5">
+        </li>
+        <li>
+            <span>Antirrábica (Raiva)</span>
+            <input type="checkbox" class="vacina-check" value="Antirrábica (Raiva)">
+        </li>
+    </ul>
+    <button class="btn-primary sheet-confirm" onclick="addSelectedVaccines()">Confirmar</button>
+</div>
+
+<script src="./js/cadastrarPet1.js"></script>
+</body>
+</html>
