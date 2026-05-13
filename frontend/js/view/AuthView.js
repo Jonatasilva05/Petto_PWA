@@ -11,7 +11,7 @@ export class AuthView {
         this.vetCheckbox = document.getElementById('reg-is-vet');
         this.vetFields = document.getElementById('vet-fields');
         this.toastContainer = document.getElementById('toast-container');
-        this.btnRegFinal = document.getElementById('btn-register-final');
+        this.btnRegFinal = document.getElementById('btn-register-final');   
         this.pacientesList = document.getElementById('pacientes-list-container');
         this.prontuarioList = document.getElementById('prontuario-list');
         
@@ -22,13 +22,10 @@ export class AuthView {
     }
 
     initBinds() {
-        document.getElementById('link-go-register')?.addEventListener('click', (e) => { 
-            e.preventDefault(); this.switchScreen('register'); 
-        });
         document.getElementById('link-go-login')?.addEventListener('click', (e) => { 
             e.preventDefault(); this.switchScreen('login'); 
         });
-        
+
         this.vetCheckbox?.addEventListener('change', (e) => {
             this.vetFields?.classList.toggle('show', e.target.checked);
             if(this.btnRegFinal) this.btnRegFinal.innerText = e.target.checked ? "Registrar Veterinário" : "Registrar";
@@ -105,8 +102,17 @@ export class AuthView {
     }
 
     switchScreen(screenName) {
-        Object.values(this.sections).forEach(sec => sec?.classList.remove('active'));
-        this.sections[screenName]?.classList.add('active');
+        Object.values(this.sections).forEach(sec => {
+            if (sec) {
+                sec.classList.remove('active');
+                sec.classList.add('hidden');
+            }
+        });
+        
+        if (this.sections[screenName]) {
+            this.sections[screenName].classList.remove('hidden');
+            this.sections[screenName].classList.add('active');
+        }
     }
 
     showToast(msg, type = 'success') {

@@ -5,8 +5,6 @@ export class AuthController {
         this.petController = petController; // Guarda a referência
 
         this.view.bindLoginEvent(this.handleLogin.bind(this));  
-
-        this.view.bindLoginEvent(this.handleLogin.bind(this));
         this.view.bindRegisterFinal(this.handleRegisterSubmit.bind(this));
         this.view.bindCepInput(this.handleCepCheck.bind(this));
         this.view.bindPasswordInput(this.handlePasswordCheck.bind(this));
@@ -17,21 +15,28 @@ export class AuthController {
     }
 
     async checkSession() {
-        if(this.model.isLoggedIn()) {
+        if (this.model.isLoggedIn()) {
             const role = localStorage.getItem('user-role');
-            const name = localStorage.getItem('user-name') || '';
-            this.view.setupDashboard(role, name);
             
-            // Se for tutor, carrega os pets automaticamente ao abrir o app
-            if (role === 'tutor') {
-                await this.petController.loadDashboard();
-            } else if (role === 'veterinario') {
-                this.loadVetDashboard();
+            // Verifica se o usuário já está dentro da pasta /pages/
+            const isInsidePages = window.location.pathname.includes('/pages/');
+            const dashPath = isInsidePages ? './dashboard.html' : './pages/dashboard.html';
+
+            // O utilizador já está logado! Redireciona para o dashboard
+            if (role === 'tutor' || role === 'veterinario') {
+                if (!window.location.pathname.includes('dashboard.html')) {
+                    window.location.href = dashPath; 
+                }
             }
         } else {
-            this.view.switchScreen('login');
+            // NÃO ESTÁ LOGADO!
+            // Só esconde tudo e tenta mostrar o login SE a tela de login existir neste HTML
+            if (this.view.sections.login) {
+                this.view.switchScreen('login');
+            }
         }
     }
+    
 
     handleLogout() {
         this.model.logout();

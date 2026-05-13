@@ -1,0 +1,615 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #274472;
+    --accent-color: #4CAF50;
+    --bg-overlay: rgba(0, 0, 0, 0.42);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-white: #ffffff;
+    --text-hint: #cccccc;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../assets/image/fundo_login.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#app::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg-overlay);
+    z-index: 1;
+}
+
+.view-section {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    padding:
+        35px
+        24px
+        20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.view-section.hidden {
+    display: none;
+}
+
+.view-section.active {
+    display: flex;
+}
+
+
+
+/* --- ESTILO LOGO --- */
+.logo {
+    font-size: 75px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 40px;
+    letter-spacing: -2px;
+}
+
+.logo-small {
+    font-size: 52px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -2px;
+    margin-bottom: 5px;
+    text-shadow:
+        0 4px 15px rgba(0,0,0,0.25);
+}
+
+.section-title {
+    color: rgba(255,255,255,0.92);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 28px;
+}
+
+.input-container {
+    width: 100%;
+}
+
+.input-wrapper {
+    width: 100%;
+    background:
+        rgba(255,255,255,0.10);
+    border:
+        1px solid rgba(255,255,255,0.18);
+    border-radius: 18px;
+    margin-bottom: 16px;
+    display:flex;
+    align-items:center;
+    padding:
+        4px
+        16px;
+    backdrop-filter: blur(14px);
+    position:relative;
+    transition:
+        border .2s,
+        transform .2s,
+        background .2s;
+}
+
+.input-wrapper:focus-within{
+
+    border:
+        1px solid rgba(255,255,255,0.45);
+
+    background:
+        rgba(255,255,255,0.14);
+
+    transform: scale(1.01);
+}
+
+.input-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.input-wrapper input {
+    flex:1;
+    background:transparent;
+    border:none;
+    color:white;
+    font-size:16px;
+    font-weight:500;
+    padding:14px 2px;
+    outline:none;
+    width:100%;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255,255,255,0.58);
+}
+
+.toggle-password {
+    cursor: pointer;
+    padding: 10px; /* Aumentar a área de clique */
+    font-size: 18px;
+    position: absolute; /* Prende o ícone à direita */
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+}
+
+/* Ocultar o ícone de password nativo do Edge/Internet Explorer */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+/* --- BOTÕES --- */
+.btn-primary {
+    background: linear-gradient(135deg,#3c6fc2,#274472);
+    color:white;
+    border:none;
+    border-radius:18px;
+    padding:16px;
+    width:100%;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:10px;
+    transition: transform .2s, opacity .2s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    flex-shrink:0;
+}
+
+.btn-primary:hover{
+    opacity:.95;
+}
+
+.btn-primary:active{
+    transform:scale(.98);
+}
+
+.link-text {
+    color:white;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.password-strength{
+    width:100%;
+    margin-top:-8px;
+    margin-bottom:18px;
+}
+
+.strength-bars{
+    display:flex;
+    gap:6px;
+}
+
+.bar{
+    flex:1;
+    height:6px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.15);
+    transition:.3s;
+}
+
+.bottom-text {
+    color:rgba(255,255,255,0.88);
+    margin-top:20px;
+    font-size:14px;
+    text-align:center;
+    flex-shrink:0;
+    padding-bottom:10px;
+}
+
+/* --- SCROLL CONTAINER PARA CADASTRO --- */
+.scroll-container {
+    width: 100%;
+    overflow-y: auto;
+    flex: 1;
+    padding-right: 2px;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scroll-container::-webkit-scrollbar{
+    width: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb{
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+}
+
+/* --- DASHBOARD ELEMENTS --- */
+.dash-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: white;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.btn-logout {
+    background: rgba(255,0,0,0.2);
+    border: 1px solid rgba(255,0,0,0.3);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.fab {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* --- HELPERS --- */
+.hidden-fields { display: none; width: 100%; }
+
+.hidden-fields.show { display: block; }
+
+/* =========================
+   CHECKBOX VETERINÁRIO
+========================= */
+
+.checkbox-wrapper{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    margin:
+        10px
+        0
+        24px;
+
+    padding:
+        14px
+        16px;
+
+    border-radius:18px;
+
+    background:
+        rgba(76,175,80,0.12);
+
+    border:
+        1px solid rgba(76,175,80,0.25);
+
+    backdrop-filter:blur(14px);
+
+    transition:
+        .25s ease;
+}
+
+.checkbox-wrapper:hover{
+    background:
+        rgba(76,175,80,0.16);
+
+    transform:
+        translateY(-1px);
+}
+
+.checkbox-wrapper label{
+    color:white;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    user-select:none;
+}
+
+/* CHECKBOX CUSTOM */
+
+.checkbox-wrapper input[type="checkbox"]{
+    appearance:none;
+    -webkit-appearance:none;
+
+    width:24px;
+    height:24px;
+
+    border-radius:8px;
+
+    border:
+        2px solid rgba(255,255,255,0.45);
+
+    background:
+        rgba(255,255,255,0.08);
+
+    cursor:pointer;
+
+    position:relative;
+
+    transition:
+        .25s ease;
+
+    flex-shrink:0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked{
+    background:var(--accent-color);
+    border-color:var(--accent-color);
+
+    box-shadow:
+        0 0 14px rgba(76,175,80,0.45);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::before{
+    content:'✓';
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    color:white;
+
+    font-size:14px;
+    font-weight:700;
+}
+
+/* =========================
+   CHECKS SENHA
+========================= */
+
+.strength-reqs{
+    color:white !important;
+
+    font-size:12px !important;
+
+    display:flex !important;
+    flex-direction:column;
+
+    gap:10px !important;
+
+    margin-top:12px !important;
+}
+
+.strength-reqs span{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:
+        11px
+        14px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    color:
+        rgba(255,255,255,0.92);
+
+    font-size:13px !important;
+    font-weight:500;
+
+    transition:
+        .25s ease;
+}
+
+/* QUANDO VALIDAR VIA JS */
+.strength-reqs span.valid{
+    background:
+        rgba(76,175,80,0.18);
+
+    border:
+        1px solid rgba(76,175,80,0.30);
+
+    color:#dfffea;
+}
+
+.strength-reqs span.invalid{
+    background:
+        rgba(255,77,77,0.10);
+
+    border:
+        1px solid rgba(255,77,77,0.20);
+}
+
+/* =========================
+   MELHORIAS MOBILE
+========================= */
+
+@media (max-width: 480px){
+
+    .view-section{
+        padding:
+            26px
+            18px
+            16px;
+    }
+
+    .logo-small{
+        font-size:40px;
+    }
+
+    .section-title{
+        font-size:15px;
+        margin-bottom:18px;
+    }
+
+    .input-wrapper{
+        border-radius:16px;
+        margin-bottom:14px;
+    }
+
+    .input-wrapper input{
+        font-size:15px;
+        padding:13px 2px;
+    }
+
+    .toggle-password{
+        right:8px;
+        font-size:17px;
+    }
+
+    .btn-primary{
+        border-radius:16px;
+        padding:15px;
+        font-size:16px;
+    }
+
+    .checkbox-wrapper{
+        padding:13px 14px;
+        gap:12px;
+    }
+
+    .checkbox-wrapper label{
+        font-size:13px;
+    }
+
+    .strength-reqs span{
+        padding:10px 12px;
+        font-size:12px !important;
+    }
+
+    .bottom-text{
+        margin-top:16px;
+        font-size:13px;
+        flex-shrink:0;
+        padding-bottom:10px;
+    }
+}
+
+/* =========================
+   TELAS MUITO PEQUENAS
+========================= */
+
+@media (max-height: 700px){
+
+    .view-section{
+        padding-top:20px;
+    }
+
+    .logo-small{
+        font-size:36px;
+    }
+
+    .section-title{
+        margin-bottom:14px;
+    }
+
+    .input-wrapper{
+        margin-bottom:12px;
+    }
+
+    .input-wrapper input{
+        padding:11px 2px;
+    }
+
+    .checkbox-wrapper{
+        margin-bottom:18px;
+    }
+
+    .strength-reqs{
+        gap:8px !important;
+    }
+
+    .strength-reqs span{
+        padding:8px 10px;
+        font-size:11px !important;
+    }
+}
+
+/* --- BOTÃO SECUNDÁRIO (ENTRAR / REGISTAR) --- */
+.btn-outline {
+    background: transparent;
+    color: var(--text-white);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    padding: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--text-white);
+}
+
+.btn-outline:active {
+    transform: scale(0.98);
+}
+
+/* --- BOTÃO DE PORTA (VOLTAR) --- */
+.btn-door {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    padding: 16px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* Espaço entre o ícone e o texto */
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.btn-door i {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.btn-door:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-door:active {
+    transform: scale(0.98);
+}

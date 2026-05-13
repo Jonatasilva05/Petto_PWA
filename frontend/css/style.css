@@ -164,7 +164,14 @@ input::-ms-clear {
 .link-text {
     color: var(--text-white);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
+    margin-top: 15px;
+    opacity: 0.8;
+}
+
+.link-text-cadastro {
+    color: var(--text-white);
+    font-size: 15px;
     margin-top: 15px;
     opacity: 0.8;
 }
@@ -300,3 +307,28 @@ input::-ms-clear {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* --- BOTÃO SECUNDÁRIO (ENTRAR / REGISTAR) --- */
+.btn-outline {
+    background: transparent;
+    color: var(--text-white);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    padding: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--text-white);
+}
+
+.btn-outline:active {
+    transform: scale(0.98);
+}
+

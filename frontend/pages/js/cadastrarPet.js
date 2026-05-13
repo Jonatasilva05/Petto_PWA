@@ -1,5 +1,16 @@
-
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Verificação de Segurança (O Guarda)
+    const token = localStorage.getItem('auth-token-petto');
+
+    if (!token) {
+        // Se não houver token, expulsa para o ecrã de login na raiz
+        window.location.replace('../index.html'); 
+        return; // Pára a execução do resto do código
+    }
+
+    // A partir daqui, o utilizador tem sessão. Pode colocar o resto do seu código!
+    console.log("Utilizador autorizado!");
+    
     // Estado do formulário
     let currentStep = 1;
     const totalSteps = 4;

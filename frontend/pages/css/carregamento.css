@@ -41,16 +41,29 @@ body{
 .mobile-frame{
     width:100%;
     height:100vh;
-
-    background: var(--bg-color);
-
     position:relative;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     overflow:hidden;
+    background: linear-gradient(rgba(244,247,251,0.78),rgba(244,247,251,0.82) ), url("../assets/image/abracaCao.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.mobile-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    backdrop-filter: blur(1px);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.15),
+            rgba(255,255,255,0.35)
+        );
+    z-index:0;
 }
 
 /* FUNDO */
@@ -84,7 +97,7 @@ body{
 .bg-paws{
     position:absolute;
     inset:0;
-    opacity:0.05;
+    opacity:5;
 }
 
 .bg-paw{
