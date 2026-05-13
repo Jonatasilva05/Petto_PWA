@@ -2,6 +2,7 @@
 │   ├── .gitignore
 │   ├── criarEstrutura.py
 │   ├── estrutura.txt
+│   ├── petto.zip
 │   ├── backend/
 │   │   ├── .env
 │   │   ├── package-lock.json
@@ -129,6 +130,12 @@
 │   │   │   │   ├── carregamento.css
 │   │   │   │   ├── dashboard.css
 │   │   │   │   ├── registroTutor.css
+│   │   │   ├── data/
+│   │   │   │   ├── databaseBreeds.ts
+│   │   │   │   ├── databaseHealthReference.ts
+│   │   │   │   ├── databaseMedi.ts
+│   │   │   │   ├── databasePets.ts
+│   │   │   │   ├── encyclopediaMedi.ts
 │   │   │   ├── js/
 │   │   │   │   ├── cadastrarPet.js
 │   │   │   │   ├── carregamento.js
