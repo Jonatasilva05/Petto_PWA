@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redefinir Senha</title>
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/confirmSenha.css">
+
+</head>
+
+<body>
+
+  <div class="screen">
+
+    <div class="content">
+
+      <!-- Título -->
+      <div class="title">
+        <h1>Redefinir Senha</h1>
+        <p>Digite sua nova senha abaixo.</p>
+      </div>
+
+      <!-- Nova senha -->
+      <div class="input-group">
+
+        <i class="fa-solid fa-lock left-icon"></i>
+
+        <input type="password" placeholder="Nova Senha" />
+
+        <i class="fa-solid fa-eye eye"></i>
+
+      </div>
+
+      <!-- Regras -->
+      <div class="rules">
+
+        <div class="rule">
+          <div class="circle"></div>
+          Entre 6 e 20 caracteres
+        </div>
+
+        <div class="rule">
+          <div class="circle"></div>
+          Uma letra minúscula
+        </div>
+
+        <div class="rule">
+          <div class="circle"></div>
+          Uma letra MAIÚSCULA
+        </div>
+
+        <div class="rule">
+          <div class="circle"></div>
+          Um número (0-9)
+        </div>
+
+      </div>
+
+      <!-- Confirmar senha -->
+      <div class="input-group">
+
+        <i class="fa-solid fa-lock left-icon"></i>
+
+        <input type="password" placeholder="Confirmar Nova Senha" />
+
+        <i class="fa-solid fa-eye eye"></i>
+
+      </div>
+
+      <!-- Botão -->
+      <button class="btn">
+        Salvar Nova Senha
+      </button>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

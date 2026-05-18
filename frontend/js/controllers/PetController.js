@@ -12,7 +12,7 @@ export class PetController {
         const btnFab = document.getElementById('btn-go-add-pet');
         if (btnFab) {
             btnFab.addEventListener('click', () => {
-                window.location.href = './pets/cadastrarPet1.html';
+                window.location.href = './auth/cadastrarPet1.html';
             });
         }
 
@@ -20,7 +20,7 @@ export class PetController {
         const btnFirst = document.getElementById('btn-add-first');
         if (btnFirst) {
             btnFirst.addEventListener('click', () => {
-                window.location.href = '../pages/cadastroPet/cadastrarPet1.html';
+                window.location.href = './auth/cadastrarPet1.html';
             });
         }
     }

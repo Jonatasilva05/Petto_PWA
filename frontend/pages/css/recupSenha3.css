@@ -1,0 +1,118 @@
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Inter', sans-serif;
+    }
+
+    body{
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#111;
+    }
+
+    .screen{
+      width:390px;
+      height:844px;
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+      background:url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+    }
+
+    /* Overlay escuro */
+    .screen::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+    }
+
+    .content{
+      position:relative;
+      z-index:2;
+      height:100%;
+      padding:20px 16px 30px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Botão voltar */
+    .back-btn{
+      width:40px;
+      height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      color:#fff;
+      cursor:pointer;
+    }
+
+    /* Área central */
+    .center{
+      margin-top:240px;
+      text-align:center;
+    }
+
+    h1{
+      font-size:28px;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+
+    .subtitle{
+      font-size:17px;
+      color:rgba(255,255,255,0.92);
+      margin-bottom:28px;
+    }
+
+    /* Campo */
+    .input-box{
+      width:100%;
+      height:54px;
+      border:1.5px solid rgba(255,255,255,0.75);
+      border-radius:14px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(4px);
+      padding:0 18px;
+    }
+
+    .input-box input{
+      width:100%;
+      height:100%;
+      background:transparent;
+      border:none;
+      outline:none;
+      color:#fff;
+      font-size:18px;
+    }
+
+    .input-box input::placeholder{
+      color:rgba(255,255,255,0.75);
+    }
+
+    /* Botão */
+    .bottom{
+      margin-top:38px;
+    }
+
+    .btn{
+      width:100%;
+      height:58px;
+      border:none;
+      border-radius:12px;
+      background:#294b8f;
+      color:#fff;
+      font-size:20px;
+      font-weight:500;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .btn:hover{
+      background:#3158a8;
+    }

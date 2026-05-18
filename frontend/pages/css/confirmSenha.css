@@ -1,0 +1,129 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', sans-serif;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111;
+}
+
+.screen{
+    width:390px;
+    height:844px;
+    position:relative;
+    overflow:hidden;
+    background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop')
+    center/cover no-repeat;
+    color:#fff;
+}
+
+.content{
+    width:100%;
+    height:100%;
+    padding:42px 20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.title h1{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.title p{
+    font-size:16px;
+    color:rgba(255,255,255,0.9);
+}
+
+/* Campo */
+.input-group{
+    width:100%;
+    height:56px;
+    border:1.5px solid rgba(255,255,255,0.75);
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    padding:0 16px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(4px);
+    margin-bottom:12px;
+}
+
+.input-group i{
+    font-size:20px;
+    color:rgba(255,255,255,0.9);
+}
+
+.input-group .left-icon{
+    margin-right:12px;
+}
+
+.input-group .eye{
+    cursor:pointer;
+}
+
+.input-group input{
+    flex:1;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:#fff;
+    font-size:17px;
+}
+
+.input-group input::placeholder{
+    color:rgba(255,255,255,0.8);
+}
+
+/* Regras */
+.rules{
+    margin:8px 0 20px 10px;
+}
+
+.rule{
+    display:flex;
+    align-items:center;
+    margin-bottom:8px;
+    font-size:15px;
+    color:rgba(255,255,255,0.92);
+}
+
+.circle{
+    width:16px;
+    height:16px;
+    border:2px solid #fff;
+    border-radius:50%;
+    margin-right:10px;
+}
+
+/* Botão */
+.btn{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:12px;
+    background:#28b13f;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:8px;
+    transition:0.2s;
+}
+
+.btn:hover{
+    background:#2dc747;
+}

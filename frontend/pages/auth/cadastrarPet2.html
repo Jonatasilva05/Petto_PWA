@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro do Pet</title>
+    <link rel="stylesheet" href="../css/cadastrarPet2.css">
+    
+</head>
+<body>
+
+<div class="mobile-container">
+    <header>
+        <button class="btn-cancel">Cancelar</button>
+        <h2>Cadastro do Pet</h2>
+    </header>
+    
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <form id="petForm">
+        
+        <div class="form-group">
+            <div class="label-row">
+                <label>Data de Nascimento</label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="cb-unknown-date">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">Não sei a data</span>
+                </label>
+            </div>
+            <input type="date" id="input-birth-date">
+        </div>
+
+        <div id="approx-age-section">
+            <div class="form-group">
+                <label id="label-approx-main">Anos aproximados</label>
+                <div class="input-with-toggles">
+                    <input type="number" placeholder="Ex: 5" min="0">
+                    <div class="toggle-group">
+                        <button type="button" class="toggle-btn" id="btn-months">Meses</button>
+                        <button type="button" class="toggle-btn active" id="btn-years">Anos</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-row">
+                    <label id="label-approx-sub">e Meses (opcional)</label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="cb-unknown-months">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Não sei</span>
+                    </label>
+                </div>
+                <input type="number" id="input-approx-months" placeholder="Ex: 3" min="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Sexo</label>
+            <div class="gender-group">
+                <button type="button" class="gender-btn" id="btn-male">
+                    <span class="icon-male">♂</span> Macho
+                </button>
+                <button type="button" class="gender-btn" id="btn-female">
+                    <span class="icon-female">♀</span> Fêmea
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="label-row">
+                <label>Peso (kg)</label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="cb-unknown-weight">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">Não sei</span>
+                </label>
+            </div>
+            <input type="text" id="input-weight" placeholder="Opcional. Ex: 12.5">
+        </div>
+
+        <div class="form-group">
+            <label>Cor Principal</label>
+            <input type="text" placeholder="Opcional. Ex: Dourado">
+        </div>
+
+        <div class="footer-buttons">
+            <button type="button" class="btn-secondary">Voltar</button>
+            <button type="button" class="btn-primary">Avançar</button>
+        </div>
+    </form>
+</div>
+
+<script src="../js/cadastrarPet2.js"></script>
+
+</body>
+</html>

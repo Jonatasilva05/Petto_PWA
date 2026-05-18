@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         view: {
             switchScreen: (screenName) => {
                 if (screenName === 'cadastrar-pet-view') {
-                    Futuramente: window.location.href = './cadastroPet/cadastrarPet1.html'
+                    Futuramente: window.location.href = './auth/cadastrarPet1.html'
                     alert('Navegar para a página de Cadastro de Pet');
                 }
             }
@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     document.getElementById('btn-go-add-pet').addEventListener('click', () => {
-        window.location.href = './cadastroPet/cadastrarPet1.html';
+        window.location.href = './auth/cadastrarPet1.html';
     });
 
     document.getElementById('btn-add-first').addEventListener('click', () => {
-        window.location.href = './cadastroPet/cadastrarPet1.html';
+        window.location.href = './auth/cadastrarPet1.html';
     });
 
     // 4. Inicializa os Pets
