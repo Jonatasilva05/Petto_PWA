@@ -115,6 +115,7 @@ app.use(express.static(frontendPath, {
 app.use('/api/auth', authRoutes);
 app.use('/api/pets', petRoutes);
 app.use('/api/vet', vetRoutes);
+app.use('/api/agendamentos', require('./routes/appointmentRoutes'));
 
 /* =========================================
    TESTE UTF-8

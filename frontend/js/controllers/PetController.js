@@ -16,10 +16,52 @@ export class PetController {
         this.view.showSkeleton();
         try {
             const pets = await this.model.getPets();
-            this.view.renderPets(pets, (petId) => { console.log('Carteira do pet: ', petId); });
-        } catch (error) { console.error(error.message); }
-    }
+            this.view.renderPets(
+                pets, 
+                // Função 1: Acessar Carteira
+                (petId) => { console.log('Carteira do pet: ', petId); },
+                
+                // Função 2: Editar Pet (Apenas Aviso por enquanto)
+                (petId) => { 
+                    Swal.fire({
+                        title: 'Em breve!',
+                        text: 'A tela de edição de pets está em desenvolvimento.',
+                        icon: 'info',
+                        confirmButtonColor: '#4890F0'
+                    });
+                },
 
+                // Função 3: Excluir Pet
+                (petId, petNome) => {
+                    Swal.fire({
+                        title: `Excluir ${petNome}?`,
+                        text: "Essa ação é irreversível. Todos os dados, vacinas e imagem serão apagados.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ff4d4d',
+                        cancelButtonColor: '#ccc',
+                        confirmButtonText: 'Sim, excluir',
+                        cancelButtonText: 'Cancelar'
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            try {
+                                await this.model.deletePet(petId);
+                                Swal.fire('Excluído!', `${petNome} foi removido do seu painel.`, 'success');
+                                this.loadDashboard(); 
+                            } catch (error) {
+                                Swal.fire('Erro', error.message, 'error');
+                            }
+                        }
+                    });
+                }
+            );
+        } catch (error) { 
+            console.error(error.message); 
+            // Se falhar ou estiver vazio, passa os 4 parâmetros garantindo que não dê erro
+            this.view.renderPets([], () => {}, () => {}, () => {});
+        }
+    }
+    
     gerenciarCicloDeFormularios() {
         const path = window.location.pathname;
         const dadosEtapa1 = JSON.parse(localStorage.getItem('cadastro_pet_e1') || '{}');
@@ -120,34 +162,55 @@ export class PetController {
 
         document.getElementById('overlay')?.addEventListener('click', window.closeBottomSheet);
 
-        // Captura a imagem selecionada/tirada e gera o preview em Base64
+        // ==========================================
+        // COMPRESSOR DE IMAGEM ADICIONADO AQUI
+        // ==========================================
         window.handlePhotoUpload = (event) => {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    const previewImage = document.getElementById('pet-photo-preview');
-                    const placeholder = document.getElementById('photo-placeholder');
-                    if (previewImage && placeholder) {
-                        previewImage.src = e.target.result;
-                        previewImage.style.display = 'block';
-                        placeholder.style.display = 'none';
-                    }
-                    window.closeBottomSheet();
+                    const img = new Image();
+                    img.onload = () => {
+                        // Cria um canvas para redimensionar a imagem
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 800; // Largura máxima permitida
+                        const MAX_HEIGHT = 800; // Altura máxima permitida
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        } else {
+                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Converte para JPG com 70% de qualidade (Reduz drasticamente o peso)
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+                        const previewImage = document.getElementById('pet-photo-preview');
+                        const placeholder = document.getElementById('photo-placeholder');
+                        if (previewImage && placeholder) {
+                            previewImage.src = compressedBase64;
+                            previewImage.style.display = 'block';
+                            placeholder.style.display = 'none';
+                        }
+                        window.closeBottomSheet();
+                    };
+                    img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
         };
 
-        // Conecta as ações dos botões dentro do Bottom Sheet de foto
-        document.querySelector('#sheet-foto .btn-primary')?.addEventListener('click', () => {
-            document.getElementById('input-camera').click();
-        });
-        document.querySelector('#sheet-foto .btn-secondary')?.addEventListener('click', () => {
-            document.getElementById('input-gallery').click();
-        });
+        document.querySelector('#sheet-foto .btn-primary')?.addEventListener('click', () => { document.getElementById('input-camera').click(); });
+        document.querySelector('#sheet-foto .btn-secondary')?.addEventListener('click', () => { document.getElementById('input-gallery').click(); });
 
-        // Configura escuta de alteração nos inputs de arquivos
         document.getElementById('input-camera')?.addEventListener('change', window.handlePhotoUpload);
         document.getElementById('input-gallery')?.addEventListener('change', window.handlePhotoUpload);
     }
@@ -254,13 +317,20 @@ export class PetController {
                 window.location.href = urlAvancar;
             });
         } else {
-            
+            // Botão Finalizar da Etapa 4
             document.querySelector('.finalizar')?.addEventListener('click', async () => {
                 this.coletarDatasDinamicas(itensSelecionados, container);
                 
                 const e1 = JSON.parse(localStorage.getItem('cadastro_pet_e1') || '{}');
                 const e2 = JSON.parse(localStorage.getItem('cadastro_pet_e2') || '{}');
                 const vacinas = JSON.parse(localStorage.getItem('cadastro_pet_vacinas') || '[]');
+
+                // TRAVA DE SEGURANÇA: Se perdeu os dados de nome na transição das telas
+                if (!e1.nome) {
+                    alert("Os dados principais do pet foram perdidos. Por favor, reinicie o cadastro.");
+                    window.location.href = 'cadastrarPet1.html';
+                    return;
+                }
 
                 const payloadCompleto = {
                     nome: e1.nome,

@@ -12,7 +12,6 @@ export class PetModel {
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || 'Erro ao carregar pets');
 
-        // Formatação igual ao seu código original
         return data.map(p => ({
             ...p,
             is_details_complete: p.is_details_complete === 1,
@@ -21,6 +20,16 @@ export class PetModel {
         }));
     }
 
+    async getPetById(petId) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/pets/${petId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Erro ao carregar perfil do pet.');
+        return data;
+    }
     
     async cadastrarPetCompleto(payload) {
         const token = localStorage.getItem('auth-token-petto');
@@ -28,7 +37,7 @@ export class PetModel {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Envia o token JWT do tutor logado para segurança do banco
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(payload)
         });

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Perfil do Pet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <link rel="stylesheet" href="../css/perfilPet.css">
+</head>
+<body>
+
+<div class="mobile-frame">
+    <div class="header">
+        <i class="fa-solid fa-chevron-left clickable" id="btn-voltar"></i>
+        <span id="lbl-nome-header">Carregando...</span>
+        <i class="fa-solid fa-heart clickable" id="btn-favorito"></i>
+    </div>
+    
+    <div class="hero">
+        <img id="img-pet-foto" src="../../assets/image/cachorro.png" alt="Foto do Pet">
+    </div>
+
+    <div class="info-tags">
+        <span class="tag" id="tag-peso">Peso: -- kg</span>
+        <span class="tag" id="tag-idade">Idade: --</span>
+        <span class="tag" id="tag-raca">--</span>
+        <i class="fa-solid fa-download download-btn clickable" id="btn-download"></i>
+    </div>
+
+    <div class="content">
+        <div class="section-title">Próximos Compromissos</div>
+        <div class="horizontal-scroll">
+            <div class="card-compromisso clickable">
+                <i class="fa-solid fa-id-card blue-icon"></i>
+                <h3>Consulta de Rotina</h3>
+                <p>15/Out</p>
+            </div>
+            <div class="card-compromisso clickable">
+                <i class="fa-solid fa-bath"></i>
+                <h3>Banho e Tosa</h3>
+                <p>20/Out</p>
+            </div>
+        </div>
+
+        <div class="grid-menu" style="margin-top: 15px;">
+            <div class="grid-item clickable" data-tela="Vacinas">
+                <i class="fa-solid fa-syringe" style="color:#0056b3;"></i> Vacinas
+            </div>
+            <div class="grid-item clickable" data-tela="Medicamentos">
+                <i class="fa-solid fa-pills" style="color:#e91e63;"></i> Medicamentos
+            </div>
+            <div class="grid-item clickable" data-tela="Exames">
+                <i class="fa-solid fa-file-medical" style="color:#2196F3;"></i> Exames
+            </div>
+            <div class="grid-item clickable" data-tela="Outros Exames">
+                <i class="fa-solid fa-microscope" style="color:#ff9800;"></i> Exames (Outros)
+            </div>
+            <div class="grid-item clickable" data-tela="Alergias">
+                <i class="fa-solid fa-virus" style="color:#f44336;"></i> Alergias
+            </div>
+            
+            <div class="grid-item grid-item-double">
+                <div class="sub-item clickable" data-tela="Agendar Consulta">
+                    <i class="fa-solid fa-calendar-check" style="color:#03a9f4;"></i>
+                    <span>Agendar<br>Consulta</span>
+                </div>
+                <div class="sub-item clickable" data-tela="Histórico Rápido">
+                    <i class="fa-solid fa-heart-pulse" style="color:#ff5722;"></i>
+                    <span>Histórico<br>Rápido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-menu">
+            <div class="list-item clickable" data-tela="Histórico Completo">
+                <div><i class="fa-solid fa-clipboard-list left-icon"></i> Histórico Completo</div>
+                <i class="fa-solid fa-chevron-right right-icon"></i>
+            </div>
+            <div class="list-item clickable" data-tela="Agendamentos">
+                <div><i class="fa-solid fa-calendar-days left-icon"></i> Agendamentos</div>
+                <i class="fa-solid fa-chevron-right right-icon"></i>
+            </div>
+            <div class="list-item clickable" data-tela="Gerenciador de Arquivos">
+                <div><i class="fa-solid fa-folder-open left-icon"></i> Arquivos</div>
+                <i class="fa-solid fa-chevron-right right-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-actions">
+        <button class="bottom-btn btn-blue clickable" data-tela="Acompanhamento Cirúrgico">
+            <i class="fa-solid fa-laptop-medical"></i> Acompanhar Cirurgia
+        </button>
+        <button class="bottom-btn btn-red clickable" data-tela="Central de Emergência">
+            <i class="fa-solid fa-truck-medical"></i> Emergência
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    import { PetModel } from '../../js/models/PetModel.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        document.getElementById('btn-voltar').addEventListener('click', () => {
+            window.location.href = '../dashboard.html';
+        });
+
+        document.getElementById('btn-favorito').addEventListener('click', function() {
+            this.classList.toggle('active');
+            this.classList.toggle('fa-regular');
+            this.classList.toggle('fa-solid');
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const petId = urlParams.get('id');
+
+        if (!petId) {
+            Swal.fire('Erro', 'Pet não identificado.', 'error').then(() => {
+                window.location.href = '../dashboard.html';
+            });
+            return;
+        }
+
+        const model = new PetModel();
+        try {
+            const pet = await model.getPetById(petId);
+
+            document.getElementById('lbl-nome-header').innerText = pet.nome || 'Sem nome';
+            
+            if (pet.foto_url) {
+                document.getElementById('img-pet-foto').src = '../..' + pet.foto_url;
+            }
+
+            const racaSegura = (pet.raca && pet.raca !== 'null' && pet.raca !== 'Selecione...') ? pet.raca : 'Sem raça';
+            document.getElementById('tag-raca').innerText = racaSegura;
+            document.getElementById('tag-peso').innerText = pet.peso ? `Peso: ${pet.peso} kg` : 'Peso: -- kg';
+            
+            // Lógica unificada para exibição limpa da idade no perfil
+            let idadeTexto = 'Idade: --';
+            if (pet.data_nascimento) {
+                const nascimento = new Date(pet.data_nascimento);
+                const hoje = new Date();
+                
+                let anos = hoje.getFullYear() - nascimento.getFullYear();
+                let meses = hoje.getMonth() - nascimento.getMonth();
+                let dias = hoje.getDate() - nascimento.getDate();
+
+                if (dias < 0) {
+                    meses--;
+                    const ultimoDiaMesAnterior = new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate();
+                    dias += ultimoDiaMesAnterior;
+                }
+                if (meses < 0) {
+                    anos--;
+                    meses += 12;
+                }
+
+                if (anos > 0) idadeTexto = `Idade: ${anos} ${anos === 1 ? 'ano' : 'anos'}`;
+                else if (meses > 0) idadeTexto = `Idade: ${meses} ${meses === 1 ? 'mês' : 'meses'}`;
+                else if (dias >= 0) idadeTexto = `Idade: ${dias} ${dias === 1 ? 'dia' : 'dias'}`;
+            } else if (pet.idade_valor !== null && pet.idade_valor !== undefined && pet.idade_valor !== '') {
+                idadeTexto = `Idade: ${pet.idade_valor} ${pet.idade_unidade || 'anos'}`;
+            }
+
+            document.getElementById('tag-idade').innerText = idadeTexto;
+
+        } catch (error) {
+            console.error(error);
+            Swal.fire('Erro', 'Não foi possível carregar os dados deste pet.', 'error');
+        }
+
+        const exibirAvisoEmBreve = (nomeTela) => {
+            Swal.fire({
+                title: 'Em breve!',
+                text: `A tela de "${nomeTela}" está em desenvolvimento.`,
+                icon: 'info',
+                confirmButtonColor: '#4890F0'
+            });
+        };
+
+        document.querySelectorAll('.clickable[data-tela]').forEach(elemento => {
+            elemento.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const nomeTela = elemento.getAttribute('data-tela');
+                exibirAvisoEmBreve(nomeTela);
+            });
+        });
+
+        document.getElementById('btn-download').addEventListener('click', () => exibirAvisoEmBreve('Baixar Relatório'));
+        document.querySelectorAll('.card-compromisso').forEach(card => {
+            card.addEventListener('click', () => exibirAvisoEmBreve('Detalhes do Compromisso'));
+        });
+    });
+</script>
+</body>
+</html>

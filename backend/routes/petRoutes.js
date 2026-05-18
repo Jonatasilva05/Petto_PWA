@@ -18,11 +18,11 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Rota 1: Listar pets
+// Rota 1: Listar pets (CAMPOS DE IDADE E DATA DE NASCIMENTO ADICIONADOS)
 router.get('/', authenticateToken, async (req, res) => {
     try {
         const sql = `
-            SELECT p.id_pet, p.nome, p.raca, p.foto_url, 
+            SELECT p.id_pet, p.nome, p.raca, p.foto_url, p.idade_valor, p.idade_unidade, p.data_nascimento,
             (p.peso IS NOT NULL AND p.cor IS NOT NULL) as is_details_complete, 
             (SELECT COUNT(*) FROM vacinas v WHERE v.id_pet = p.id_pet) > 0 as has_vaccines, 
             (SELECT COUNT(*) FROM medicamentos m WHERE m.id_pet = p.id_pet) > 0 as has_meds 
@@ -31,6 +31,22 @@ router.get('/', authenticateToken, async (req, res) => {
         res.status(200).json(pets);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar pets.' });
+    }
+});
+
+// Rota de consulta individual para a tela de Perfil do Pet
+router.get('/:id', authenticateToken, async (req, res) => {
+    const petId = req.params.id;
+    const userId = req.user.id;
+    try {
+        const sql = `SELECT * FROM pets WHERE id_pet = ? AND id_usuario = ?`;
+        const [rows] = await pool.execute(sql, [petId, userId]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Pet não encontrado.' });
+        }
+        res.status(200).json(rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro interno ao carregar perfil do pet.' });
     }
 });
 
@@ -105,6 +121,60 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Erro ao salvar o cadastro no banco de dados.' });
     } finally {
         connection.release(); 
+    }
+});
+
+// Rota 3: Excluir pet
+router.delete('/:id', authenticateToken, async (req, res) => {
+    const petId = req.params.id;
+    const userId = req.user.id;
+
+    try {
+        // 1. Busca a URL da foto para deletar do servidor
+        const [pet] = await pool.execute('SELECT foto_url FROM pets WHERE id_pet = ? AND id_usuario = ?', [petId, userId]);
+        
+        if (pet.length === 0) {
+            return res.status(404).json({ message: 'Pet não encontrado ou você não tem permissão para excluí-lo.' });
+        }
+
+        const fotoUrl = pet[0].foto_url;
+
+        // 2. Deleta o pet do banco de dados (o CASCADE apagará vacinas, medicamentos e consultas)
+        await pool.execute('DELETE FROM pets WHERE id_pet = ? AND id_usuario = ?', [petId, userId]);
+
+        // 3. Deleta o arquivo de imagem fisicamente do servidor
+        if (fotoUrl && fotoUrl.startsWith('/uploads/')) {
+            const filePath = path.join(__dirname, '../../frontend', fotoUrl);
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath); // Apaga o arquivo
+            }
+        }
+
+        res.status(200).json({ message: 'Pet e imagem excluídos com sucesso!' });
+
+    } catch (error) {
+        console.error("Erro ao excluir pet:", error);
+        res.status(500).json({ message: 'Erro interno ao excluir o pet.' });
+    }
+});
+
+// Rota 4: Buscar detalhes de um pet específico para o perfil
+router.get('/:id', authenticateToken, async (req, res) => {
+    const petId = req.params.id;
+    const userId = req.user.id;
+
+    try {
+        const sql = `SELECT * FROM pets WHERE id_pet = ? AND id_usuario = ?`;
+        const [rows] = await pool.execute(sql, [petId, userId]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Pet não encontrado.' });
+        }
+
+        res.status(200).json(rows[0]);
+    } catch (error) {
+        console.error("Erro ao buscar perfil do pet:", error);
+        res.status(500).json({ message: 'Erro interno ao carregar perfil do pet.' });
     }
 });
 

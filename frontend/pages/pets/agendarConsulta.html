@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Agendar Consulta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/agendarConsulta.css">
+</head>
+<body>
+
+<div class="mobile-frame">
+    <header class="header">
+        <div class="header-content">
+            <div class="brand-info">
+                <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Petto Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <i class="fa-solid fa-hand-holding-heart fallback-logo" style="display: none;"></i>
+                
+                <div class="title-text">
+                    <h1>Petto</h1>
+                    <p>Agendamento de Consulta</p>
+                </div>
+            </div>
+            
+            <button id="btn-logout" class="btn-logout">
+                <i class="fa-solid fa-door-open"></i> Sair
+            </button>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="card select-card">
+            <div class="form-group">
+                <label for="select-pet"><i class="fa-solid fa-paw"></i> Quem vai à consulta?</label>
+                <select id="select-pet">
+                    <option value="">Selecione um Pet...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="select-vet"><i class="fa-solid fa-user-doctor"></i> Qual profissional?</label>
+                <select id="select-vet">
+                    <option value="">Selecione um Veterinário...</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card calendar-card">
+            <div class="month-header">
+                <i class="fa-solid fa-chevron-left" id="prev-month"></i>
+                <span id="month-display">Mês Ano</span>
+                <i class="fa-solid fa-chevron-right" id="next-month"></i>
+            </div>
+            
+            <div class="weekdays">
+                <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+            </div>
+            
+            <div class="days-grid" id="days-container">
+                </div>
+        </div>
+
+        <div class="card time-card">
+            <h3>Horários Disponíveis</h3>
+            <div class="time-slots" id="slots-container">
+                <div class="time-slot" data-time="10:00">10:00</div>
+                <div class="time-slot" data-time="11:30">11:30</div>
+                <div class="time-slot" data-time="14:30">14:30</div>
+                <div class="time-slot" data-time="16:00">16:00</div>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="btn-confirm-appointment" style="margin-top: 15px; margin-bottom: 30px;">
+            Confirmar Agendamento
+        </button>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='../dashboard.html'"><i class="fa-solid fa-house"></i><span>Home</span></div>
+        <div class="nav-item active"><i class="fa-solid fa-calendar-days"></i><span>Calendário</span></div>
+        <div class="nav-item"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
+        <div class="nav-item"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+    </nav>
+</div>
+
+<script type="module" src="../js/agendarConsulta.js"></script>
+</body>
+</html>
