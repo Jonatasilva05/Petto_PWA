@@ -2,12 +2,12 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Inter', sans-serif;
+    font-family:'Poppins', sans-serif;
 }
 
 body{
     width:100%;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -15,21 +15,31 @@ body{
 }
 
 .screen{
-    width:390px;
-    height:844px;
     position:relative;
+    width:100%;
+    max-width:480px;
+    height:100vh;
     overflow:hidden;
-    background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop')
-    center/cover no-repeat;
+    background:url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
     color:#fff;
+    display:flex;
+    align-items:center;
+}
+
+.screen::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(3px);
+    z-index:1;
 }
 
 .content{
+    position:relative;
+    z-index:2;
     width:100%;
-    height:100%;
-    padding:42px 20px;
+    padding:40px 20px;
 }
 
 .title{
@@ -40,39 +50,35 @@ body{
 .title h1{
     font-size:28px;
     font-weight:700;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .title p{
     font-size:16px;
-    color:rgba(255,255,255,0.9);
+    color:rgba(255,255,255,0.85);
 }
 
 /* Campo */
 .input-group{
     width:100%;
     height:56px;
-    border:1.5px solid rgba(255,255,255,0.75);
+    border:1.5px solid rgba(255,255,255,0.45);
     border-radius:14px;
     display:flex;
     align-items:center;
     padding:0 16px;
     background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(4px);
-    margin-bottom:12px;
+    backdrop-filter:blur(10px);
+    margin-bottom:15px;
 }
 
 .input-group i{
     font-size:20px;
-    color:rgba(255,255,255,0.9);
+    color:rgba(255,255,255,0.8);
 }
 
 .input-group .left-icon{
     margin-right:12px;
-}
-
-.input-group .eye{
-    cursor:pointer;
 }
 
 .input-group input{
@@ -81,32 +87,32 @@ body{
     border:none;
     outline:none;
     color:#fff;
-    font-size:17px;
+    font-size:16px;
 }
 
 .input-group input::placeholder{
-    color:rgba(255,255,255,0.8);
+    color:rgba(255,255,255,0.75);
 }
 
 /* Regras */
 .rules{
-    margin:8px 0 20px 10px;
+    margin:5px 0 25px 5px;
 }
 
 .rule{
     display:flex;
     align-items:center;
     margin-bottom:8px;
-    font-size:15px;
-    color:rgba(255,255,255,0.92);
+    font-size:14px;
+    color:rgba(255,255,255,0.9);
 }
 
 .circle{
-    width:16px;
-    height:16px;
-    border:2px solid #fff;
+    width:8px;
+    height:8px;
+    background:#fff;
     border-radius:50%;
-    margin-right:10px;
+    margin-right:12px;
 }
 
 /* Botão */
@@ -114,16 +120,45 @@ body{
     width:100%;
     height:56px;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     background:#28b13f;
     color:#fff;
     font-size:18px;
     font-weight:600;
-    cursor:pointer;
-    margin-top:8px;
-    transition:0.2s;
+    margin-top:10px;
+    transition:0.3s;
 }
 
 .btn:hover{
     background:#2dc747;
+}
+
+/* =========================================
+   NOVO: BOTÃO HOME (CANTO SUPERIOR)
+========================================= */
+.home-btn {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    z-index: 3;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.home-btn i {
+    font-size: 18px;
+    color: #fff;
 }

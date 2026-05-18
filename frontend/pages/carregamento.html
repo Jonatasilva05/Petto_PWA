@@ -1,114 +1,114 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>PETTO Splash Screen</title>
+    <title>PETTO Splash Screen</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Fonte mais moderna e amigável -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonte mais moderna e amigável -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-<link rel="stylesheet" href="./css/carregamento.css">
+    <link rel="stylesheet" href="./css/carregamento.css">
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-<div class="mobile-frame">
+    <div class="mobile-frame">
 
-    <div class="background-glow"></div>
-    <div class="background-glow-2"></div>
+        <div class="background-glow"></div>
+        <div class="background-glow-2"></div>
 
-    <div class="bg-paws">
-        <i class="fa-solid fa-paw bg-paw"></i>
-        <i class="fa-solid fa-paw bg-paw"></i>
-        <i class="fa-solid fa-paw bg-paw"></i>
-        <i class="fa-solid fa-paw bg-paw"></i>
-        <i class="fa-solid fa-paw bg-paw"></i>
-    </div>
-
-    <div class="content">
-
-        <!-- LOGO -->
-        <div class="logo-wrapper">
-            <img src="./assets/logo/iconSemFundoSemNome.png" alt="PETTO">
+        <div class="bg-paws">
+            <i class="fa-solid fa-paw bg-paw"></i>
+            <i class="fa-solid fa-paw bg-paw"></i>
+            <i class="fa-solid fa-paw bg-paw"></i>
+            <i class="fa-solid fa-paw bg-paw"></i>
+            <i class="fa-solid fa-paw bg-paw"></i>
         </div>
 
-        <!-- TITULO -->
-        <h1 class="brand-title">
-            PE<span class="double-t">TT</span>O
-        </h1>
+        <div class="content">
 
-        <!-- SUBTITULO -->
-        <p class="subtitle">
-            Tudo o que <span>seu pet</span> precisa.
-        </p>
-
-        <!-- FEATURES -->
-        <div class="features">
-
-            <div class="feature-item">
-                <i class="fa-solid fa-shield-heart"></i>
-                <p>Proteção</p>
+            <!-- LOGO -->
+            <div class="logo-wrapper">
+                <img src="./assets/logo/iconSemFundoSemNome.png" alt="PETTO">
             </div>
 
-            <div class="feature-divider"></div>
+            <!-- TITULO -->
+            <h1 class="brand-title">
+                PE<span class="double-t">TT</span>O
+            </h1>
 
-            <div class="feature-item">
-                <i class="fa-solid fa-heart"></i>
-                <p>Empatia</p>
+            <!-- SUBTITULO -->
+            <p class="subtitle">
+                Tudo o que <span>seu pet</span> precisa.
+            </p>
+
+            <!-- FEATURES -->
+            <div class="features">
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <p>Proteção</p>
+                </div>
+
+                <div class="feature-divider"></div>
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <p>Empatia</p>
+                </div>
+
+                <div class="feature-divider"></div>
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-eye"></i>
+                    <p>Transparência</p>
+                </div>
+
+                <div class="feature-divider"></div>
+
+                <div class="feature-item">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <p>Organização</p>
+                </div>
+
             </div>
 
-            <div class="feature-divider"></div>
+            <!-- LOADING -->
+            <div class="loading-area">
 
-            <div class="feature-item">
-                <i class="fa-solid fa-eye"></i>
-                <p>Transparência</p>
+                <div class="loading-top">
+
+                    <span class="loading-text">
+                        Carregando...
+                    </span>
+
+                    <span class="loading-percent" id="percent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
             </div>
-
-            <div class="feature-divider"></div>
-
-            <div class="feature-item">
-                <i class="fa-solid fa-calendar-check"></i>
-                <p>Organização</p>
-            </div>
-
         </div>
 
-        <!-- LOADING -->
-        <div class="loading-area">
-
-            <div class="loading-top">
-
-                <span class="loading-text">
-                    Carregando...
-                </span>
-
-                <span class="loading-percent" id="percent">
-                    0%
-                </span>
-
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
+        <div class="footer">
+            PETTO © 2026
         </div>
+
     </div>
 
-    <div class="footer">
-        PETTO © 2026
-    </div>
+    <script src="./js/carregamento.js"></script>
 
-</div>
-
-<script src="./js/carregamento.js"></script>
-
-</body>
-</html>
+    </body>
+    </html>

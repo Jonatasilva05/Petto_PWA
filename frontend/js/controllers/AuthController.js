@@ -20,17 +20,26 @@ export class AuthController {
             
             // Verifica se o usuário já está dentro da pasta /pages/
             const isInsidePages = window.location.pathname.includes('/pages/');
-            const dashPath = isInsidePages ? './dashboard.html' : './pages/dashboard.html';
 
-            // O utilizador já está logado! Redireciona para o dashboard
-            if (role === 'tutor' || role === 'veterinario') {
-                if (!window.location.pathname.includes('dashboard.html')) {
-                    window.location.href = dashPath; 
+            if (role === 'tutor') {
+                // Caminho para a tela de carregamento, em vez do dashboard direto
+                const loadingPath = isInsidePages ? './carregamento.html' : './pages/carregamento.html';
+                
+                // Impede loop infinito (só redireciona se não estiver já no carregamento ou no dashboard)
+                const currentPath = window.location.pathname;
+                if (!currentPath.includes('dashboard.html') && !currentPath.includes('carregamento.html')) {
+                    window.location.href = loadingPath; 
+                }
+            } else if (role === 'veterinario') {
+                // Se for veterinário (SPA na mesma página index)
+                if (this.view.sections.vet && !window.location.pathname.includes('dashboard.html')) {
+                    const userName = localStorage.getItem('user-name');
+                    this.view.setupDashboard(role, userName);
+                    this.loadVetDashboard();
                 }
             }
         } else {
-            // NÃO ESTÁ LOGADO!
-            // Só esconde tudo e tenta mostrar o login SE a tela de login existir neste HTML
+            // NÃO ESTÁ LOGADO! Mostra a tela de login se ela existir
             if (this.view.sections.login) {
                 this.view.switchScreen('login');
             }
@@ -44,7 +53,9 @@ export class AuthController {
         this.view.showToast('Sessão encerrada.', 'success');
     }
 
-    async handleLogin() {
+    async handleLogin(e) {
+        if (e) e.preventDefault(); 
+
         const { email, senha } = this.view.getLoginData();
         if (!email || !senha) return this.view.showToast('Campos obrigatórios!', 'error');
 
@@ -133,7 +144,7 @@ export class AuthController {
             
             // Aguarda 1.5 segundos para o usuário ler o Toast, depois volta pra login
             setTimeout(() => {
-                window.location.href = '../index.html';
+                window.location.href = '../../index.html';
             }, 1500); 
 
         } catch (e) {

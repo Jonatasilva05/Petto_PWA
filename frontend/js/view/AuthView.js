@@ -116,18 +116,15 @@ export class AuthView {
     }
 
     showToast(msg, type = 'success') {
-        const t = document.createElement('div');
-        t.className = `toast ${type}`;
-        t.innerText = msg;
-        this.toastContainer?.appendChild(t);
-
-        // Efeito de saída após 3 segundos
-        setTimeout(() => {
-            t.style.opacity = '0';
-            t.style.transform = 'translateY(-20px)';
-            t.style.transition = 'all 0.5s ease';
-            setTimeout(() => t.remove(), 500);
-        }, 3000);
+        Swal.fire({
+            text: msg,
+            icon: type, // 'success' ou 'error'
+            toast: true,
+            position: 'top-end', // Fica no canto superior direito
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
     }
 
     setLoading(id, isL, txt = 'Entrar') {
@@ -138,21 +135,27 @@ export class AuthView {
     getLoginData() { return { email: document.getElementById('login-email').value, senha: document.getElementById('login-password').value }; }
     
     getRegisterData() {
+        const isVet = this.vetCheckbox.checked;
+        
         return {
             nome: document.getElementById('reg-nome').value,
             email: document.getElementById('reg-email').value,
             senha: document.getElementById('reg-password').value,
-            isVet: this.vetCheckbox.checked,
-            cpf: document.getElementById('reg-cpf').value,
-            crmv: document.getElementById('reg-crmv').value,
             pet_primario: document.getElementById('reg-pet-primario').value,
             cor_favorita: document.getElementById('reg-cor-favorita').value,
+            
+            // O Node espera "role" ('veterinario' ou 'tutor') em vez de "isVet" (booleano)
+            role: isVet ? 'veterinario' : 'tutor', 
+            
+            // Campos de Veterinário com as chaves exatas do authRoutes.js
+            cpf: document.getElementById('reg-cpf').value,
+            crmv: document.getElementById('reg-crmv').value,
             nome_clinica: document.getElementById('reg-clinica').value,
-            tempo_experiencia: document.getElementById('reg-experiencia').value,
-            cep: document.getElementById('reg-cep').value,
+            tempo_experiencia: document.getElementById('reg-experiencia')?.value || null,
+            cep_clinica: document.getElementById('reg-cep').value, // Alterado de 'cep'
             endereco: document.getElementById('reg-endereco').value,
-            bairro: document.getElementById('reg-bairro').value,
-            numero: document.getElementById('reg-numero').value
+            bairro_clinica: document.getElementById('reg-bairro').value, // Alterado de 'bairro'
+            numero_clinica: document.getElementById('reg-numero').value // Alterado de 'numero'
         };
     }
 

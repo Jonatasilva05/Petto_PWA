@@ -622,3 +622,41 @@ input::-ms-clear {
         font-size: 18px;
     }
 }
+
+/* Container fixo que não afeta o layout da página */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* Impede que o container invisível bloqueie cliques */
+}
+
+/* Estilo do balãozinho de alerta */
+.toast {
+    background-color: #fff;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+    
+    /* Animação de entrada elástica */
+    transform: translateX(120%);
+    animation: slideIn 0.4s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Cores de borda para sucesso e erro */
+.toast.success { border-left: 5px solid #28a745; }
+.toast.error { border-left: 5px solid #dc3545; }
+
+/* Keyframe para a entrada animada */
+@keyframes slideIn {
+    to { transform: translateX(0); }
+}   

@@ -1,98 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>Recuperar Senha</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/recupSenha1.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperar Senha</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/recupSenha1.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
 <div class="container">
-
     <div class="overlay"></div>
 
-    <div class="back-btn">
-
+    <div class="back-btn" style="cursor: pointer;">
         <svg viewBox="0 0 24 24">
             <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
         </svg>
-
     </div>
 
-    <!-- TELA RECUPERAR SENHA -->
     <div class="content" id="screen-email">
-
         <h1 class="title">Recuperar Senha</h1>
-
         <p class="subtitle">
             Insira seu e-mail para continuar.
         </p>
 
         <div class="input-box">
-
             <svg viewBox="0 0 24 24">
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
                 1.1.9 2 2 2h16c1.1 0 2-.9 
                 2-2V6c0-1.1-.9-2-2-2zm0 
                 4-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
-
             <input type="email" placeholder="Seu e-mail">
-
-        </div>
-
-        <button class="btn" onclick="mostrarVerificacao()">
-            Continuar
-        </button>
-
-    </div>
-
-    <!-- TELA VERIFICAÇÃO -->
-    <div class="content hidden" id="screen-security">
-
-        <h1 class="title">Verificação de Segurança</h1>
-
-        <p class="subtitle">
-            Qual o nome do seu primeiro pet?
-        </p>
-
-        <div class="input-box">
-
-            <svg viewBox="0 0 24 24">
-                <path d="M4.5 9.5A1.5 1.5 0 1 0 4.5 
-                6a1.5 1.5 0 0 0 0 3.5zm15 
-                0A1.5 1.5 0 1 0 19.5 6a1.5 
-                1.5 0 0 0 0 3.5zM8 8a2 
-                2 0 1 0 0-4 2 2 0 0 0 
-                0 4zm8 0a2 2 0 1 0 0-4 
-                2 2 0 0 0 0 4zm-4 10c2.33 
-                0 7-1.17 7-3.5 0-1.46-1.54-2.5-3-2.5-.77 
-                0-1.44.29-2 .76-.56-.47-1.23-.76-2-.76-1.46 
-                0-3 1.04-3 2.5C5 16.83 9.67 18 12 18z"/>
-            </svg>
-
-            <input type="text" placeholder="Nome do pet">
-
-        </div>
-
-        <div class="link">
-            <a href="#">Esqueci a resposta</a>
         </div>
 
         <button class="btn">
-            Verificar
+            Continuar
         </button>
-
     </div>
-
 </div>
 
-<script src="../js/recupSenha1.js"></script>
+<script src="../../js/recuperarSenha.js"></script>
 
 </body>
-</html> 
+</html>
