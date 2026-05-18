@@ -1,0 +1,3 @@
+se usar expo tera que usar banco de dados
+
+docker-compose

@@ -2,7 +2,6 @@
 │   ├── .gitignore
 │   ├── criarEstrutura.py
 │   ├── estrutura.txt
-│   ├── petto.zip
 │   ├── backend/
 │   │   ├── .env
 │   │   ├── package-lock.json
@@ -21,72 +20,85 @@
 │   │   │   │   ├── petto_pwa.sql
 │   │   │   ├── 30-04/
 │   │   │   │   ├── petto.sql
+│   │   ├── database/
+│   │   │   ├── backups/
 │   │   ├── routes/
 │   │   │   ├── authRoutes.js
 │   │   │   ├── petRoutes.js
 │   │   │   ├── vetRoutes.js
 │   │   ├── uploads/
+│   │   │   ├── pets/
+│   │   │   ├── users/
+│   │   │   ├── vaccines/
 │   │   ├── utils/
 │   │   │   ├── validators.js
-│   ├── base/
-│   │   ├── chat/
-│   │   │   ├── agendamento.html
-│   │   │   ├── cirurgia.html
-│   │   │   ├── emergencia.html
-│   │   │   ├── especialistas.html
-│   │   │   ├── historico.html
-│   │   │   ├── home.html
-│   │   │   ├── index.html
-│   │   │   ├── login.html
-│   │   │   ├── perfil-pet.html
-│   │   │   ├── splash.html
-│   │   │   ├── assets/
-│   │   │   ├── css/
-│   │   │   │   ├── style.css
-│   │   │   ├── js/
-│   │   │   │   ├── app.js
-│   │   ├── desktop/
-│   │   │   ├── chat.html
-│   │   │   ├── historico.html
-│   │   │   ├── index.html
-│   │   │   ├── perfil.html
-│   │   │   ├── procedimentos.html
-│   │   │   ├── vacinas.html
-│   │   ├── gemini/
-│   │   │   ├── agendar.html
-│   │   │   ├── alergia.html
-│   │   │   ├── cirurgia.html
-│   │   │   ├── emergencia.html
-│   │   │   ├── especialistas.html
-│   │   │   ├── exame.html
-│   │   │   ├── historico.html
-│   │   │   ├── home.html
-│   │   │   ├── iconSemFundoSemNome.png
-│   │   │   ├── login.html
-│   │   │   ├── medicamentos.html
-│   │   │   ├── perfil_pet.html
-│   │   │   ├── splash.html
-│   │   │   ├── vacina.html
+│   ├── backups/
+│   │   ├── base/
+│   │   │   ├── chat/
+│   │   │   │   ├── agendamento.html
+│   │   │   │   ├── cirurgia.html
+│   │   │   │   ├── emergencia.html
+│   │   │   │   ├── especialistas.html
+│   │   │   │   ├── historico.html
+│   │   │   │   ├── home.html
+│   │   │   │   ├── index.html
+│   │   │   │   ├── login.html
+│   │   │   │   ├── perfil-pet.html
+│   │   │   │   ├── splash.html
+│   │   │   │   ├── css/
+│   │   │   │   │   ├── style.css
+│   │   │   │   ├── js/
+│   │   │   │   │   ├── app.js
 │   │   │   ├── desktop/
-│   │   │   │   ├── desktop.html
-│   │   ├── idea_perfil/
-│   │   │   ├── ajuda.html
-│   │   │   ├── dados.html
-│   │   │   ├── exportCart.html
-│   │   │   ├── notfi.html
-│   │   │   ├── perfil.html
-│   │   │   ├── pets.html
-│   │   │   ├── premiun.html
-│   │   │   ├── seg.html
+│   │   │   │   ├── chat.html
+│   │   │   │   ├── historico.html
+│   │   │   │   ├── index.html
+│   │   │   │   ├── perfil.html
+│   │   │   │   ├── procedimentos.html
+│   │   │   │   ├── vacinas.html
+│   │   │   ├── gemini/
+│   │   │   │   ├── agendar.html
+│   │   │   │   ├── alergia.html
+│   │   │   │   ├── cirurgia.html
+│   │   │   │   ├── emergencia.html
+│   │   │   │   ├── especialistas.html
+│   │   │   │   ├── exame.html
+│   │   │   │   ├── historico.html
+│   │   │   │   ├── home.html
+│   │   │   │   ├── iconSemFundoSemNome.png
+│   │   │   │   ├── login.html
+│   │   │   │   ├── medicamentos.html
+│   │   │   │   ├── perfil_pet.html
+│   │   │   │   ├── splash.html
+│   │   │   │   ├── vacina.html
+│   │   │   │   ├── desktop/
+│   │   │   │   │   ├── desktop.html
+│   │   │   ├── idea_perfil/
+│   │   │   │   ├── ajuda.html
+│   │   │   │   ├── dados.html
+│   │   │   │   ├── exportCart.html
+│   │   │   │   ├── notfi.html
+│   │   │   │   ├── perfil.html
+│   │   │   │   ├── pets.html
+│   │   │   │   ├── premiun.html
+│   │   │   │   ├── seg.html
+│   │   ├── notas/
+│   │   │   ├── idea.txt
+│   │   │   ├── Notas.txt
+│   │   │   ├── script.js
+│   │   │   ├── style.css
+│   │   │   ├── tes.html
 │   ├── frontend/
 │   │   ├── index.html
 │   │   ├── manifest.json
 │   │   ├── sw.js
 │   │   ├── assets/
-│   │   │   ├── icons/
 │   │   │   ├── image/
 │   │   │   │   ├── cachorro.png
 │   │   │   │   ├── fundo_login.jpeg
+│   │   │   ├── logo/
+│   │   │   ├── sounds/
+│   │   │   ├── splash/
 │   │   ├── css/
 │   │   │   ├── style.css
 │   │   ├── js/
@@ -140,10 +152,3 @@
 │   │   │   │   ├── cadastrarPet.js
 │   │   │   │   ├── carregamento.js
 │   │   │   │   ├── dashboard.js
-│   ├── notas/
-│   │   ├── cadastrarPet.html
-│   │   ├── idea.txt
-│   │   ├── Notas.txt
-│   │   ├── script.js
-│   │   ├── style.css
-│   │   ├── tes.html

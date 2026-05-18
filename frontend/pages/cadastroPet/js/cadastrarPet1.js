@@ -1,127 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
+// =========================================
+// IMPORTAÇÃO DOS DADOS (MODEL)
+// =========================================
+import { PET_DATA } from '../../data/databasePets.js';
+import { MEDICAL_DATABASE } from '../../data/databaseHealthReference.js';
 
-    // VARIÁVEIS DE CONTROLE DO WIZARD
-    let currentStep = 1;
-    const totalSteps = 4;
+// Mapeia todas as espécies que possuem vacinas cadastradas no banco médico
+const ESPECIES_PERMITIDAS = [...new Set(MEDICAL_DATABASE.vacinas.flatMap(v => v.species))];
 
-    const btnNext = document.getElementById('btn-next');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnFinish = document.getElementById('btn-finish');
-    const progressBar = document.getElementById('progress-bar');
-
-    // NAVEGAÇÃO DE PASSOS
-    function updateWizard() {
-        // Esconde todos
-        document.querySelectorAll('.step-section').forEach(el => {
-            el.classList.add('hidden');
-            el.classList.remove('active');
-        });
-
-        // Mostra o atual
-        const currentSection = document.getElementById(`step-${currentStep}`);
-        if (currentSection) {
-            currentSection.classList.remove('hidden');
-            currentSection.classList.add('active');
-        }
-
-        // Progresso
-        if (progressBar) progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
-
-        // Botões
-        if (currentStep === 1) {
-            btnPrev.classList.add('hidden');
-        } else {
-            btnPrev.classList.remove('hidden');
-        }
-
-        if (currentStep === totalSteps) {
-            btnNext.classList.add('hidden');
-            btnFinish.classList.remove('hidden');
-        } else {
-            btnNext.classList.remove('hidden');
-            btnFinish.classList.add('hidden');
-        }
-    }
-
-    btnNext?.addEventListener('click', () => {
-        if (currentStep < totalSteps) {
-            currentStep++;
-            updateWizard();
-        }
-    });
-
-    btnPrev?.addEventListener('click', () => {
-        if (currentStep > 1) {
-            currentStep--;
-            updateWizard();
-        }
-    });
-
-    btnFinish?.addEventListener('click', () => {
-        alert("Cadastro finalizado com sucesso!");
-        window.location.href = './dashboard.html';
-    });
-
-    // ETAPA 2: Data vs Idade
-    const checkNaoSeiData = document.getElementById('check-nao-sei-data');
-    const containerData = document.getElementById('container-data-nasc');
-    const containerIdade = document.getElementById('container-idade-aprox');
-
-    checkNaoSeiData?.addEventListener('change', (e) => {
-        if (e.target.checked) {
-            containerData.classList.add('hidden');
-            containerIdade.classList.remove('hidden');
-        } else {
-            containerData.classList.remove('hidden');
-            containerIdade.classList.add('hidden');
-        }
-    });
-
-    // Toggle de Anos/Meses
-    document.querySelectorAll('.btn-toggle-idade').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            document.querySelectorAll('.btn-toggle-idade').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-        });
-    });
-
-    // ETAPA 2: Sexo
-    const btnSexes = document.querySelectorAll('.btn-sex');
-    const inputSexo = document.getElementById('pet-sexo');
-
-    btnSexes.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            btnSexes.forEach(b => b.classList.remove('active'));
-            const targetBtn = e.currentTarget;
-            targetBtn.classList.add('active');
-            inputSexo.value = targetBtn.getAttribute('data-value');
-        });
-    });
-
-    // ETAPA 3 e 4: Toggles Sim/Não/Não Sei
-    const vacinaOpts = document.querySelectorAll('.btn-vacina-opt');
-    vacinaOpts.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const group = e.target.getAttribute('data-group');
-            const value = e.target.getAttribute('data-value');
-
-            document.querySelectorAll(`.btn-vacina-opt[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-
-            if (group === 'vacina') {
-                document.getElementById('pet-vacinado').value = value;
-                const areaVacinas = document.getElementById('area-selecionar-vacinas');
-                if (value === 'sim') areaVacinas.classList.remove('hidden');
-                else areaVacinas.classList.add('hidden');
-            } else if (group === 'med') {
-                document.getElementById('pet-medicado').value = value;
-            }
-        });
-    });
-});
-
-// BOTTOM SHEETS
+// =========================================
+// VARIÁVEIS DE ESTADO
+// =========================================
 let activeSheetId = null;
+let especieSelecionada = null;
+let currentStep = 1;
+const totalSteps = 4;
+
+// =========================================
+// FUNÇÕES GLOBAIS (Acessíveis pelo HTML)
+// =========================================
 
 window.openBottomSheet = function (id) {
     activeSheetId = id;
@@ -137,21 +33,40 @@ window.closeBottomSheet = function () {
     }
 };
 
-document.getElementById('overlay')?.addEventListener('click', closeBottomSheet);
-
-window.selectItem = function (tipo, nome) {
-    const el = document.getElementById(`txt-${tipo}`);
-    if (el) {
-        el.innerText = nome;
-        el.style.color = '#fff';
+window.selecionarEspecie = function(value, label) {
+    const elTexto = document.getElementById('txt-especie');
+    if (elTexto) {
+        elTexto.innerText = label;
+        elTexto.style.color = '#fff';
     }
+
+    especieSelecionada = value;
+
+    // Reseta a raça ao trocar de espécie
+    const elRacaTexto = document.getElementById('txt-raca');
+    if (elRacaTexto) {
+        elRacaTexto.innerText = 'Selecione...';
+        elRacaTexto.style.color = 'var(--text-muted)';
+    }
+
+    carregarRacas(value);
+    closeBottomSheet();
+};
+
+window.selecionarRaca = function(value, label) {
+    const elTexto = document.getElementById('txt-raca');
+    if (elTexto) {
+        elTexto.innerText = label;
+        elTexto.style.color = '#fff';
+    }
+    closeBottomSheet();
 };
 
 window.addSelectedVaccines = function () {
     const checkboxes = document.querySelectorAll('#sheet-vacina .vacina-check:checked');
     const container = document.getElementById('lista-vacinas-selecionadas');
 
-    container.innerHTML = '';
+    container.innerHTML = ''; // Limpa antes de adicionar
 
     checkboxes.forEach(chk => {
         const div = document.createElement('div');
@@ -169,3 +84,154 @@ window.addSelectedVaccines = function () {
 
     closeBottomSheet();
 };
+
+// =========================================
+// FUNÇÕES LOCAIS (Lógica de Tela)
+// =========================================
+
+function carregarEspecies() {
+    const listaEspecies = document.getElementById('lista-especies');
+    if (!listaEspecies) return;
+
+    listaEspecies.innerHTML = ''; 
+
+    // Filtra para exibir apenas espécies com suporte médico
+    const especiesFiltradas = PET_DATA.filter(esp => ESPECIES_PERMITIDAS.includes(esp.value));
+
+    especiesFiltradas.forEach(especie => {
+        const li = document.createElement('li');
+        li.innerText = especie.label;
+        li.onclick = () => selecionarEspecie(especie.value, especie.label);
+        listaEspecies.appendChild(li);
+    });
+}
+
+function carregarRacas(especieValue) {
+    const listaRacas = document.getElementById('lista-racas');
+    if (!listaRacas) return;
+
+    listaRacas.innerHTML = '';
+
+    const especieEncontrada = PET_DATA.find(e => e.value === especieValue);
+
+    if (especieEncontrada && especieEncontrada.breeds) {
+        especieEncontrada.breeds.forEach(raca => {
+            const li = document.createElement('li');
+            li.innerText = raca.label;
+            li.onclick = () => selecionarRaca(raca.value, raca.label);
+            listaRacas.appendChild(li);
+        });
+    } else {
+        listaRacas.innerHTML = '<li style="text-align: center; color: var(--text-muted);">Nenhuma raça encontrada</li>';
+    }
+}
+
+function updateWizard() {
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnFinish = document.getElementById('btn-finish');
+    const progressBar = document.getElementById('progress-bar');
+
+    document.querySelectorAll('.step-section').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('active');
+    });
+
+    const currentSection = document.getElementById(`step-${currentStep}`);
+    if (currentSection) {
+        currentSection.classList.remove('hidden');
+        currentSection.classList.add('active');
+    }
+
+    if (progressBar) progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+    // Controle de botões
+    btnPrev.classList.toggle('hidden', currentStep === 1);
+    
+    if (currentStep === totalSteps) {
+        btnNext.classList.add('hidden');
+        btnFinish.classList.remove('hidden');
+    } else {
+        btnNext.classList.remove('hidden');
+        btnFinish.classList.add('hidden');
+    }
+}
+
+// =========================================
+// INICIALIZAÇÃO E EVENTOS DO DOM
+// =========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Inicia os dados
+    carregarEspecies();
+
+    // Eventos do Wizard
+    document.getElementById('btn-next')?.addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            updateWizard();
+        }
+    });
+
+    document.getElementById('btn-prev')?.addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            updateWizard();
+        }
+    });
+
+    document.getElementById('btn-finish')?.addEventListener('click', () => {
+        alert("Cadastro finalizado com sucesso!");
+        window.location.href = '../dashboard.html';
+    });
+
+    // Eventos de Data vs Idade
+    const checkNaoSeiData = document.getElementById('check-nao-sei-data');
+    const containerData = document.getElementById('container-data-nasc');
+    const containerIdade = document.getElementById('container-idade-aprox');
+
+    checkNaoSeiData?.addEventListener('change', (e) => {
+        containerData.classList.toggle('hidden', e.target.checked);
+        containerIdade.classList.toggle('hidden', !e.target.checked);
+    });
+
+    document.querySelectorAll('.btn-toggle-idade').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.btn-toggle-idade').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+        });
+    });
+
+    // Eventos de Sexo
+    const inputSexo = document.getElementById('pet-sexo');
+    document.querySelectorAll('.btn-sex').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.btn-sex').forEach(b => b.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            inputSexo.value = e.currentTarget.getAttribute('data-value');
+        });
+    });
+
+    // Eventos de Toggles (Vacina e Medicação)
+    document.querySelectorAll('.btn-vacina-opt').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const group = e.target.getAttribute('data-group');
+            const value = e.target.getAttribute('data-value');
+
+            document.querySelectorAll(`.btn-vacina-opt[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+
+            if (group === 'vacina') {
+                document.getElementById('pet-vacinado').value = value;
+                const areaVacinas = document.getElementById('area-selecionar-vacinas');
+                areaVacinas.classList.toggle('hidden', value !== 'sim');
+            } else if (group === 'med') {
+                document.getElementById('pet-medicado').value = value;
+            }
+        });
+    });
+
+    // Overlay Close
+    document.getElementById('overlay')?.addEventListener('click', closeBottomSheet);
+});

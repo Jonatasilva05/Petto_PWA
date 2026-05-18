@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Petto - Cadastro do Pet</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -150,15 +153,7 @@
     <div class="sheet-handle"></div>
     <h3 class="sheet-title">Selecione a Espécie</h3>
     <input type="text" class="sheet-search" placeholder="Pesquisar...">
-    <ul class="sheet-list">
-        <li onclick="selectItem('especie', 'Cachorro 🐶')">Cachorro 🐶</li>
-        <li onclick="selectItem('especie', 'Gato 🐱')">Gato 🐱</li>
-        <li onclick="selectItem('especie', 'Pássaro 🐦')">Pássaro 🐦</li>
-        <li onclick="selectItem('especie', 'Roedor 🐹')">Roedor 🐹</li>
-        <li onclick="selectItem('especie', 'Peixe 🐠')">Peixe 🐠</li>
-        <li onclick="selectItem('especie', 'Tartaruga 🐢')">Tartaruga 🐢</li>
-        <li onclick="selectItem('especie', 'Outro')">Outro</li>
-    </ul>
+    <ul class="sheet-list" id="lista-especies"></ul>
     <button class="btn-primary sheet-confirm" onclick="closeBottomSheet()">Confirmar</button>
 </div>
 
@@ -166,13 +161,8 @@
     <div class="sheet-handle"></div>
     <h3 class="sheet-title">Selecione a Raça</h3>
     <input type="text" class="sheet-search" placeholder="Pesquisar...">
-    <ul class="sheet-list">
-        <li onclick="selectItem('raca', 'Não sei a raça')">Não sei a raça</li>
-        <li onclick="selectItem('raca', 'Vira-lata (SRD)')">Vira-lata (SRD)</li>
-        <li onclick="selectItem('raca', 'Abissínio')">Abissínio</li>
-        <li onclick="selectItem('raca', 'Angorá')">Angorá</li>
-        <li onclick="selectItem('raca', 'Bengal')">Bengal</li>
-        <li onclick="selectItem('raca', 'Golden Retriever')">Golden Retriever</li>
+    <ul class="sheet-list" id="lista-racas">
+        <li style="text-align: center; color: var(--text-muted);">Selecione uma espécie primeiro</li>
     </ul>
     <button class="btn-primary sheet-confirm" onclick="closeBottomSheet()">Confirmar</button>
 </div>
@@ -181,19 +171,19 @@
     <div class="sheet-handle"></div>
     <h3 class="sheet-title">Selecione as Vacinas</h3>
     <input type="text" class="sheet-search" placeholder="Pesquisar...">
-    <ul class="sheet-list">
+    <ul class="sheet-list" id="lista-vacinas-opcoes">
         <li>
-            <span>Polivalente Felina V4 ou V5</span>
-            <input type="checkbox" class="vacina-check" value="Polivalente Felina V4 ou V5">
+            <span>Polivalente (V8/V10)</span>
+            <input type="checkbox" class="vacina-check" value="Polivalente (V8/V10)">
         </li>
         <li>
-            <span>Antirrábica (Raiva)</span>
-            <input type="checkbox" class="vacina-check" value="Antirrábica (Raiva)">
+            <span>Antirrábica</span>
+            <input type="checkbox" class="vacina-check" value="Antirrábica">
         </li>
     </ul>
     <button class="btn-primary sheet-confirm" onclick="addSelectedVaccines()">Confirmar</button>
 </div>
 
-<script src="./js/cadastrarPet1.js"></script>
+<script type="module" src="./js/cadastrarPet1.js"></script>
 </body>
 </html>

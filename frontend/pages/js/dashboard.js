@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         view: {
             switchScreen: (screenName) => {
                 if (screenName === 'cadastrar-pet-view') {
-                    Futuramente: window.location.href = './cadastroPet/cadastrarPet.html'
+                    Futuramente: window.location.href = './cadastroPet/cadastrarPet1.html'
                     alert('Navegar para a página de Cadastro de Pet');
                 }
             }
