@@ -170,8 +170,8 @@ input::-ms-clear {
 }
 
 .link-text-cadastro {
-    color: var(--text-white);
-    font-size: 15px;
+    color: #9d9dff;
+    font-size: 18px;
     margin-top: 15px;
     opacity: 0.8;
 }

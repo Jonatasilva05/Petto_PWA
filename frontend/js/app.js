@@ -31,22 +31,14 @@ petApp.authController = authApp;
 ========================================= */
 
 if ('serviceWorker' in navigator) {
-
     window.addEventListener('load', async () => {
-
         try {
-
-            const registration = await navigator.serviceWorker.register('./sw.js');
-
+            // Caminho voltando para a raiz do frontend
+            const registration = await navigator.serviceWorker.register('../sw.js');
             console.log('✅ Service Worker ativo!');
             console.log('📦 Scope:', registration.scope);
-
         } catch (error) {
-
             console.error('❌ Erro ao registrar SW:', error);
-
         }
-
     });
-
 }
