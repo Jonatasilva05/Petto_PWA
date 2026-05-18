@@ -1,143 +1,172 @@
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', Arial, sans-serif;
+}
 
-    body{
-      background:#111;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-      color:#fff;
-    }
+body {
+  background: #121212;
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
 
-    .container{
-      width:380px;
-      padding:30px 20px;
-    }
+.container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 100dvh;
+}
 
-    h2{
-      font-size:20px;
-      font-weight:500;
-      line-height:1.3;
-      margin-bottom:20px;
-    }
+h2 {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+}
 
-    /* BOTÕES */
-    .options{
-      display:flex;
-      gap:10px;
-      margin-bottom:20px;
-    }
+/* BOTÕES SIM / NÃO / NÃO SEI */
+.options {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
 
-    .btn-option{
-      flex:1;
-      height:48px;
-      border:none;
-      border-radius:10px;
-      background:#2a2a2a;
-      color:#fff;
-      font-size:17px;
-      font-weight:600;
-      cursor:pointer;
-      transition:.2s;
-    }
+.btn-option {
+  flex: 1;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #1e1e1e;
+  color: #aaa;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
 
-    .btn-option.active{
-      background:#0d6efd;
-    }
+.btn-option.active {
+  background: rgba(21, 101, 192, 0.1);
+  color: #1565C0;
+  border-color: #1565C0;
+}
 
-    /* BOTÃO DROPDOWN */
-    .btn-dropdown{
-      width:100%;
-      height:52px;
-      border:none;
-      border-radius:12px;
-      background:#1f1f1f;
-      color:#fff;
-      font-size:17px;
-      font-weight:600;
-      cursor:pointer;
-      display:none;
-      justify-content:center;
-      align-items:center;
-      gap:8px;
-      margin-bottom:15px;
-    }
+/* BOTÃO DROPDOWN */
+.btn-dropdown, .btn-vacina {
+  width: 100%;
+  height: 54px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(21, 101, 192, 0.15);
+  color: #1565C0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  transition: .2s;
+}
 
-    /* DROPDOWN */
-    .dropdown{
-      display:none;
-      flex-direction:column;
-      gap:10px;
-      margin-bottom:20px;
-    }
+.btn-dropdown:active, .btn-vacina:active {
+  background: rgba(21, 101, 192, 0.25);
+}
 
-    .dropdown-item{
-      background:#222;
-      padding:14px;
-      border-radius:10px;
-      cursor:pointer;
-      transition:.2s;
-      border:2px solid transparent;
-    }
+/* DROPDOWN */
+.dropdown {
+  display: none;
+  background: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #333;
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
 
-    .dropdown-item:hover{
-      border-color:#0d6efd;
-    }
+.dropdown-item {
+  padding: 16px;
+  border-bottom: 1px solid #2a2a2a;
+  cursor: pointer;
+  font-size: 15px;
+  color: #ddd;
+  transition: .2s;
+}
 
-    .dropdown-item.selected{
-      background:#0d6efd;
-    }
+.dropdown-item:last-child {
+  border-bottom: none;
+}
 
-    /* MEDICAÇÕES SELECIONADAS */
-    .medicacoes-container{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom:60px;
-    }
+.dropdown-item:active {
+  background: #1565C0;
+  color: #fff;
+}
 
-    .medicacao-tag{
-      background:#0d6efd;
-      padding:10px 14px;
-      border-radius:20px;
-      font-size:14px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
+/* CONTAINERS SELECIONADOS */
+.vacinas-container, .medicacoes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
 
-    .remove{
-      cursor:pointer;
-      font-weight:bold;
-    }
+.date-picker-item {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #121212;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  margin-top: 10px;
+}
 
-    /* FOOTER */
-    .footer{
-      display:flex;
-      gap:15px;
-    }
+.date-picker-item::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 
-    .btn-footer{
-      flex:1;
-      height:56px;
-      border:none;
-      border-radius:30px;
-      font-size:18px;
-      font-weight:bold;
-      cursor:pointer;
-    }
+/* FOOTER FIXADO NA PARTE DE BAIXO */
+.footer {
+  margin-top: auto; 
+  display: flex;
+  gap: 15px;
+  padding-top: 20px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
 
-    .voltar{
-      background:#8b949e;
-      color:#fff;
-    }
+.btn-footer {
+  flex: 1;
+  height: 54px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
 
-    .finalizar{
-      background:#20c933;
-      color:#fff;
-    }
+.voltar {
+  background: #333;
+  color: #fff;
+  flex: 1;
+}
+
+.finalizar {
+  background: #2E7D32; /* Verde para ação final */
+  color: #fff;
+  flex: 2;
+}
+
+.avancar:active, .finalizar:active {
+  opacity: 0.8;
+}

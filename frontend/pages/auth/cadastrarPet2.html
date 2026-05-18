@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro do Pet</title>
+    <title>Cadastro do Pet - Etapa 2</title>
     <link rel="stylesheet" href="../css/cadastrarPet2.css">
-    
 </head>
 <body>
 
 <div class="mobile-container">
     <header>
-        <button class="btn-cancel">Cancelar</button>
+        <button class="btn-cancel" onclick="window.location.href = '../dashboard.html'">Cancelar</button>
         <h2>Cadastro do Pet</h2>
     </header>
     
     <div class="progress-container">
-        <div class="progress-bar"></div>
+        <div class="progress-bar" style="width: 50%;"></div>
     </div>
 
     <form id="petForm">
-        
         <div class="form-group">
             <div class="label-row">
                 <label>Data de Nascimento</label>
@@ -37,7 +35,7 @@
             <div class="form-group">
                 <label id="label-approx-main">Anos aproximados</label>
                 <div class="input-with-toggles">
-                    <input type="number" placeholder="Ex: 5" min="0">
+                    <input type="number" id="input-age-value" placeholder="Ex: 5" min="0">
                     <div class="toggle-group">
                         <button type="button" class="toggle-btn" id="btn-months">Meses</button>
                         <button type="button" class="toggle-btn active" id="btn-years">Anos</button>
@@ -61,12 +59,8 @@
         <div class="form-group">
             <label>Sexo</label>
             <div class="gender-group">
-                <button type="button" class="gender-btn" id="btn-male">
-                    <span class="icon-male">♂</span> Macho
-                </button>
-                <button type="button" class="gender-btn" id="btn-female">
-                    <span class="icon-female">♀</span> Fêmea
-                </button>
+                <button type="button" class="gender-btn" id="btn-male">♂ Macho</button>
+                <button type="button" class="gender-btn" id="btn-female">♀ Fêmea</button>
             </div>
         </div>
 
@@ -84,17 +78,16 @@
 
         <div class="form-group">
             <label>Cor Principal</label>
-            <input type="text" placeholder="Opcional. Ex: Dourado">
+            <input type="text" id="input-color" placeholder="Opcional. Ex: Dourado">
         </div>
 
         <div class="footer-buttons">
-            <button type="button" class="btn-secondary">Voltar</button>
-            <button type="button" class="btn-primary">Avançar</button>
+            <button type="button" class="btn-secondary" id="btn-back">Voltar</button>
+            <button type="button" class="btn-primary" id="btn-next">Avançar</button>
         </div>
     </form>
 </div>
 
-<script src="../js/cadastrarPet2.js"></script>
-
+<script type="module" src="../js/cadastrarPet2.js"></script>
 </body>
 </html>

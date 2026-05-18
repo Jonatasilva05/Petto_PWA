@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/05/2026 às 06:20
+-- Tempo de geração: 18/05/2026 às 09:25
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -47,8 +47,7 @@ INSERT INTO `medicamentos` (`id_medicamento`, `id_dataset`, `id_pet`, `nome_medi
 (16, 'vermifugo_oral_cao_gato', 103, 'Vermífugo (Comprimido Oral)', NULL, 0),
 (17, 'antipulgas_carrapatos_cao_gato', 104, 'Antipulgas e Carrapatos (Oral/Tópico)', NULL, 0),
 (18, 'vermifugo_oral_cao_gato', 105, 'Vermífugo (Comprimido Oral)', NULL, 1),
-(19, 'vermifugo_oral_cao_gato', 108, 'Vermífugo (Comprimido Oral)', '2025-06-26', 0),
-(20, 'antipulgas_carrapatos_cao_gato', 112, 'Antipulgas e Carrapatos (Oral/Tópico)', '2020-09-20', 0);
+(22, 'vermifugo_oral_cao_gato', 117, 'Vermífugo (Comprimido Oral)', '2026-05-17', 0);
 
 -- --------------------------------------------------------
 
@@ -92,11 +91,7 @@ INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_va
 (103, 'Luna', 96, 'cachorro', 'vira_lata', 6, 'anos', 1, NULL, NULL, 'F', NULL, NULL, NULL, NULL),
 (104, 'Sara', 97, 'cachorro', 'dachshund', NULL, NULL, NULL, NULL, NULL, 'F', 'Branca', '2003-03-11', '/uploads/ecb927684e6a7b49311a04bd166ccdc7.jpeg', NULL),
 (105, 'Gaia', 98, 'gato', 'sem_raca_definida', 7, 'meses', NULL, NULL, NULL, 'F', 'Cinza', NULL, NULL, NULL),
-(108, 'Caramelo', NULL, 'cachorro', 'chow_chow', NULL, NULL, NULL, NULL, 3, 'M', 'Caramelo', '2025-05-22', '/uploads/b4b7af06abc7b4558b0977eb57cdcec2.jpeg', NULL),
-(109, 'Teste', NULL, 'tartaruga', 'jabuti_piranga', 2, 'meses', NULL, 8, 3, 'F', 'Preta', NULL, '/uploads/e66b595df04580cfe812a0c8459a9a66.jpeg', NULL),
-(110, 'ere', NULL, 'peixe', 'kingui', NULL, NULL, NULL, NULL, 3, 'M', 'das', '2025-11-18', NULL, NULL),
-(111, 'teste', NULL, 'roedor', 'porquinho_da_india', NULL, NULL, NULL, NULL, 2, 'F', 'preto', '2025-11-18', NULL, NULL),
-(112, 'tetse', NULL, 'cachorro', 'border_collie', NULL, NULL, NULL, NULL, 4, 'M', 'te', '2019-05-20', NULL, NULL);
+(117, 'Uev', 102, 'cachorro', 'Airedale Terrier', NULL, 'anos', NULL, NULL, 12, 'M', 'Preto', '2026-05-11', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -154,8 +149,9 @@ INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `telefone`, `endereco`, 
 (98, 'bea@gmail.com', '$2b$10$lyBq0kFfS0R3hYARNjVwdePmBQc7rcXW0bJPiyz7c.ROfkecIJ/aC', 'Beatriz Silva', NULL, NULL, NULL, 'Gaia', 'Roxo', 'tutor', NULL),
 (99, 'davimoraes05@gmail.com', '$2b$10$jw.W9ZC5tNOmSwc9SkfF1.NwpASWFmN87SVX/HBGpjt4UddtvYMCu', 'Davi', NULL, NULL, NULL, 'Urso', 'Azul', 'veterinario', NULL),
 (101, 'maicon129@gmail.com', '$2b$10$8cXjEjnr40UD8GdQokdJE..VZzn0QMsHpcPMy7TULcWf7XkcbAwxm', 'Maicon Pivetta', NULL, NULL, NULL, 'Bolinha', 'Azul', 'tutor', NULL),
-(102, 'jonatasmoraes05@gmail.com', '$2b$10$eA3jdWdBUN0JsSMwC6B/9.skFqXghsx.ZBeWAxtJM2lcnVn5zRHi2', 'Jônatas', NULL, NULL, NULL, 'Jonatas Silva', 'azul', 'tutor', NULL),
-(103, 'teste@gmail.com', '$2b$10$YaWD2raqqkoWnB0Y0vfcbeki0WsY6x/IO2ziOjuht4R4WuIQ5va1W', 'Teste', NULL, NULL, NULL, 'ter', 'ter', 'tutor', NULL);
+(102, 'jonatasmoraes05@gmail.com', '$2b$10$3p0UybJRHei2oTa1UbP6l.Hy0PYlOsYUX2nq51j2BCj3MNjVaLxS.', 'Jônatas', NULL, NULL, NULL, 'Jonatas Silva', 'azul', 'tutor', NULL),
+(105, 'testando@gmail.com', '$2b$10$a8KF4jLwfugb69w6wD8ss.6Rd5UA7gz2N4p5NaA9ni5GSWnC3/OBy', 'Teste', NULL, NULL, NULL, 'Tigre', 'Azul', 'tutor', NULL),
+(106, 'vet@gmail.com', '$2b$10$B.7dfbOEwZ3quEFFm0Xn3e2uAgkdUrfiX3sG.j0Njhtuh2XK3tpv2', 'Vet', NULL, NULL, NULL, 'Tigre', 'Azul', 'veterinario', '46935923077');
 
 -- --------------------------------------------------------
 
@@ -184,9 +180,7 @@ INSERT INTO `vacinas` (`id_vacina`, `id_dataset`, `nome`, `data_aplicacao`, `pro
 (15, NULL, 'Leucemia Felina (FeLV)', '2021-06-22', '0000-00-00', 0, 80),
 (22, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 1, 103),
 (23, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', NULL, '0000-00-00', 0, 104),
-(25, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', '2025-06-29', '0000-00-00', 0, 108),
-(26, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', '2025-07-30', '0000-00-00', 0, 108),
-(27, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', '2019-06-20', '0000-00-00', 0, 112);
+(31, 'vacina_gripe_canina', 'Gripe Canina (Tosse dos Canis)', '2026-05-13', '0000-00-00', 0, 117);
 
 -- --------------------------------------------------------
 
@@ -276,13 +270,13 @@ ALTER TABLE `veterinarios`
 -- AUTO_INCREMENT de tabela `medicamentos`
 --
 ALTER TABLE `medicamentos`
-  MODIFY `id_medicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_medicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT de tabela `prontuario`
@@ -294,19 +288,19 @@ ALTER TABLE `prontuario`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT de tabela `vacinas`
 --
 ALTER TABLE `vacinas`
-  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de tabela `veterinarios`
 --
 ALTER TABLE `veterinarios`
-  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Restrições para tabelas despejadas

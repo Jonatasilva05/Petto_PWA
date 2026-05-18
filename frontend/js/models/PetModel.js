@@ -20,4 +20,21 @@ export class PetModel {
             has_meds: p.has_meds > 0
         }));
     }
+
+    
+    async cadastrarPetCompleto(payload) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/pets/cadastro-completo`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Envia o token JWT do tutor logado para segurança do banco
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Erro ao salvar os dados do pet.');
+        return data;
+    }
 }

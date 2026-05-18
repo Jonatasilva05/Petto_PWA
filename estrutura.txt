@@ -133,6 +133,7 @@
 │   │   │   ├── style.css
 │   │   ├── js/
 │   │   │   ├── app.js
+│   │   │   ├── recuperarSenha.js
 │   │   │   ├── controllers/
 │   │   │   │   ├── AuthController.js
 │   │   │   │   ├── PetController.js
@@ -160,6 +161,8 @@
 │   │   │   ├── auth/
 │   │   │   │   ├── cadastrarPet1.html
 │   │   │   │   ├── cadastrarPet2.html
+│   │   │   │   ├── cadastrarPet3.html
+│   │   │   │   ├── cadastrarPet4.html
 │   │   │   │   ├── registroTutor.html
 │   │   │   ├── components/
 │   │   │   │   ├── confirmSenhaNova.html
@@ -169,6 +172,8 @@
 │   │   │   ├── css/
 │   │   │   │   ├── cadastrarPet1.css
 │   │   │   │   ├── cadastrarPet2.css
+│   │   │   │   ├── cadastrarPet3.css
+│   │   │   │   ├── cadastrarPet4.css
 │   │   │   │   ├── carregamento.css
 │   │   │   │   ├── confirmSenha.css
 │   │   │   │   ├── dashboard.css
@@ -182,18 +187,14 @@
 │   │   │   │   ├── databaseMedi.json
 │   │   │   │   ├── databasePets.json
 │   │   │   │   ├── encyclopediaMedi.json
-│   │   │   │   ├── js/
-│   │   │   │   │   ├── databaseBreeds.js
-│   │   │   │   │   ├── databaseHealthReference.js
-│   │   │   │   │   ├── databaseMedi.js
-│   │   │   │   │   ├── databasePets.js
-│   │   │   │   │   ├── encyclopediaMedi.js
-│   │   │   │   ├── json/
 │   │   │   ├── js/
 │   │   │   │   ├── cadastrarPet1.js
 │   │   │   │   ├── cadastrarPet2.js
+│   │   │   │   ├── cadastrarPet3.js
+│   │   │   │   ├── cadastrarPet4.js
 │   │   │   │   ├── carregamento.js
 │   │   │   │   ├── dashboard.js
 │   │   │   │   ├── recupSenha1.js
 │   │   │   │   ├── recupSenha2.js
 │   │   │   │   ├── recupSenha3.js
+│   │   ├── upload/

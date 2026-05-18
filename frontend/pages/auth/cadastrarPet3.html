@@ -3,67 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vacinação Pet</title>
-
+  <title>Vacinação Pet - Etapa 3</title>
   <link rel="stylesheet" href="../css/cadastrarPet3.css">
 </head>
-
 <body>
-
   <div class="container">
-
     <h2>O pet já foi vacinado?</h2>
-
     <div class="options">
       <button class="btn-option active">Sim</button>
       <button class="btn-option">Não</button>
       <button class="btn-option">Não Sei</button>
     </div>
 
-    <button class="btn-vacina" id="toggleDropdown">
-      ⊕ Selecionar Vacinas
-    </button>
+    <button class="btn-vacina" id="toggleDropdown">⊕ Selecionar Vacinas</button>
 
-    <!-- DROPDOWN -->
-    <div class="dropdown" id="dropdown">
+    <div class="dropdown" id="dropdown"></div>
 
-      <div class="dropdown-item">
-        Polivalente Felina V4 ou V5
-      </div>
-
-      <div class="dropdown-item">
-        Antirrábica
-      </div>
-
-      <div class="dropdown-item">
-        Giárdia
-      </div>
-
-      <div class="dropdown-item">
-        Leucemia Felina
-      </div>
-
-    </div>
-
-    <!-- VACINAS -->
     <div class="vacinas-container" id="vacinasContainer"></div>
 
-    <!-- FOOTER -->
     <div class="footer">
-
-      <button class="btn-footer voltar">
-        Voltar
-      </button>
-
-      <button class="btn-footer avancar">
-        Avançar
-      </button>
-
+      <button class="btn-footer voltar" id="btn-back">Voltar</button>
+      <button class="btn-footer avancar" id="btn-next">Avançar</button>
     </div>
-
   </div>
 
-
+  <script type="module" src="../js/cadastrarPet3.js"></script>
 </body>
-<script src="../js/cadastrarPet3.js"></script>
 </html>

@@ -2,31 +2,15 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,
-        initial-scale=1,
-        maximum-scale=1,
-        user-scalable=no,
-        viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#121212" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <title>Petto - Cadastro do Pet</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/cadastrarPet1.css" />
   </head>
 
@@ -55,21 +39,12 @@
 
           <div class="input-group">
             <label for="pet-nome"> Nome do Pet </label>
-            <input
-              type="text"
-              id="pet-nome"
-              placeholder="Ex: Bob"
-              autocomplete="off"
-            />
+            <input type="text" id="pet-nome" placeholder="Ex: Bob" autocomplete="off" />
           </div>
 
           <div class="input-group">
             <label> Espécie </label>
-            <button
-              type="button"
-              class="custom-select"
-              onclick="window.openBottomSheet('sheet-especie')"
-            >
+            <button type="button" class="custom-select" onclick="window.openBottomSheet('sheet-especie')">
               <span id="txt-especie"> Selecione... </span>
               <i class="fa-solid fa-chevron-down"></i>
             </button>
@@ -77,11 +52,7 @@
 
           <div class="input-group">
             <label> Raça </label>
-            <button
-              type="button"
-              class="custom-select"
-              onclick="window.openBottomSheet('sheet-raca')"
-            >
+            <button type="button" class="custom-select" onclick="window.openBottomSheet('sheet-raca')">
               <span id="txt-raca"> Selecione... </span>
               <i class="fa-solid fa-chevron-down"></i>
             </button>
@@ -90,8 +61,8 @@
       </main>
 
       <footer class="bottom-nav-buttons">
-        <button type="button" class="btn-success" id="btn-finish" style="width: 100%;">
-          Finalizar Cadastro
+        <button type="button" class="btn-primary" id="btn-next" style="width: 100%;">
+          Avançar
         </button>
       </footer>
     </div>
@@ -101,53 +72,34 @@
     <div class="bottom-sheet" id="sheet-foto">
       <div class="sheet-handle"></div>
       <h3 class="sheet-title">Adicionar Foto</h3>
-      
       <div style="display: flex; flex-direction: column; gap: 15px; padding: 0 20px 20px 20px;">
-        <button type="button" class="btn-primary" onclick="document.getElementById('input-camera').click()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <button type="button" class="btn-primary" onclick="document.getElementById('input-camera').click()">
           <i class="fa-solid fa-camera"></i> Tirar Foto
         </button>
-        
-        <button type="button" class="btn-secondary" onclick="document.getElementById('input-gallery').click()" style="display: flex; align-items: center; justify-content: center; gap: 10px; background-color: #333; color: #fff;">
+        <button type="button" class="btn-secondary" onclick="document.getElementById('input-gallery').click()">
           <i class="fa-regular fa-image"></i> Escolher da Galeria
         </button>
       </div>
-
-      <input type="file" id="input-camera" accept="image/*" capture="environment" hidden onchange="window.handlePhotoUpload(event)" />
-      <input type="file" id="input-gallery" accept="image/*" hidden onchange="window.handlePhotoUpload(event)" />
+      <input type="file" id="input-camera" accept="image/*" capture="environment" hidden />
+      <input type="file" id="input-gallery" accept="image/*" hidden />
     </div>
 
     <div class="bottom-sheet" id="sheet-especie">
       <div class="sheet-handle"></div>
       <h3 class="sheet-title">Selecione a Espécie</h3>
       <input type="text" class="sheet-search" placeholder="Pesquisar espécie..." />
-      
       <ul class="sheet-list" id="lista-especies"></ul>
-
-      <button
-        type="button"
-        class="btn-primary sheet-confirm"
-        onclick="window.closeBottomSheet()"
-      >
-        Fechar
-      </button>
+      <button type="button" class="btn-primary sheet-confirm" onclick="window.closeBottomSheet()">Fechar</button>
     </div>
 
     <div class="bottom-sheet" id="sheet-raca">
       <div class="sheet-handle"></div>
       <h3 class="sheet-title">Selecione a Raça</h3>
       <input type="text" class="sheet-search" placeholder="Pesquisar raça..." />
-      
       <ul class="sheet-list" id="lista-racas">
         <li><span style="color:#888;">Selecione uma espécie primeiro</span></li>
       </ul>
-
-      <button
-        type="button"
-        class="btn-primary sheet-confirm"
-        onclick="window.closeBottomSheet()"
-      >
-        Fechar
-      </button>
+      <button type="button" class="btn-primary sheet-confirm" onclick="window.closeBottomSheet()">Fechar</button>
     </div>
 
     <script type="module" src="../js/cadastrarPet1.js"></script>
