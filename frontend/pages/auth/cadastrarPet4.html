@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medicação Pet</title>
+
+  <link rel="stylesheet" href="../css/cadastrarPet4.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>O pet já tomou ou ainda toma alguma medicação?</h2>
+
+    <!-- OPÇÕES -->
+    <div class="options">
+      <button class="btn-option">Sim</button>
+      <button class="btn-option">Não</button>
+      <button class="btn-option active">Não Sei</button>
+    </div>
+
+    <!-- BOTÃO DROPDOWN -->
+    <button class="btn-dropdown" id="toggleDropdown">
+      ⊕ Selecionar Medicações
+    </button>
+
+    <!-- DROPDOWN -->
+    <div class="dropdown" id="dropdown">
+
+      <div class="dropdown-item">
+        Anti-inflamatório
+      </div>
+
+      <div class="dropdown-item">
+        Antibiótico
+      </div>
+
+      <div class="dropdown-item">
+        Vermífugo
+      </div>
+
+      <div class="dropdown-item">
+        Remédio para Pulgas
+      </div>
+
+      <div class="dropdown-item">
+        Insulina
+      </div>
+
+    </div>
+
+    <!-- ITENS SELECIONADOS -->
+    <div class="medicacoes-container" id="medicacoesContainer"></div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <button class="btn-footer voltar">Voltar</button>
+      <button class="btn-footer finalizar">Finalizar Cadastro</button>
+    </div>
+
+  </div>
+
+  <link rel="stylesheet" href="../js/cadastrarPet4.js">
+</body>
+</html>

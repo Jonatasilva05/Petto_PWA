@@ -22,12 +22,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         const nome = document.getElementById('pet-nome').value;
         
         if(!nome || !petSelecionado.especieValue || !petSelecionado.racaValue) {
-            alert("Por favor, preencha o Nome, a Espécie e a Raça do pet.");
+            Swal.fire({ text: 'Preencha Nome, Espécie e Raça do pet.', icon: 'warning', toast: true, position: 'top-end', showConfirmButton: false, timer: 3000 });
             return;
         }
 
-        alert("Cadastro finalizado com sucesso!");
-        window.location.href = '../dashboard.html';
+        // Pega a imagem base64 se ela estiver visível
+        const previewImage = document.getElementById('pet-photo-preview');
+        const fotoBase64 = previewImage.style.display === 'block' ? previewImage.src : null;
+
+        // Monta o pacote da Parte 1
+        const step1Data = {
+            nome,
+            especie: petSelecionado.especieValue,
+            raca: petSelecionado.racaValue,
+            fotoBase64
+        };
+
+        // Salva na memória do navegador
+        sessionStorage.setItem('pet_cadastro_step1', JSON.stringify(step1Data));
+        
+        // Vai para a tela 2
+        window.location.href = './cadastrarPet2.html';
     });
 
     // Filtro de pesquisa dentro das Bottom Sheets
