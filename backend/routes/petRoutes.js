@@ -4,9 +4,8 @@ const pool = require('../config/db');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 
-// Middleware para proteger as rotas de pets
+// Middleware de proteção nativo do seu app
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -19,9 +18,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// ==========================================
-// ROTA: LISTAR PETS
-// ==========================================
+// Rota 1: Listar pets
 router.get('/', authenticateToken, async (req, res) => {
     try {
         const sql = `
@@ -37,60 +34,77 @@ router.get('/', authenticateToken, async (req, res) => {
     }
 });
 
-// ==========================================
-// ROTA: CADASTRAR NOVO PET
-// ==========================================
-router.post('/cadastro', authenticateToken, async (req, res) => {
-    const { nome, especie, raca, fotoBase64, data_nascimento, idade_valor, idade_unidade, sexo, peso, cor } = req.body;
-    const id_usuario = req.user.id;
+// Rota 2: Cadastro Completo Relacional com Transação SQL e Upload de Foto
+router.post('/cadastro-completo', authenticateToken, async (req, res) => {
+    const { 
+        nome, especie, raca, fotoBase64, dataNascimento, idadeValor, 
+        idadeUnidade, idadeMeses, peso, sexo, cor, vacinas, medicamentos 
+    } = req.body;
+    
+    const id_usuario = req.user.id; 
+    const connection = await pool.getConnection();
 
-    let foto_url = null;
-
-    // Processamento da Imagem Base64
-    if (fotoBase64) {
-        // Extrai a extensão e os dados puros da imagem
-        const matches = fotoBase64.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
-        
-        if (matches && matches.length === 3) {
-            const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1]; // Normaliza jpeg para jpg
-            const buffer = Buffer.from(matches[2], 'base64');
+    // LÓGICA DE SALVAMENTO DA FOTO
+    let fotoUrlSalva = null;
+    if (fotoBase64 && fotoBase64.includes('base64')) {
+        try {
+            const base64Data = fotoBase64.replace(/^data:image\/\w+;base64,/, "");
+            const extensao = fotoBase64.substring(fotoBase64.indexOf('/') + 1, fotoBase64.indexOf(';base64'));
+            const nomeArquivo = Date.now() + '_' + Math.round(Math.random() * 1000) + '.' + extensao;
             
-            // Gera um nome único (Ex: 8f4b2c1d.jpg)
-            const fileName = crypto.randomBytes(16).toString('hex') + '.' + ext;
+            // Vai salvar na pasta frontend/uploads. IMPORTANTE: Crie essa pasta se não existir!
+            const pastaUploads = path.join(__dirname, '../../frontend/uploads');
+            if (!fs.existsSync(pastaUploads)) fs.mkdirSync(pastaUploads, { recursive: true });
             
-            // Define o caminho para a pasta "uploads" dentro do seu "frontend"
-            const uploadDir = path.join(__dirname, '../../frontend/uploads');
-            
-            // Cria a pasta automaticamente se ela não existir
-            if (!fs.existsSync(uploadDir)) {
-                fs.mkdirSync(uploadDir, { recursive: true });
-            }
-
-            // Salva o arquivo fisicamente
-            fs.writeFileSync(path.join(uploadDir, fileName), buffer);
-            
-            // Salva o caminho relativo no banco para o HTML conseguir ler depois
-            foto_url = './uploads/' + fileName;
+            fs.writeFileSync(path.join(pastaUploads, nomeArquivo), base64Data, 'base64');
+            fotoUrlSalva = '/uploads/' + nomeArquivo;
+        } catch (err) {
+            console.error("Erro ao salvar a foto:", err);
         }
     }
 
     try {
-        const sql = `
+        await connection.beginTransaction();
+
+        // 1. Insere na tabela 'pets' com a foto
+        const sqlPet = `
             INSERT INTO pets 
-            (nome, id_usuario, especie, raca, idade_valor, idade_unidade, peso, sexo, cor, data_nascimento, foto_url) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-            
-        await pool.execute(sql, [
-            nome, id_usuario, especie, raca, 
-            idade_valor || null, idade_unidade || null, 
-            peso || null, sexo || null, cor || null, 
-            data_nascimento || null, foto_url
+            (nome, id_usuario, especie, raca, idade_valor, idade_unidade, idade_meses, peso, sexo, cor, data_nascimento, foto_url) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+        const [petResult] = await connection.execute(sqlPet, [
+            nome || null, id_usuario, especie || null, raca || null,
+            idadeValor || null, idadeUnidade || 'anos',
+            idadeMeses || null, peso || null, sexo || null, cor || null, dataNascimento || null, fotoUrlSalva
         ]);
 
-        res.status(201).json({ message: 'Pet cadastrado com sucesso!' });
+        const id_pet = petResult.insertId;
+
+        // 2. Insere a lista de vacinas se houver
+        if (vacinas && vacinas.length > 0) {
+            const sqlVacina = `INSERT INTO vacinas (id_dataset, nome, data_aplicacao, proxima_aplicacao, data_desconhecida, id_pet) VALUES (?, ?, ?, '0000-00-00', ?, ?)`;
+            for (const v of vacinas) {
+                await connection.execute(sqlVacina, [v.idDataset || null, v.nome, v.data_aplicacao || null, v.data_desconhecida, id_pet]);
+            }
+        }
+
+        // 3. Insere a lista de medicações se houver
+        if (medicamentos && medicamentos.length > 0) {
+            const sqlMedicamento = `INSERT INTO medicamentos (id_dataset, id_pet, nome_medicamento, data_aplicacao, data_desconhecida) VALUES (?, ?, ?, ?, ?)`;
+            for (const m of medicamentos) {
+                await connection.execute(sqlMedicamento, [m.idDataset || null, id_pet, m.nome, m.data_aplicacao || null, m.data_desconhecida]);
+            }
+        }
+
+        await connection.commit();
+        res.status(201).json({ message: 'Pet e histórico médico salvos com sucesso!' });
+
     } catch (error) {
-        console.error("Erro ao salvar pet:", error);
-        res.status(500).json({ message: 'Erro ao salvar o pet no banco de dados.' });
+        await connection.rollback();
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao salvar o cadastro no banco de dados.' });
+    } finally {
+        connection.release(); 
     }
 });
 
