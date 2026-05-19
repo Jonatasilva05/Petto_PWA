@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Histórico do Pet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/historicoPet.css">
+</head>
+<body>
+
+<div class="mobile-frame">
+    <div class="header">
+        <i class="fa-solid fa-chevron-left clickable" id="btn-voltar"></i>
+        <span>Histórico Completo</span>
+        <i class="fa-solid fa-filter clickable" style="opacity: 0; pointer-events: none;"></i> </div>
+    
+    <div class="filters-container">
+        <div class="filters">
+            <div class="filter-tab active-outline" data-filter="Tudo">Tudo</div>
+            <div class="filter-tab" data-filter="Vacina">Vacinas</div>
+            <div class="filter-tab" data-filter="Medicação">Medicações</div>
+            <div class="filter-tab" data-filter="Exame/Consulta">Exames</div>
+        </div>
+    </div>
+
+    <div class="list-container" id="historico-lista">
+        <p style="text-align:center; margin-top:30px; color: var(--text-muted);">Carregando histórico seguro...</p>
+    </div>
+</div>
+
+<script src="../js/historicoPet.js"></script>
+</body>
+</html>

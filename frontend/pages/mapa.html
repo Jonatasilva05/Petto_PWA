@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetCare - Especialistas Próximos</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="./css/mapa.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+</head>
+<body>
+
+<div class="mobile-frame">
+    <div class="header-section">
+        <h1>Especialistas Próximos</h1>
+        <div class="filters" id="category-filters">
+            <div class="filter-pill active" data-tipo="todos">Todos</div>
+            <div class="filter-pill" data-tipo="veterinaria">Veterinárias</div>
+            <div class="filter-pill" data-tipo="petshop">Pet Shops</div>
+            <div class="filter-pill" data-tipo="lazer">Parques/Horto</div>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <div class="search-overlay" style="z-index: 1000;">
+            <div class="search-box">
+                <i class="fa-solid fa-location-dot"></i> Taquaritinga, SP
+            </div>
+            <div class="location-btn" id="btn-my-location">
+                <i class="fa-solid fa-crosshairs"></i>
+            </div>
+        </div>
+
+        <div id="map" style="width: 100%; height: 100%; z-index: 1;"></div>
+
+        <div class="clinic-card" id="info-card" style="display: none; z-index: 1000;">
+            <div class="clinic-header">
+                <div class="clinic-icon" id="card-icon"><i class="fa-solid fa-paw"></i></div>
+                <div class="clinic-info">
+                    <h2 id="card-title">Nome do Local</h2>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <span id="card-rating">5.0</span>
+                    </div>
+                </div>
+            </div>
+                <div class="specialist-name" id="card-address">Endereço do Local</div>
+            <div class="card-actions">
+                <div class="btn btn-whatsapp" id="btn-wa">WhatsApp</div>
+                <div class="btn btn-gps" id="btn-route">Rotas</div>
+                <div class="btn btn-chat" id="btn-chat">Chat</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='./dashboard.html'" style="cursor:pointer;"><i class="fa-solid fa-house"></i><span>Home</span></div>
+        <div class="nav-item" onclick="window.location.href='./pets/agendarConsulta.html'" style="cursor:pointer;"><i class="fa-solid fa-calendar-days"></i><span>Calendário</span></div>
+        <div class="nav-item active"><i class="fa-solid fa-map-location-dot"></i><span>Mapa</span></div>
+        <div class="nav-item" onclick="window.location.href='./pets/acompanhaPet.html'" style="cursor:pointer;"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
+        <div class="nav-item" onclick="window.location.href='./perfil.html'" style="cursor:pointer;"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+    </nav>
+</div> 
+</body>
+<script src="./js/mapa.js"></script>
+</html>

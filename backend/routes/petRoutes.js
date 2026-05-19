@@ -178,4 +178,58 @@ router.get('/:id', authenticateToken, async (req, res) => {
     }
 });
 
+// Rota 5: Buscar o histórico unificado (Tutor e Veterinário protegidos)
+router.get('/:id/historico', authenticateToken, async (req, res) => {
+    const petId = req.params.id;
+    const userId = req.user.id;
+
+    try {
+        // 1. Validação de segurança: O usuário é o dono (id_usuario) OU é o veterinário vinculado?
+        const sqlValidacao = `
+            SELECT p.id_pet 
+            FROM pets p 
+            LEFT JOIN veterinarios v ON p.id_veterinario = v.id_veterinario
+            WHERE p.id_pet = ? AND (p.id_usuario = ? OR v.user_id = ?)
+        `;
+        const [pet] = await pool.execute(sqlValidacao, [petId, userId, userId]);
+        
+        if (pet.length === 0) {
+            return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para visualizar este histórico.' });
+        }
+
+        // 2. Buscando exatamente nas tabelas onde o tutor inseriu os dados (Baseado no seu SQL)
+        const [vacinas] = await pool.execute(
+            'SELECT nome, data_aplicacao as data_registro FROM vacinas WHERE id_pet = ?', 
+            [petId]
+        );
+        
+        const [medicamentos] = await pool.execute(
+            'SELECT nome_medicamento as nome, data_aplicacao as data_registro FROM medicamentos WHERE id_pet = ?', 
+            [petId]
+        );
+        
+        const [prontuarios] = await pool.execute(
+            'SELECT motivo as nome, data_consulta as data_registro FROM prontuario WHERE id_pet = ?', 
+            [petId]
+        );
+
+        // 3. Unificar as listas e organizar a ordem cronológica
+        const historicoCompleto = [
+            ...vacinas.map(v => ({ categoria: 'Vacina', nome: v.nome, data: v.data_registro })),
+            ...medicamentos.map(m => ({ categoria: 'Medicação', nome: m.nome, data: m.data_registro })),
+            ...prontuarios.map(p => ({ categoria: 'Exame/Consulta', nome: p.nome, data: p.data_registro }))
+        ].sort((a, b) => {
+            // Se a data for nula (tutor marcou "não lembro a data"), o valor vira 0 para ir pro final da lista e não quebrar o app
+            const dataA = a.data ? new Date(a.data).getTime() : 0;
+            const dataB = b.data ? new Date(b.data).getTime() : 0;
+            return dataB - dataA; 
+        });
+
+        res.status(200).json(historicoCompleto);
+    } catch (error) {
+        console.error("Erro ao carregar histórico:", error);
+        res.status(500).json({ message: 'Erro interno ao consultar banco de dados.' });
+    }
+});
+
 module.exports = router;

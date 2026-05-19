@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Petto - Meus Pets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <div class="mobile-frame">
+    <header class="header">
+      <div class="header-content" style="justify-content: flex-start; gap: 15px;">
+        <i class="fa-solid fa-chevron-left" style="font-size: 20px; color: white; cursor: pointer;" onclick="window.location.href='../perfil.html'"></i>
+        <h1 class="text-xl font-semibold text-white">Meus Pets</h1>
+      </div>
+    </header>
+
+    <main class="content space-y-4">
+      
+      <div class="bg-white rounded-3xl p-4 flex items-center gap-4 shadow-sm border border-gray-100">
+        <div class="w-16 h-16 rounded-2xl bg-orange-100 flex justify-center items-center text-orange-500 text-2xl">
+          <i class="fa-solid fa-dog"></i>
+        </div>
+        <div class="flex-1">
+          <h2 class="font-bold text-gray-800 text-lg">Thor</h2>
+          <p class="text-xs text-gray-500 font-medium">Golden Retriever</p>
+        </div>
+        <button class="bg-cyan-50 text-cyan-600 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-cyan-100 transition" onclick="window.location.href='../pets/perfilPet.html?id=103'">
+          Ver
+        </button>
+      </div>
+
+      <div class="bg-white rounded-3xl p-4 flex items-center gap-4 shadow-sm border border-gray-100">
+        <div class="w-16 h-16 rounded-2xl bg-gray-100 flex justify-center items-center text-gray-500 text-2xl">
+          <i class="fa-solid fa-cat"></i>
+        </div>
+        <div class="flex-1">
+          <h2 class="font-bold text-gray-800 text-lg">Luna</h2>
+          <p class="text-xs text-gray-500 font-medium">Gato Persa</p>
+        </div>
+        <button class="bg-cyan-50 text-cyan-600 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-cyan-100 transition" onclick="window.location.href='../pets/perfilPet.html?id=103'">
+          Ver
+        </button>
+      </div>
+
+      <button class="w-full bg-cyan-500 text-white p-4 rounded-2xl font-bold shadow-md hover:bg-cyan-600 transition active:scale-95 flex justify-center items-center gap-2 mt-6">
+        <i class="fa-solid fa-plus"></i> Adicionar Pet
+      </button>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <div class="nav-item" onclick="window.location.href='../dashboard.html'"><i class="fa-solid fa-house"></i><span>Home</span></div>
+      <div class="nav-item" onclick="window.location.href='../pets/agendarConsulta.html'"><i class="fa-solid fa-calendar-days"></i><span>Calendário</span></div>
+      <div class="nav-item" onclick="window.location.href='../mapa.html'"><i class="fa-solid fa-map-location-dot"></i><span>Mapa</span></div>
+      <div class="nav-item" onclick="window.location.href='../pets/acompanhaPet.html'"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
+      <div class="nav-item active" onclick="window.location.href='../perfil.html'"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+    </nav>
+  </div>
+</body>
+</html>

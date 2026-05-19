@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    /* Cores Padrão do Petto (Herdadas do Dashboard) */
+    --primary-blue: #4890F0;
+    --primary-dark: #274472;
+    --bg-color: #f4f7fb;
+    --text-dark: #333;
+    --text-muted: #9aa5b1;
+    
+    /* Cores Específicas do Mapa */
+    --whatsapp-green: #25D366;
+}
+
+body, html {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Trava o fundo, impedindo o "bounce" no celular */
+}
+
+/* Ocupa a tela inteira do celular */
+.mobile-frame {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* =========================================
+   CABEÇALHO ESTILO DASHBOARD
+   ========================================= */
+.header-section {
+    background-color: #264475; /* Mesmo azul do Dashboard */
+    padding: 20px 20px 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.header-section h1 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.filters::-webkit-scrollbar { 
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Pílulas de filtro combinando com o botão de logout do Dashboard */
+.filter-pill {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease;
+}
+
+.filter-pill.active {
+    background: white;
+    color: var(--primary-dark);
+    border-color: white;
+}
+
+/* =========================================
+   ÁREA DO MAPA (Preenche o meio da tela)
+   ========================================= */
+.map-container {
+    flex: 1; /* Faz o mapa esticar até o rodapé */
+    position: relative;
+    background-color: #e0e5ec;
+}
+
+/* Search Bar Overlay */
+.search-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.search-box {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.search-box i {
+    color: var(--primary-blue);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.location-btn {
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: var(--primary-blue);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* =========================================
+   CARD INFERIOR (Informações da Clínica)
+   ========================================= */
+.clinic-card {
+    position: absolute;
+    bottom: 25px;
+    left: 15px;
+    right: 15px;
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.clinic-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.clinic-icon {
+    width: 50px;
+    height: 50px;
+    background: #f4f7fb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    font-size: 22px;
+    margin-right: 15px;
+}
+
+.clinic-info h2 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
+
+.stars { color: #ff9800; font-size: 12px; }
+.stars span { color: var(--text-muted); margin-left: 5px; font-weight: 600; }
+
+.specialist-name {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+/* Botões de Ação do Card */
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.btn:active { transform: scale(0.95); }
+
+.btn-whatsapp { background-color: var(--whatsapp-green); box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); }
+.btn-gps { background-color: var(--primary-blue); box-shadow: 0 4px 10px rgba(72, 144, 240, 0.2); }
+.btn-chat { background-color: var(--primary-dark); }
+
+/* =========================================
+   NAVEGAÇÃO INFERIOR (Idêntica ao Dashboard)
+   ========================================= */
+.bottom-nav {
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 25px 0;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.nav-item i { font-size: 22px; }
+.nav-item.active { color: var(--primary-dark); }

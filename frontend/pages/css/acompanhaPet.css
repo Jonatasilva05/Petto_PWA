@@ -1,0 +1,101 @@
+/* Container da Timeline */
+.timeline-container {
+    padding: 10px 5px;
+}
+
+/* Timeline Items */
+.tl-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Linha conectora */
+.tl-item::after {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 16px;
+    width: 2px;
+    height: 35px;
+    background-color: #d1d9e2; /* Cinza claro da linha */
+    z-index: 1;
+}
+
+.tl-item:last-child::after {
+    display: none;
+}
+.tl-item.completed::after {
+    background-color: #2ca062; /* Verde sucesso */
+}
+
+/* Ícones da Timeline */
+.tl-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    margin-right: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.completed .tl-icon { background-color: #2ca062; } /* Verde */
+.active .tl-icon { background-color: #f39c12; }    /* Amarelo */
+.pending .tl-icon {
+    background-color: transparent;
+    border: 2px solid #d1d9e2;
+    color: #9aa5b1;
+    box-sizing: border-box;
+}
+
+/* Textos da Timeline */
+.tl-content {
+    padding-top: 5px;
+}
+.tl-content h3 {
+    margin: 0 0 3px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.tl-content p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Vet Card (Cartão do Veterinário) */
+.vet-card {
+    background: white;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.vet-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.vet-info h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.vet-info p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}

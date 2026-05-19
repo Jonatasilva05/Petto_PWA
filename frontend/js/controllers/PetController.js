@@ -9,7 +9,9 @@ export class PetController {
     initBinds() {
         document.getElementById('btn-go-add-pet')?.addEventListener('click', () => { window.location.href = './auth/cadastrarPet1.html'; });
         document.getElementById('btn-add-first')?.addEventListener('click', () => { window.location.href = './auth/cadastrarPet1.html'; });
+        
         this.gerenciarCicloDeFormularios();
+        this.gerenciarPaginasDePerfil(); // <-- NOVA CHAMADA
     }
 
     async loadDashboard() {
@@ -17,9 +19,9 @@ export class PetController {
         try {
             const pets = await this.model.getPets();
             this.view.renderPets(
-                pets, 
+                pets,
                 // Função 1: Acessar Carteira
-                (petId) => { console.log('Carteira do pet: ', petId); },
+                (petId) => { window.location.href = `./pets/historicoPet.html?petId=${petId}`; },
                 
                 // Função 2: Editar Pet (Apenas Aviso por enquanto)
                 (petId) => { 
@@ -59,6 +61,49 @@ export class PetController {
             console.error(error.message); 
             // Se falhar ou estiver vazio, passa os 4 parâmetros garantindo que não dê erro
             this.view.renderPets([], () => {}, () => {}, () => {});
+        }
+    }
+
+    gerenciarPaginasDePerfil() {
+        const path = window.location.pathname;
+
+        // Verifica se o usuário está na tela de histórico
+        if (path.includes('historicoPet.html')) {
+            this.loadHistoricoPet();
+        }
+    }
+
+    async loadHistoricoPet() {
+        // Captura o ID do pet na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const petId = urlParams.get('petId');
+        
+        if (!petId) {
+            Swal.fire('Erro', 'Pet não identificado', 'error').then(() => {
+                window.location.href = '../dashboard.html';
+            });
+            return;
+        }
+
+        const listContainer = document.querySelector('.list-container');
+        if (listContainer) listContainer.innerHTML = '<p style="text-align:center; margin-top:20px;">Carregando histórico...</p>';
+
+        try {
+            // Busca os dados no servidor e guarda localmente para os filtros funcionarem rápido
+            this.historicoDataBruto = await this.model.getHistoricoPet(petId);
+            
+            // Renderiza com a aba "Tudo"
+            this.view.renderHistorico(this.historicoDataBruto, 'Tudo');
+
+            // Configura o evento de clique nas abas
+            this.view.bindFiltrosHistorico((filtroSelecionado) => {
+                this.view.renderHistorico(this.historicoDataBruto, filtroSelecionado);
+            });
+
+        } catch (error) {
+            console.error(error);
+            if (listContainer) listContainer.innerHTML = '<p style="text-align:center; color: red; margin-top:20px;">Não foi possível carregar os dados.</p>';
+            Swal.fire('Erro', error.message, 'error');
         }
     }
     

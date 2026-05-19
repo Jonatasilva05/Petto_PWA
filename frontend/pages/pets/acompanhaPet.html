@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Acompanhamento Cirurgia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/acompanhaPet.css">
+</head>
+<body>
+
+<div class="mobile-frame">
+    <header class="header">
+        <div class="header-content">
+            <div class="brand-info">
+                <i class="fa-solid fa-chevron-left" style="font-size: 20px; color: white; cursor: pointer; margin-right: 15px;" onclick="window.location.href='../dashboard.html'"></i>
+                <div class="title-text">
+                    <h1>Cirurgia do Thor</h1>
+                    <p>Acompanhamento em tempo real</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="timeline-container">
+            <div class="tl-item completed">
+                <div class="tl-icon"><i class="fa-solid fa-check"></i></div>
+                <div class="tl-content">
+                    <h3>Admissão</h3>
+                    <p>08:00</p>
+                </div>
+            </div>
+
+            <div class="tl-item completed">
+                <div class="tl-icon"><i class="fa-solid fa-check"></i></div>
+                <div class="tl-content">
+                    <h3>Início da Cirurgia</h3>
+                    <p>09:15</p>
+                </div>
+            </div>
+
+            <div class="tl-item active">
+                <div class="tl-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <div class="tl-content">
+                    <h3>Cirurgia em Andamento</h3>
+                    <p>Em Progresso</p>
+                </div>
+            </div>
+
+            <div class="tl-item pending">
+                <div class="tl-icon"><i class="fa-regular fa-clock"></i></div>
+                <div class="tl-content">
+                    <h3>Fim Previsto</h3>
+                    <p>11:30</p>
+                </div>
+            </div>
+
+            <div class="tl-item pending">
+                <div class="tl-icon"><i class="fa-regular fa-calendar"></i></div>
+                <div class="tl-content">
+                    <h3>Previsão de Alta</h3>
+                    <p>Tarde</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vet-card">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=100&q=80" alt="Dr. André" class="vet-img">
+            <div class="vet-info">
+                <h4>Dr. André Martins</h4>
+                <p>Veterinário Responsável</p>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='../dashboard.html'" style="cursor:pointer;"><i class="fa-solid fa-house"></i><span>Home</span></div>
+        <div class="nav-item" onclick="window.location.href='./agendarConsulta.html'" style="cursor:pointer;"><i class="fa-solid fa-calendar-days"></i><span>Calendário</span></div>
+        <div class="nav-item" onclick="window.location.href='../mapa.html'" style="cursor:pointer;"><i class="fa-solid fa-map-location-dot"></i><span>Mapa</span></div>
+        <div class="nav-item active"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
+        <div class="nav-item" onclick="window.location.href='../perfil.html'" style="cursor:pointer;"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+    </nav>
+</div>
+
+</body>
+</html>

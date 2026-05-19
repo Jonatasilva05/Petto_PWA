@@ -162,4 +162,89 @@ export class PetView {
             `;
         }
     }
+
+    // Função de segurança para evitar injeção de código (XSS)
+    escapeHTML(str) {
+        if (!str) return '';
+        return str.toString().replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])
+        );
+    }
+
+    // Gerencia o clique nas abas de filtro
+    bindFiltrosHistorico(callback) {
+        const tabs = document.querySelectorAll('.filter-tab');
+        if (!tabs.length) return;
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                // Remove a borda de todos e adiciona no clicado
+                tabs.forEach(t => t.classList.remove('active-outline'));
+                e.target.classList.add('active-outline');
+                
+                // Retorna o texto da aba (Tudo, Vacinas, Exames, Alergias)
+                callback(e.target.textContent.trim()); 
+            });
+        });
+    }
+
+    // Renderiza a lista na tela
+    renderHistorico(historicoData, filtro = 'Tudo') {
+        const listContainer = document.querySelector('.list-container');
+        if (!listContainer) return;
+
+        listContainer.innerHTML = '';
+
+        // Filtra os dados com base no texto da aba clicada
+        const dadosFiltrados = filtro === 'Tudo' 
+            ? historicoData 
+            : historicoData.filter(item => {
+                if (filtro === 'Vacinas') return item.categoria === 'Vacina';
+                if (filtro === 'Medicações') return item.categoria === 'Medicação';
+                if (filtro === 'Exames') return item.categoria === 'Exame/Consulta';
+                if (filtro === 'Alergias') return item.categoria === 'Alergia';
+                return item.categoria === filtro;
+            });
+
+        if (dadosFiltrados.length === 0) {
+            listContainer.innerHTML = `<p style="text-align:center; color: var(--text-muted); margin-top: 20px;">Nenhum registro encontrado para este filtro.</p>`;
+            return;
+        }
+
+        dadosFiltrados.forEach(item => {
+            let iconClass, iconTag, tagBg, tagColor;
+            
+            // Define estilos com base na categoria
+            if (item.categoria === 'Vacina') {
+                iconClass = 'bg-vacina'; iconTag = 'fa-check'; tagBg = 'var(--tag-bg)'; tagColor = 'var(--tag-text)';
+            } else if (item.categoria === 'Medicação') {
+                iconClass = 'bg-med-red'; iconTag = 'fa-rotate-right'; tagBg = '#e0f2f1'; tagColor = '#00897b';
+            } else if (item.categoria === 'Alergia') {
+                iconClass = 'bg-alergia'; iconTag = 'fa-clipboard-list'; tagBg = '#f3e8ff'; tagColor = '#7e22ce';
+            } else {
+                iconClass = 'bg-exame'; iconTag = 'fa-flask'; tagBg = '#e9ecef'; tagColor = '#6c757d';
+            }
+
+            const safeNome = this.escapeHTML(item.nome);
+            const safeData = item.data ? this.escapeHTML(item.data.split('T')[0]) : 'Data não informada';
+
+            const cardHtml = `
+                <div class="list-item">
+                    <div class="item-icon ${iconClass}"><i class="fa-solid ${iconTag}"></i></div>
+                    <div class="item-details">
+                        <div class="title-row">
+                            <h3>${safeNome}</h3>
+                            <span class="category-tag" style="background:${tagBg}; color:${tagColor};">${item.categoria}</span>
+                        </div>
+                        <p>${safeData !== 'Data não informada' ? 'Data: ' + safeData : safeData}</p>
+                    </div>
+                    <div class="status-area">
+                        <div class="status-icon-circle circle-green"><i class="fa-solid fa-check"></i></div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                </div>
+            `;
+            listContainer.insertAdjacentHTML('beforeend', cardHtml);
+        });
+    }
 }

@@ -46,4 +46,16 @@ export class PetModel {
         if (!response.ok) throw new Error(data.message || 'Erro ao salvar os dados do pet.');
         return data;
     }
+
+    async getHistoricoPet(petId) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/pets/${petId}/historico`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Erro ao carregar o histórico do pet.');
+        
+        return data;
+    }
 }

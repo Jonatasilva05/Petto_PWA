@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Petto - Central de Ajuda</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <div class="mobile-frame">
+    <header class="header">
+      <div class="header-content" style="justify-content: flex-start; gap: 15px;">
+        <i class="fa-solid fa-chevron-left" style="font-size: 20px; color: white; cursor: pointer;" onclick="window.location.href='../perfil.html'"></i>
+        <h1 class="text-xl font-semibold text-white">Central de Ajuda</h1>
+      </div>
+    </header>
+
+    <main class="content space-y-4">
+      <div class="bg-white rounded-3xl shadow-sm overflow-hidden divide-y divide-gray-100">
+        <div class="p-5 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition">
+          <div class="flex items-center gap-3"><i class="fa-solid fa-paw text-cyan-500"></i><span>Como cadastrar um pet?</span></div>
+          <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
+        </div>
+        <div class="p-5 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition">
+          <div class="flex items-center gap-3"><i class="fa-solid fa-file-pdf text-cyan-500"></i><span>Como exportar a carteirinha?</span></div>
+          <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
+        </div>
+        <div class="p-5 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition">
+          <div class="flex items-center gap-3"><i class="fa-solid fa-headset text-cyan-500"></i><span>Falar com o Suporte</span></div>
+          <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
+        </div>
+        <div class="p-5 flex items-center justify-between hover:bg-gray-50 cursor-pointer transition">
+          <div class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-cyan-500"></i><span>Política de Privacidade</span></div>
+          <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <div class="nav-item" onclick="window.location.href='../dashboard.html'"><i class="fa-solid fa-house"></i><span>Home</span></div>
+      <div class="nav-item" onclick="window.location.href='../pets/agendarConsulta.html'"><i class="fa-solid fa-calendar-days"></i><span>Calendário</span></div>
+      <div class="nav-item" onclick="window.location.href='../mapa.html'"><i class="fa-solid fa-map-location-dot"></i><span>Mapa</span></div>
+      <div class="nav-item" onclick="window.location.href='../pets/acompanhaPet.html'"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
+      <div class="nav-item active" onclick="window.location.href='../perfil.html'"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+    </nav>
+  </div>
+</body>
+</html>
