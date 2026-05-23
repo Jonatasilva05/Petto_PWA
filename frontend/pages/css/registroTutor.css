@@ -1,3 +1,7 @@
+/* =========================================
+   RESET
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -7,55 +11,102 @@
 
 :root {
     --primary-color: #274472;
+    --primary-light: #3c6fc2;
     --accent-color: #4CAF50;
-    --bg-overlay: rgba(0, 0, 0, 0.42);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+
+    --bg-overlay:
+        linear-gradient(
+            180deg,
+            rgba(8, 15, 28, 0.68),
+            rgba(7, 10, 18, 0.82)
+        );
+
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-bg-strong: rgba(255, 255, 255, 0.12);
+
+    --glass-border: rgba(255, 255, 255, 0.12);
+
     --text-white: #ffffff;
-    --text-hint: #cccccc;
+    --text-soft: rgba(255,255,255,0.78);
+    --text-hint: rgba(255,255,255,0.56);
+
+    --shadow-soft:
+        0 10px 35px rgba(0,0,0,0.22);
+
+    --shadow-strong:
+        0 18px 50px rgba(0,0,0,0.35);
 }
 
-body, html {
-    height: 100%;
+/* =========================================
+   BODY
+========================================= */
+
+body,
+html {
     width: 100%;
+    height: 100%;
     overflow: hidden;
+    background: #0f1725;
 }
 
 #app {
-    height: 100vh;
     width: 100vw;
-    background-image: url('../assets/image/fundo_login.jpeg');
+    height: 100vh;
+
+    background:
+        var(--bg-overlay),
+        url('../assets/image/fundo_login.jpeg');
+
     background-size: cover;
     background-position: center;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     position: relative;
+    overflow: hidden;
 }
 
 #app::before {
     content: '';
+
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--bg-overlay);
+    inset: 0;
+
+    backdrop-filter: blur(3px);
+
     z-index: 1;
 }
+
+/* =========================================
+   VIEW
+========================================= */
 
 .view-section {
     position: relative;
     z-index: 2;
+
     width: 100%;
+    max-width: 470px;
+
     height: 100vh;
-    padding:
-        35px
-        24px
-        20px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    padding:
+        32px
+        22px
+        20px;
+
     overflow-y: auto;
     overflow-x: hidden;
+
     -webkit-overflow-scrolling: touch;
+
+    animation: fadeUp .45s ease;
 }
 
 .view-section.hidden {
@@ -66,9 +117,59 @@ body, html {
     display: flex;
 }
 
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-/* --- ESTILO LOGO --- */
+/* =========================================
+   CARD PRINCIPAL
+========================================= */
+
+.scroll-container {
+    width: 100%;
+
+    background: rgba(255,255,255,0.07);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    border-radius: 28px;
+
+    padding: 22px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow: var(--shadow-soft);
+
+    overflow-y: auto;
+
+    flex: 1;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.scroll-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.22);
+    border-radius: 20px;
+}
+
+/* =========================================
+   LOGO E TÍTULOS
+========================================= */
+
 .logo {
     font-size: 75px;
     font-weight: 700;
@@ -78,21 +179,33 @@ body, html {
 }
 
 .logo-small {
-    font-size: 52px;
+    font-size: 54px;
     font-weight: 800;
+
     color: white;
+
     letter-spacing: -2px;
-    margin-bottom: 5px;
+
+    margin-bottom: 6px;
+
     text-shadow:
-        0 4px 15px rgba(0,0,0,0.25);
+        0 4px 18px rgba(0,0,0,0.35);
 }
 
 .section-title {
-    color: rgba(255,255,255,0.92);
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 28px;
+    color: rgba(255,255,255,0.94);
+
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 26px;
+
+    text-align: center;
 }
+
+/* =========================================
+   INPUTS
+========================================= */
 
 .input-container {
     width: 100%;
@@ -100,351 +213,219 @@ body, html {
 
 .input-wrapper {
     width: 100%;
-    background:
-        rgba(255,255,255,0.10);
-    border:
-        1px solid rgba(255,255,255,0.18);
-    border-radius: 18px;
-    margin-bottom: 16px;
-    display:flex;
-    align-items:center;
+
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
     padding:
         4px
         16px;
-    backdrop-filter: blur(14px);
-    position:relative;
-    transition:
-        border .2s,
-        transform .2s,
-        background .2s;
-}
 
-.input-wrapper:focus-within{
+    margin-bottom: 16px;
 
-    border:
-        1px solid rgba(255,255,255,0.45);
+    border-radius: 18px;
 
     background:
-        rgba(255,255,255,0.14);
+        rgba(255,255,255,0.08);
 
-    transform: scale(1.01);
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.02);
+
+    transition:
+        transform .2s ease,
+        border .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.input-wrapper:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+.input-wrapper:focus-within {
+    border:
+        1px solid rgba(92, 155, 255, 0.65);
+
+    background:
+        rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 0 0 4px rgba(92,155,255,0.12);
+
+    transform: translateY(-1px);
 }
 
 .input-icon {
-    font-size: 20px;
+    font-size: 18px;
     margin-right: 10px;
+    color: rgba(255,255,255,0.72);
 }
 
 .input-wrapper input {
-    flex:1;
-    background:transparent;
-    border:none;
-    color:white;
-    font-size:16px;
-    font-weight:500;
-    padding:14px 2px;
-    outline:none;
-    width:100%;
+    flex: 1;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+
+    width: 100%;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    padding: 14px 2px;
 }
 
 .input-wrapper input::placeholder {
-    color: rgba(255,255,255,0.58);
+    color: var(--text-hint);
 }
+
+.input-wrapper input[readonly] {
+    opacity: .82;
+}
+
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
 
 .toggle-password {
-    cursor: pointer;
-    padding: 10px; /* Aumentar a área de clique */
-    font-size: 18px;
-    position: absolute; /* Prende o ícone à direita */
+    position: absolute;
+
     right: 10px;
     top: 50%;
-    transform: translateY(-50%); /* Centraliza verticalmente */
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    padding: 8px;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+
+    transition: background .2s ease;
 }
 
-/* Ocultar o ícone de password nativo do Edge/Internet Explorer */
+.toggle-password:hover {
+    background: rgba(255,255,255,0.08);
+}
+
 input::-ms-reveal,
 input::-ms-clear {
-  display: none;
+    display: none;
 }
 
-/* --- BOTÕES --- */
-.btn-primary {
-    background: linear-gradient(135deg,#3c6fc2,#274472);
-    color:white;
-    border:none;
-    border-radius:18px;
-    padding:16px;
-    width:100%;
-    font-size:17px;
-    font-weight:700;
-    cursor:pointer;
-    transition: transform .2s, opacity .2s;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    flex-shrink:0;
-    margin-top: 10px;
-    margin-bottom: 35px;
+/* =========================================
+   EMAIL HINT
+========================================= */
+
+#email-hint {
+    display: block;
+
+    margin:
+        -8px
+        0
+        14px
+        8px;
+
+    color: rgba(255,255,255,0.82);
+
+    font-size: 12px;
+    font-weight: 500;
 }
 
-.btn-primary:hover{
-    opacity:.95;
-}
+/* =========================================
+   SENHA
+========================================= */
 
-.btn-primary:active{
-    transform:scale(.98);
-}
-
-.link-text {
-    color:white;
-    font-weight:700;
-    text-decoration:none;
-}
-
-.password-strength{
-    width:100%;
-    margin-top:-8px;
-    margin-bottom:18px;
-}
-
-.strength-bars{
-    display:flex;
-    gap:6px;
-}
-
-.bar{
-    flex:1;
-    height:6px;
-    border-radius:20px;
-    background: rgba(255,255,255,0.15);
-    transition:.3s;
-}
-
-.bottom-text {
-    color:rgba(255,255,255,0.88);
-    margin-top:20px;
-    font-size:14px;
-    text-align:center;
-    flex-shrink:0;
-    padding-bottom:10px;
-}
-
-/* --- SCROLL CONTAINER PARA CADASTRO --- */
-.scroll-container {
+.password-strength {
     width: 100%;
-    overflow-y: auto;
-    flex: 1;
-    padding-right: 2px;
-    padding-bottom: 20px;
-    -webkit-overflow-scrolling: touch;
-}
 
-.scroll-container::-webkit-scrollbar{
-    width: 3px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb{
-    background: rgba(255,255,255,0.25);
-    border-radius: 20px;
-}
-
-/* --- DASHBOARD ELEMENTS --- */
-.dash-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: white;
-    text-align: left;
+    margin-top: -6px;
     margin-bottom: 20px;
 }
 
-.btn-logout {
-    background: rgba(255,0,0,0.2);
-    border: 1px solid rgba(255,0,0,0.3);
-    color: white;
-    padding: 5px 12px;
-    border-radius: 10px;
-    font-size: 12px;
-    cursor: pointer;
+.strength-bars {
+    display: flex;
+    gap: 6px;
 }
 
-.fab {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    cursor: pointer;
-    z-index: 10;
+.bar {
+    flex: 1;
+
+    height: 6px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.12);
+
+    transition: .3s ease;
 }
 
-/* --- HELPERS --- */
-.hidden-fields { display: none; width: 100%; }
+.strength-reqs {
+    display: flex !important;
+    flex-direction: column;
 
-.hidden-fields.show { display: block; }
+    gap: 8px !important;
 
-/* =========================
-   CHECKBOX VETERINÁRIO
-========================= */
+    margin-top: 14px !important;
 
-.checkbox-wrapper{
-    width:100%;
+    color: white !important;
 
-    display:flex;
-    align-items:center;
-    gap:14px;
+    font-size: 12px !important;
+}
 
-    margin:
+.strength-reqs span {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
         10px
-        0
-        24px;
-
-    padding:
-        14px
-        16px;
-
-    border-radius:18px;
-
-    background:
-        rgba(76,175,80,0.12);
-
-    border:
-        1px solid rgba(76,175,80,0.25);
-
-    backdrop-filter:blur(14px);
-
-    transition:
-        .25s ease;
-}
-
-.checkbox-wrapper:hover{
-    background:
-        rgba(76,175,80,0.16);
-
-    transform:
-        translateY(-1px);
-}
-
-.checkbox-wrapper label{
-    color:white;
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
-    user-select:none;
-}
-
-/* CHECKBOX CUSTOM */
-
-.checkbox-wrapper input[type="checkbox"]{
-    appearance:none;
-    -webkit-appearance:none;
-
-    width:24px;
-    height:24px;
-
-    border-radius:8px;
-
-    border:
-        2px solid rgba(255,255,255,0.45);
-
-    background:
-        rgba(255,255,255,0.08);
-
-    cursor:pointer;
-
-    position:relative;
-
-    transition:
-        .25s ease;
-
-    flex-shrink:0;
-}
-
-.checkbox-wrapper input[type="checkbox"]:checked{
-    background:var(--accent-color);
-    border-color:var(--accent-color);
-
-    box-shadow:
-        0 0 14px rgba(76,175,80,0.45);
-}
-
-.checkbox-wrapper input[type="checkbox"]:checked::before{
-    content:'✓';
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    color:white;
-
-    font-size:14px;
-    font-weight:700;
-}
-
-/* =========================
-   CHECKS SENHA
-========================= */
-
-.strength-reqs{
-    color:white !important;
-
-    font-size:12px !important;
-
-    display:flex !important;
-    flex-direction:column;
-
-    gap:10px !important;
-
-    margin-top:12px !important;
-}
-
-.strength-reqs span{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    padding:
-        11px
         14px;
 
-    border-radius:14px;
+    border-radius: 14px;
 
     background:
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,0.06);
 
     border:
-        1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255,255,255,0.06);
 
-    color:
-        rgba(255,255,255,0.92);
+    color: rgba(255,255,255,0.88);
 
-    font-size:13px !important;
-    font-weight:500;
+    font-size: 12px !important;
+    font-weight: 500;
 
-    transition:
-        .25s ease;
+    transition: .25s ease;
 }
 
-/* QUANDO VALIDAR VIA JS */
-.strength-reqs span.valid{
+.strength-reqs span.valid {
     background:
         rgba(76,175,80,0.18);
 
     border:
         1px solid rgba(76,175,80,0.30);
 
-    color:#dfffea;
+    color: #e8fff1;
 }
 
-.strength-reqs span.invalid{
+.strength-reqs span.invalid {
     background:
         rgba(255,77,77,0.10);
 
@@ -452,211 +433,510 @@ input::-ms-clear {
         1px solid rgba(255,77,77,0.20);
 }
 
-/* =========================
-   MELHORIAS MOBILE
-========================= */
+/* =========================================
+   CHECKBOX
+========================================= */
 
-@media (max-width: 480px){
-
-    .view-section{
-        padding:
-            26px
-            18px
-            16px;
-    }
-
-    .logo-small{
-        font-size:40px;
-    }
-
-    .section-title{
-        font-size:15px;
-        margin-bottom:18px;
-    }
-
-    .input-wrapper{
-        border-radius:16px;
-        margin-bottom:14px;
-    }
-
-    .input-wrapper input{
-        font-size:15px;
-        padding:13px 2px;
-    }
-
-    .toggle-password{
-        right:8px;
-        font-size:17px;
-    }
-
-    .btn-primary{
-        border-radius:16px;
-        padding:15px;
-        font-size:16px;
-    }
-
-    .checkbox-wrapper{
-        padding:13px 14px;
-        gap:12px;
-    }
-
-    .checkbox-wrapper label{
-        font-size:13px;
-    }
-
-    .strength-reqs span{
-        padding:10px 12px;
-        font-size:12px !important;
-    }
-
-    .bottom-text{
-        margin-top:16px;
-        font-size:13px;
-        flex-shrink:0;
-        padding-bottom:10px;
-    }
-}
-
-/* =========================
-   TELAS MUITO PEQUENAS
-========================= */
-
-@media (max-height: 700px){
-
-    .view-section{
-        padding: 26px 18px calc(40px + env(safe-area-inset-bottom, 0px));
-    }
-
-    .logo-small{
-        font-size:36px;
-    }
-
-    .section-title{
-        margin-bottom:14px;
-    }
-
-    .input-wrapper{
-        margin-bottom:12px;
-    }
-
-    .input-wrapper input{
-        padding:11px 2px;
-    }
-
-    .checkbox-wrapper{
-        margin-bottom:18px;
-    }
-
-    .strength-reqs{
-        gap:8px !important;
-    }
-
-    .strength-reqs span{
-        padding:8px 10px;
-        font-size:11px !important;
-    }
-}
-
-/* --- BOTÃO SECUNDÁRIO (ENTRAR / REGISTAR) --- */
-.btn-outline {
-    background: transparent;
-    color: var(--text-white);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 18px;
-    padding: 15px;
+.checkbox-wrapper {
     width: 100%;
-    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin:
+        12px
+        0
+        22px;
+
+    padding:
+        16px
+        18px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(76,175,80,0.12),
+            rgba(76,175,80,0.05)
+        );
+
+    border:
+        1px solid rgba(76,175,80,0.18);
+
+    backdrop-filter: blur(14px);
+
+    transition: .25s ease;
+}
+
+.checkbox-wrapper:hover {
+    transform: translateY(-1px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(76,175,80,0.15),
+            rgba(76,175,80,0.08)
+        );
+}
+
+.checkbox-wrapper label {
+    color: white;
+
+    font-size: 14px;
     font-weight: 600;
+
     cursor: pointer;
-    margin-top: 12px;
-    transition: all 0.3s ease;
+
+    user-select: none;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    border:
+        2px solid rgba(255,255,255,0.38);
+
+    background:
+        rgba(255,255,255,0.08);
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition: .25s ease;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked {
+    background: var(--accent-color);
+
+    border-color: var(--accent-color);
+
+    box-shadow:
+        0 0 14px rgba(76,175,80,0.4);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::before {
+    content: '✓';
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* =========================================
+   ÁREA VETERINÁRIO
+========================================= */
+
+.hidden-fields {
+    display: none;
+    width: 100%;
+}
+
+.hidden-fields.show {
+    display: block;
+
+    margin-top: 10px;
+
+    padding: 18px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    animation: fadeUp .3s ease;
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.btn-primary {
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    margin-top: 18px;
+    margin-bottom: 24px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: .3px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary-light),
+            var(--primary-color)
+        );
+
+    box-shadow:
+        0 10px 28px rgba(39,68,114,0.35);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+
+    flex-shrink: 0;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 18px 35px rgba(39,68,114,0.45);
+}
+
+.btn-primary:active {
+    transform: scale(.985);
+}
+
+.btn-outline {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 18px;
+
+    border:
+        2px solid rgba(255,255,255,0.25);
+
+    background: transparent;
+
+    color: var(--text-white);
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s ease;
 }
 
 .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--text-white);
+    background: rgba(255,255,255,0.08);
+
+    border-color: rgba(255,255,255,0.42);
 }
 
-.btn-outline:active {
-    transform: scale(0.98);
-}
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
 
-/* --- BOTÃO VOLTAR (TOPO) --- */
 .top-back-button {
     position: absolute;
-    top: 25px;
+
+    top: 26px;
     left: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    width: 46px;
+    height: 46px;
+
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid rgba(255,255,255,0.14);
+
+    color: white;
+
+    font-size: 18px;
+
     cursor: pointer;
-    transition: all 0.3s ease;
+
     backdrop-filter: blur(10px);
+
+    transition: .25s ease;
+
     z-index: 100;
 }
 
 .top-back-button:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255,255,255,0.16);
+
     transform: scale(1.05);
 }
 
 .top-back-button:active {
-    transform: scale(0.95);
+    transform: scale(.95);
 }
 
-/* Opcional: Garante que a logo não bata no botão em telas muito estreitas */
-@media (max-width: 480px){
-    .top-back-button {
-        top: 20px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
+/* =========================================
+   TEXTOS
+========================================= */
+
+.link-text {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bottom-text {
+    color: rgba(255,255,255,0.82);
+
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    padding-bottom: 8px;
+}
+
+/* =========================================
+   TOASTS
+========================================= */
+
+#toast-container {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    pointer-events: none;
+}
+
+.toast {
+    background-color: #ffffff;
+
+    color: #333;
+
+    padding:
+        15px
+        24px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.18);
+
+    pointer-events: auto;
+
+    transform: translateX(120%);
+
+    animation:
+        slideIn .4s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.toast.success {
+    border-left: 5px solid #28a745;
+}
+
+.toast.error {
+    border-left: 5px solid #dc3545;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
     }
 }
 
-/* Container fixo que não afeta o layout da página */
-#toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
+/* =========================================
+   DASHBOARD ELEMENTS
+========================================= */
+
+.dash-header {
+    width: 100%;
+
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    pointer-events: none; /* Impede que o container invisível bloqueie cliques */
+    justify-content: space-between;
+    align-items: flex-start;
+
+    color: white;
+
+    text-align: left;
+
+    margin-bottom: 20px;
 }
 
-/* Estilo do balãozinho de alerta */
-.toast {
-    background-color: #fff;
-    color: #333;
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    pointer-events: auto;
-    
-    /* Animação de entrada elástica */
-    transform: translateX(120%);
-    animation: slideIn 0.4s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+.btn-logout {
+    background: rgba(255,0,0,0.15);
+
+    border:
+        1px solid rgba(255,0,0,0.22);
+
+    color: white;
+
+    padding:
+        6px
+        12px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    cursor: pointer;
 }
 
-/* Cores de borda para sucesso e erro */
-.toast.success { border-left: 5px solid #28a745; }
-.toast.error { border-left: 5px solid #dc3545; }
+.fab {
+    position: absolute;
 
-/* Keyframe para a entrada animada */
-@keyframes slideIn {
-    to { transform: translateX(0); }
-}   
+    bottom: 20px;
+    right: 20px;
+
+    width: 60px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--accent-color);
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.4);
+
+    z-index: 10;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 480px) {
+
+    .view-section {
+        padding:
+            24px
+            16px
+            14px;
+    }
+
+    .logo-small {
+        font-size: 42px;
+    }
+
+    .section-title {
+        font-size: 19px;
+        margin-bottom: 22px;
+    }
+
+    .scroll-container {
+        padding: 18px;
+        border-radius: 24px;
+    }
+
+    .input-wrapper {
+        min-height: 54px;
+        border-radius: 16px;
+    }
+
+    .input-wrapper input {
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        height: 54px;
+        border-radius: 16px;
+        font-size: 15px;
+    }
+
+    .checkbox-wrapper {
+        padding: 14px 15px;
+    }
+
+    .checkbox-wrapper label {
+        font-size: 13px;
+    }
+
+    .top-back-button {
+        width: 42px;
+        height: 42px;
+
+        top: 20px;
+        left: 14px;
+    }
+}
+
+/* =========================================
+   TELAS BAIXAS
+========================================= */
+
+@media (max-height: 700px) {
+
+    .view-section {
+        padding:
+            22px
+            16px
+            calc(38px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .logo-small {
+        font-size: 38px;
+    }
+
+    .section-title {
+        margin-bottom: 18px;
+    }
+
+    .input-wrapper {
+        margin-bottom: 12px;
+    }
+
+    .input-wrapper input {
+        padding: 11px 2px;
+    }
+
+    .strength-reqs {
+        gap: 6px !important;
+    }
+
+    .strength-reqs span {
+        padding: 8px 10px;
+    }
+}

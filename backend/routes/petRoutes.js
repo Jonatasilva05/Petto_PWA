@@ -4,6 +4,7 @@ const pool = require('../config/db');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto'); // <-- Adicionado para gerar hashes seguros
 
 // Middleware de proteção nativo do seu app
 const authenticateToken = (req, res, next) => {
@@ -18,7 +19,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Rota 1: Listar pets (CAMPOS DE IDADE E DATA DE NASCIMENTO ADICIONADOS)
+// Rota 1: Listar pets
 router.get('/', authenticateToken, async (req, res) => {
     try {
         const sql = `
@@ -60,22 +61,40 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
     const id_usuario = req.user.id; 
     const connection = await pool.getConnection();
 
-    // LÓGICA DE SALVAMENTO DA FOTO
+    // LÓGICA SEGURA DE SALVAMENTO DA FOTO
     let fotoUrlSalva = null;
-    if (fotoBase64 && fotoBase64.includes('base64')) {
+    
+    if (fotoBase64) {
         try {
+            // Remove o cabeçalho do base64
             const base64Data = fotoBase64.replace(/^data:image\/\w+;base64,/, "");
-            const extensao = fotoBase64.substring(fotoBase64.indexOf('/') + 1, fotoBase64.indexOf(';base64'));
-            const nomeArquivo = Date.now() + '_' + Math.round(Math.random() * 1000) + '.' + extensao;
+            const buffer = Buffer.from(base64Data, 'base64');
+
+            // Trava de segurança: Arquivo de no máximo 2MB no backend
+            if (buffer.length > 2 * 1024 * 1024) {
+                return res.status(400).json({ message: "A imagem excede o limite de tamanho permitido no servidor." });
+            }
+
+            // Cria um nome em hash aleatório e força a extensão jpeg
+            const hash = crypto.randomBytes(16).toString('hex');
+            const nomeArquivo = `${hash}.jpeg`;
             
-            // Vai salvar na pasta frontend/uploads. IMPORTANTE: Crie essa pasta se não existir!
+            // Diretório de uploads no frontend
             const pastaUploads = path.join(__dirname, '../../frontend/uploads');
-            if (!fs.existsSync(pastaUploads)) fs.mkdirSync(pastaUploads, { recursive: true });
+            if (!fs.existsSync(pastaUploads)) {
+                fs.mkdirSync(pastaUploads, { recursive: true });
+            }
             
-            fs.writeFileSync(path.join(pastaUploads, nomeArquivo), base64Data, 'base64');
+            // Grava o arquivo físico
+            const uploadPath = path.join(pastaUploads, nomeArquivo);
+            fs.writeFileSync(uploadPath, buffer);
+            
+            // URL que será gravada no banco
             fotoUrlSalva = '/uploads/' + nomeArquivo;
+            
         } catch (err) {
             console.error("Erro ao salvar a foto:", err);
+            return res.status(500).json({ message: 'Falha ao processar a foto do pet.' });
         }
     }
 
@@ -116,8 +135,16 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
         res.status(201).json({ message: 'Pet e histórico médico salvos com sucesso!' });
 
     } catch (error) {
+        // Se a transação SQL falhar, desfazemos tudo
         await connection.rollback();
         console.error(error);
+        
+        // Limpeza (Rollback Físico): Apaga a foto que acabou de ser salva para não deixar lixo no servidor
+        if (fotoUrlSalva) {
+            const fileToRemove = path.join(__dirname, '../../frontend', fotoUrlSalva);
+            if (fs.existsSync(fileToRemove)) fs.unlinkSync(fileToRemove);
+        }
+
         res.status(500).json({ message: 'Erro ao salvar o cadastro no banco de dados.' });
     } finally {
         connection.release(); 
@@ -197,7 +224,7 @@ router.get('/:id/historico', authenticateToken, async (req, res) => {
             return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para visualizar este histórico.' });
         }
 
-        // 2. Buscando exatamente nas tabelas onde o tutor inseriu os dados (Baseado no seu SQL)
+        // 2. Buscando exatamente nas tabelas onde o tutor inseriu os dados
         const [vacinas] = await pool.execute(
             'SELECT nome, data_aplicacao as data_registro FROM vacinas WHERE id_pet = ?', 
             [petId]
@@ -219,7 +246,6 @@ router.get('/:id/historico', authenticateToken, async (req, res) => {
             ...medicamentos.map(m => ({ categoria: 'Medicação', nome: m.nome, data: m.data_registro })),
             ...prontuarios.map(p => ({ categoria: 'Exame/Consulta', nome: p.nome, data: p.data_registro }))
         ].sort((a, b) => {
-            // Se a data for nula (tutor marcou "não lembro a data"), o valor vira 0 para ir pro final da lista e não quebrar o app
             const dataA = a.data ? new Date(a.data).getTime() : 0;
             const dataB = b.data ? new Date(b.data).getTime() : 0;
             return dataB - dataA; 
