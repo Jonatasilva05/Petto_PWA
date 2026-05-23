@@ -336,7 +336,8 @@ export class PetController {
         dropdown.innerHTML = '';
 
         try {
-            const response = await fetch('../data/databaseMedi.json');
+            // Lendo o novo banco de dados detalhado (Ajuste o caminho se necessário)
+            const response = await fetch('../data/databaseInfoMed2.json');
             if (!response.ok) throw new Error('Falha ao ler JSON médico.');
             const baseDados = await response.json();
 
@@ -354,28 +355,98 @@ export class PetController {
                     dropdown.appendChild(div);
                 });
             }
-        } catch (error) { dropdown.innerHTML = `<div class="dropdown-item" style="color: red;">Erro ao carregar dados.</div>`; }
+
+            // ==========================================
+            // LÓGICA DE CLIQUE NO DROPDOWN COM VALIDAÇÃO
+            // ==========================================
+            dropdown.addEventListener('click', async (e) => {
+                const itemElement = e.target.closest('.dropdown-item');
+                if (!itemElement || !itemElement.getAttribute('data-id')) return;
+
+                const idDataset = itemElement.getAttribute('data-id');
+                const nomeItem = itemElement.textContent;
+
+                // Encontrar o item no JSON para checar a idade mínima
+                const itemRegra = listaItens.find(i => i.id === idDataset);
+                const idadeEmDias = this.calcularIdadePetEmDias();
+                const idadeMinima = itemRegra?.schedule?.minimum_age_days || 0;
+
+                const adicionarItemNaTela = () => {
+                    if (!itensSelecionados.some(i => i.idDataset === idDataset)) {
+                        itensSelecionados.push({ idDataset, nome: nomeItem, data_aplicacao: null, data_desconhecida: 1 });
+                        
+                        // Criação do elemento DOM com o botão de excluir
+                        const divItem = document.createElement('div');
+                        divItem.className = 'item-medico-adicionado';
+                        divItem.setAttribute('data-id', idDataset);
+                        divItem.style.cssText = 'background:#1e1e1e; padding:16px; margin-top:12px; border-radius:12px; border: 1px solid #333; color:#fff;';
+                        
+                        divItem.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <p style="margin:0; font-size:15px; font-weight:500; width: 85%;">${nomeItem}</p>
+                                <button type="button" class="btn-excluir-item" style="background:none; border:none; color:#ff4d4d; font-size:16px; cursor:pointer; padding:4px;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                            <input type="date" style="width:100%; padding:10px; border-radius:8px; border:1px solid #444; background:#121212; color:#fff;" class="date-picker-item" data-id="${idDataset}">
+                        `;
+
+                        // Lógica para excluir o item se foi adicionado por acidente
+                        divItem.querySelector('.btn-excluir-item').addEventListener('click', () => {
+                            itensSelecionados = itensSelecionados.filter(i => i.idDataset !== idDataset);
+                            divItem.remove(); // Remove visualmente da tela
+                        });
+
+                        container.appendChild(divItem);
+                    }
+                    dropdown.style.display = 'none';
+                };
+
+                // Validação de Idade Mínima
+                if (idadeEmDias !== null && idadeEmDias < idadeMinima) {
+                    
+                    // Verifica se o SweetAlert (Swal) foi carregado na página
+                    if (typeof Swal !== 'undefined') {
+                        const result = await Swal.fire({
+                            title: 'Procedimento Precoce!',
+                            html: `A idade do pet (<b>${idadeEmDias} dias</b>) não é recomendada para <b>${nomeItem}</b>.<br><br>A idade mínima exigida é de <b>${idadeMinima} dias</b>.`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Cancelar', 
+                            cancelButtonText: 'Inserir mesmo assim', 
+                            confirmButtonColor: '#4890F0', // Azul (Ação segura vira o botão principal)
+                            cancelButtonColor: '#ff4d4d', // Vermelho (Inserir mesmo assim)
+                            reverseButtons: true // Inverte a posição dos botões na tela (Opcional, mas melhora a UX)
+                        });
+
+                        // dismiss === cancel significa que ele clicou no botão vermelho "Inserir mesmo assim"
+                        if (result.dismiss === Swal.DismissReason.cancel) {
+                            adicionarItemNaTela();
+                        } else {
+                            dropdown.style.display = 'none';
+                        }
+                    } else {
+                        // PLANO B: Se o desenvolvedor esquecer de colocar o script do Swal no HTML
+                        const confirmou = confirm(`ATENÇÃO: Procedimento Precoce!\n\nA idade do pet (${idadeEmDias} dias) não é recomendada para ${nomeItem}. A idade mínima é de ${idadeMinima} dias.\n\nDeseja inserir mesmo assim?`);
+                        if (confirmou) {
+                            adicionarItemNaTela();
+                        } else {
+                            dropdown.style.display = 'none';
+                        }
+                    }
+                } else {
+                    // Idade compatível ou idade não informada, adiciona direto
+                    adicionarItemNaTela();
+                }
+            });
+
+        } catch (error) { 
+            dropdown.innerHTML = `<div class="dropdown-item" style="color: red;">Erro ao carregar dados médicos.</div>`; 
+            console.error(error);
+        }
 
         document.getElementById('toggleDropdown')?.addEventListener('click', () => {
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-
-        dropdown.addEventListener('click', (e) => {
-            const item = e.target.closest('.dropdown-item');
-            if (!item || !item.getAttribute('data-id')) return;
-
-            const idDataset = item.getAttribute('data-id');
-            const nomeItem = item.textContent;
-
-            if (!itensSelecionados.some(i => i.idDataset === idDataset)) {
-                itensSelecionados.push({ idDataset, nome: nomeItem, data_aplicacao: null, data_desconhecida: 1 });
-                container.innerHTML += `
-                    <div style="background:#1e1e1e; padding:16px; margin-top:12px; border-radius:12px; border: 1px solid #333; color:#fff">
-                        <p style="margin:0 0 8px 0; font-size:15px; font-weight:500;">${nomeItem}</p>
-                        <input type="date" style="width:100%; padding:10px; border-radius:8px; border:1px solid #444; background:#121212; color:#fff;" class="date-picker-item" data-id="${idDataset}">
-                    </div>`;
-            }
-            dropdown.style.display = 'none';
         });
 
         document.querySelector('.voltar')?.addEventListener('click', () => { window.location.href = urlVoltar; });
@@ -419,12 +490,38 @@ export class PetController {
                 try {
                     await this.model.cadastrarPetCompleto(payloadCompleto);
                     ['cadastro_pet_e1', 'cadastro_pet_e2', 'cadastro_pet_vacinas', 'cadastro_pet_meds'].forEach(k => localStorage.removeItem(k));
-                    sessionStorage.removeItem('tempFotoBase64'); // Limpa a foto temporária
+                    sessionStorage.removeItem('tempFotoBase64');
                     alert("Pet cadastrado com sucesso!");
                     window.location.href = '../dashboard.html';
                 } catch (err) { alert(err.message); }
             });
         }
+    }
+
+    // Função NOVA: Calcula a idade em dias do pet baseado nos dados da Etapa 2
+    calcularIdadePetEmDias() {
+        const e2 = JSON.parse(localStorage.getItem('cadastro_pet_e2') || '{}');
+        let dias = null; // Se não conseguir calcular (tudo em branco), retorna null para não bloquear injustamente.
+
+        if (e2.dataNascimento) {
+            // O tutor preencheu a data de nascimento exata
+            const nasc = new Date(e2.dataNascimento);
+            const hoje = new Date();
+            const diffTime = Math.abs(hoje - nasc);
+            dias = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        } else if (e2.idMeses) {
+            // O tutor preencheu a quantidade de meses aproximada
+            dias = parseInt(e2.idMeses) * 30;
+        } else if (e2.idValor && e2.idadeUnidade) {
+            // O tutor preencheu a idade base (anos ou meses)
+            if (e2.idadeUnidade === 'anos') {
+                dias = parseInt(e2.idValor) * 365;
+            } else if (e2.idadeUnidade === 'meses') {
+                dias = parseInt(e2.idValor) * 30;
+            }
+        }
+        
+        return dias;
     }
 
     configurarBotoesSimNao(containerId, dropdownBtnId) {

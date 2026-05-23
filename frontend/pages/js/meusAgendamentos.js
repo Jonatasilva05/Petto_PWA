@@ -5,7 +5,6 @@ class AgendamentoController {
         this.currentDate = new Date();
         this.model = new PetModel();
         
-        // Captura o petId da URL (ex: meusAgendamentos.html?petId=50)
         const urlParams = new URLSearchParams(window.location.search);
         this.petId = urlParams.get('petId');
         
@@ -19,18 +18,19 @@ class AgendamentoController {
         }
 
         try {
-        const todosAgendamentos = await this.fetchAgendamentos();
-        console.log("Dados que chegaram do servidor:", todosAgendamentos);
-        console.log("Pet ID vindo da URL:", this.petId);
-        
-        this.agendamentos = todosAgendamentos.filter(a => a.id_pet == this.petId);
-        console.log("Agendamentos filtrados para este pet:", this.agendamentos);
-        
-        this.renderCalendar();
-    } catch (error) {
-        console.error("Erro na inicialização:", error);
+            const todosAgendamentos = await this.fetchAgendamentos();
+            
+            // Filtra e também ordena os agendamentos por data (mais antigos primeiro)
+            this.agendamentos = todosAgendamentos
+                .filter(a => a.id_pet == this.petId)
+                .sort((a, b) => new Date(a.data_hora) - new Date(b.data_hora));
+            
+            this.renderCalendar();
+            this.renderList(); // Renderiza a lista completa ao inicializar
+        } catch (error) {
+            console.error("Erro na inicialização:", error);
+        }
     }
-}
 
     async fetchAgendamentos() {
         const token = localStorage.getItem('auth-token-petto');
@@ -60,10 +60,8 @@ class AgendamentoController {
             div.className = 'day';
             div.textContent = i;
             
-            // Formata a data para comparar com o formato ISO vindo do banco (YYYY-MM-DD)
             const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
             
-            // Verifica se existe agendamento para este dia específico
             const agendamento = this.agendamentos.find(a => {
                 const dataBanco = new Date(a.data_hora).toISOString().split('T')[0];
                 return dataBanco === dateStr;
@@ -71,9 +69,10 @@ class AgendamentoController {
 
             if (agendamento) {
                 div.classList.add('has-appointment');
-                // Aplica a cor baseada no status: agendado = verde, caso contrário = vermelho
                 div.classList.add(agendamento.status === 'agendado' ? 'status-green' : 'status-red');
-                div.onclick = () => this.showDetails(agendamento);
+                
+                // Passa o elemento clicado e a data para a função de destaque
+                div.onclick = (e) => this.highlightAppointment(dateStr, e.currentTarget);
             }
             container.appendChild(div);
         }
@@ -84,21 +83,68 @@ class AgendamentoController {
         this.renderCalendar();
     }
 
-    showDetails(data) {
-        const details = document.getElementById('appointment-details');
-        const detInfo = document.getElementById('det-info');
-        
-        if (details && detInfo) {
-            details.style.display = 'block';
-            // Formata a exibição da data e hora
-            const dataFormatada = new Date(data.data_hora).toLocaleString('pt-BR');
-            detInfo.innerHTML = `
-                <strong>Data/Hora:</strong> ${dataFormatada}<br>
-                <strong>Status:</strong> ${data.status.toUpperCase()}
+    // NOVO: Renderiza a lista com todos os agendamentos do pet
+    renderList() {
+        const listContainer = document.getElementById('appointments-list');
+        listContainer.innerHTML = '';
+
+        if (this.agendamentos.length === 0) {
+            listContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 13px; text-align: center;">Nenhuma consulta agendada para este pet.</p>';
+            return;
+        }
+
+        this.agendamentos.forEach(agendamento => {
+            const dataBanco = new Date(agendamento.data_hora);
+            const dateStr = dataBanco.toISOString().split('T')[0];
+            const dataFormatada = dataBanco.toLocaleString('pt-BR');
+            
+            const statusClass = agendamento.status === 'agendado' ? 'status-green-item' : 'status-red-item';
+            
+            const itemDiv = document.createElement('div');
+            itemDiv.className = `appointment-item ${statusClass}`;
+            // Adicionamos um atributo "data-date" para acharmos esse item depois
+            itemDiv.setAttribute('data-date', dateStr); 
+            
+            itemDiv.innerHTML = `
+                <div class="appointment-date">${dataFormatada}</div>
+                <div class="appointment-status">Status: <strong>${agendamento.status.toUpperCase()}</strong></div>
             `;
+            
+            listContainer.appendChild(itemDiv);
+        });
+    }
+
+    // MODIFICADO: Substitui o showDetails para destacar o item na lista
+    highlightAppointment(dateStr, dayElement) {
+        // 1. Limpa destaques anteriores da lista e do calendário
+        document.querySelectorAll('.appointment-item').forEach(item => {
+            item.classList.remove('highlighted');
+        });
+        document.querySelectorAll('.day').forEach(day => {
+            day.classList.remove('selected-day');
+        });
+
+        // 2. Destaca o dia clicado no calendário
+        if (dayElement) {
+            dayElement.classList.add('selected-day');
+        }
+
+        // 3. Busca todos os itens da lista que têm essa exata data
+        const itemsToHighlight = document.querySelectorAll(`.appointment-item[data-date="${dateStr}"]`);
+        
+        // 4. Aplica o efeito e rola a tela até a consulta
+        if (itemsToHighlight.length > 0) {
+            itemsToHighlight.forEach(item => item.classList.add('highlighted'));
+            
+            // Rola suavemente até o primeiro agendamento daquele dia na lista
+            itemsToHighlight[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 }
 
-// Inicializa o controlador
 new AgendamentoController();
+
+// Como você está usando ES modules para importação do PetModel, exponha a troca de meses no escopo global para o HTML
+window.AgendamentoControllerRef = new AgendamentoController();
+document.getElementById('prev-month').onclick = () => window.AgendamentoControllerRef.changeMonth(-1);
+document.getElementById('next-month').onclick = () => window.AgendamentoControllerRef.changeMonth(1);

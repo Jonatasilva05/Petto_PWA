@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const nomeTela = elemento.getAttribute('data-tela');
             
             if (nomeTela === 'Agendamentos') {
-                // Redireciona passando o ID do pet na URL
                 window.location.href = `meusAgendamentos.html?petId=${petId}`;
             } 
             else if (nomeTela === 'Histórico Completo' || nomeTela === 'Histórico Rápido') {
@@ -93,6 +92,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             else if (nomeTela === 'Agendar Consulta') {
                 window.location.href = `agendarConsulta.html?petId=${petId}`;
+            }
+            else if (nomeTela === 'Vacinas') {
+                window.location.href = `../historicoPet/vacinasPet.html?petId=${petId}`;
+            }
+            else if (nomeTela === 'Medicamentos') {
+                window.location.href = `../historicoPet/medicamentosPet.html?petId=${petId}`;
             }
             else {
                 exibirAvisoEmBreve(nomeTela);

@@ -1,0 +1,37 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+:root {
+    --bg-color: #f4f7fb;
+    --text-dark: #333333;
+    --text-muted: #9aa5b1;
+    --card-bg: #ffffff;
+    --theme-color: #e91e63; /* Rosa/Vermelho para medicamentos */
+    --theme-dark: #c2185b;
+}
+
+/* Copie e cole todo o resto do CSS do vacinasPet.css exatamente igual a partir daqui: */
+body, html { background-color: var(--bg-color); width: 100%; height: 100%; overflow: hidden; }
+.mobile-frame { width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; }
+.header { background-color: var(--theme-dark); color: white; padding: 16px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; height: 60px; }
+.header i { font-size: 20px; color: white; }
+.header span { font-size: 18px; font-weight: 700; color: white; }
+.clickable { cursor: pointer; transition: transform 0.1s ease, opacity 0.1s ease; }
+.clickable:active { transform: scale(0.95); opacity: 0.8; }
+.filters-container { padding: 20px; flex-shrink: 0; }
+.filters { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding-bottom: 5px; }
+.filters::-webkit-scrollbar { display: none; }
+.filter-tab { background: var(--card-bg); border: 1px solid #e0e0e0; padding: 10px 20px; border-radius: 20px; font-size: 13px; color: var(--text-dark); white-space: nowrap; cursor: pointer; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+.filter-tab.active-outline { border: 1.5px solid var(--theme-color); color: var(--theme-color); background-color: #fff0f4; } /* Fundo rosinha claro */
+.list-container { flex: 1; padding: 0 20px 20px 20px; overflow-y: auto; }
+.list-item { display: flex; align-items: center; padding: 18px; background-color: var(--card-bg); border-radius: 15px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.03); border: 1px solid #f9f9f9; }
+.item-icon { width: 42px; height: 42px; color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-right: 15px; flex-shrink: 0; }
+.item-details { flex: 1; }
+.title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.title-row h3 { margin: 0; font-size: 14px; font-weight: 700; color: var(--text-dark); }
+.item-details p { margin: 0; font-size: 12px; font-weight: 500; }
+.status-aplicada { color: #198754; background-color: #e8f5e9; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700;}
+.status-atrasada { color: #dc3545; background-color: #ffebee; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700;}
+.status-futura { color: #f39c12; background-color: #fff8e1; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700;}
+.icon-aplicada { background-color: #198754; }
+.icon-atrasada { background-color: #dc3545; }
+.icon-futura { background-color: #f39c12; }
