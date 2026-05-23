@@ -11,24 +11,25 @@
 │   │   ├── config/
 │   │   │   ├── db.js
 │   │   ├── data/
+│   │   │   ├── 01-05/
+│   │   │   │   ├── petto_pwa.sql
+│   │   │   ├── 10-05/
+│   │   │   │   ├── petto_pwa.sql
+│   │   │   ├── 12-05/
+│   │   │   │   ├── petto_pwa.sql
+│   │   │   ├── 13-05/
+│   │   │   │   ├── petto_pwa.sql
 │   │   │   ├── 18-05/
 │   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 18-05-V2/
-│   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 19-05/
-│   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 23-05/
-│   │   │   │   ├── petto_pwa.sql
+│   │   │   ├── 30-04/
+│   │   │   │   ├── petto.sql
 │   │   ├── routes/
-│   │   │   ├── appointmentRoutes.js
 │   │   │   ├── authRoutes.js
 │   │   │   ├── petRoutes.js
 │   │   │   ├── vetRoutes.js
 │   │   ├── utils/
 │   │   │   ├── validators.js
 │   ├── backups/
-│   │   ├── ChatGPT Image 18 de mai. de 2026, 21_52_34.png
-│   │   ├── ChatGPT Image 18 de mai. de 2026, 21_54_15.png
 │   │   ├── base/
 │   │   │   ├── chat/
 │   │   │   │   ├── agendamento.html
@@ -53,13 +54,19 @@
 │   │   │   │   ├── procedimentos.html
 │   │   │   │   ├── vacinas.html
 │   │   │   ├── gemini/
+│   │   │   │   ├── agendar.html
 │   │   │   │   ├── alergia.html
+│   │   │   │   ├── cirurgia.html
 │   │   │   │   ├── emergencia.html
+│   │   │   │   ├── especialistas.html
 │   │   │   │   ├── exame.html
 │   │   │   │   ├── historico.html
+│   │   │   │   ├── home.html
 │   │   │   │   ├── iconSemFundoSemNome.png
 │   │   │   │   ├── login.html
 │   │   │   │   ├── medicamentos.html
+│   │   │   │   ├── perfil_pet.html
+│   │   │   │   ├── splash.html
 │   │   │   │   ├── vacina.html
 │   │   │   │   ├── desktop/
 │   │   │   │   │   ├── desktop.html
@@ -77,23 +84,12 @@
 │   │   │   ├── databaseBreeds.json
 │   │   │   ├── databaseHealthReference.js
 │   │   │   ├── databaseHealthReference.json
-│   │   │   ├── databaseInfoMed.json
 │   │   │   ├── databaseMedi.js
 │   │   │   ├── databaseMedi.json
 │   │   │   ├── databasePets.js
 │   │   │   ├── databasePets.json
 │   │   │   ├── encyclopediaMedi.js
 │   │   │   ├── encyclopediaMedi.json
-│   │   │   ├── 01-05/
-│   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 10-05/
-│   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 12-05/
-│   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 13-05/
-│   │   │   │   ├── petto_pwa.sql
-│   │   │   ├── 30-04/
-│   │   │   │   ├── petto.sql
 │   │   │   ├── antigos/
 │   │   │   │   ├── databaseBreeds.ts
 │   │   │   │   ├── databaseHealthReference.js
@@ -150,8 +146,6 @@
 │   │   ├── pages/
 │   │   │   ├── carregamento.html
 │   │   │   ├── dashboard.html
-│   │   │   ├── mapa.html
-│   │   │   ├── perfil.html
 │   │   │   ├── assets/
 │   │   │   │   ├── image/
 │   │   │   │   │   ├── abracaCao.png
@@ -176,79 +170,31 @@
 │   │   │   │   ├── recupSenha2.html
 │   │   │   │   ├── recupSenha3.html
 │   │   │   ├── css/
-│   │   │   │   ├── acompanhaPet.css
-│   │   │   │   ├── agendarConsulta.css
 │   │   │   │   ├── cadastrarPet1.css
 │   │   │   │   ├── cadastrarPet2.css
 │   │   │   │   ├── cadastrarPet3.css
 │   │   │   │   ├── cadastrarPet4.css
 │   │   │   │   ├── carregamento.css
 │   │   │   │   ├── confirmSenha.css
-│   │   │   │   ├── dadosPerfil.css
 │   │   │   │   ├── dashboard.css
-│   │   │   │   ├── gerenciaArquivoPet.css
-│   │   │   │   ├── historicoPet.css
-│   │   │   │   ├── mapa.css
-│   │   │   │   ├── medicamentosPet.css
-│   │   │   │   ├── perfilPet.css
 │   │   │   │   ├── recupSenha1.css
 │   │   │   │   ├── recupSenha2.css
 │   │   │   │   ├── recupSenha3.css
 │   │   │   │   ├── registroTutor.css
-│   │   │   │   ├── vacinasPet.css
 │   │   │   ├── data/
-│   │   │   │   ├── databaseAlertMedi.json
 │   │   │   │   ├── databaseBreeds.json
 │   │   │   │   ├── databaseHealthReference.json
-│   │   │   │   ├── databaseInfoMed2.json
 │   │   │   │   ├── databaseMedi.json
 │   │   │   │   ├── databasePets.json
 │   │   │   │   ├── encyclopediaMedi.json
-│   │   │   │   ├── locais.json
-│   │   │   ├── docs/
-│   │   │   ├── historicoPet/
-│   │   │   │   ├── medicamentosPet.html
-│   │   │   │   ├── vacinasPet.html
 │   │   │   ├── js/
-│   │   │   │   ├── agendarConsulta.js
 │   │   │   │   ├── cadastrarPet1.js
 │   │   │   │   ├── cadastrarPet2.js
 │   │   │   │   ├── cadastrarPet3.js
 │   │   │   │   ├── cadastrarPet4.js
 │   │   │   │   ├── carregamento.js
-│   │   │   │   ├── configPerfil.js
-│   │   │   │   ├── dadosPerfil.js
 │   │   │   │   ├── dashboard.js
-│   │   │   │   ├── exportCartPerfil.js
-│   │   │   │   ├── historicoPet.js
-│   │   │   │   ├── mapa.js
-│   │   │   │   ├── medicamentosPet.js
-│   │   │   │   ├── meusAgendamentos.js
-│   │   │   │   ├── perfil.js
-│   │   │   │   ├── perfilPet.js
-│   │   │   │   ├── planosPerfil.js
 │   │   │   │   ├── recupSenha1.js
 │   │   │   │   ├── recupSenha2.js
 │   │   │   │   ├── recupSenha3.js
-│   │   │   │   ├── segurancaPeril.js
-│   │   │   │   ├── vacinasPet.js
-│   │   │   ├── perfil/
-│   │   │   │   ├── configPerfil.html
-│   │   │   │   ├── dadosPerfil.html
-│   │   │   │   ├── exportCartPerfil.html
-│   │   │   │   ├── petsPerfil.html
-│   │   │   │   ├── planosPerfil.html
-│   │   │   │   ├── segurancaPerfil.html
-│   │   │   │   ├── sobrePerfil.html
-│   │   │   ├── pets/
-│   │   │   │   ├── acompanhaPet.html
-│   │   │   │   ├── agendarConsulta.html
-│   │   │   │   ├── gerenciaArquivoPet.html
-│   │   │   │   ├── historicoPet.html
-│   │   │   │   ├── meusAgendamentos.html
-│   │   │   │   ├── perfilPet.html
-│   │   ├── uploads/
-│   │   │   ├── 1779111607640_143.jpeg
-│   │   │   ├── 1779199652527_523.jpeg
-│   │   │   ├── 842a2c3e2c42972ee34acbd3bf27c9f8.jpeg
-│   │   │   ├── perfil/
+│   │   ├── upload/

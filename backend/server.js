@@ -15,7 +15,6 @@ const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const petRoutes = require('./routes/petRoutes');
 const vetRoutes = require('./routes/vetRoutes');
-const appointmentRoutes = require('./routes/appointmentRoutes');
 
 const app = express();
 const port = 3000;
@@ -116,7 +115,6 @@ app.use(express.static(frontendPath, {
 app.use('/api/auth', authRoutes);
 app.use('/api/pets', petRoutes);
 app.use('/api/vet', vetRoutes);
-app.use('/api/agendamentos', appointmentRoutes);
 
 /* =========================================
    TESTE UTF-8
@@ -171,11 +169,14 @@ const getLocalIp = () => {
 let server;
 
 const startServer = async () => {
+
     try {
-        // TESTE BANCO CORRETO PARA O SERVER.JS
-        await pool.execute('SELECT 1');
+
+        // TESTE BANCO
+        await pool.query('SELECT 1');
 
         console.clear();
+
         console.log('✅ Conexão com o banco estabelecida.');
 
         server = app.listen(port, '0.0.0.0', () => {

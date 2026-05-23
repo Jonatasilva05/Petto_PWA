@@ -8,20 +8,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     const name = localStorage.getItem('user-name');
 
     if (!token) {
+        // Se o usuário tentar acessar a URL diretamente sem login, expulsa para a home
         window.location.href = '../index.html'; 
         return;
     }
 
-    // 2. Preenche o nome do tutor na interface
+    // 2. Preenche a interface
     const nameDisplay = document.getElementById('tutor-name-display');
     if (nameDisplay) nameDisplay.innerText = name;
 
-    // 3. Mock básico do AuthController apenas para evitar erros de navegação do PetController
+    // 3. Mock do AuthController 
+    // (Apenas para evitar erros nas chamadas do PetController que mudam de tela)
     const mockAuthController = {
-        view: { switchScreen: () => {} }
+        view: {
+            switchScreen: (screenName) => {
+                if (screenName === 'cadastrar-pet-view') {
+                    Futuramente: window.location.href = './auth/cadastrarPet1.html'
+                    alert('Navegar para a página de Cadastro de Pet');
+                }
+            }
+        }
     };
 
-    // 4. Inicializa os Pets conectando ao Banco de Dados REAL
+    document.getElementById('btn-go-add-pet').addEventListener('click', () => {
+        window.location.href = './auth/cadastrarPet1.html';
+    });
+
+    document.getElementById('btn-add-first').addEventListener('click', () => {
+        window.location.href = './auth/cadastrarPet1.html';
+    });
+
+    // 4. Inicializa os Pets
     const petApp = new PetController(new PetModel(), new PetView(), mockAuthController);
     await petApp.loadDashboard();
 
@@ -32,17 +49,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.removeItem('user-name');
         window.location.href = '../index.html';
     });
-
-    // ==========================================
-    // 6. NAVEGAÇÃO: REDIRECIONAMENTO DO CALENDÁRIO
-    // ==========================================
-    // Seleciona a div .nav-item que contém o ícone do calendário
-    const calendarNavItem = document.querySelector('.bottom-nav .fa-calendar-days')?.closest('.nav-item');
-    
-    if (calendarNavItem) {
-        calendarNavItem.style.cursor = 'pointer'; // Garante o feedback visual de clique
-        calendarNavItem.addEventListener('click', () => {
-            window.location.href = './pets/agendarConsulta.html';
-        });
-    }
 });

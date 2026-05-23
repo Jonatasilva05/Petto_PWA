@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Pets - Home</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-blue: #0056b3;
+        --bg-color: #f4f7fb;
+        --text-dark: #333;
+        --text-muted: #777;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e0e5ec;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 20px;
+    }
+    .mobile-frame {
+        width: 375px;
+        height: 812px;
+        background-color: var(--bg-color);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    /* Top Header */
+    .header {
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 30px 20px 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .top-bar {
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #e0e0e0;
+        margin-bottom: 15px;
+    }
+    .user-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .user-info h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+    .user-info p {
+        margin: 0;
+        font-size: 12px;
+        color: #d1e3f8;
+    }
+    /* Main Content */
+    .content {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    .section-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--text-dark);
+        margin-bottom: 10px;
+    }
+    /* Pet Card */
+    .pet-card {
+        background: white;
+        border-radius: 15px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        margin-bottom: 15px;
+    }
+    .pet-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 15px;
+    }
+    .pet-details h2 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--text-dark);
+    }
+    .pet-details p {
+        margin: 5px 0 0;
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+    /* Action Buttons (Middle) */
+    .action-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    .action-btn {
+        background: white;
+        border-radius: 15px;
+        padding: 15px 10px;
+        text-align: center;
+        flex: 1;
+        margin: 0 5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        font-size: 12px;
+        font-weight: bold;
+        color: var(--text-dark);
+    }
+    .action-btn:first-child { margin-left: 0; }
+    .action-btn:last-child { margin-right: 0; }
+    .action-btn i {
+        font-size: 20px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    .icon-blue { color: var(--primary-blue); }
+    .icon-orange { color: #ff6b6b; }
+    
+    /* Add Pet Button */
+    .add-pet-btn {
+        background-color: var(--primary-blue);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    
+    /* Bottom Nav */
+    .bottom-nav {
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 15px 0;
+        border-top: 1px solid #eaeaea;
+    }
+    .nav-item {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 10px;
+    }
+    .nav-item.active { color: var(--primary-blue); }
+    .nav-item i {
+        font-size: 20px;
+        margin-bottom: 3px;
+        display: block;
+    }
+</style>
+</head>
+<body>
+
+<div class="mobile-frame">
+    <div class="header">
+        <div class="top-bar">HOME / INÍCIO</div>
+        <div class="user-info">
+            <div>
+                <h1><i class="fa-solid fa-crown" style="font-size: 18px;"></i> Olá, João!</h1>
+                <p>Seus Pets</p>
+            </div>
+            <i class="fa-solid fa-comments"></i>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-title">Seus Pets</div>
+        
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=150&q=80" alt="Thor" class="pet-img">
+            <div class="pet-details">
+                <h2>Thor</h2>
+                <p>Golden Retriever • 3 anos</p>
+            </div>
+        </div>
+
+        <div class="action-row">
+            <div class="action-btn">
+                <i class="fa-solid fa-wallet icon-blue"></i>
+                Carteira
+            </div>
+            <div class="action-btn">
+                <i class="fa-solid fa-syringe icon-blue"></i>
+                Vacinas
+            </div>
+            <div class="action-btn">
+                <i class="fa-solid fa-notes-medical icon-orange"></i>
+                Consultas
+            </div>
+        </div>
+
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=150&q=80" alt="Luna" class="pet-img">
+            <div class="pet-details">
+                <h2>Luna</h2>
+                <p>Shih Tzu • 5 anos</p>
+            </div>
+        </div>
+
+        <div class="add-pet-btn">
+            <i class="fa-solid fa-plus"></i> Adicionar Pet
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active"><i class="fa-solid fa-house"></i>Home</div>
+        <div class="nav-item"><i class="fa-solid fa-calendar-days"></i>Calendário</div>
+        <div class="nav-item"><i class="fa-solid fa-location-dot"></i>Mapa</div>
+        <div class="nav-item"><i class="fa-solid fa-user"></i>Perfil</div>
+    </div>
+</div>
+
+</body>
+</html>
