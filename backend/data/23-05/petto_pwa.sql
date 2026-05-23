@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/05/2026 às 13:58
+-- Tempo de geração: 23/05/2026 às 15:54
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -35,14 +35,6 @@ CREATE TABLE `agendamentos` (
   `status` varchar(20) DEFAULT 'agendado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Despejando dados para a tabela `agendamentos`
---
-
-INSERT INTO `agendamentos` (`id_agendamento`, `id_pet`, `id_veterinario`, `data_hora`, `status`) VALUES
-(3, 126, 64, '2026-05-20 16:00:00', 'agendado'),
-(4, 126, 66, '2026-05-27 14:30:00', 'agendado');
-
 -- --------------------------------------------------------
 
 --
@@ -70,8 +62,7 @@ INSERT INTO `medicamentos` (`id_medicamento`, `id_dataset`, `id_pet`, `nome_medi
 (16, 'vermifugo_oral_cao_gato', 103, 'Vermífugo (Comprimido Oral)', NULL, 0, NULL),
 (17, 'antipulgas_carrapatos_cao_gato', 104, 'Antipulgas e Carrapatos (Oral/Tópico)', NULL, 0, NULL),
 (18, 'vermifugo_oral_cao_gato', 105, 'Vermífugo (Comprimido Oral)', NULL, 1, NULL),
-(27, 'vermifugo_oral_cao_gato', 125, 'Vermífugo (Comprimido Oral)', '2026-05-20', 0, NULL),
-(28, 'antipulgas_carrapatos_cao', 126, 'Antipulgas e Carrapatos (Oral/Tópico)', '2026-05-12', 0, NULL);
+(30, 'antipulgas_carrapatos_cao', 128, 'Antipulgas e Carrapatos (Oral/Tópico/Coleira)', '2026-05-13', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -115,8 +106,7 @@ INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_va
 (103, 'Luna', 96, 'cachorro', 'vira_lata', 6, 'anos', 1, NULL, NULL, 'F', NULL, NULL, NULL, NULL),
 (104, 'Sara', 97, 'cachorro', 'dachshund', NULL, NULL, NULL, NULL, NULL, 'F', 'Branca', '2003-03-11', '/uploads/ecb927684e6a7b49311a04bd166ccdc7.jpeg', NULL),
 (105, 'Gaia', 98, 'gato', 'sem_raca_definida', 7, 'meses', NULL, NULL, NULL, 'F', 'Cinza', NULL, NULL, NULL),
-(125, 'Teste', 102, 'gato', 'Bombaim', 6, 'anos', 3, NULL, 3, 'F', 'Azul', NULL, '/uploads/8201881482dcba5b33042927ec8c7ac4.jpeg', NULL),
-(126, 'Hebd', 102, 'cachorro', 'American Bully', NULL, 'anos', NULL, NULL, 3, 'M', 'Preto', '2026-05-23', '/uploads/7d07ba088c701b3e19fff5d68b1b518c.jpeg', NULL);
+(128, 'Preto', 102, 'cachorro', 'Afghan Hound', NULL, 'anos', NULL, NULL, 12, 'M', 'Caramelo', '2025-12-17', '/uploads/842a2c3e2c42972ee34acbd3bf27c9f8.jpeg', NULL);
 
 -- --------------------------------------------------------
 
@@ -206,9 +196,7 @@ INSERT INTO `vacinas` (`id_vacina`, `id_dataset`, `nome`, `data_aplicacao`, `pro
 (15, NULL, 'Leucemia Felina (FeLV)', '2021-06-22', '0000-00-00', 0, 80, NULL),
 (22, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 1, 103, NULL),
 (23, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', NULL, '0000-00-00', 0, 104, NULL),
-(38, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', '2026-05-18', '0000-00-00', 0, 125, NULL),
-(39, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', '2026-05-23', '0000-00-00', 0, 126, NULL),
-(40, 'vacina_rabica_cao', 'Antirrábica (Raiva)', '2026-05-23', '0000-00-00', 0, 126, NULL);
+(42, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', '2026-05-12', '0000-00-00', 0, 128, NULL);
 
 -- --------------------------------------------------------
 
@@ -314,13 +302,13 @@ ALTER TABLE `agendamentos`
 -- AUTO_INCREMENT de tabela `medicamentos`
 --
 ALTER TABLE `medicamentos`
-  MODIFY `id_medicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_medicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de tabela `prontuario`
@@ -338,7 +326,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `vacinas`
 --
 ALTER TABLE `vacinas`
-  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `veterinarios`
