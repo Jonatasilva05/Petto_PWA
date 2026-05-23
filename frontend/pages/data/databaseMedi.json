@@ -8,7 +8,7 @@
         "category": "Essencial"
       },
       {
-        "id": "vacina_rabica_cao_gato",
+        "id": "vacina_rabica_cao",
         "name": "Antirrábica (Raiva)",
         "category": "Essencial"
       },
@@ -20,12 +20,12 @@
     ],
     "medications": [
       {
-        "id": "vermifugo_oral_cao_gato",
+        "id": "vermifugo_oral_cao",
         "name": "Vermífugo (Comprimido Oral)",
         "category": "Essencial"
       },
       {
-        "id": "antipulgas_carrapatos_cao_gato",
+        "id": "antipulgas_carrapatos_cao",
         "name": "Antipulgas e Carrapatos (Oral/Tópico)",
         "category": "Essencial"
       }
@@ -40,19 +40,19 @@
         "category": "Essencial"
       },
       {
-        "id": "vacina_rabica_cao_gato",
+        "id": "vacina_rabica_gato",
         "name": "Antirrábica (Raiva)",
         "category": "Essencial"
       }
     ],
     "medications": [
       {
-        "id": "vermifugo_oral_cao_gato",
+        "id": "vermifugo_oral_gato",
         "name": "Vermífugo (Comprimido Oral)",
         "category": "Essencial"
       },
       {
-        "id": "antipulgas_carrapatos_cao_gato",
+        "id": "antipulgas_carrapatos_gato",
         "name": "Antipulgas e Carrapatos (Oral/Tópico)",
         "category": "Essencial"
       },
@@ -184,7 +184,7 @@
         "category": "Essencial"
       },
       {
-        "id": "vacina_rabica_cao_gato",
+        "id": "vacina_rabica_furao",
         "name": "Antirrábica (Raiva)",
         "category": "Essencial"
       }
@@ -201,7 +201,7 @@
         "category": "Essencial"
       },
       {
-        "id": "vermifugo_oral_cao_gato",
+        "id": "vermifugo_furao",
         "name": "Vermífugo",
         "category": "Essencial"
       }

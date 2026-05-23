@@ -55,16 +55,17 @@ router.get('/veterinarios', authenticateToken, async (req, res) => {
 router.get('/usuario', authenticateToken, async (req, res) => {
     try {
         const sql = `
-            SELECT a.id_agendamento, a.data_hora, a.status, p.nome as nome_pet 
+            SELECT a.id_agendamento, a.data_hora, a.status, p.nome as nome_pet, a.id_pet 
             FROM agendamentos a
             JOIN pets p ON a.id_pet = p.id_pet
             WHERE p.id_usuario = ?
             ORDER BY a.data_hora ASC
         `;
         const [agendamentos] = await pool.execute(sql, [req.user.id]);
+        console.log("Agendamentos encontrados:", agendamentos); // Adicione isso para ver no terminal!
         res.status(200).json(agendamentos);
     } catch (error) {
-        console.error("Erro ao buscar agendamentos do usuário:", error);
+        console.error("Erro no backend:", error);
         res.status(500).json({ message: 'Erro ao buscar suas consultas.' });
     }
 });

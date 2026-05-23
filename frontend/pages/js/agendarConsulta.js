@@ -1,5 +1,3 @@
-// frontend/js/agendarApp.js
-
 class AppointmentModel {
     constructor() {
         this.apiUrl = '/api';

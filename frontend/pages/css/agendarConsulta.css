@@ -315,3 +315,30 @@ body, html {
 }
 .status-green::after { background-color: #22c55e; }
 .status-red::after { background-color: #ef4444; }
+
+/* Adicione isso ao seu arquivo CSS */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #4890F0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.day.selected-day {
+    border: 2px solid #4890F0;
+    background-color: #e3f2fd;
+    border-radius: 50%;
+}

@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     };
 
+    // Dentro do seu arquivo perfilPet.js, atualize o listener de cliques:
     document.querySelectorAll('.clickable[data-tela]').forEach(elemento => {
         elemento.addEventListener('click', (e) => {
             e.stopPropagation();
