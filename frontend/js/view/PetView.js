@@ -211,10 +211,10 @@ export class PetView {
             return;
         }
 
+        // Substitua o loop forEach correspondente dentro do método renderHistorico em PetView.js
         dadosFiltrados.forEach(item => {
             let iconClass, iconTag, tagBg, tagColor;
             
-            // Define estilos com base na categoria
             if (item.categoria === 'Vacina') {
                 iconClass = 'bg-vacina'; iconTag = 'fa-check'; tagBg = 'var(--tag-bg)'; tagColor = 'var(--tag-text)';
             } else if (item.categoria === 'Medicação') {
@@ -227,6 +227,14 @@ export class PetView {
 
             const safeNome = this.escapeHTML(item.nome);
             const safeData = item.data ? this.escapeHTML(item.data.split('T')[0]) : 'Data não informada';
+            
+            // Tratamento seguro para o nome do veterinário responsável
+            const safeVeterinario = item.veterinario ? this.escapeHTML(item.veterinario) : null;
+            const veterinarioHtml = safeVeterinario 
+                ? `<p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                    <i class="fa-solid fa-user-doctor"></i> Aplicado por: ${safeVeterinario}
+                </p>` 
+                : '';
 
             const cardHtml = `
                 <div class="list-item">
@@ -237,6 +245,7 @@ export class PetView {
                             <span class="category-tag" style="background:${tagBg}; color:${tagColor};">${item.categoria}</span>
                         </div>
                         <p>${safeData !== 'Data não informada' ? 'Data: ' + safeData : safeData}</p>
+                        ${veterinarioHtml}
                     </div>
                     <div class="status-area">
                         <div class="status-icon-circle circle-green"><i class="fa-solid fa-check"></i></div>

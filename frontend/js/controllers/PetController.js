@@ -198,70 +198,88 @@ export class PetController {
             const file = event.target.files[0];
             if (!file) return;
 
-            // 1. Aumentamos o limite para 25MB para aceitar fotos de celulares potentes, 
-            // mas ainda bloquear vídeos enormes acidentais.
+            // Limite de 25MB
             if (file.size > 25 * 1024 * 1024) {
-                Swal.fire('Erro', 'A imagem é muito grande. O limite máximo é de 25MB.', 'error');
+                alert('A imagem é muito grande. O limite máximo é de 25MB.');
                 return;
             }
 
-            // 2. Mostra o Loading na tela para o usuário não achar que travou
-            Swal.fire({
-                title: 'Processando foto...',
-                text: 'Aguarde um momento.',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
+            // 1. Cria e mostra o Loader Nativo
+            let loader = document.getElementById('native-pic-loader');
+            if (!loader) {
+                loader = document.createElement('div');
+                loader.id = 'native-pic-loader';
+                loader.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(18, 18, 18, 0.9); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-family: "Poppins", sans-serif; backdrop-filter: blur(5px);';
+                loader.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" style="font-size: 50px; color: #4890F0; margin-bottom: 20px;"></i><h3 style="margin:0; font-weight: 500;">Processando foto...</h3><p style="color:#aaa; font-size: 14px; margin-top:5px;">Aguarde um momento</p>';
+                document.body.appendChild(loader);
+            }
+            loader.style.display = 'flex';
 
-            // 3. O setTimeout dá tempo (100ms) pro navegador desenhar o Loading na tela 
-            // antes de congelar processando a imagem pesada
+            // 2. Timeout para a tela conseguir renderizar o "Carregando"
             setTimeout(() => {
-                const objectUrl = URL.createObjectURL(file);
-                const img = new Image();
-
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 800; 
-                    const MAX_HEIGHT = 800; 
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                    } else {
-                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-
-                    const previewImage = document.getElementById('pet-photo-preview');
-                    const placeholder = document.getElementById('photo-placeholder');
+                // Voltamos para o FileReader, pois ele é imune a bloqueios de segurança do celular
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    const img = new Image();
                     
-                    if (previewImage && placeholder) {
-                        previewImage.src = compressedBase64;
-                        previewImage.style.display = 'block';
-                        placeholder.style.display = 'none';
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 800; 
+                        const MAX_HEIGHT = 800; 
+                        let width = img.width;
+                        let height = img.height;
 
-                        // Salva a foto temporariamente
-                        sessionStorage.setItem('tempFotoBase64', compressedBase64);
-                    }
+                        if (width > height) {
+                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        } else {
+                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                        }
 
-                    URL.revokeObjectURL(objectUrl);
-                    
-                    // 4. Fecha o Loading e a Bottom Sheet quando terminar
-                    Swal.close();
-                    window.closeBottomSheet();
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+                        const previewImage = document.getElementById('pet-photo-preview');
+                        const placeholder = document.getElementById('photo-placeholder');
+                        
+                        if (previewImage && placeholder) {
+                            previewImage.src = compressedBase64;
+                            previewImage.style.display = 'block';
+                            placeholder.style.display = 'none';
+                            sessionStorage.setItem('tempFotoBase64', compressedBase64);
+                        }
+
+                        // Limpeza de memória
+                        canvas.width = 0;
+                        canvas.height = 0;
+                        img.src = '';
+                        
+                        // Finaliza
+                        loader.style.display = 'none';
+                        window.closeBottomSheet();
+                    };
+
+                    img.onerror = () => {
+                        loader.style.display = 'none';
+                        alert('Formato de imagem não suportado pela câmera do dispositivo.');
+                    };
+
+                    img.src = e.target.result;
                 };
 
-                img.src = objectUrl;
-            }, 100);
+                reader.onerror = () => {
+                    loader.style.display = 'none';
+                    alert('Erro ao ler a foto do celular. Tente novamente.');
+                };
+
+                // Inicia a leitura do arquivo fisicamente
+                reader.readAsDataURL(file);
+                
+            }, 150);
         };
 
         document.querySelector('#sheet-foto .btn-primary')?.addEventListener('click', () => { document.getElementById('input-camera').click(); });

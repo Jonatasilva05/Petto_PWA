@@ -1,27 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // AÇÃO DE VOLTAR
-    const btnVoltar = document.getElementById('btn-voltar');
-    if (btnVoltar) {
-        btnVoltar.addEventListener('click', () => {
-            if (petId) {
-                // Volta direto para o perfil DO PET ESPECÍFICO
-                window.location.href = `perfilPet.html?id=${petId}`;
-            } else {
-                // Fallback caso dê algum erro
-                window.location.href = '../dashboard.html';
-            }
-        });
-    }
-
     const listContainer = document.getElementById('historico-lista');
     const filterTabs = document.querySelectorAll('.filter-tab');
     
-    // Captura o ID do pet da URL (Ex: historicoPet.html?petId=103)
     const urlParams = new URLSearchParams(window.location.search);
     const petId = urlParams.get('petId'); 
+    
     let historicoData = [];
+    let enciclopediaMedica = [];
 
-    // Função de sanitização para proteger a tela e o dispositivo
+    // Carrega o dicionário médico (JSON)
+    async function carregarDicionario() {
+        try {
+            const res = await fetch('../data/databaseInfoMed.json');
+            const data = await res.json();
+            data.forEach(item => {
+                if (item.vaccines) enciclopediaMedica.push(...item.vaccines);
+                if (item.medications) enciclopediaMedica.push(...item.medications);
+            });
+        } catch (e) { console.error("Erro ao carregar dicionário:", e); }
+    }
+
     function escapeHTML(str) {
         if (!str) return '';
         return str.toString().replace(/[&<>'"]/g, 
@@ -30,58 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function buscarHistorico() {
-        if (!petId) {
-            listContainer.innerHTML = '<p style="text-align:center; margin-top:20px;">ID do Pet não fornecido.</p>';
-            return;
-        }
-
-        // CORREÇÃO 1: Usa a chave exata gerada no momento do seu login seguro
+        if (!petId) return;
         const token = localStorage.getItem('auth-token-petto'); 
-        
-        if (!token) {
-            alert("Acesso protegido. Faça login para visualizar o histórico.");
-            // CORREÇÃO 2: Redireciona corretamente para a página inicial (Login) do app
-            window.location.href = '../../index.html';
-            return;
-        }
-
         try {
-            // CORREÇÃO 3: URL relativa (/api/...) garante o funcionamento no Celular (Wi-Fi) e no Notebook
             const response = await fetch(`/api/pets/${petId}/historico`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Authorization': `Bearer ${token}` }
             });
-
-            if (!response.ok) throw new Error('Falha ao autenticar ou buscar dados.');
-
+            if (!response.ok) throw new Error('Falha ao buscar histórico.');
             historicoData = await response.json();
             renderizarHistorico('Tudo');
-
-        } catch (error) {
-            console.error('Erro na conexão segura:', error);
-            listContainer.innerHTML = '<p style="text-align:center; margin-top:20px; color: red;">Não foi possível carregar os dados.</p>';
-        }
+        } catch (error) { console.error(error); }
     }
 
     function renderizarHistorico(filtro) {
         listContainer.innerHTML = '';
-
-        const dadosFiltrados = filtro === 'Tudo' 
-            ? historicoData 
-            : historicoData.filter(item => item.categoria === filtro);
-
-        if (dadosFiltrados.length === 0) {
-            listContainer.innerHTML = `<p style="text-align:center; color: var(--text-muted); margin-top: 20px;">Nenhum registro de ${filtro.toLowerCase()} encontrado.</p>`;
-            return;
-        }
+        const dadosFiltrados = filtro === 'Tudo' ? historicoData : historicoData.filter(i => i.categoria === filtro);
 
         dadosFiltrados.forEach(item => {
-            // Definição de design baseada na categoria do banco
             let iconClass, iconTag, tagBg, tagColor;
-            
             if (item.categoria === 'Vacina') {
                 iconClass = 'bg-vacina'; iconTag = 'fa-check'; tagBg = 'var(--tag-bg)'; tagColor = 'var(--tag-text)';
             } else if (item.categoria === 'Medicação') {
@@ -92,9 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const safeNome = escapeHTML(item.nome);
             const safeData = item.data ? escapeHTML(item.data.split('T')[0]) : 'Data não informada';
-
+            const safeVeterinario = item.veterinario ? escapeHTML(item.veterinario) : null;
+            
+            // Card original (sem ícones extras), mas com data-id
             const cardHtml = `
-                <div class="list-item">
+                <div class="list-item" data-id="${item.id_dataset || ''}" style="cursor: pointer;">
                     <div class="item-icon ${iconClass}"><i class="fa-solid ${iconTag}"></i></div>
                     <div class="item-details">
                         <div class="title-row">
@@ -102,20 +68,47 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="category-tag" style="background:${tagBg}; color:${tagColor};">${item.categoria}</span>
                         </div>
                         <p>${safeData !== 'Data não informada' ? 'Data: ' + safeData : safeData}</p>
+                        ${safeVeterinario ? `<p style="font-size: 12px; color: var(--text-muted);"><i class="fa-solid fa-user-doctor"></i> Aplicado por: ${safeVeterinario}</p>` : ''}
                     </div>
                     <div class="status-area">
                         <div class="status-icon-circle circle-green"><i class="fa-solid fa-check"></i></div>
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
                 </div>
             `;
-            
-            // Inserção segura no DOM
             listContainer.insertAdjacentHTML('beforeend', cardHtml);
         });
     }
 
-    // Configuração de abas (Filtros)
+    // Evento de clique unificado no container (mais eficiente e não falha nos cliques internos)
+    listContainer.addEventListener('click', (e) => {
+        const card = e.target.closest('.list-item');
+        if (!card) return; // Se não clicou num card, ignora
+
+        const idDataset = card.getAttribute('data-id');
+        
+        if (!idDataset || idDataset === 'null' || idDataset === '') {
+            Swal.fire('Informação', 'Não há detalhes adicionais disponíveis para este item.', 'info');
+            return;
+        }
+
+        const info = enciclopediaMedica.find(m => m.id === idDataset);
+
+        if (info) {
+            Swal.fire({
+                title: info.name,
+                html: `
+                    <div style="text-align: left; font-size: 14px;">
+                        <p><strong>Categoria:</strong> ${info.category}</p>
+                        ${info.schedule ? `<p><strong>Protocolo:</strong> ${info.schedule.first_dose_note || 'Consulte seu veterinário.'}</p>` : ''}
+                    </div>
+                `,
+                confirmButtonColor: '#4890F0'
+            });
+        } else {
+            Swal.fire('Aviso', 'Informações educativas não encontradas.', 'info');
+        }
+    });
+
     filterTabs.forEach(tab => {
         tab.addEventListener('click', (e) => {
             filterTabs.forEach(t => t.classList.remove('active-outline'));
@@ -124,10 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Permite voltar para o perfil do pet clicando no título "Histórico"
-    document.querySelector('.header-top h1').addEventListener('click', () => {
-        window.history.back();
-    });
-
+    carregarDicionario();
     buscarHistorico();
 });

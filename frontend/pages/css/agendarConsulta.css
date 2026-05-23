@@ -301,3 +301,17 @@ body, html {
 
 .nav-item i { font-size: 22px; }
 .nav-item.active { color: var(--primary-dark); }
+
+.day.has-appointment { position: relative; font-weight: bold; }
+.day.has-appointment::after {
+    content: ''; 
+    position: absolute; 
+    bottom: 5px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 6px; 
+    height: 6px;
+    border-radius: 50%;
+}
+.status-green::after { background-color: #22c55e; }
+.status-red::after { background-color: #ef4444; }

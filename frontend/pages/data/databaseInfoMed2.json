@@ -1,0 +1,872 @@
+[
+  {
+    "species_value": "cachorro",
+    "vaccines": [
+      {
+        "id": "vacina_v10_cao",
+        "name": "Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 6,
+          "minimum_age_days": 45,
+          "first_dose_note": "Recomenda-se iniciar entre 6 a 8 semanas de vida (45 dias). Algumas clínicas iniciam com vacina 'puppy' a partir de 30 dias.",
+          "primary_series": {
+            "total_doses": 3,
+            "interval_between_doses_days": 21,
+            "interval_between_doses_note": "Intervalo de 21 a 30 dias entre doses. Não exceder 30 dias. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+            "end_age_note": "Última dose deve ser aplicada com 16 semanas (4 meses) ou mais para garantir imunidade plena. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado com dose única após conclusão da série primária. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "45 dias de vida (6–7 semanas)"
+            },
+            {
+              "dose": 2,
+              "timing": "66 dias de vida (~9–10 semanas)"
+            },
+            {
+              "dose": 3,
+              "timing": "87–112 dias de vida (12–16 semanas)"
+            }
+          ]
+        },
+        "sources": [
+          "WSAVA Guidelines 2024",
+          "Covet SP – Protocolo de Imunização",
+          "Cobasi Blog"
+        ],
+        "description": "Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.) é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      },
+      {
+        "id": "vacina_rabica_cao",
+        "name": "Antirrábica (Raiva)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 12,
+          "minimum_age_days": 84,
+          "first_dose_note": "A aplicação deve ocorrer a partir dos 3 meses (12 semanas / 84 dias) de vida. No Brasil, pode ser aplicada após completar a série da polivalente.",
+          "primary_series": {
+            "total_doses": 1,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Realiza-se uma dose inicial única para início da imunização. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "Reforço obrigatório por lei anualmente. Considerada obrigatória em todo o Brasil. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "A partir dos 3 meses de vida (após última dose da V8/V10)"
+            }
+          ]
+        },
+        "sources": [
+          "Petz Blog",
+          "World Veterinária",
+          "NUXCELL Blog"
+        ],
+        "description": "Antirrábica (Raiva) é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      },
+      {
+        "id": "vacina_gripe_canina",
+        "name": "Gripe Canina / Tosse dos Canis (Bordetella + Parainfluenza)",
+        "category": "Opcional",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Recomendada a partir de 8 semanas. Indicada especialmente para cães que frequentam pet shops, parques, canis ou hotéis. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": 2,
+            "interval_between_doses_days": 21,
+            "interval_between_doses_note": "Duas doses com intervalo de 3 a 4 semanas entre elas. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+            "end_age_note": "Pode ser aplicada no mesmo dia que a vacina contra giárdia. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado. Pode ser semestral para cães com alto risco de exposição (frequentam canis, exposições etc.)."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "8 semanas de vida"
+            },
+            {
+              "dose": 2,
+              "timing": "11–12 semanas de vida (3–4 semanas após a 1ª dose)"
+            }
+          ]
+        },
+        "sources": [
+          "NUXCELL Blog",
+          "Grupo Hospital Veterinário",
+          "Pedigree Brasil"
+        ],
+        "description": "Gripe Canina / Tosse dos Canis (Bordetella + Parainfluenza) é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      }
+    ],
+    "medications": [
+      {
+        "id": "vermifugo_oral_cao",
+        "name": "Vermífugo (Comprimido Oral)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 2,
+          "minimum_age_days": 15,
+          "first_dose_note": "Recomenda-se iniciar aos 15 dias de vida. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": 15,
+            "interval_between_doses_note": "A cada 15 dias até os 3 meses de idade. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+            "phases": [
+              {
+                "phase": "Filhote (15 dias até 3 meses)",
+                "frequency": "A cada 15 dias Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+              },
+              {
+                "phase": "Filhote (3 a 6 meses)",
+                "frequency": "A aplicação mensal é recomendada (a cada 30 dias) Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+              },
+              {
+                "phase": "Adulto (após 6 meses)",
+                "frequency": "A cada 3 a 6 meses, sempre com acompanhamento e orientação veterinária Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+              }
+            ]
+          },
+          "booster": {
+            "frequency": "trimestral ou semestral",
+            "frequency_days": 90,
+            "note": "Mínimo a cada 3–6 meses para adultos. Após 1 ano de vida: a cada 3 meses. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "Cobasi Blog",
+          "Inova Veterinária",
+          "Empire Pet"
+        ],
+        "description": "Vermífugo (Comprimido Oral) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "antipulgas_carrapatos_cao",
+        "name": "Antipulgas e Carrapatos (Oral/Tópico/Coleira)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Recomenda-se iniciar a partir das 8 semanas de vida (consultar bula do produto específico, pois a idade mínima pode variar entre marcas).",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": 30,
+            "interval_between_doses_note": "Aplicação mensal para a maioria dos produtos orais e tópicos (pipetas). Coleiras têm duração de 4 a 8 meses. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "mensal ou conforme produto",
+            "frequency_days": 30,
+            "note": "A aplicação mensal é recomendada para orais e pipetas. Trimestral para alguns produtos injetáveis. Seguir sempre a bula."
+          }
+        },
+        "sources": [
+          "Petlove – Vermífugo e antipulgas",
+          "Purina Brasil"
+        ],
+        "description": "Antipulgas e Carrapatos (Oral/Tópico/Coleira) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "gato",
+    "vaccines": [
+      {
+        "id": "vacina_v4_gato",
+        "name": "Polivalente Felina V3, V4 ou V5",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 6,
+          "minimum_age_days": 45,
+          "first_dose_note": "Recomenda-se iniciar entre 6 e 8 semanas (45–60 dias). Não vacinar antes dos 45 dias pois anticorpos maternos podem interferir na eficácia.",
+          "primary_series": {
+            "total_doses": 3,
+            "interval_between_doses_days": 28,
+            "interval_between_doses_note": "Intervalo de 3 a 4 semanas (21–30 dias) entre doses. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+            "end_age_note": "Última dose por volta dos 4 meses de vida. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado com dose única. Para a V5 (FeLV), recomenda-se teste de FeLV antes da primeira aplicação, especialmente em gatos adultos."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "60 dias de vida (8–9 semanas)"
+            },
+            {
+              "dose": 2,
+              "timing": "90 dias de vida (12–13 semanas)"
+            },
+            {
+              "dose": 3,
+              "timing": "120 dias de vida (16 semanas / 4 meses)"
+            }
+          ]
+        },
+        "sources": [
+          "Terra Zoo Blog",
+          "Foxvet",
+          "Hospital Cats Londrina",
+          "WSAVA Guidelines 2024"
+        ],
+        "description": "Polivalente Felina V3, V4 ou V5 é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      },
+      {
+        "id": "vacina_rabica_gato",
+        "name": "Antirrábica (Raiva)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 12,
+          "minimum_age_days": 84,
+          "first_dose_note": "A aplicação deve ocorrer a partir dos 3–4 meses (12–16 semanas), preferencialmente após completar a série da polivalente.",
+          "primary_series": {
+            "total_doses": 1,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Realiza-se uma dose inicial única para início da imunização. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado obrigatório. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "A partir dos 4 meses (após conclusão da série da V4/V5)"
+            }
+          ]
+        },
+        "sources": [
+          "Cobasi Blog",
+          "Clinivet",
+          "Whiskas Brasil"
+        ],
+        "description": "Antirrábica (Raiva) é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      }
+    ],
+    "medications": [
+      {
+        "id": "vermifugo_oral_gato",
+        "name": "Vermífugo (Comprimido Oral / Pasta)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 2,
+          "minimum_age_days": 15,
+          "first_dose_note": "Recomenda-se iniciar aos 15 dias de vida. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": 15,
+            "interval_between_doses_note": "A cada 15 dias até os 6 meses de idade. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+            "phases": [
+              {
+                "phase": "Filhote (15 dias até 6 meses)",
+                "frequency": "A cada 15 dias Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+              },
+              {
+                "phase": "Adulto (após 6 meses)",
+                "frequency": "A cada 3 a 6 meses, sempre com acompanhamento e orientação veterinária Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+              }
+            ]
+          },
+          "booster": {
+            "frequency": "trimestral ou semestral",
+            "frequency_days": 90,
+            "note": "Mínimo a cada 3 meses para adultos. Após 1 ano: a cada 3 meses. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "Purina Brasil",
+          "Inova Veterinária"
+        ],
+        "description": "Vermífugo (Comprimido Oral / Pasta) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "antipulgas_carrapatos_gato",
+        "name": "Antipulgas e Carrapatos (Tópico/Oral)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Vermifugação externa deve iniciar após as 8 semanas de vida. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": 30,
+            "interval_between_doses_note": "Aplicação mensal. ATENÇÃO: nunca usar produtos para cão em gatos — muitos são tóxicos para felinos (ex.: permetrina). Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "mensal",
+            "frequency_days": 30,
+            "note": "A aplicação mensal é recomendada para produtos tópicos (pipetas) e orais específicos para felinos. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "Purina Brasil"
+        ],
+        "description": "Antipulgas e Carrapatos (Tópico/Oral) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "malte_gato",
+        "name": "Pasta de Malte (Controle de bolas de pelo)",
+        "category": "Complementar",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "O uso pode ser iniciado a partir das 8 semanas. Indicado especialmente para raças de pelo longo. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "2 a 3 vezes por semana",
+            "frequency_days": null,
+            "note": "O uso contínuo é recomendado e regular, 2 a 3 vezes por semana ou conforme necessidade/orientação veterinária. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Pasta de Malte (Controle de bolas de pelo) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "coelho",
+    "vaccines": [
+      {
+        "id": "vacina_mixomatose_coelho",
+        "name": "Vacina contra Mixomatose",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 5,
+          "minimum_age_days": 35,
+          "first_dose_note": "Primeira dose a partir das 5 semanas de vida (35 dias). Recomendado vacinar preferencialmente no início da primavera (maior risco no verão).",
+          "primary_series": {
+            "total_doses": 1,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Dose única inicial (primovacinação). Aguardar pelo menos 2 semanas entre esta e a vacina contra RHDV. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "semestral ou anual",
+            "frequency_days": 180,
+            "note": "O reforço anual é recomendado mínimo. Para coelhos com acesso ao exterior ou em regiões de alto risco, recomenda-se reforço semestral (primavera e outono)."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "5–8 semanas de vida"
+            },
+            {
+              "reforco": "A cada 6 meses (regiões de risco) ou anualmente"
+            }
+          ]
+        },
+        "sources": [
+          "Tiendanimal Blog",
+          "FOZCANIS",
+          "Zooplus Magazine",
+          "Zoomalia Blog"
+        ],
+        "description": "Vacina contra Mixomatose é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      },
+      {
+        "id": "vacina_doenca_hemorragica_coelho",
+        "name": "Vacina contra Doença Hemorrágica Viral (RHDV)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 10,
+          "minimum_age_days": 70,
+          "first_dose_note": "Recomendado a partir de 10 semanas de vida (70 dias). Aguardar mínimo de 2 semanas após a vacina contra mixomatose. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": 1,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Realiza-se uma dose inicial única para início da imunização. Início da imunidade: 1 semana após aplicação. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado. Após o 1º ano, pode ser combinada com a mixomatose em dose única (vacina combinada Myxo-RHD)."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "10 semanas de vida (2 semanas após a vacina de mixomatose)"
+            },
+            {
+              "reforco": "Anualmente (pode usar vacina combinada)"
+            }
+          ]
+        },
+        "sources": [
+          "FILAVAC VHD K C+V – bula oficial",
+          "Tiendanimal Blog",
+          "Vets App"
+        ],
+        "description": "Vacina contra Doença Hemorrágica Viral (RHDV) é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      }
+    ],
+    "medications": [
+      {
+        "id": "vermifugo_coelho",
+        "name": "Vermífugo para Coelhos (Fenbendazol)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 6,
+          "minimum_age_days": 42,
+          "first_dose_note": "Recomenda-se iniciar a partir das 6 semanas. O Fenbendazol é o princípio ativo mais indicado e também previne encefalitozoonose.",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Uso periódico sempre com acompanhamento e orientação veterinária. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "semestral ou conforme veterinário",
+            "frequency_days": 180,
+            "note": "Geralmente a cada 6 meses ou conforme prescrição veterinária de especialista em animais exóticos. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vermífugo para Coelhos (Fenbendazol) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "antiparasitario_coelho",
+        "name": "Antiparasitário Tópico (Ácaros, Pulgas, Piolhos)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Recomendado a partir das 8 semanas. Apenas produtos aprovados para coelhos — nunca usar produtos para cão ou gato. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "mensal",
+            "frequency_days": 30,
+            "note": "Aplicação tópica mensal conforme produto indicado por veterinário especialista em exóticos. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Antiparasitário Tópico (Ácaros, Pulgas, Piolhos) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "passaro",
+    "vaccines": [
+      {
+        "id": "vacina_newcastle",
+        "name": "Vacina contra Newcastle",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 5,
+          "minimum_age_days": 35,
+          "first_dose_note": "A primeira dose deve ser ministrada entre o 35º e 40º dia de vida (5–6 semanas). Aplicada em gotas oculares/nasais ou spray.",
+          "primary_series": {
+            "total_doses": 2,
+            "interval_between_doses_days": 21,
+            "interval_between_doses_note": "Segunda dose 3 semanas após a primeira. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "semestral ou anual",
+            "frequency_days": 180,
+            "note": "Reforços periódicos a cada 6–12 meses sempre com acompanhamento e orientação veterinária e risco de exposição. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "Manual de Boas Práticas – CEDASB / EMBRAPA",
+          "databaseHealthReference.json"
+        ],
+        "description": "Vacina contra Newcastle é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      }
+    ],
+    "medications": [
+      {
+        "id": "vermifugo_aves",
+        "name": "Vermífugo Aviário",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Recomendado a partir das 8 semanas de vida, ou sempre com acompanhamento e orientação veterinária. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "semestral",
+            "frequency_days": 180,
+            "note": "Geralmente a cada 6 meses. Indispensável para aves que vivem em gaiolas fechadas. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vermífugo Aviário auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "suplemento_calcio_aves",
+        "name": "Suplemento de Cálcio",
+        "category": "Complementar",
+        "schedule": {
+          "minimum_age_weeks": null,
+          "minimum_age_days": null,
+          "first_dose_note": "Pode ser oferecido desde o início da vida adulta. Essencial para fêmeas em postura de ovos. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "conforme necessidade",
+            "frequency_days": null,
+            "note": "Adicionado na água ou ração sempre com acompanhamento e orientação veterinária. Para fêmeas em postura: uso contínuo. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Suplemento de Cálcio auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "suplemento_vitaminas_aves",
+        "name": "Suplemento Vitamínico para Aves (Vitaminas A e D3)",
+        "category": "Complementar",
+        "schedule": {
+          "minimum_age_weeks": null,
+          "minimum_age_days": null,
+          "first_dose_note": "O uso pode ser iniciado a qualquer idade. Especialmente importante para aves cuja dieta é baseada apenas em sementes. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "semanal",
+            "frequency_days": 7,
+            "note": "Semanalmente na água ou ração conforme o produto. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Suplemento Vitamínico para Aves (Vitaminas A e D3) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "roedor",
+    "vaccines": [],
+    "medications": [
+      {
+        "id": "vitamina_c_roedor",
+        "name": "Vitamina C (Indispensável para Porquinhos-da-Índia)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 1,
+          "minimum_age_days": 7,
+          "first_dose_note": "Desde o desmame (1–2 semanas). Porquinhos-da-índia não produzem vitamina C naturalmente — deficiência causa escorbuto. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "diária",
+            "frequency_days": 1,
+            "note": "Uso diário obrigatório para cobaias: em gotas na água ou alimentos ricos (pimentão vermelho, laranja, salsa). NÃO necessário para hamsters, ratos ou gerbils."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vitamina C (Indispensável para Porquinhos-da-Índia) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "vermifugo_roedor",
+        "name": "Vermífugo para Roedores",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 6,
+          "minimum_age_days": 42,
+          "first_dose_note": "Recomendado a partir das 6 semanas de vida, somente sob prescrição de veterinário especialista em animais exóticos. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "semestral ou conforme veterinário",
+            "frequency_days": 180,
+            "note": "Uso somente sob prescrição. A frequência varia conforme a espécie (hamster, gerbil, cobaia etc.) e exposição ao ambiente."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vermífugo para Roedores auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "antiparasitario_roedor",
+        "name": "Antiparasitário Tópico (Ácaros e Pulgas em Roedores)",
+        "category": "Opcional",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Recomendado a partir das 8 semanas, apenas sob prescrição veterinária. Nunca usar produtos de cão ou gato. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "mensal ou conforme veterinário",
+            "frequency_days": 30,
+            "note": "Aplicação tópica sempre com acompanhamento e orientação veterinária. Frequência depende do grau de infestação. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Antiparasitário Tópico (Ácaros e Pulgas em Roedores) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "reptil",
+    "vaccines": [],
+    "medications": [
+      {
+        "id": "vermifugo_reptil",
+        "name": "Vermífugo para Répteis",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": null,
+          "minimum_age_days": null,
+          "first_dose_note": "Indispensável para répteis recém-adquiridos, independente da idade. Apenas sob prescrição de veterinário especialista em répteis.",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Protocolo individual definido pelo veterinário conforme espécie (lagartos, cobras, tartarugas). Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "semestral ou anual",
+            "frequency_days": 180,
+            "note": "Geralmente a cada 6–12 meses. Apenas sob prescrição. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vermífugo para Répteis auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "suplemento_calcio_reptil",
+        "name": "Suplemento de Cálcio e Vitamina D3 (Répteis)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": null,
+          "minimum_age_days": null,
+          "first_dose_note": "Desde o início da alimentação sólida. Fundamental para répteis criados sem iluminação UVB adequada. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "a cada 2–3 refeições",
+            "frequency_days": null,
+            "note": "Polvilhado diretamente nos alimentos (insetos, vegetais) a cada 2–3 alimentações. Previne a Doença Metabólica Óssea (MBD)."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Suplemento de Cálcio e Vitamina D3 (Répteis) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "tartaruga",
+    "vaccines": [],
+    "medications": [
+      {
+        "id": "vermifugo_reptil",
+        "name": "Vermífugo para Répteis/Tartarugas",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": null,
+          "minimum_age_days": null,
+          "first_dose_note": "Indispensável para tartarugas recém-adquiridas. Apenas sob prescrição veterinária. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "semestral ou anual",
+            "frequency_days": 180,
+            "note": "A cada 6–12 meses conforme prescrição. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vermífugo para Répteis/Tartarugas auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "suplemento_calcio_reptil",
+        "name": "Suplemento de Cálcio e Vitamina D3",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": null,
+          "minimum_age_days": null,
+          "first_dose_note": "Desde o início da alimentação sólida. Crítico para tartarugas aquáticas e terrestres sem exposição solar ou UVB. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "a cada 2–3 refeições",
+            "frequency_days": null,
+            "note": "Polvilhado nos alimentos a cada 2–3 refeições para prevenir deformações no casco e Doença Metabólica Óssea. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Suplemento de Cálcio e Vitamina D3 auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "furao",
+    "vaccines": [
+      {
+        "id": "vacina_cinomose_furao",
+        "name": "Vacina contra Cinomose (Obrigatória para Furões)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 6,
+          "minimum_age_days": 42,
+          "first_dose_note": "Recomenda-se iniciar a partir das 6 semanas de vida. A cinomose é 100% fatal em furões — vacinação é crítica. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": 3,
+            "interval_between_doses_days": 21,
+            "interval_between_doses_note": "Três doses com intervalo de 3 semanas entre cada uma. Com apenas 2 doses não se garante imunidade total. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+            "end_age_note": "Concluir a série primária por volta dos 3–4 meses. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado obrigatório. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "example_calendar": [
+            {
+              "dose": 1,
+              "timing": "6–8 semanas de vida"
+            },
+            {
+              "dose": 2,
+              "timing": "9–11 semanas (3 semanas após a 1ª)"
+            },
+            {
+              "dose": 3,
+              "timing": "12–14 semanas (3 semanas após a 2ª)"
+            }
+          ]
+        },
+        "sources": [
+          "Tiendanimal Blog – Vacinas para Furões",
+          "databaseHealthReference.json"
+        ],
+        "description": "Vacina contra Cinomose (Obrigatória para Furões) é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      },
+      {
+        "id": "vacina_rabica_furao",
+        "name": "Antirrábica (Raiva) para Furão",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 12,
+          "minimum_age_days": 84,
+          "first_dose_note": "Recomendado a partir dos 3 meses (12 semanas). Considerada obrigatória para furões em Portugal e recomendada no Brasil. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": 1,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Dose única inicial, preferencialmente após a conclusão da série de cinomose. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "anual",
+            "frequency_days": 365,
+            "note": "O reforço anual é recomendado obrigatório. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "Tiendanimal Blog – Vacinas para Furões",
+          "Centro Veterinário Olival Basto"
+        ],
+        "description": "Antirrábica (Raiva) para Furão é uma medida preventiva importante para reduzir riscos de doenças infecciosas e auxiliar na proteção da saúde do animal ao longo da vida."
+      }
+    ],
+    "medications": [
+      {
+        "id": "antipulgas_furao",
+        "name": "Antipulgas específico para Furão",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 8,
+          "minimum_age_days": 56,
+          "first_dose_note": "Recomendado a partir das 8 semanas. ATENÇÃO: a maioria dos antipulgas para cão contém permetrina, que é tóxica para furões. Usar apenas produtos aprovados para furões.",
+          "primary_series": null,
+          "booster": {
+            "frequency": "mensal",
+            "frequency_days": 30,
+            "note": "Aplicação mensal conforme produto aprovado para furões. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Antipulgas específico para Furão auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "hormonio_furao",
+        "name": "Implante Hormonal (Fêmeas — Previne morte por cio prolongado)",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 24,
+          "minimum_age_days": 168,
+          "first_dose_note": "Recomendado a partir dos 6 meses de vida (antes do primeiro cio). CRÍTICO: o cio prolongado sem cópula é fatal para fêmeas inteiras — causa aplasia medular por excesso de estrogênio.",
+          "primary_series": {
+            "total_doses": 1,
+            "interval_between_doses_days": null,
+            "interval_between_doses_note": "Implante subcutâneo único, realizado por veterinário. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "a cada 2–4 anos",
+            "frequency_days": 730,
+            "note": "Duração do implante: 2 a 4 anos conforme o produto. Renovar antes do vencimento para evitar exposição ao cio. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Implante Hormonal (Fêmeas — Previne morte por cio prolongado) auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      },
+      {
+        "id": "vermifugo_furao",
+        "name": "Vermífugo para Furão",
+        "category": "Essencial",
+        "schedule": {
+          "minimum_age_weeks": 6,
+          "minimum_age_days": 42,
+          "first_dose_note": "Recomendado a partir das 6 semanas de vida. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal.",
+          "primary_series": {
+            "total_doses": null,
+            "interval_between_doses_days": 15,
+            "interval_between_doses_note": "A cada 15 dias até os 3 meses; mensal até os 6 meses. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          },
+          "booster": {
+            "frequency": "trimestral",
+            "frequency_days": 90,
+            "note": "A cada 3 meses para adultos, sempre com acompanhamento e orientação veterinária. Essa recomendação auxilia na prevenção de doenças e contribui para a manutenção da saúde e qualidade de vida do animal."
+          }
+        },
+        "sources": [
+          "databaseHealthReference.json"
+        ],
+        "description": "Vermífugo para Furão auxilia na prevenção e controle de condições comuns, contribuindo para o bem-estar e qualidade de vida do animal."
+      }
+    ]
+  },
+  {
+    "species_value": "peixe",
+    "vaccines": [],
+    "medications": [],
+    "notes": "Peixes domésticos geralmente não têm protocolo de vacinação ou vermifugação padronizado para tutores. Cuidados preventivos incluem manutenção da qualidade da água, filtração adequada e quarentena de novos peixes antes de introduzi-los ao aquário principal."
+  },
+  {
+    "species_value": "outro",
+    "vaccines": [],
+    "medications": [],
+    "notes": "Para espécies não listadas, consulte um médico veterinário especialista em animais exóticos para um protocolo personalizado."
+  }
+]

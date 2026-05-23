@@ -83,12 +83,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.stopPropagation();
             const nomeTela = elemento.getAttribute('data-tela');
             
-            // Verifica se o botão clicado é o de Histórico
-            if (nomeTela === 'Histórico Completo' || nomeTela === 'Histórico Rápido') {
-                // Redireciona para a tela de histórico passando o ID do pet na URL
+            if (nomeTela === 'Agendamentos') {
+                // Redireciona passando o ID do pet na URL
+                window.location.href = `meusAgendamentos.html?petId=${petId}`;
+            } 
+            else if (nomeTela === 'Histórico Completo' || nomeTela === 'Histórico Rápido') {
                 window.location.href = `historicoPet.html?petId=${petId}`;
-            } else {
-                // Para as outras telas que ainda não existem, continua mostrando o aviso
+            }
+            else if (nomeTela === 'Agendar Consulta') {
+                window.location.href = `agendarConsulta.html?petId=${petId}`;
+            }
+            else {
                 exibirAvisoEmBreve(nomeTela);
             }
         });

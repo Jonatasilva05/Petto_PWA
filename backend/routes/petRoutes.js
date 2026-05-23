@@ -151,7 +151,7 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
     }
 });
 
-// Rota 3: Excluir pet
+// Rota 3: Excluir pet (Já no seu petRoutes.js)
 router.delete('/:id', authenticateToken, async (req, res) => {
     const petId = req.params.id;
     const userId = req.user.id;
@@ -171,9 +171,10 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 
         // 3. Deleta o arquivo de imagem fisicamente do servidor
         if (fotoUrl && fotoUrl.startsWith('/uploads/')) {
+            // Volta duas pastas (sai de routes e da raiz do backend) e entra no frontend
             const filePath = path.join(__dirname, '../../frontend', fotoUrl);
             if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath); // Apaga o arquivo
+                fs.unlinkSync(filePath); // Apaga o arquivo físico
             }
         }
 
@@ -207,51 +208,53 @@ router.get('/:id', authenticateToken, async (req, res) => {
 
 // Rota 5: Buscar o histórico unificado (Tutor e Veterinário protegidos)
 router.get('/:id/historico', authenticateToken, async (req, res) => {
-    const petId = req.params.id;
-    const userId = req.user.id;
+    const petId = parseInt(req.params.id, 10);
+    const userId = parseInt(req.user.id, 10);
 
     try {
-        // 1. Validação de segurança: O usuário é o dono (id_usuario) OU é o veterinário vinculado?
+        // 1. Validação de segurança
         const sqlValidacao = `
             SELECT p.id_pet 
             FROM pets p 
             LEFT JOIN veterinarios v ON p.id_veterinario = v.id_veterinario
             WHERE p.id_pet = ? AND (p.id_usuario = ? OR v.user_id = ?)
         `;
-        const [pet] = await pool.execute(sqlValidacao, [petId, userId, userId]);
+        const [pet] = await pool.query(sqlValidacao, [petId, userId, userId]);
         
         if (pet.length === 0) {
             return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para visualizar este histórico.' });
         }
 
-        // 2. Buscando exatamente nas tabelas onde o tutor inseriu os dados
-        const [vacinas] = await pool.execute(
-            'SELECT nome, data_aplicacao as data_registro FROM vacinas WHERE id_pet = ?', 
-            [petId]
-        );
-        
-        const [medicamentos] = await pool.execute(
-            'SELECT nome_medicamento as nome, data_aplicacao as data_registro FROM medicamentos WHERE id_pet = ?', 
-            [petId]
-        );
-        
-        const [prontuarios] = await pool.execute(
-            'SELECT motivo as nome, data_consulta as data_registro FROM prontuario WHERE id_pet = ?', 
-            [petId]
-        );
+        // 2. Query Unificada (pool.query evita o travamento do MySQL)
+        const query = `
+            SELECT 
+                'Vacina' AS categoria,
+                v.nome AS nome,
+                v.data_aplicacao AS data,
+                vet.nome AS veterinario,
+                v.id_dataset  -- Verifique se esta coluna está aqui
+            FROM vacinas v
+            LEFT JOIN veterinarios vet ON v.id_veterinario = vet.id_veterinario
+            WHERE v.id_pet = ?
 
-        // 3. Unificar as listas e organizar a ordem cronológica
-        const historicoCompleto = [
-            ...vacinas.map(v => ({ categoria: 'Vacina', nome: v.nome, data: v.data_registro })),
-            ...medicamentos.map(m => ({ categoria: 'Medicação', nome: m.nome, data: m.data_registro })),
-            ...prontuarios.map(p => ({ categoria: 'Exame/Consulta', nome: p.nome, data: p.data_registro }))
-        ].sort((a, b) => {
-            const dataA = a.data ? new Date(a.data).getTime() : 0;
-            const dataB = b.data ? new Date(b.data).getTime() : 0;
-            return dataB - dataA; 
-        });
+            UNION ALL
+            -- Repita para Medicamentos e Prontuário adicionando , m.id_dataset e , p.id_dataset respectivamente
+            SELECT 
+                'Medicação' AS categoria,
+                m.nome_medicamento AS nome,
+                m.data_aplicacao AS data,
+                vet.nome AS veterinario,
+                m.id_dataset
+            FROM medicamentos m
+            LEFT JOIN veterinarios vet ON m.id_veterinario = vet.id_veterinario
+            WHERE m.id_pet = ?
 
-        res.status(200).json(historicoCompleto);
+            ORDER BY data DESC
+        `;
+
+        const [rows] = await pool.query(query, [petId, petId, petId]);
+        res.status(200).json(rows);
+
     } catch (error) {
         console.error("Erro ao carregar histórico:", error);
         res.status(500).json({ message: 'Erro interno ao consultar banco de dados.' });

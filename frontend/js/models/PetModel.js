@@ -58,4 +58,25 @@ export class PetModel {
         
         return data;
     }
+
+    async deletePet(petId) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/pets/${petId}`, {
+            method: 'DELETE',
+            headers: { 
+                'Authorization': `Bearer ${token}` 
+            }
+        });
+
+        if (!response.ok) {
+            let errorMessage = 'Erro ao excluir o pet.';
+            try {
+                const data = await response.json();
+                errorMessage = data.message || errorMessage;
+            } catch (e) {}
+            throw new Error(errorMessage);
+        }
+
+        try { return await response.json(); } catch (e) { return true; }
+    }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petto - Meus Agendamentos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/agendarConsulta.css"> </head>
+<body>
+
+<div class="mobile-frame">
+    <header class="header">
+        <button id="btn-back" class="btn-back" onclick="window.history.back()">
+            <i class="fa-solid fa-arrow-left"></i> Voltar
+        </button>
+        <h1>Agendamentos</h1>
+    </header>
+
+    <main class="content">
+        <div class="card calendar-card">
+            <div class="month-header">
+                <i class="fa-solid fa-chevron-left" id="prev-month"></i>
+                <span id="month-display">Mês Ano</span>
+                <i class="fa-solid fa-chevron-right" id="next-month"></i>
+            </div>
+            <div class="weekdays">
+                <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+            </div>
+            <div class="days-grid" id="days-container"></div>
+        </div>
+
+        <div id="appointment-details" class="card" style="margin-top: 20px; display: none;">
+            <h3>Detalhes da Consulta</h3>
+            <p id="det-info">Selecione uma data marcada.</p>
+        </div>
+    </main>
+</div>
+
+<script type="module" src="../js/meusAgendamentos.js"></script>
+</body>
+</html>
