@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Petto - Editar Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/editarPet.css">
+</head>
+<body>
+    <div class="mobile-frame">
+        <header class="header">
+            <button class="btn-back" onclick="window.location.href='../dashboard.html'">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1>Editar Pet</h1>
+            <div style="width: 40px;"></div> 
+        </header>
+
+        <main class="content">
+            <div id="native-pic-loader" style="display: none;" class="loader-overlay">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <p>Processando foto...</p>
+            </div>
+
+            <div class="edit-photo-container">
+                <div class="photo-wrapper" onclick="openBottomSheet('sheet-foto')">
+                    <img id="edit-photo-preview" src="../../assets/image/cachorro.png" alt="Foto do Pet">
+                    <div class="camera-badge"><i class="fa-solid fa-camera"></i></div>
+                </div>
+            </div>
+
+            <form id="form-edit-pet" class="edit-form">
+                <div class="input-group">
+                    <label>Nome do Pet</label>
+                    <input type="text" id="edit-nome" placeholder="Nome">
+                </div>
+
+                <div class="input-group">
+                    <label>Raça</label>
+                    <button type="button" class="custom-select" onclick="openBottomSheet('sheet-raca')">
+                        <span id="txt-raca">Selecione...</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label>Data de Nascimento</label>
+                    <input type="date" id="edit-nascimento">
+                </div>
+
+                <div class="input-group">
+                    <label>Peso (kg)</label>
+                    <input type="number" id="edit-peso" step="0.1" placeholder="Ex: 5.5">
+                </div>
+
+                <div class="input-group">
+                    <label>Cor / Pelagem</label>
+                    <input type="text" id="edit-cor" placeholder="Ex: Preto e Branco">
+                </div>
+
+                <button type="submit" class="btn-save" id="btn-salvar">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar Alterações
+                </button>
+            </form>
+        </main>
+
+        <div class="overlay" id="overlay" onclick="closeBottomSheet()"></div>
+
+        <div class="bottom-sheet" id="sheet-foto">
+            <div class="sheet-handle"></div>
+            <h3 class="sheet-title">Adicionar Foto</h3>
+            <div style="display: flex; flex-direction: column; gap: 15px; padding: 0 20px 20px 20px;">
+                <label class="btn-primary sheet-btn" for="input-camera">
+                    <i class="fa-solid fa-camera"></i> Tirar Foto
+                </label>
+                <label class="btn-secondary sheet-btn" for="input-gallery">
+                    <i class="fa-regular fa-image"></i> Escolher da Galeria
+                </label>
+            </div>
+            <input type="file" id="input-camera" accept="image/*" capture="environment" style="display: none;">
+            <input type="file" id="input-gallery" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="bottom-sheet" id="sheet-raca">
+            <div class="sheet-handle"></div>
+            <h3 class="sheet-title">Selecione a Raça</h3>
+            <input type="text" class="sheet-search" id="search-raca" placeholder="Pesquisar raça..." autocomplete="off"/>
+            <ul class="sheet-list" id="lista-racas">
+                <li><span style="color:#888;">Carregando raças...</span></li>
+            </ul>
+            <button type="button" class="btn-primary sheet-confirm" onclick="closeBottomSheet()">Fechar</button>
+        </div>
+    </div>
+    
+    <script type="module" src="../js/editarPet.js"></script>
+</body>
+</html>

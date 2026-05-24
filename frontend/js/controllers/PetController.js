@@ -22,13 +22,8 @@ export class PetController {
                 pets,
                 (petId) => { window.location.href = `./pets/historicoPet.html?petId=${petId}`; },
                 (petId) => { 
-                    Swal.fire({
-                        title: 'Em breve!',
-                        text: 'A tela de edição de pets está em desenvolvimento.',
-                        icon: 'info',
-                        confirmButtonColor: '#4890F0'
-                    });
-                },
+                        window.location.href = `./pets/editarPet.html?id=${petId}`; 
+                    },
                 (petId, petNome) => {
                     Swal.fire({
                         title: `Excluir ${petNome}?`,
@@ -59,11 +54,15 @@ export class PetController {
     }
 
     gerenciarPaginasDePerfil() {
-        const path = window.location.pathname;
-        if (path.includes('historicoPet.html')) {
-            this.loadHistoricoPet();
-        }
+    const path = window.location.pathname;
+    if (path.includes('historicoPet.html')) {
+        this.loadHistoricoPet();
     }
+    // Adicione esta checagem para ativar a tela de edição nativamente pelo MVC:
+    if (path.includes('editarPet.html')) {
+        this.loadEditarPet();
+    }
+}
 
     async loadHistoricoPet() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -194,93 +193,75 @@ export class PetController {
 
         document.getElementById('overlay')?.addEventListener('click', window.closeBottomSheet);
 
-        window.handlePhotoUpload = (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
+        // Remova o FileReader e use createObjectURL
+    window.handlePhotoUpload = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
 
-            // Limite de 25MB
-            if (file.size > 25 * 1024 * 1024) {
-                alert('A imagem é muito grande. O limite máximo é de 25MB.');
-                return;
+        if (file.size > 25 * 1024 * 1024) {
+            alert('A imagem é muito grande. O limite máximo é de 25MB.');
+            return;
+        }
+
+        // Mostra o loader
+        const loader = document.getElementById('native-pic-loader');
+        if (loader) loader.style.display = 'flex';
+
+        // 1. Cria uma URL temporária super rápida direto do arquivo
+        const objectURL = URL.createObjectURL(file);
+        const img = new Image();
+
+        img.onload = () => {
+            // 2. Comprime a imagem no Canvas
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 800; 
+            const MAX_HEIGHT = 800; 
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+            } else {
+                if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
             }
 
-            // 1. Cria e mostra o Loader Nativo
-            let loader = document.getElementById('native-pic-loader');
-            if (!loader) {
-                loader = document.createElement('div');
-                loader.id = 'native-pic-loader';
-                loader.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(18, 18, 18, 0.9); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-family: "Poppins", sans-serif; backdrop-filter: blur(5px);';
-                loader.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" style="font-size: 50px; color: #4890F0; margin-bottom: 20px;"></i><h3 style="margin:0; font-weight: 500;">Processando foto...</h3><p style="color:#aaa; font-size: 14px; margin-top:5px;">Aguarde um momento</p>';
-                document.body.appendChild(loader);
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // 3. Gera o Base64 apenas da imagem já comprimida (muito mais leve)
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+            // 4. Atualiza a UI
+            const previewImage = document.getElementById('pet-photo-preview');
+            const placeholder = document.getElementById('photo-placeholder');
+            
+            if (previewImage && placeholder) {
+                previewImage.src = compressedBase64;
+                previewImage.style.display = 'block';
+                placeholder.style.display = 'none';
+                sessionStorage.setItem('tempFotoBase64', compressedBase64);
             }
-            loader.style.display = 'flex';
 
-            // 2. Timeout para a tela conseguir renderizar o "Carregando"
-            setTimeout(() => {
-                // Voltamos para o FileReader, pois ele é imune a bloqueios de segurança do celular
-                const reader = new FileReader();
-                
-                reader.onload = (e) => {
-                    const img = new Image();
-                    
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 800; 
-                        const MAX_HEIGHT = 800; 
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > height) {
-                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                        } else {
-                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-
-                        const previewImage = document.getElementById('pet-photo-preview');
-                        const placeholder = document.getElementById('photo-placeholder');
-                        
-                        if (previewImage && placeholder) {
-                            previewImage.src = compressedBase64;
-                            previewImage.style.display = 'block';
-                            placeholder.style.display = 'none';
-                            sessionStorage.setItem('tempFotoBase64', compressedBase64);
-                        }
-
-                        // Limpeza de memória
-                        canvas.width = 0;
-                        canvas.height = 0;
-                        img.src = '';
-                        
-                        // Finaliza
-                        loader.style.display = 'none';
-                        window.closeBottomSheet();
-                    };
-
-                    img.onerror = () => {
-                        loader.style.display = 'none';
-                        alert('Formato de imagem não suportado pela câmera do dispositivo.');
-                    };
-
-                    img.src = e.target.result;
-                };
-
-                reader.onerror = () => {
-                    loader.style.display = 'none';
-                    alert('Erro ao ler a foto do celular. Tente novamente.');
-                };
-
-                // Inicia a leitura do arquivo fisicamente
-                reader.readAsDataURL(file);
-                
-            }, 150);
+            // 5. Limpeza de memória crucial para PWA em celulares
+            URL.revokeObjectURL(objectURL);
+            canvas.width = 0;
+            canvas.height = 0;
+            img.src = '';
+            
+            if (loader) loader.style.display = 'none';
+            window.closeBottomSheet();
         };
+
+        img.onerror = () => {
+            if (loader) loader.style.display = 'none';
+            alert('Erro ao processar a imagem.');
+        };
+
+        // Dispara o carregamento da imagem usando a URL instantânea
+        img.src = objectURL;
+    };
 
         document.querySelector('#sheet-foto .btn-primary')?.addEventListener('click', () => { document.getElementById('input-camera').click(); });
         document.querySelector('#sheet-foto .btn-secondary')?.addEventListener('click', () => { document.getElementById('input-gallery').click(); });

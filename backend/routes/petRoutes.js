@@ -4,7 +4,7 @@ const pool = require('../config/db');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto'); // <-- Adicionado para gerar hashes seguros
+const crypto = require('crypto');
 
 // Middleware de proteção nativo do seu app
 const authenticateToken = (req, res, next) => {
@@ -61,35 +61,28 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
     const id_usuario = req.user.id; 
     const connection = await pool.getConnection();
 
-    // LÓGICA SEGURA DE SALVAMENTO DA FOTO
     let fotoUrlSalva = null;
     
     if (fotoBase64) {
         try {
-            // Remove o cabeçalho do base64
             const base64Data = fotoBase64.replace(/^data:image\/\w+;base64,/, "");
             const buffer = Buffer.from(base64Data, 'base64');
 
-            // Trava de segurança: Arquivo de no máximo 2MB no backend
             if (buffer.length > 2 * 1024 * 1024) {
                 return res.status(400).json({ message: "A imagem excede o limite de tamanho permitido no servidor." });
             }
 
-            // Cria um nome em hash aleatório e força a extensão jpeg
             const hash = crypto.randomBytes(16).toString('hex');
             const nomeArquivo = `${hash}.jpeg`;
             
-            // Diretório de uploads no frontend
             const pastaUploads = path.join(__dirname, '../../frontend/uploads');
             if (!fs.existsSync(pastaUploads)) {
                 fs.mkdirSync(pastaUploads, { recursive: true });
             }
             
-            // Grava o arquivo físico
             const uploadPath = path.join(pastaUploads, nomeArquivo);
             fs.writeFileSync(uploadPath, buffer);
             
-            // URL que será gravada no banco
             fotoUrlSalva = '/uploads/' + nomeArquivo;
             
         } catch (err) {
@@ -101,7 +94,6 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
     try {
         await connection.beginTransaction();
 
-        // 1. Insere na tabela 'pets' com a foto
         const sqlPet = `
             INSERT INTO pets 
             (nome, id_usuario, especie, raca, idade_valor, idade_unidade, idade_meses, peso, sexo, cor, data_nascimento, foto_url) 
@@ -115,7 +107,6 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
 
         const id_pet = petResult.insertId;
 
-        // 2. Insere a lista de vacinas se houver
         if (vacinas && vacinas.length > 0) {
             const sqlVacina = `INSERT INTO vacinas (id_dataset, nome, data_aplicacao, proxima_aplicacao, data_desconhecida, id_pet) VALUES (?, ?, ?, '0000-00-00', ?, ?)`;
             for (const v of vacinas) {
@@ -123,7 +114,6 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
             }
         }
 
-        // 3. Insere a lista de medicações se houver
         if (medicamentos && medicamentos.length > 0) {
             const sqlMedicamento = `INSERT INTO medicamentos (id_dataset, id_pet, nome_medicamento, data_aplicacao, data_desconhecida) VALUES (?, ?, ?, ?, ?)`;
             for (const m of medicamentos) {
@@ -135,11 +125,9 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
         res.status(201).json({ message: 'Pet e histórico médico salvos com sucesso!' });
 
     } catch (error) {
-        // Se a transação SQL falhar, desfazemos tudo
         await connection.rollback();
         console.error(error);
         
-        // Limpeza (Rollback Físico): Apaga a foto que acabou de ser salva para não deixar lixo no servidor
         if (fotoUrlSalva) {
             const fileToRemove = path.join(__dirname, '../../frontend', fotoUrlSalva);
             if (fs.existsSync(fileToRemove)) fs.unlinkSync(fileToRemove);
@@ -151,13 +139,12 @@ router.post('/cadastro-completo', authenticateToken, async (req, res) => {
     }
 });
 
-// Rota 3: Excluir pet (Já no seu petRoutes.js)
+// Rota 3: Excluir pet
 router.delete('/:id', authenticateToken, async (req, res) => {
     const petId = req.params.id;
     const userId = req.user.id;
 
     try {
-        // 1. Busca a URL da foto para deletar do servidor
         const [pet] = await pool.execute('SELECT foto_url FROM pets WHERE id_pet = ? AND id_usuario = ?', [petId, userId]);
         
         if (pet.length === 0) {
@@ -166,15 +153,12 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 
         const fotoUrl = pet[0].foto_url;
 
-        // 2. Deleta o pet do banco de dados (o CASCADE apagará vacinas, medicamentos e consultas)
         await pool.execute('DELETE FROM pets WHERE id_pet = ? AND id_usuario = ?', [petId, userId]);
 
-        // 3. Deleta o arquivo de imagem fisicamente do servidor
         if (fotoUrl && fotoUrl.startsWith('/uploads/')) {
-            // Volta duas pastas (sai de routes e da raiz do backend) e entra no frontend
             const filePath = path.join(__dirname, '../../frontend', fotoUrl);
             if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath); // Apaga o arquivo físico
+                fs.unlinkSync(filePath); 
             }
         }
 
@@ -212,7 +196,6 @@ router.get('/:id/historico', authenticateToken, async (req, res) => {
     const userId = parseInt(req.user.id, 10);
 
     try {
-        // 1. Validação de segurança
         const sqlValidacao = `
             SELECT p.id_pet 
             FROM pets p 
@@ -225,20 +208,18 @@ router.get('/:id/historico', authenticateToken, async (req, res) => {
             return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para visualizar este histórico.' });
         }
 
-        // 2. Query Unificada (pool.query evita o travamento do MySQL)
         const query = `
             SELECT 
                 'Vacina' AS categoria,
                 v.nome AS nome,
                 v.data_aplicacao AS data,
                 vet.nome AS veterinario,
-                v.id_dataset  -- Verifique se esta coluna está aqui
+                v.id_dataset  
             FROM vacinas v
             LEFT JOIN veterinarios vet ON v.id_veterinario = vet.id_veterinario
             WHERE v.id_pet = ?
 
             UNION ALL
-            -- Repita para Medicamentos e Prontuário adicionando , m.id_dataset e , p.id_dataset respectivamente
             SELECT 
                 'Medicação' AS categoria,
                 m.nome_medicamento AS nome,

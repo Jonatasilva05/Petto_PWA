@@ -2,6 +2,7 @@
 │   ├── .gitignore
 │   ├── criarEstrutura.py
 │   ├── estrutura.txt
+│   ├── Gemini_Generated_Image_j2jsjlj2jsjlj2js.png
 │   ├── nota.txt
 │   ├── backend/
 │   │   ├── .env
@@ -186,6 +187,7 @@
 │   │   │   │   ├── confirmSenha.css
 │   │   │   │   ├── dadosPerfil.css
 │   │   │   │   ├── dashboard.css
+│   │   │   │   ├── editarPet.css
 │   │   │   │   ├── gerenciaArquivoPet.css
 │   │   │   │   ├── historicoPet.css
 │   │   │   │   ├── mapa.css
@@ -219,6 +221,7 @@
 │   │   │   │   ├── configPerfil.js
 │   │   │   │   ├── dadosPerfil.js
 │   │   │   │   ├── dashboard.js
+│   │   │   │   ├── editarPet.js
 │   │   │   │   ├── exportCartPerfil.js
 │   │   │   │   ├── historicoPet.js
 │   │   │   │   ├── mapa.js
@@ -243,6 +246,7 @@
 │   │   │   ├── pets/
 │   │   │   │   ├── acompanhaPet.html
 │   │   │   │   ├── agendarConsulta.html
+│   │   │   │   ├── editarPet.html
 │   │   │   │   ├── gerenciaArquivoPet.html
 │   │   │   │   ├── historicoPet.html
 │   │   │   │   ├── meusAgendamentos.html
