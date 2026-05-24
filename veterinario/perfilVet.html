@@ -28,19 +28,10 @@
         }
     </script>
     <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #232333; 
-            border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #3a3a4c;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #232333; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3a3a4c; }
     </style>
 </head>
 <body class="bg-dark-bg text-gray-300 font-sans h-screen flex overflow-hidden selection:bg-brand selection:text-black">
@@ -69,27 +60,15 @@
             <a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 rounded-lg hover:text-white hover:bg-dark-panel transition-colors">
                 <i class="ph ph-file-text text-xl"></i> Prontuários
             </a>
-            <a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 rounded-lg hover:text-white hover:bg-dark-panel transition-colors">
-                <i class="ph ph-syringe text-xl"></i> Vacinas
-            </a>
-            <hr class="border-dark-border my-2 mx-2">
-            <a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 rounded-lg hover:text-white hover:bg-dark-panel transition-colors">
-                <i class="ph ph-chat-teardrop-text text-xl"></i> Mensagens
-            </a>
         </nav>
     </aside>
 
     <main class="flex-1 flex flex-col min-w-0 bg-dark-bg">
         
         <header class="h-16 border-b border-dark-border flex items-center justify-between px-8 bg-dark-bg shrink-0">
-            <h1 class="text-white text-xl font-medium">Meu Perfil</h1>
+            <h1 class="text-white text-xl font-medium">Configurações da Conta</h1>
             
             <div class="flex items-center gap-6">
-                <div class="relative hidden md:block">
-                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                    <input type="text" placeholder="Buscar..." class="bg-dark-panel border border-dark-border rounded-lg pl-9 pr-4 py-1.5 text-sm focus:outline-none focus:border-brand text-white w-64 transition-colors">
-                </div>
-                
                 <button class="text-gray-400 hover:text-white relative transition-colors">
                     <i class="ph ph-bell text-xl"></i>
                     <span class="absolute top-0 right-0 w-2 h-2 bg-brand rounded-full border border-dark-bg"></span>
@@ -100,133 +79,156 @@
             </div>
         </header>
 
-        <div class="flex-1 p-8 overflow-y-auto custom-scrollbar">
+        <div class="flex-1 overflow-y-auto custom-scrollbar pb-12">
             
-            <div class="flex items-center gap-3 mb-8">
-                <i class="ph-bold ph-user-circle text-brand text-2xl"></i>
-                <h2 class="text-white text-xl font-semibold">Configurações da Conta</h2>
+            <div class="h-40 bg-gradient-to-r from-[#051310] via-[#0a1a15] to-dark-panel border-b border-dark-border relative">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#00d68f_1px,transparent_1px)] [background-size:20px_20px]"></div>
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-8 max-w-6xl">
-                
-                <div class="w-full lg:w-1/3 flex flex-col gap-6">
-                    <div class="bg-dark-panel border border-dark-border rounded-xl p-6 text-center">
-                        <div class="relative inline-block mb-4 group cursor-pointer">
-                            <div class="w-24 h-24 rounded-full bg-[#0a1a15] text-brand border-2 border-brand/30 flex items-center justify-center mx-auto transition-colors group-hover:border-brand">
-                                <span class="text-3xl font-medium">J</span>
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between -mt-12 mb-8 gap-6">
+                    <div class="flex items-end gap-6 relative z-10">
+                        <div class="relative group cursor-pointer">
+                            <div class="w-28 h-28 rounded-2xl bg-dark-bg text-brand border-4 border-dark-bg flex items-center justify-center shadow-xl overflow-hidden">
+                                <div class="w-full h-full bg-dark-panel flex items-center justify-center group-hover:bg-brand/5 transition-colors">
+                                    <span class="text-4xl font-semibold">J</span>
+                                </div>
                             </div>
-                            <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <i class="ph ph-camera text-white text-xl"></i>
+                            <div class="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i class="ph ph-camera text-white text-2xl"></i>
                             </div>
                         </div>
                         
-                        <h3 class="text-white text-xl font-medium mb-1">Dr. Jhon</h3>
-                        <p class="text-brand text-sm font-medium mb-4">Clínico Geral & Cirurgião</p>
-                        
-                        <div class="bg-dark-input rounded-lg p-3 border border-dark-border text-left space-y-3">
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-gray-500">CRMV</span>
-                                <span class="text-gray-300 font-medium">45892-SP</span>
-                            </div>
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-gray-500">Status</span>
-                                <span class="bg-brand/20 text-brand text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Ativo</span>
-                            </div>
+                        <div class="pb-2">
+                            <h2 class="text-white text-2xl font-semibold flex items-center gap-2">
+                                Dr. Jhon <i class="ph-fill ph-seal-check text-brand text-xl"></i>
+                            </h2>
+                            <p class="text-gray-400">CRMV: 45892-SP &bull; Clínico Geral</p>
                         </div>
+                    </div>
+                    
+                    <div class="pb-2 flex gap-3">
+                        <button class="px-4 py-2 bg-dark-panel text-white text-sm font-medium border border-dark-border rounded-lg hover:border-gray-600 transition-colors flex items-center gap-2">
+                            <i class="ph ph-eye text-lg"></i> Ver Perfil Público
+                        </button>
+                        <button class="px-4 py-2 bg-brand text-black text-sm font-medium rounded-lg hover:bg-brand-dark transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(0,214,143,0.2)]">
+                            <i class="ph-bold ph-floppy-disk text-lg"></i> Salvar Alterações
+                        </button>
                     </div>
                 </div>
 
-                <div class="w-full lg:w-2/3 bg-dark-panel border border-dark-border rounded-xl p-6 md:p-8">
+                <div class="flex gap-8 border-b border-dark-border mb-8">
+                    <button class="text-brand border-b-2 border-brand pb-3 text-sm font-medium flex items-center gap-2">
+                        <i class="ph-fill ph-identification-card text-lg"></i> Dados Gerais
+                    </button>
+                    <button class="text-gray-400 hover:text-white border-b-2 border-transparent pb-3 text-sm font-medium flex items-center gap-2 transition-colors">
+                        <i class="ph ph-map-pin text-lg"></i> Endereço
+                    </button>
+                    <button class="text-gray-400 hover:text-white border-b-2 border-transparent pb-3 text-sm font-medium flex items-center gap-2 transition-colors">
+                        <i class="ph ph-shield-check text-lg"></i> Segurança e Dispositivos
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     
-                    <form class="space-y-8">
+                    <div class="lg:col-span-2 space-y-6">
                         
-                        <div>
-                            <h4 class="text-white text-base font-medium border-b border-dark-border pb-2 mb-4">Informações Pessoais</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-dark-panel border border-dark-border rounded-xl p-6">
+                            <h3 class="text-white font-medium mb-5">Informações Básicas</h3>
+                            
+                            <div class="grid grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-white text-sm mb-1.5">Nome Completo</label>
-                                    <input type="text" value="Dr. Jhon" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
+                                    <label class="block text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2">Nome de Exibição</label>
+                                    <input type="text" value="Dr. Jhon" class="w-full bg-dark-input border border-dark-border rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-white text-sm mb-1.5">E-mail Profissional</label>
-                                    <input type="email" value="contato@vetcare.com.br" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
+                                    <label class="block text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2">CRMV</label>
+                                    <input type="text" value="45892-SP" class="w-full bg-dark-input border border-dark-border rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
                                 </div>
-                                <div>
-                                    <label class="block text-white text-sm mb-1.5">Celular / WhatsApp</label>
-                                    <input type="text" value="(16) 99999-0000" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
+                                <div class="col-span-2">
+                                    <label class="block text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2">E-mail Profissional</label>
+                                    <input type="email" value="contato@vetcare.com.br" class="w-full bg-dark-input border border-dark-border rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2">Biografia</label>
+                                    <textarea rows="3" class="w-full bg-dark-input border border-dark-border rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand transition-colors resize-none leading-relaxed">Médico veterinário atuando em Taquaritinga e região. Especialista em garantir a saúde e o bem-estar dos animais, com atendimento focado em clínica geral e diagnóstico rápido.</textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <div>
-                            <h4 class="text-white text-base font-medium border-b border-dark-border pb-2 mb-4">Dados Profissionais</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-white text-sm mb-1.5">CRMV</label>
-                                    <input type="text" value="45892-SP" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
+                        <div class="bg-dark-panel border border-dark-border rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-5">
+                                <h3 class="text-white font-medium flex items-center gap-2">
+                                    <i class="ph-fill ph-lock-key text-brand"></i> Controle de Segurança
+                                </h3>
+                                <span class="bg-green-900/30 text-brand text-xs px-2.5 py-1 rounded-full border border-green-900/50">Proteção Ativa</span>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-dark-input border border-dark-border rounded-lg">
+                                    <div>
+                                        <h4 class="text-white text-sm font-medium mb-1">Autenticação em Dois Fatores (2FA)</h4>
+                                        <p class="text-gray-500 text-xs">Exige um código extra para acessar seu banco de dados e app.</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-dark-border rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                                    </label>
                                 </div>
-                                <div>
-                                    <label class="block text-white text-sm mb-1.5">Especialidade Principal</label>
-                                    <div class="relative">
-                                        <select class="w-full bg-dark-input border border-dark-border rounded-lg pl-3 pr-8 py-2.5 text-sm text-white appearance-none focus:outline-none focus:border-brand cursor-pointer">
-                                            <option selected>Clínica Geral</option>
-                                            <option>Cirurgia</option>
-                                            <option>Dermatologia</option>
-                                            <option>Oftalmologia</option>
-                                        </select>
-                                        <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+
+                                <div class="flex items-center justify-between p-4 bg-dark-input border border-dark-border rounded-lg">
+                                    <div>
+                                        <h4 class="text-white text-sm font-medium mb-1">Restrição de IP (Roteador Wi-Fi)</h4>
+                                        <p class="text-gray-500 text-xs">Bloquear acessos fora da rede configurada da clínica.</p>
+                                    </div>
+                                    <button class="text-sm text-brand hover:text-brand-dark transition-colors font-medium">Configurar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-dark-panel border border-dark-border rounded-xl p-6">
+                            <h3 class="text-white font-medium mb-1">Dispositivos Conectados</h3>
+                            <p class="text-gray-500 text-xs mb-5">Gerencie o acesso do seu celular e notebook.</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-dark-input border border-dark-border flex items-center justify-center shrink-0 text-gray-400">
+                                        <i class="ph ph-laptop text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-white text-sm font-medium truncate">Samsung Book</h4>
+                                        <p class="text-brand text-xs mt-0.5 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-brand rounded-full inline-block"></span> Sessão atual</p>
+                                        <p class="text-gray-500 text-xs mt-0.5">Taquaritinga, SP &bull; IP: 192.168.1.10</p>
                                     </div>
                                 </div>
-                                <div class="md:col-span-2">
-                                    <label class="block text-white text-sm mb-1.5">Mini Biografia (Visível para tutores)</label>
-                                    <textarea rows="3" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors resize-none">Médico veterinário apaixonado por pequenos animais, atuando na região de Taquaritinga. Especialista em garantir o bem-estar e a saúde do seu melhor amigo.</textarea>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div>
-                            <h4 class="text-white text-base font-medium border-b border-dark-border pb-2 mb-4">Endereço de Atendimento</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="md:col-span-2">
-                                    <label class="block text-white text-sm mb-1.5">Nome da Clínica / Hospital</label>
-                                    <input type="text" value="Clínica VetCare" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
-                                </div>
-                                <div>
-                                    <label class="block text-white text-sm mb-1.5">CEP</label>
-                                    <input type="text" value="15900-000" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label class="block text-white text-sm mb-1.5">Cidade</label>
-                                    <input type="text" value="Taquaritinga" class="w-full bg-dark-input border border-dark-border rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand transition-colors">
-                                </div>
-                                <div>
-                                    <label class="block text-white text-sm mb-1.5">Estado</label>
-                                    <div class="relative">
-                                        <select class="w-full bg-dark-input border border-dark-border rounded-lg pl-3 pr-8 py-2.5 text-sm text-white appearance-none focus:outline-none focus:border-brand cursor-pointer">
-                                            <option selected>São Paulo (SP)</option>
-                                            <option>Minas Gerais (MG)</option>
-                                            <option>Rio de Janeiro (RJ)</option>
-                                        </select>
-                                        <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                                <hr class="border-dark-border">
+
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-dark-input border border-dark-border flex items-center justify-center shrink-0 text-gray-400">
+                                        <i class="ph ph-device-mobile text-xl"></i>
                                     </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-white text-sm font-medium truncate">App Mobile (Android)</h4>
+                                        <p class="text-gray-400 text-xs mt-0.5">Visto por último há 2 horas</p>
+                                    </div>
+                                    <button class="text-red-900/80 hover:text-red-500 transition-colors mt-1" title="Desconectar celular">
+                                        <i class="ph ph-x-circle text-lg"></i>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="flex justify-end gap-3 pt-6 border-t border-dark-border mt-8">
-                            <button type="button" class="px-6 py-2.5 rounded-lg text-sm font-medium text-white border border-dark-border hover:bg-dark-border transition-colors">
-                                Descartar Alterações
-                            </button>
-                            <button type="button" class="px-6 py-2.5 rounded-lg text-sm font-medium text-black bg-brand hover:bg-brand-dark transition-colors flex items-center gap-2">
-                                <i class="ph-bold ph-floppy-disk text-lg"></i> Salvar Perfil
+                            <button class="w-full mt-6 py-2.5 bg-dark-input border border-dark-border text-gray-300 text-sm font-medium rounded-lg hover:text-white hover:border-gray-600 transition-colors">
+                                Desconectar todos os outros
                             </button>
                         </div>
-
-                    </form>
+                    </div>
 
                 </div>
             </div>
-
         </div>
     </main>
 
