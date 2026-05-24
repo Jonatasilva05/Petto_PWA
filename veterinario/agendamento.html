@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+    
+    <title>VetCare - Agendamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#00D09E', 
+                            dark: '#00D09E1a', 
+                        },
+                        dark: {
+                            900: '#060B0E', 
+                            800: '#11171A', 
+                            700: '#1B2328', 
+                            border: '#242D32' 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            color-scheme: dark; /* Força os inputs nativos (como o de data) a usarem o tema escuro */
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060B0E; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #242D32; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200 font-sans h-screen flex overflow-hidden selection:bg-brand selection:text-dark-900">
+
+    <aside class="w-64 border-r border-dark-border bg-dark-900 flex flex-col justify-between h-full z-10 shrink-0">
+        <div class="flex-1 overflow-y-auto">
+            <div class="h-20 flex items-center px-6 gap-3 shrink-0">
+                <div class="w-8 h-8 rounded bg-brand flex items-center justify-center text-dark-900">
+                    <i class="ph-fill ph-paw-print text-xl"></i>
+                </div>
+                <span class="text-white font-semibold text-lg">VetCare</span>
+            </div>
+
+            <nav class="px-4 space-y-2 mt-4 pb-4">
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-squares-four text-xl"></i>
+                    Dashboard
+                </a>
+                <a href="tutores.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-users text-xl"></i>
+                    Tutores
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-paw-print text-xl"></i>
+                    Pets
+                </a>
+                
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-dark border border-brand/30 text-brand font-medium">
+                    <i class="ph ph-calendar-blank text-xl"></i>
+                    Agendamento
+                    <i class="ph ph-caret-right ml-auto text-sm"></i>
+                </a>
+                
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-file-text text-xl"></i>
+                    Prontuários
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-syringe text-xl"></i>
+                    Vacinas
+                </a>
+                
+                <div class="h-px bg-dark-border my-2 mx-2"></div>
+                
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-chart-line-up text-xl"></i>
+                    Procedimentos
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-chats text-xl"></i>
+                    Chat
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-user-circle text-xl"></i>
+                    Perfil
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-dark-border bg-dark-900 shrink-0">
+            <div class="flex flex-col gap-3">
+                <button class="w-full flex justify-center py-2 text-gray-500 hover:text-white transition-colors">
+                    <i class="ph ph-caret-left text-lg"></i>
+                </button>
+                <div class="flex items-center justify-center gap-2 text-brand text-xs font-medium px-3 py-2.5 bg-brand-dark rounded-lg border border-brand/20 cursor-default">
+                    <i class="ph-fill ph-shield-check text-sm"></i>
+                    Ambiente Isolado
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <header class="h-20 border-b border-dark-border flex items-center justify-between px-8 bg-dark-900 shrink-0">
+            <h1 class="text-white text-xl font-semibold">Agendamento</h1>
+            
+            <div class="flex items-center gap-6">
+                <div class="relative">
+                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" placeholder="Buscar..." class="bg-dark-800 border border-dark-border text-sm rounded-lg pl-10 pr-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-brand w-64 transition-colors">
+                </div>
+
+                <button class="relative text-gray-400 hover:text-white transition-colors">
+                    <i class="ph ph-bell text-xl"></i>
+                    <span class="absolute 0 right-0 w-2 h-2 bg-brand rounded-full border border-dark-900"></span>
+                </button>
+                <button class="w-8 h-8 rounded-full bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                    <i class="ph ph-user text-lg"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <i class="ph ph-calendar-blank text-brand text-2xl"></i>
+                        <h2 class="text-white text-lg font-medium">Agendamento</h2>
+                        <span class="px-2.5 py-0.5 rounded-full bg-dark-800 border border-dark-border text-gray-400 text-xs">5 consultas</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <div class="relative w-full sm:w-auto">
+                            <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                            <input type="text" placeholder="Buscar pet..." class="w-full sm:w-64 bg-dark-800 border border-dark-border text-sm rounded-lg pl-10 pr-4 py-2.5 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-brand transition-colors">
+                        </div>
+                        
+                        <div class="relative w-full sm:w-auto">
+                            <select class="appearance-none w-full sm:w-32 bg-dark-800 border border-dark-border text-gray-300 text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-brand transition-colors cursor-pointer">
+                                <option>Todos</option>
+                                <option>Agendadas</option>
+                                <option>Confirmadas</option>
+                            </select>
+                            <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                        </div>
+
+                        <button id="openModalAgendamentoBtn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand text-dark-900 px-4 py-2.5 rounded-lg font-medium hover:bg-brand/90 transition-colors">
+                            <i class="ph ph-plus font-bold"></i>
+                            Nova Consulta
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-dark-800 border border-dark-border rounded-xl p-5 mb-6 flex items-center justify-between shadow-sm">
+                    <button class="w-10 h-10 rounded-lg hover:bg-dark-700 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                        <i class="ph ph-caret-left text-lg"></i>
+                    </button>
+                    
+                    <div class="text-center">
+                        <h3 class="text-white font-semibold text-lg">Sábado, 23 De Maio De 2026</h3>
+                        <p class="text-gray-500 text-sm mt-0.5">3 consultas agendadas</p>
+                    </div>
+
+                    <button class="w-10 h-10 rounded-lg hover:bg-dark-700 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                        <i class="ph ph-caret-right text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    
+                    <div class="bg-dark-800 border border-dark-border rounded-xl p-6 flex flex-col md:flex-row gap-6 justify-between items-start hover:border-dark-700 transition-colors shadow-sm">
+                        
+                        <div class="flex gap-6 w-full">
+                            <div class="flex flex-col items-start gap-1.5 min-w-[80px] pt-0.5">
+                                <span class="text-brand text-3xl font-bold tracking-tight">09:00</span>
+                                <span class="px-2.5 py-0.5 rounded text-[10px] font-medium bg-[#1e3a8a]/30 text-[#60a5fa] border border-[#1e3a8a]/50">Agendada</span>
+                            </div>
+
+                            <div class="flex flex-col gap-2.5 flex-1">
+                                <div class="flex items-center gap-3">
+                                    <i class="ph ph-paw-print text-brand text-xl"></i>
+                                    <h3 class="text-white font-medium text-lg">Thor</h3>
+                                    <span class="px-2 py-0.5 rounded bg-dark-900 border border-dark-border text-gray-400 text-xs">Consulta</span>
+                                </div>
+                                
+                                <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-400 mt-1">
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph ph-user"></i>
+                                        <span>Tutor: Maria Silva</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph ph-user"></i>
+                                        <span>Vet: Dr. Roberto Mendes</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-gray-500 text-sm italic mt-1">Consulta de rotina</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 shrink-0 mt-4 md:mt-0 md:pt-1">
+                            <div class="relative">
+                                <select class="appearance-none bg-dark-900 border border-dark-border text-gray-300 text-sm rounded-lg pl-4 pr-10 py-2 focus:outline-none focus:border-brand cursor-pointer">
+                                    <option selected>Agendada</option>
+                                    <option>Confirmada</option>
+                                    <option>Em Andamento</option>
+                                    <option>Finalizada</option>
+                                </select>
+                                <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button class="text-gray-400 hover:text-white transition-colors p-2"><i class="ph ph-pencil-simple text-lg"></i></button>
+                                <button class="text-gray-400 hover:text-red-400 transition-colors p-2"><i class="ph ph-trash text-lg text-red-500/80"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-dark-800 border border-dark-border rounded-xl p-6 flex flex-col md:flex-row gap-6 justify-between items-start hover:border-dark-700 transition-colors shadow-sm">
+                        
+                        <div class="flex gap-6 w-full">
+                            <div class="flex flex-col items-start gap-1.5 min-w-[80px] pt-0.5">
+                                <span class="text-brand text-3xl font-bold tracking-tight">10:30</span>
+                                <span class="px-2.5 py-0.5 rounded text-[10px] font-medium bg-[#064e3b]/30 text-brand border border-[#064e3b]/50">Confirmada</span>
+                            </div>
+
+                            <div class="flex flex-col gap-2.5 flex-1">
+                                <div class="flex items-center gap-3">
+                                    <i class="ph ph-paw-print text-brand text-xl"></i>
+                                    <h3 class="text-white font-medium text-lg">Luna</h3>
+                                    <span class="px-2 py-0.5 rounded bg-dark-900 border border-dark-border text-gray-400 text-xs">Consulta</span>
+                                </div>
+                                
+                                <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-400 mt-1">
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph ph-user"></i>
+                                        <span>Tutor: Maria Silva</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph ph-user"></i>
+                                        <span>Vet: Dra. Fernanda Lima</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-gray-500 text-sm italic mt-1">Verificar coceira na pele</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 shrink-0 mt-4 md:mt-0 md:pt-1">
+                            <div class="relative">
+                                <select class="appearance-none bg-dark-900 border border-dark-border text-gray-300 text-sm rounded-lg pl-4 pr-10 py-2 focus:outline-none focus:border-brand cursor-pointer">
+                                    <option>Agendada</option>
+                                    <option selected>Confirmada</option>
+                                    <option>Em Andamento</option>
+                                    <option>Finalizada</option>
+                                </select>
+                                <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button class="text-gray-400 hover:text-white transition-colors p-2"><i class="ph ph-pencil-simple text-lg"></i></button>
+                                <button class="text-gray-400 hover:text-red-400 transition-colors p-2"><i class="ph ph-trash text-lg text-red-500/80"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modalNovaConsulta" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="bg-[#0B1015] border border-dark-border rounded-xl w-full max-w-xl shadow-2xl overflow-hidden m-4">
+            
+            <div class="flex items-center justify-between p-5 border-b border-dark-border">
+                <h3 class="text-white font-medium text-lg">Nova Consulta</h3>
+                <button id="closeModalAgendamentoBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="ph ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Pet</label>
+                        <div class="relative">
+                            <select class="appearance-none w-full bg-dark-900 border border-brand text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-brand transition-colors cursor-pointer outline-none ring-1 ring-brand/50">
+                                <option value="" disabled selected>Selecione</option>
+                                <option>Thor</option>
+                                <option>Luna</option>
+                                <option>Max</option>
+                            </select>
+                            <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Veterinário</label>
+                        <div class="relative">
+                            <select class="appearance-none w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-brand transition-colors cursor-pointer">
+                                <option value="" disabled selected>Selecione</option>
+                                <option>Dr. Roberto Mendes</option>
+                                <option>Dra. Fernanda Lima</option>
+                            </select>
+                            <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Data</label>
+                        <input type="date" class="w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Horário</label>
+                        <div class="relative">
+                            <select class="appearance-none w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-brand transition-colors cursor-pointer">
+                                <option value="" disabled selected>Selecione</option>
+                                <option>09:00</option>
+                                <option>10:30</option>
+                                <option>14:00</option>
+                                <option>15:30</option>
+                            </select>
+                            <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Tipo</label>
+                        <div class="relative">
+                            <select class="appearance-none w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-brand transition-colors cursor-pointer">
+                                <option selected>Consulta</option>
+                                <option>Retorno</option>
+                                <option>Exame</option>
+                                <option>Cirurgia</option>
+                            </select>
+                            <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Status</label>
+                        <div class="relative">
+                            <select class="appearance-none w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:border-brand transition-colors cursor-pointer">
+                                <option selected>Agendada</option>
+                                <option>Confirmada</option>
+                                <option>Aguardando</option>
+                            </select>
+                            <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+                    <label class="block text-white text-sm mb-1.5">Observações</label>
+                    <textarea rows="3" class="w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors resize-none"></textarea>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 p-5 border-t border-dark-border">
+                <button id="cancelModalAgendamentoBtn" class="px-5 py-2.5 rounded-lg text-white text-sm font-medium border border-dark-border hover:bg-dark-800 transition-colors">
+                    Cancelar
+                </button>
+                <button class="px-5 py-2.5 rounded-lg bg-brand text-dark-900 text-sm font-medium hover:bg-brand/90 transition-colors">
+                    Agendar
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modalNovaConsulta');
+            const openBtn = document.getElementById('openModalAgendamentoBtn');
+            const closeBtn = document.getElementById('closeModalAgendamentoBtn');
+            const cancelBtn = document.getElementById('cancelModalAgendamentoBtn');
+
+            // Proteção contra submissões acidentais
+            const formElements = modal.querySelectorAll('input, select, textarea');
+            formElements.forEach(element => {
+                element.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && element.tagName !== 'TEXTAREA') {
+                        e.preventDefault(); // Previne reload do banco ou notebook
+                    }
+                });
+            });
+
+            function toggleModal() {
+                modal.classList.toggle('hidden');
+            }
+
+            openBtn.addEventListener('click', toggleModal);
+            closeBtn.addEventListener('click', toggleModal);
+            cancelBtn.addEventListener('click', toggleModal);
+
+            // Fechar ao clicar fora
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    toggleModal();
+                }
+            });
+            
+            // Fechar com a tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    toggleModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

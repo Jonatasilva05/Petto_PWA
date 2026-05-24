@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+    
+    <title>VetCare - Tutores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#00D09E', 
+                            dark: '#00D09E1a', 
+                        },
+                        dark: {
+                            900: '#060B0E', 
+                            800: '#11171A', 
+                            700: '#1B2328', 
+                            border: '#242D32' 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060B0E; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #242D32; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200 font-sans h-screen flex overflow-hidden selection:bg-brand selection:text-dark-900">
+
+    <aside class="w-64 border-r border-dark-border bg-dark-900 flex flex-col justify-between h-full z-10 shrink-0">
+        <div class="flex-1 overflow-y-auto">
+            <div class="h-20 flex items-center px-6 gap-3 shrink-0">
+                <div class="w-8 h-8 rounded bg-brand flex items-center justify-center text-dark-900">
+                    <i class="ph-fill ph-paw-print text-xl"></i>
+                </div>
+                <span class="text-white font-semibold text-lg">VetCare</span>
+            </div>
+
+            <nav class="px-4 space-y-2 mt-4 pb-4">
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-squares-four text-xl"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-dark border border-brand/30 text-brand font-medium">
+                    <i class="ph ph-users text-xl"></i>
+                    Tutores
+                    <i class="ph ph-caret-right ml-auto text-sm"></i>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-paw-print text-xl"></i>
+                    Pets
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-calendar-blank text-xl"></i>
+                    Agendamento
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-file-text text-xl"></i>
+                    Prontuários
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-syringe text-xl"></i>
+                    Vacinas
+                </a>
+                
+                <div class="h-px bg-dark-border my-2 mx-2"></div>
+                
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-chart-line-up text-xl"></i>
+                    Procedimentos
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-chats text-xl"></i>
+                    Chat
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-800 transition-colors">
+                    <i class="ph ph-user-circle text-xl"></i>
+                    Perfil
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-dark-border bg-dark-900 shrink-0">
+            <div class="flex flex-col gap-3">
+                <button class="w-full flex justify-center py-2 text-gray-500 hover:text-white transition-colors">
+                    <i class="ph ph-caret-left text-lg"></i>
+                </button>
+                <div class="flex items-center justify-center gap-2 text-brand text-xs font-medium px-3 py-2.5 bg-brand-dark rounded-lg border border-brand/20 cursor-default">
+                    <i class="ph-fill ph-shield-check text-sm"></i>
+                    Ambiente Isolado
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <header class="h-20 border-b border-dark-border flex items-center justify-between px-8 bg-dark-900 shrink-0">
+            <h1 class="text-white text-xl font-semibold">Tutores</h1>
+            
+            <div class="flex items-center gap-6">
+                <div class="relative">
+                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" placeholder="Buscar..." class="bg-dark-800 border border-dark-border text-sm rounded-lg pl-10 pr-4 py-2 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-brand w-64 transition-colors">
+                </div>
+
+                <button class="relative text-gray-400 hover:text-white transition-colors">
+                    <i class="ph ph-bell text-xl"></i>
+                    <span class="absolute 0 right-0 w-2 h-2 bg-brand rounded-full border border-dark-900"></span>
+                </button>
+                <button class="w-8 h-8 rounded-full bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                    <i class="ph ph-user text-lg"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                    <div class="flex items-center gap-3">
+                        <i class="ph ph-users text-brand text-2xl"></i>
+                        <h2 class="text-white text-lg font-medium">Tutores Cadastrados</h2>
+                        <span class="px-2.5 py-0.5 rounded-full bg-dark-800 border border-dark-border text-gray-400 text-xs">4 total</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <div class="relative w-full sm:w-auto">
+                            <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                            <input type="text" placeholder="Buscar tutor..." class="w-full sm:w-64 bg-dark-800 border border-dark-border text-sm rounded-lg pl-10 pr-4 py-2.5 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-brand transition-colors">
+                        </div>
+                        <button id="openModalBtn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand text-dark-900 px-4 py-2.5 rounded-lg font-medium hover:bg-brand/90 transition-colors">
+                            <i class="ph ph-plus font-bold"></i>
+                            Novo Tutor
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                    
+                    <div class="bg-dark-800 border border-dark-border rounded-xl p-6 flex flex-col gap-5 hover:border-brand/30 transition-colors">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center text-brand shrink-0">
+                                    <i class="ph-fill ph-users text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-medium text-base">Maria Silva</h3>
+                                    <p class="text-gray-500 text-xs mt-0.5">123.456.789-00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <button class="hover:text-white transition-colors p-1"><i class="ph ph-pencil-simple text-lg"></i></button>
+                                <button class="hover:text-red-400 transition-colors p-1"><i class="ph ph-trash text-lg text-red-500/80"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 text-sm text-gray-400">
+                                <i class="ph ph-envelope-simple text-gray-500 text-lg"></i>
+                                <span>maria.silva@email.com</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-400">
+                                <i class="ph ph-phone text-gray-500 text-lg"></i>
+                                <span>(11) 99999-1234</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-sm text-gray-400">
+                                <i class="ph ph-map-pin text-gray-500 text-lg mt-0.5"></i>
+                                <span>Rua das Flores, 123 - São Paulo/SP</span>
+                            </div>
+                        </div>
+
+                        <div class="h-px bg-dark-border w-full"></div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-brand text-sm font-medium">
+                                <i class="ph ph-paw-print text-lg"></i>
+                                <span>2 pets</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-1 rounded bg-dark-900 border border-dark-border text-xs text-gray-300">Thor</span>
+                                <span class="px-2.5 py-1 rounded bg-dark-900 border border-dark-border text-xs text-gray-300">Luna</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-dark-800 border border-dark-border rounded-xl p-6 flex flex-col gap-5 hover:border-brand/30 transition-colors">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center text-brand shrink-0">
+                                    <i class="ph-fill ph-users text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-medium text-base">João Santos</h3>
+                                    <p class="text-gray-500 text-xs mt-0.5">987.654.321-00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <button class="hover:text-white transition-colors p-1"><i class="ph ph-pencil-simple text-lg"></i></button>
+                                <button class="hover:text-red-400 transition-colors p-1"><i class="ph ph-trash text-lg text-red-500/80"></i></button>
+                            </div>
+                        </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modalNovoTutor" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="bg-[#0B1015] border border-dark-border rounded-xl w-full max-w-lg shadow-2xl overflow-hidden m-4">
+            
+            <div class="flex items-center justify-between p-5 border-b border-dark-border">
+                <h3 class="text-white font-medium">Novo Tutor</h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="ph ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <div>
+                    <label class="block text-white text-sm mb-1.5">Nome Completo</label>
+                    <input type="text" class="w-full bg-dark-900 border border-brand text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors" placeholder="">
+                </div>
+                
+                <div>
+                    <label class="block text-white text-sm mb-1.5">CPF</label>
+                    <input type="text" class="w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors" placeholder="000.000.000-00">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Email</label>
+                        <input type="email" class="w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors" placeholder="">
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm mb-1.5">Telefone</label>
+                        <input type="text" class="w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-white text-sm mb-1.5">Endereço</label>
+                    <input type="text" class="w-full bg-dark-900 border border-dark-border text-white text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-brand transition-colors" placeholder="">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 p-5 border-t border-dark-border">
+                <button id="cancelModalBtn" class="px-5 py-2.5 rounded-lg text-white text-sm font-medium border border-dark-border hover:bg-dark-800 transition-colors">
+                    Cancelar
+                </button>
+                <button class="px-5 py-2.5 rounded-lg bg-brand text-dark-900 text-sm font-medium hover:bg-brand/90 transition-colors">
+                    Cadastrar
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modalNovoTutor');
+            const openBtn = document.getElementById('openModalBtn');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const cancelBtn = document.getElementById('cancelModalBtn');
+
+            // Proteção contra submissões acidentais ou externas
+            const inputs = modal.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault(); // Previne ação padrão até termos a integração segura do banco
+                    }
+                });
+            });
+
+            function toggleModal() {
+                modal.classList.toggle('hidden');
+            }
+
+            openBtn.addEventListener('click', toggleModal);
+            closeBtn.addEventListener('click', toggleModal);
+            cancelBtn.addEventListener('click', toggleModal);
+
+            // Fechar ao clicar fora do modal
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    toggleModal();
+                }
+            });
+            
+            // Fechar com a tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    toggleModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
