@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="./css/vacinas.css">
+
+    <title>Petto • Controle de Vacinas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#00D09E', dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' } }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen w-full">
+        <!-- SIDEBAR UNIFICADA -->
+        <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
+                    <div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950">
+                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
+                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    </div>
+                </div>
+                <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
+                    <div>
+                        <p class="sidebar-title">VISÃO GERAL</p>
+                        <div class="space-y-1">
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
+                                Dashboard</a>
+                            <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
+                            <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">ROTINA CLÍNICA</p>
+                        <div class="space-y-1">
+                            <a href="agenda.html" class="sidebar-item"><i class="ph ph-calendar text-xl"></i>
+                                Agendamentos</a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
+                                Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-active"><i class="ph-fill ph-syringe text-xl"></i>
+                                Vacinas</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">SISTEMA</p>
+                        <div class="space-y-1">
+                            <a href="procedimentos.html" class="sidebar-item"><i class="ph ph-heartbeat text-xl"></i>
+                                Centro Cirúrgico</a>
+                            <a href="mensagens.html" class="sidebar-item"><i
+                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
+                                Segurança & Acessos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
+            <header
+                class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Controle de Vacinas</h2>
+                    <p class="text-gray-400 text-sm mt-1">Gerencie o calendário de imunização dos pets.</p>
+                </div>
+                <button class="btn-action btn-primary"><i class="ph-bold ph-plus"></i> Registrar Aplicação</button>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-[1200px] mx-auto space-y-8">
+                    <!-- Status Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-panel p-6 rounded-3xl">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-500 flex items-center justify-center text-xl mb-4">
+                                <i class="ph-fill ph-warning"></i></div>
+                            <h3 class="text-3xl font-bold">14</h3>
+                            <p class="text-xs text-gray-400 mt-1">Vacinas Atrasadas</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-3xl">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4">
+                                <i class="ph-fill ph-calendar"></i></div>
+                            <h3 class="text-3xl font-bold">08</h3>
+                            <p class="text-xs text-gray-400 mt-1">Agendadas p/ esta semana</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-3xl">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-xl mb-4">
+                                <i class="ph-fill ph-check-circle"></i></div>
+                            <h3 class="text-3xl font-bold">156</h3>
+                            <p class="text-xs text-gray-400 mt-1">Aplicadas no mês</p>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Vacinas -->
+                    <div class="glass-panel rounded-3xl p-6">
+                        <h3 class="font-bold text-lg mb-6">Aplicações Recentes & Pendentes</h3>
+                        <div class="space-y-4">
+                            <!-- Item Pendente -->
+                            <div
+                                class="bg-dark-800 border border-dark-border rounded-2xl p-5 flex items-center justify-between border-l-4 border-l-yellow-500">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-yellow-500/10 text-yellow-500 flex items-center justify-center text-2xl">
+                                        <i class="ph-fill ph-syringe"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-white">V10 Polivalente (2ª Dose)</h4>
+                                        <p class="text-xs text-gray-400">Thor • Golden Retriever (Tutor: Maria Silva)
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="badge badge-yellow">Atrasada 2 dias</span>
+                                    <button class="btn-action bg-dark-900 border border-dark-border text-xs h-10">Enviar
+                                        Lembrete</button>
+                                </div>
+                            </div>
+
+                            <!-- Item Aplicado -->
+                            <div
+                                class="bg-dark-800 border border-dark-border rounded-2xl p-5 flex items-center justify-between border-l-4 border-l-primary">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-2xl">
+                                        <i class="ph-fill ph-check-circle"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Anti-rábica</h4>
+                                        <p class="text-xs text-gray-400">Luna • Persa (Tutor: Fernanda Lima)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="badge badge-green">Aplicada hoje</span>
+                                    <button
+                                        class="w-10 h-10 rounded-xl bg-dark-900 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white"><i
+                                            class="ph ph-printer"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="./js/global.js"></script>
+</body>
+
+</html>

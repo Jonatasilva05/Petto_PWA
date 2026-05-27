@@ -1,0 +1,69 @@
+body {
+    background: #05080A;
+    color: white;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.sidebar-item {
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px;
+    color: #94a3b8;
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.25s ease;
+}
+
+.sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: white;
+}
+
+.sidebar-active {
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 16px;
+    background: rgba(0, 208, 158, 0.12);
+    border: 1px solid rgba(0, 208, 158, 0.18);
+    color: #00D09E;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.sidebar-title {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding-left: 16px;
+    margin-bottom: 12px;
+}
+
+.input-base {
+    background: #151F25;
+    border: 1px solid #26343C;
+    border-radius: 14px;
+    color: white;
+    outline: none;
+    padding: 0 16px;
+}
+
+.input-base:focus {
+    border-color: #00D09E;
+}
+
+.chat-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-scroll::-webkit-scrollbar-thumb {
+    background: #26343C;
+    border-radius: 999px;
+}

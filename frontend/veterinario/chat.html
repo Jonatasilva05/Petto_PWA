@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="./css/chat.css">
+
+    <title>Petto • Mensagens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#00D09E', dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' } }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen w-full">
+        <!-- SIDEBAR UNIFICADA -->
+        <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
+                    <div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950">
+                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
+                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    </div>
+                </div>
+                <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
+                    <div>
+                        <p class="sidebar-title">VISÃO GERAL</p>
+                        <div class="space-y-1">
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
+                                Dashboard</a>
+                            <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
+                            <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">ROTINA CLÍNICA</p>
+                        <div class="space-y-1">
+                            <a href="agenda.html" class="sidebar-item"><i class="ph ph-calendar text-xl"></i>
+                                Agendamentos</a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
+                                Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i>
+                                Vacinas</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">SISTEMA</p>
+                        <div class="space-y-1">
+                            <a href="procedimentos.html" class="sidebar-item"><i class="ph ph-heartbeat text-xl"></i>
+                                Centro Cirúrgico</a>
+                            <a href="mensagens.html" class="sidebar-active"><i
+                                    class="ph-fill ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
+                                Segurança & Acessos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- MÓDULO DE CHAT -->
+        <main class="flex-1 flex min-w-0 bg-dark-950">
+
+            <!-- Lista de Contatos -->
+            <div class="w-80 border-r border-dark-border bg-dark-900 flex flex-col">
+                <div class="p-6 border-b border-dark-border shrink-0">
+                    <h2 class="text-xl font-bold text-white mb-4">Mensagens</h2>
+                    <div class="relative">
+                        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="text" placeholder="Buscar tutor..."
+                            class="input-base w-full h-10 pl-10 text-sm bg-dark-950" />
+                    </div>
+                </div>
+
+                <div class="flex-1 overflow-y-auto chat-scroll">
+                    <!-- Contato Ativo -->
+                    <div
+                        class="p-4 border-b border-dark-border bg-dark-800 cursor-pointer flex items-center gap-3 border-l-4 border-l-primary">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-900/40 text-blue-400 flex items-center justify-center font-bold shrink-0">
+                            MS</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="text-sm font-bold text-white truncate">Maria Silva</h4>
+                                <span class="text-[10px] text-gray-500">09:18</span>
+                            </div>
+                            <p class="text-xs text-primary truncate">Excelente notícia! Mantenha a...</p>
+                        </div>
+                    </div>
+
+                    <!-- Contato Normal -->
+                    <div
+                        class="p-4 border-b border-dark-border hover:bg-dark-850 transition-colors cursor-pointer flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-full bg-purple-900/40 text-purple-400 flex items-center justify-center font-bold shrink-0">
+                            FL</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="text-sm font-bold text-gray-300 truncate">Fernanda Lima</h4>
+                                <span class="text-[10px] text-gray-500">Ontem</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Obrigada pelo atendimento!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Janela do Chat -->
+            <div class="flex-1 flex flex-col bg-gradient-to-br from-dark-950 to-dark-900 relative">
+
+                <!-- Chat Header -->
+                <header
+                    class="h-20 border-b border-dark-border px-6 flex items-center justify-between shrink-0 bg-dark-900/80 backdrop-blur z-10">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-900/40 text-blue-400 flex items-center justify-center font-bold">
+                            MS</div>
+                        <div>
+                            <h3 class="font-bold text-white">Maria Silva</h3>
+                            <p class="text-xs text-gray-400">Tutor(a) do Thor (Golden Retriever)</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-10 h-10 rounded-xl bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white"><i
+                                class="ph ph-file-text"></i></button>
+                        <button
+                            class="w-10 h-10 rounded-xl bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white"><i
+                                class="ph ph-dots-three-vertical"></i></button>
+                    </div>
+                </header>
+
+                <!-- Área de Mensagens -->
+                <div class="flex-1 overflow-y-auto p-6 space-y-6 chat-scroll">
+
+                    <div class="text-center"><span
+                            class="text-[10px] bg-dark-800 text-gray-500 px-3 py-1 rounded-full border border-dark-border">Hoje</span>
+                    </div>
+
+                    <!-- Mensagem Recebida -->
+                    <div class="flex gap-3 max-w-2xl">
+                        <div
+                            class="w-8 h-8 rounded-full bg-blue-900/40 text-blue-400 flex items-center justify-center text-xs font-bold shrink-0 mt-auto">
+                            MS</div>
+                        <div>
+                            <div
+                                class="bg-dark-800 border border-dark-border rounded-2xl rounded-bl-none p-4 text-sm text-gray-300 shadow-lg">
+                                Bom dia doutor! O Thor acordou super bem após o medicamento de ontem. A tosse já
+                                diminuiu bastante.
+                            </div>
+                            <span class="text-[10px] text-gray-500 mt-1 ml-1">09:14</span>
+                        </div>
+                    </div>
+
+                    <!-- Mensagem Enviada -->
+                    <div class="flex gap-3 max-w-2xl ml-auto flex-row-reverse">
+                        <div
+                            class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold shrink-0 mt-auto">
+                            J</div>
+                        <div>
+                            <div
+                                class="bg-[#051310] border border-primary/30 rounded-2xl rounded-br-none p-4 text-sm text-primary shadow-lg">
+                                Excelente notícia, Maria! Mantenha a dosagem por mais 3 dias conforme a receita e evite
+                                passeios longos.
+                            </div>
+                            <span class="text-[10px] text-gray-500 mt-1 mr-1 block text-right">09:18 <i
+                                    class="ph-bold ph-check-all text-primary"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Input de Texto -->
+                <div class="p-4 bg-dark-900 border-t border-dark-border">
+                    <div class="flex items-center gap-3 max-w-4xl mx-auto">
+                        <button class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                                class="ph ph-paperclip"></i></button>
+                        <input type="text" placeholder="Digite uma mensagem para Maria..."
+                            class="input-base flex-1 h-12 bg-dark-950" />
+                        <button
+                            class="w-12 h-12 rounded-xl bg-primary text-dark-950 flex items-center justify-center hover:scale-105 transition-transform"><i
+                                class="ph-fill ph-paper-plane-right text-xl"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="./js/global.js"></script>
+</body>
+
+</html>
