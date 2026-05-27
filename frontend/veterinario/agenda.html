@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+
+    <link rel="stylesheet" href="./css/agenda.css">
+
+    <title>Petto • Agendamentos</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D09E',
+                        dark: {
+                            950: '#05080A', 900: '#0B1114', 850: '#11181D',
+                            800: '#151F25', 700: '#1D2A31', border: '#26343C'
+                        }
+                    },
+                    boxShadow: {
+                        glow: '0 0 40px rgba(0, 208, 158, 0.12)',
+                        card: '0 25px 60px rgba(0, 0, 0, 0.35)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen w-full">
+
+        <!-- SIDEBAR -->
+        <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
+                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
+                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    </div>
+                </div>
+
+                <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
+                    <div>
+                        <p class="sidebar-title">VISÃO GERAL</p>
+                        <div class="space-y-1">
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
+                                Dashboard</a>
+                            <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
+                            <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">ROTINA CLÍNICA</p>
+                        <div class="space-y-1">
+                            <a href="agenda.html" class="sidebar-item">
+                                <i class="ph ph-calendar text-xl"></i> Agendamentos
+                                <div
+                                    class="ml-auto w-5 h-5 rounded-md bg-dark-800 text-gray-400 flex items-center justify-center text-[10px] font-bold">
+                                    4</div>
+                            </a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
+                                Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i>
+                                Vacinas</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">SISTEMA</p>
+                        <div class="space-y-1">
+                            <a href="procedimentos.html" class="sidebar-item">
+                                <i class="ph ph-heartbeat text-xl"></i> Centro Cirúrgico
+                            </a>
+                            <a href="mensagens.html" class="sidebar-item"><i
+                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
+                                Segurança & Acessos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="p-5 border-t border-dark-border shrink-0 bg-dark-900">
+                <div class="bg-[#051310] border border-[#0a241c] rounded-2xl p-4 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <i class="ph-fill ph-shield-check text-xl"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h4 class="text-sm font-semibold text-primary truncate">Ambiente Isolado</h4>
+                        <p class="text-[10px] text-gray-400 truncate">Firewall & 2FA Ativos</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL -->
+        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
+
+            <header
+                class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Agendamentos</h2>
+                    <p class="text-gray-400 text-sm mt-1">Gerencie a agenda clínica de Taquaritinga e região.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative hidden lg:block">
+                        <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="text" placeholder="Buscar tutor ou pet..."
+                            class="input-base w-72 h-12 pl-11 pr-4 text-sm" />
+                    </div>
+                    <div class="h-8 w-px bg-dark-border mx-2"></div>
+                    <button class="btn-icon relative"><i class="ph ph-bell"></i></button>
+                    <button
+                        class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold">
+                            J</div>
+                        <div class="text-left hidden sm:block">
+                            <p class="text-sm font-semibold leading-tight">Dr. Jhon</p>
+                        </div>
+                    </button>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-[1200px] mx-auto space-y-8 pb-12">
+
+                    <!-- CONTROLES SUPERIORES -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="glass-panel rounded-2xl p-2 inline-flex items-center gap-2">
+                            <button class="btn-icon w-10 h-10"><i class="ph ph-caret-left"></i></button>
+                            <div class="px-6 text-center">
+                                <h3 class="font-bold text-white">Maio 2026</h3>
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Semana Atual</p>
+                            </div>
+                            <button class="btn-icon w-10 h-10"><i class="ph ph-caret-right"></i></button>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <select class="input-base h-12 px-4 cursor-pointer text-sm">
+                                <option>Todos os Veterinários</option>
+                                <option>Dr. Jhon</option>
+                                <option>Dra. Fernanda Lima</option>
+                            </select>
+                            <button id="btnNovaConsulta" class="btn-action btn-primary"><i class="ph-bold ph-plus"></i>
+                                Nova Consulta</button>
+                        </div>
+                    </div>
+
+                    <!-- SELETOR DE DIAS -->
+                    <div class="glass-panel rounded-3xl p-4 flex justify-between items-center overflow-x-auto">
+                        <div class="day-picker"><span class="text-xs text-gray-500 mb-1">SEG</span><span
+                                class="text-lg font-bold">25</span></div>
+                        <div class="day-picker active"><span class="text-xs font-semibold mb-1">TER</span><span
+                                class="text-lg font-bold">26</span></div>
+                        <div class="day-picker"><span class="text-xs text-gray-500 mb-1">QUA</span><span
+                                class="text-lg font-bold">27</span></div>
+                        <div class="day-picker"><span class="text-xs text-gray-500 mb-1">QUI</span><span
+                                class="text-lg font-bold">28</span></div>
+                        <div class="day-picker"><span class="text-xs text-gray-500 mb-1">SEX</span><span
+                                class="text-lg font-bold">29</span></div>
+                        <div class="day-picker opacity-50"><span class="text-xs text-gray-500 mb-1">SÁB</span><span
+                                class="text-lg font-bold">30</span></div>
+                        <div class="day-picker opacity-50"><span class="text-xs text-gray-500 mb-1">DOM</span><span
+                                class="text-lg font-bold">31</span></div>
+                    </div>
+
+                    <!-- LISTA DE AGENDAMENTOS -->
+                    <div class="space-y-4">
+                        <!-- Confirmada -->
+                        <div
+                            class="glass-panel rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 card-hover border-l-4 border-l-primary">
+                            <div class="flex items-center gap-6">
+                                <div class="text-center min-w-[70px]">
+                                    <h2 class="text-3xl font-bold text-primary">09:00</h2>
+                                    <p class="text-xs text-gray-400 mt-1">30 min</p>
+                                </div>
+                                <div class="w-px h-16 bg-dark-border hidden md:block"></div>
+                                <div class="flex items-center gap-4">
+                                    <img src="https://placedog.net/100/100?id=3"
+                                        class="w-14 h-14 rounded-2xl object-cover border border-dark-border" />
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h3 class="text-xl font-bold">Thor</h3>
+                                            <span
+                                                class="bg-dark-800 text-gray-400 text-[10px] px-2 py-0.5 rounded-md border border-dark-border">Golden
+                                                Retriever</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400"><i class="ph ph-user text-gray-500 mr-1"></i>
+                                            Maria Silva</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end gap-3">
+                                <span class="badge badge-green w-fit"><i class="ph-fill ph-check-circle"></i>
+                                    Confirmada</span>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="btn-action bg-dark-800 border border-dark-border hover:text-primary h-10 px-4 text-xs"><i
+                                            class="ph ph-stethoscope"></i> Atender</button>
+                                    <button
+                                        class="btn-action bg-dark-800 border border-dark-border hover:text-red-400 h-10 px-3"><i
+                                            class="ph ph-x"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Agendada -->
+                        <div
+                            class="glass-panel rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 card-hover border-l-4 border-l-blue-500">
+                            <div class="flex items-center gap-6">
+                                <div class="text-center min-w-[70px]">
+                                    <h2 class="text-3xl font-bold text-blue-500">10:30</h2>
+                                    <p class="text-xs text-gray-400 mt-1">45 min</p>
+                                </div>
+                                <div class="w-px h-16 bg-dark-border hidden md:block"></div>
+                                <div class="flex items-center gap-4">
+                                    <img src="https://placecats.com/100/100"
+                                        class="w-14 h-14 rounded-2xl object-cover border border-dark-border" />
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h3 class="text-xl font-bold">Luna</h3>
+                                            <span
+                                                class="bg-dark-800 text-gray-400 text-[10px] px-2 py-0.5 rounded-md border border-dark-border">Persa</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400"><i class="ph ph-user text-gray-500 mr-1"></i>
+                                            Fernanda Lima</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end gap-3">
+                                <span class="badge badge-blue w-fit"><i class="ph-fill ph-clock"></i> Agendada</span>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="btn-action bg-dark-800 border border-dark-border hover:text-blue-400 h-10 px-4 text-xs"><i
+                                            class="ph ph-check"></i> Confirmar</button>
+                                    <button
+                                        class="btn-action bg-dark-800 border border-dark-border hover:text-red-400 h-10 px-3"><i
+                                            class="ph ph-x"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pendente/Atrasada -->
+                        <div
+                            class="glass-panel rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 card-hover border-l-4 border-l-yellow-500">
+                            <div class="flex items-center gap-6">
+                                <div class="text-center min-w-[70px]">
+                                    <h2 class="text-3xl font-bold text-yellow-500">14:00</h2>
+                                    <p class="text-xs text-gray-400 mt-1">Vacinação</p>
+                                </div>
+                                <div class="w-px h-16 bg-dark-border hidden md:block"></div>
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-14 h-14 rounded-2xl bg-dark-800 flex items-center justify-center text-gray-500 border border-dark-border">
+                                        <i class="ph ph-paw-print text-2xl"></i></div>
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h3 class="text-xl font-bold">Max</h3>
+                                        </div>
+                                        <p class="text-sm text-gray-400"><i class="ph ph-user text-gray-500 mr-1"></i>
+                                            João Santos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end gap-3">
+                                <span class="badge badge-yellow w-fit"><i class="ph-fill ph-warning-circle"></i>
+                                    Pendente</span>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="btn-action bg-dark-800 border border-dark-border hover:text-primary h-10 px-4 text-xs"><i
+                                            class="ph ph-whatsapp-logo"></i> Lembrete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL NOVO AGENDAMENTO -->
+    <div id="modalConsulta"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-900 border border-dark-border rounded-[32px] w-full max-w-2xl overflow-hidden shadow-card">
+            <div class="p-6 border-b border-dark-border flex items-center justify-between bg-dark-850">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Nova Consulta</h3>
+                    <p class="text-sm text-gray-400 mt-1">Agende um atendimento na clínica</p>
+                </div>
+                <button id="fecharModal" class="btn-icon w-10 h-10"><i class="ph ph-x"></i></button>
+            </div>
+
+            <form id="formAgenda" class="p-8 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Tutor /
+                            Pet</label>
+                        <select class="input-base w-full h-12 px-4 cursor-pointer">
+                            <option value="" disabled selected>Buscar no banco...</option>
+                            <option>Maria Silva - Thor</option>
+                            <option>Fernanda Lima - Luna</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Veterinário</label>
+                        <select class="input-base w-full h-12 px-4 cursor-pointer">
+                            <option>Dr. Jhon</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Data</label>
+                        <input type="date" class="input-base w-full h-12 px-4" />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Horário</label>
+                        <input type="time" class="input-base w-full h-12 px-4" />
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Motivo /
+                            Observações</label>
+                        <textarea class="input-base w-full p-4 h-24 resize-none"
+                            placeholder="Sintomas, tipo de exame ou vacina..."></textarea>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-dark-border">
+                    <button type="button" id="cancelarModal"
+                        class="btn-action bg-transparent border border-dark-border hover:bg-dark-800">Cancelar</button>
+                    <button type="button" class="btn-action btn-primary"><i class="ph-bold ph-calendar-plus"></i>
+                        Agendar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="./js/agenda.js"></script>
+<script src="./js/global.js"></script>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petto — Pets</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#00D09E',dark:{950:'#060B0E',900:'#0B1114',850:'#11181D',800:'#151F25',700:'#1D2A31',border:'#26343C'}}}}}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif}:root{color-scheme:dark}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#060B0E}::-webkit-scrollbar-thumb{background:#26343C;border-radius:999px}
+.menu-title{color:#6b7280;font-size:11px;letter-spacing:2px;font-weight:700;padding-left:14px}
+.menu-item,.menu-active{height:48px;display:flex;align-items:center;gap:14px;padding:0 16px;border-radius:14px;transition:.2s ease;font-size:14px;font-weight:500}
+.menu-item{color:#94a3b8}.menu-item:hover{background:rgba(255,255,255,.04);color:white;transform:translateX(4px)}
+.menu-active{background:rgba(0,208,158,.12);color:#00D09E;border:1px solid rgba(0,208,158,.2)}
+.header-btn{width:48px;height:48px;border-radius:16px;border:1px solid #26343C;background:#151F25;display:flex;align-items:center;justify-content:center;font-size:20px;color:#94a3b8;transition:.25s ease;position:relative;cursor:pointer}
+.header-btn:hover{transform:translateY(-2px);color:white;border-color:rgba(0,208,158,.2)}
+.notif-dot{width:10px;height:10px;border-radius:50%;background:#00D09E;position:absolute;top:10px;right:10px;border:2px solid #151F25}
+.btn-primary{background:#00D09E;color:black;padding:0 22px;height:48px;border-radius:16px;display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;transition:.25s ease;cursor:pointer;border:none}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,208,158,.2)}
+.btn-secondary{background:rgba(255,255,255,.03);color:#e2e8f0;padding:0 18px;height:40px;border-radius:12px;display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:13px;border:1px solid #26343C;transition:.25s ease;cursor:pointer}
+.btn-secondary:hover{background:rgba(255,255,255,.06)}
+.search-wrap{position:relative}.search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#64748b;font-size:16px}
+.search-input{background:#151F25;border:1px solid #26343C;border-radius:14px;height:46px;padding:0 16px 0 44px;font-size:14px;color:white;outline:none;transition:.2s ease;font-family:inherit}
+.search-input:focus{border-color:#00D09E}.search-input::placeholder{color:#64748b}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:50;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:#0B1114;border:1px solid #26343C;border-radius:24px;width:min(620px,95vw);max-height:90vh;overflow-y:auto;transform:scale(.95);transition:.3s ease}
+.modal-overlay.open .modal-box{transform:scale(1)}
+.modal-input{width:100%;background:#060B0E;border:1px solid #26343C;border-radius:12px;padding:11px 14px;font-size:14px;color:white;outline:none;transition:.2s ease;font-family:inherit}
+.modal-input:focus{border-color:#00D09E}.modal-input::placeholder{color:#475569}
+.modal-label{font-size:12px;font-weight:500;color:#94a3b8;margin-bottom:6px;display:block}
+.pet-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:0;overflow:hidden;transition:.3s ease;cursor:pointer}
+.pet-card:hover{transform:translateY(-6px);border-color:rgba(0,208,158,.2);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600}
+</style>
+</head>
+<body class="bg-dark-950 text-white overflow-hidden h-screen flex">
+
+<!-- SIDEBAR -->
+<aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between h-full flex-shrink-0">
+  <div class="flex flex-col h-full overflow-hidden">
+    <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border flex-shrink-0">
+      <div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-black shadow-lg"><i class="ph-fill ph-paw-print text-2xl"></i></div>
+      <div><h1 class="font-bold text-xl text-white">Petto</h1><p class="text-sm text-gray-400">Painel Veterinário</p></div>
+    </div>
+    <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+      <p class="menu-title mb-3">GERAL</p>
+      <a href="#" class="menu-item"><i class="ph ph-squares-four text-xl"></i>Dashboard</a>
+      <a href="#" class="menu-item"><i class="ph ph-users text-xl"></i>Tutores</a>
+      <a href="#" class="menu-active"><i class="ph-fill ph-paw-print text-xl"></i>Pets<i class="ph ph-caret-right ml-auto text-xs opacity-60"></i></a>
+      <p class="menu-title mt-5 mb-3">CLÍNICA</p>
+      <a href="#" class="menu-item"><i class="ph ph-calendar text-xl"></i>Consultas</a>
+      <a href="#" class="menu-item"><i class="ph ph-syringe text-xl"></i>Vacinas</a>
+      <a href="#" class="menu-item"><i class="ph ph-file-text text-xl"></i>Prontuários</a>
+      <p class="menu-title mt-5 mb-3">COMUNICAÇÃO</p>
+      <a href="#" class="menu-item"><i class="ph ph-chat-circle text-xl"></i>Mensagens</a>
+    </nav>
+  </div>
+  <div class="p-5 border-t border-dark-border">
+    <div class="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary"><i class="ph-fill ph-shield-check text-xl"></i></div>
+      <div><h4 class="text-sm font-semibold text-primary">Sistema Seguro</h4><p class="text-xs text-gray-400">Ambiente protegido</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="flex-1 flex flex-col overflow-hidden bg-gradient-to-b from-dark-900 to-dark-950">
+  <header class="h-24 border-b border-dark-border px-8 flex items-center justify-between bg-dark-900/80 backdrop-blur-xl flex-shrink-0">
+    <div><h2 class="text-2xl font-bold text-white">Pets</h2><p class="text-gray-400 mt-1 text-sm">248 animais cadastrados</p></div>
+    <div class="flex items-center gap-4">
+      <div class="search-wrap hidden md:block"><i class="ph ph-magnifying-glass"></i><input type="text" placeholder="Buscar pet ou tutor..." class="search-input w-72"></div>
+      <button class="header-btn"><i class="ph ph-bell"></i><span class="notif-dot"></span></button>
+      <div class="flex items-center gap-3 bg-dark-800 border border-dark-border px-3 py-2 rounded-2xl">
+        <img src="https://i.pravatar.cc/100" class="w-10 h-10 rounded-xl object-cover">
+        <div><h4 class="text-sm font-semibold">Dr. João</h4><p class="text-xs text-gray-400">Veterinário</p></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-6xl mx-auto space-y-6">
+      
+      <!-- TOP BAR -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center"><i class="ph-fill ph-paw-print text-xl"></i></div>
+          <div><h3 class="text-white font-bold text-lg">Animais Cadastrados</h3><p class="text-xs text-gray-500">248 pets registrados</p></div>
+        </div>
+        <button onclick="openModal()" class="btn-primary"><i class="ph ph-plus text-lg"></i>Novo Pet</button>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="flex items-center gap-3">
+        <div class="search-wrap flex-1"><i class="ph ph-magnifying-glass"></i><input type="text" placeholder="Buscar por nome, raça ou tutor..." class="search-input w-full"></div>
+        <div class="flex gap-2 p-1 bg-dark-850 border border-dark-border rounded-xl">
+          <button class="px-4 py-2 rounded-lg bg-primary/15 text-primary text-sm font-medium">Todos</button>
+          <button class="px-4 py-2 rounded-lg text-gray-400 text-sm font-medium hover:text-white transition-colors">Cães</button>
+          <button class="px-4 py-2 rounded-lg text-gray-400 text-sm font-medium hover:text-white transition-colors">Gatos</button>
+          <button class="px-4 py-2 rounded-lg text-gray-400 text-sm font-medium hover:text-white transition-colors">Outros</button>
+        </div>
+      </div>
+
+      <!-- PET GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+        <!-- Pet Card 1 -->
+        <div class="pet-card">
+          <div class="h-36 bg-gradient-to-br from-blue-900/30 to-dark-850 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent"></div>
+            <img src="https://placedog.net/200/140" class="w-full h-full object-cover opacity-60">
+            <div class="absolute top-3 right-3"><span class="badge bg-blue-500/20 text-blue-400 border border-blue-500/20">Cão</span></div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <h3 class="text-white font-bold text-lg">Thor</h3>
+                <p class="text-sm text-gray-400">Golden Retriever • 6 anos</p>
+              </div>
+              <div class="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center"><i class="ph ph-heartbeat"></i></div>
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-dark-800 rounded-xl border border-dark-border mb-4">
+              <div class="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center text-xs font-bold flex-shrink-0">MS</div>
+              <div><p class="text-xs text-gray-500">Tutor</p><p class="text-sm text-white font-medium">Maria Silva</p></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs text-gray-400 mb-4">
+              <span class="flex items-center gap-1.5"><i class="ph ph-scales text-primary"></i> 28 kg</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-drop text-red-400"></i> Tipo A+</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-gender-male text-blue-400"></i> Macho</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-syringe text-primary"></i> Vacinas ok</span>
+            </div>
+            <button class="btn-secondary w-full justify-center"><i class="ph ph-eye text-sm"></i>Ver perfil completo</button>
+          </div>
+        </div>
+
+        <!-- Pet Card 2 -->
+        <div class="pet-card">
+          <div class="h-36 bg-gradient-to-br from-purple-900/30 to-dark-850 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent"></div>
+            <img src="https://placecats.com/200/140" class="w-full h-full object-cover opacity-60">
+            <div class="absolute top-3 right-3"><span class="badge bg-purple-500/20 text-purple-400 border border-purple-500/20">Gato</span></div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <h3 class="text-white font-bold text-lg">Luna</h3>
+                <p class="text-sm text-gray-400">Persa • 3 anos</p>
+              </div>
+              <div class="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center"><i class="ph ph-heartbeat"></i></div>
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-dark-800 rounded-xl border border-dark-border mb-4">
+              <div class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center text-xs font-bold flex-shrink-0">FL</div>
+              <div><p class="text-xs text-gray-500">Tutora</p><p class="text-sm text-white font-medium">Fernanda Lima</p></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs text-gray-400 mb-4">
+              <span class="flex items-center gap-1.5"><i class="ph ph-scales text-primary"></i> 4 kg</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-drop text-red-400"></i> Tipo B+</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-gender-female text-pink-400"></i> Fêmea</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-warning text-yellow-400"></i> Vacina pendente</span>
+            </div>
+            <button class="btn-secondary w-full justify-center"><i class="ph ph-eye text-sm"></i>Ver perfil completo</button>
+          </div>
+        </div>
+
+        <!-- Pet Card 3 -->
+        <div class="pet-card">
+          <div class="h-36 bg-gradient-to-br from-orange-900/30 to-dark-850 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent"></div>
+            <img src="https://placedog.net/201/140" class="w-full h-full object-cover opacity-60">
+            <div class="absolute top-3 right-3"><span class="badge bg-orange-500/20 text-orange-400 border border-orange-500/20">Cão</span></div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <h3 class="text-white font-bold text-lg">Max</h3>
+                <p class="text-sm text-gray-400">Labrador • 4 anos</p>
+              </div>
+              <div class="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center"><i class="ph ph-heartbeat"></i></div>
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-dark-800 rounded-xl border border-dark-border mb-4">
+              <div class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center text-xs font-bold flex-shrink-0">JS</div>
+              <div><p class="text-xs text-gray-500">Tutor</p><p class="text-sm text-white font-medium">João Santos</p></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs text-gray-400 mb-4">
+              <span class="flex items-center gap-1.5"><i class="ph ph-scales text-primary"></i> 32 kg</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-drop text-red-400"></i> Tipo O+</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-gender-male text-blue-400"></i> Macho</span>
+              <span class="flex items-center gap-1.5"><i class="ph ph-syringe text-primary"></i> Vacinas ok</span>
+            </div>
+            <button class="btn-secondary w-full justify-center"><i class="ph ph-eye text-sm"></i>Ver perfil completo</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL -->
+<div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="flex items-center justify-between p-7 pb-5">
+      <div><h2 class="text-xl font-bold text-white">Novo Pet</h2><p class="text-sm text-gray-400 mt-1">Cadastre um animal no sistema</p></div>
+      <button onclick="closeModal()" class="w-9 h-9 rounded-xl bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white transition-colors"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="px-7 pb-7 space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="modal-label">Nome do pet</label><input type="text" placeholder="Nome do animal" class="modal-input"></div>
+        <div class="relative"><label class="modal-label">Espécie</label>
+          <select class="modal-input appearance-none cursor-pointer"><option>Cão</option><option>Gato</option><option>Outro</option></select>
+          <i class="ph ph-caret-down absolute right-3 top-9 text-gray-500 pointer-events-none"></i>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="modal-label">Raça</label><input type="text" placeholder="Raça do animal" class="modal-input"></div>
+        <div><label class="modal-label">Data de nascimento</label><input type="text" placeholder="dd/mm/aaaa" class="modal-input"></div>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="relative"><label class="modal-label">Sexo</label>
+          <select class="modal-input appearance-none cursor-pointer"><option>Macho</option><option>Fêmea</option></select>
+          <i class="ph ph-caret-down absolute right-3 top-9 text-gray-500 pointer-events-none"></i>
+        </div>
+        <div><label class="modal-label">Peso (kg)</label><input type="number" placeholder="0.0" class="modal-input"></div>
+        <div><label class="modal-label">Tipo sanguíneo</label><input type="text" placeholder="Ex: A+" class="modal-input"></div>
+      </div>
+      <div class="relative"><label class="modal-label">Tutor responsável</label>
+        <select class="modal-input appearance-none cursor-pointer"><option>Selecione um tutor</option><option>Maria Silva</option><option>João Santos</option><option>Fernanda Lima</option></select>
+        <i class="ph ph-caret-down absolute right-3 top-9 text-gray-500 pointer-events-none"></i>
+      </div>
+      <div><label class="modal-label">Observações de saúde</label><textarea rows="2" placeholder="Alergias, condições especiais..." class="modal-input resize-none"></textarea></div>
+      <div class="flex gap-3 pt-2">
+        <button onclick="closeModal()" class="btn-secondary flex-1 justify-center">Cancelar</button>
+        <button class="btn-primary flex-1 justify-center">Cadastrar Pet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+</script>
+</body>
+</html>

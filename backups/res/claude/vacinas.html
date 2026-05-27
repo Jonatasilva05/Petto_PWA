@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petto — Vacinas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#00D09E',dark:{950:'#060B0E',900:'#0B1114',850:'#11181D',800:'#151F25',700:'#1D2A31',border:'#26343C'}}}}}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif}:root{color-scheme:dark}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#060B0E}::-webkit-scrollbar-thumb{background:#26343C;border-radius:999px}
+.menu-title{color:#6b7280;font-size:11px;letter-spacing:2px;font-weight:700;padding-left:14px}
+.menu-item,.menu-active{height:48px;display:flex;align-items:center;gap:14px;padding:0 16px;border-radius:14px;transition:.2s ease;font-size:14px;font-weight:500}
+.menu-item{color:#94a3b8}.menu-item:hover{background:rgba(255,255,255,.04);color:white;transform:translateX(4px)}
+.menu-active{background:rgba(0,208,158,.12);color:#00D09E;border:1px solid rgba(0,208,158,.2)}
+.header-btn{width:48px;height:48px;border-radius:16px;border:1px solid #26343C;background:#151F25;display:flex;align-items:center;justify-content:center;font-size:20px;color:#94a3b8;transition:.25s ease;position:relative;cursor:pointer}
+.header-btn:hover{transform:translateY(-2px);color:white;border-color:rgba(0,208,158,.2)}
+.notif-dot{width:10px;height:10px;border-radius:50%;background:#00D09E;position:absolute;top:10px;right:10px;border:2px solid #151F25}
+.btn-primary{background:#00D09E;color:black;padding:0 22px;height:48px;border-radius:16px;display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;transition:.25s ease;cursor:pointer;border:none}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,208,158,.2)}
+.btn-secondary{background:rgba(255,255,255,.03);color:#e2e8f0;padding:0 18px;height:40px;border-radius:12px;display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:13px;border:1px solid #26343C;transition:.25s ease;cursor:pointer}
+.btn-secondary:hover{background:rgba(255,255,255,.06)}
+.search-wrap{position:relative}.search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#64748b;font-size:16px}
+.search-input{background:#151F25;border:1px solid #26343C;border-radius:14px;height:46px;padding:0 16px 0 44px;font-size:14px;color:white;outline:none;transition:.2s ease;font-family:inherit}
+.search-input:focus{border-color:#00D09E}.search-input::placeholder{color:#64748b}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:50;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:#0B1114;border:1px solid #26343C;border-radius:24px;width:min(560px,95vw);max-height:90vh;overflow-y:auto;transform:scale(.95);transition:.3s ease}
+.modal-overlay.open .modal-box{transform:scale(1)}
+.modal-input{width:100%;background:#060B0E;border:1px solid #26343C;border-radius:12px;padding:11px 14px;font-size:14px;color:white;outline:none;transition:.2s ease;font-family:inherit}
+.modal-input:focus{border-color:#00D09E}.modal-input::placeholder{color:#475569}
+.modal-label{font-size:12px;font-weight:500;color:#94a3b8;margin-bottom:6px;display:block}
+.vac-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:20px 24px;transition:.25s ease;cursor:pointer}
+.vac-card:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+</style>
+</head>
+<body class="bg-dark-950 text-white overflow-hidden h-screen flex">
+
+<!-- SIDEBAR -->
+<aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between h-full flex-shrink-0">
+  <div class="flex flex-col h-full overflow-hidden">
+    <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border flex-shrink-0">
+      <div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-black shadow-lg"><i class="ph-fill ph-paw-print text-2xl"></i></div>
+      <div><h1 class="font-bold text-xl text-white">Petto</h1><p class="text-sm text-gray-400">Painel Veterinário</p></div>
+    </div>
+    <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+      <p class="menu-title mb-3">GERAL</p>
+      <a href="#" class="menu-item"><i class="ph ph-squares-four text-xl"></i>Dashboard</a>
+      <a href="#" class="menu-item"><i class="ph ph-users text-xl"></i>Tutores</a>
+      <a href="#" class="menu-item"><i class="ph ph-paw-print text-xl"></i>Pets</a>
+      <p class="menu-title mt-5 mb-3">CLÍNICA</p>
+      <a href="#" class="menu-item"><i class="ph ph-calendar text-xl"></i>Consultas</a>
+      <a href="#" class="menu-active"><i class="ph-fill ph-syringe text-xl"></i>Vacinas<i class="ph ph-caret-right ml-auto text-xs opacity-60"></i></a>
+      <a href="#" class="menu-item"><i class="ph ph-file-text text-xl"></i>Prontuários</a>
+      <p class="menu-title mt-5 mb-3">COMUNICAÇÃO</p>
+      <a href="#" class="menu-item"><i class="ph ph-chat-circle text-xl"></i>Mensagens</a>
+    </nav>
+  </div>
+  <div class="p-5 border-t border-dark-border">
+    <div class="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary"><i class="ph-fill ph-shield-check text-xl"></i></div>
+      <div><h4 class="text-sm font-semibold text-primary">Sistema Seguro</h4><p class="text-xs text-gray-400">Ambiente protegido</p></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="flex-1 flex flex-col overflow-hidden bg-gradient-to-b from-dark-900 to-dark-950">
+  <header class="h-24 border-b border-dark-border px-8 flex items-center justify-between bg-dark-900/80 backdrop-blur-xl flex-shrink-0">
+    <div><h2 class="text-2xl font-bold text-white">Vacinas</h2><p class="text-gray-400 mt-1 text-sm">Controle de vacinação dos pets</p></div>
+    <div class="flex items-center gap-4">
+      <div class="search-wrap hidden md:block"><i class="ph ph-magnifying-glass"></i><input type="text" placeholder="Buscar pet ou vacina..." class="search-input w-72"></div>
+      <button class="header-btn"><i class="ph ph-bell"></i><span class="notif-dot"></span></button>
+      <div class="flex items-center gap-3 bg-dark-800 border border-dark-border px-3 py-2 rounded-2xl">
+        <img src="https://i.pravatar.cc/100" class="w-10 h-10 rounded-xl object-cover">
+        <div><h4 class="text-sm font-semibold">Dr. João</h4><p class="text-xs text-gray-400">Veterinário</p></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-6xl mx-auto space-y-6">
+
+      <!-- TOP BAR -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center"><i class="ph-fill ph-syringe text-xl"></i></div>
+          <div><h3 class="text-white font-bold text-lg">Controle de Vacinas</h3><p class="text-xs text-gray-500">Registro e acompanhamento</p></div>
+        </div>
+        <button onclick="openModal()" class="btn-primary"><i class="ph ph-plus text-lg"></i>Registrar Vacina</button>
+      </div>
+
+      <!-- STATS CARDS -->
+      <div class="grid grid-cols-4 gap-4">
+        <div class="bg-dark-850 border border-dark-border rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-gray-500 font-medium uppercase tracking-wide">Em dia</span>
+            <div class="w-8 h-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center"><i class="ph-fill ph-check-circle text-lg"></i></div>
+          </div>
+          <p class="text-3xl font-bold text-white">184</p>
+          <p class="text-xs text-primary mt-1">+12 essa semana</p>
+        </div>
+        <div class="bg-dark-850 border border-red-900/30 rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-gray-500 font-medium uppercase tracking-wide">Atrasadas</span>
+            <div class="w-8 h-8 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center"><i class="ph-fill ph-warning-circle text-lg"></i></div>
+          </div>
+          <p class="text-3xl font-bold text-white">7</p>
+          <p class="text-xs text-red-400 mt-1">Atenção necessária</p>
+        </div>
+        <div class="bg-dark-850 border border-yellow-900/30 rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-gray-500 font-medium uppercase tracking-wide">Próximas</span>
+            <div class="w-8 h-8 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center"><i class="ph-fill ph-clock text-lg"></i></div>
+          </div>
+          <p class="text-3xl font-bold text-white">23</p>
+          <p class="text-xs text-yellow-400 mt-1">Nos próximos 30 dias</p>
+        </div>
+        <div class="bg-dark-850 border border-dark-border rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-gray-500 font-medium uppercase tracking-wide">Aplicadas hoje</span>
+            <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center"><i class="ph-fill ph-syringe text-lg"></i></div>
+          </div>
+          <p class="text-3xl font-bold text-white">4</p>
+          <p class="text-xs text-blue-400 mt-1">Hoje, 23/05</p>
+        </div>
+      </div>
+
+      <!-- FILTER + TABLE -->
+      <div class="bg-dark-850 border border-dark-border rounded-3xl overflow-hidden">
+        <div class="p-5 border-b border-dark-border flex items-center justify-between gap-4 flex-wrap">
+          <div class="search-wrap flex-1 min-w-[200px]"><i class="ph ph-magnifying-glass"></i><input type="text" placeholder="Buscar por pet, vacina ou veterinário..." class="search-input w-full"></div>
+          <div class="flex gap-2">
+            <div class="flex gap-1 p-1 bg-dark-800 border border-dark-border rounded-xl">
+              <button class="px-3 py-1.5 rounded-lg bg-primary/15 text-primary text-xs font-medium">Todos</button>
+              <button class="px-3 py-1.5 rounded-lg text-gray-400 text-xs font-medium hover:text-white transition-colors">Em dia</button>
+              <button class="px-3 py-1.5 rounded-lg text-gray-400 text-xs font-medium hover:text-white transition-colors">Atrasadas</button>
+              <button class="px-3 py-1.5 rounded-lg text-gray-400 text-xs font-medium hover:text-white transition-colors">Próximas</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Header -->
+        <div class="grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_auto] gap-4 px-6 py-4 bg-dark-800/50 border-b border-dark-border">
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Pet / Tutor</span>
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Vacina</span>
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Aplicada em</span>
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Próximo reforço</span>
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Status</span>
+          <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Ações</span>
+        </div>
+
+        <!-- Rows -->
+        <div class="divide-y divide-dark-border">
+          <!-- Row - Atrasada -->
+          <div class="grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_auto] gap-4 px-6 py-5 items-center hover:bg-white/[0.02] transition-colors group">
+            <div class="flex items-center gap-3">
+              <img src="https://placedog.net/50" class="w-10 h-10 rounded-xl object-cover">
+              <div><p class="font-semibold text-white text-sm">Thor</p><p class="text-xs text-gray-500">Maria Silva</p></div>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white">V10 Polivalente</p>
+              <p class="text-xs text-gray-500 mt-0.5">Lote: LOT12345</p>
+            </div>
+            <p class="text-sm text-gray-300">14/01/2024</p>
+            <p class="text-sm text-red-400 font-medium">14/01/2025</p>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-red-500/15 text-red-400 text-xs font-semibold border border-red-500/15 w-fit"><i class="ph ph-warning-circle text-xs"></i>Atrasada</span>
+            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button class="btn-primary h-8 px-3 text-xs" style="height:32px;font-size:12px">Registrar</button>
+            </div>
+          </div>
+
+          <!-- Row - Em dia -->
+          <div class="grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_auto] gap-4 px-6 py-5 items-center hover:bg-white/[0.02] transition-colors group">
+            <div class="flex items-center gap-3">
+              <img src="https://placedog.net/51" class="w-10 h-10 rounded-xl object-cover">
+              <div><p class="font-semibold text-white text-sm">Thor</p><p class="text-xs text-gray-500">Maria Silva</p></div>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white">Antirrábica</p>
+              <p class="text-xs text-gray-500 mt-0.5">Lote: LOT67890</p>
+            </div>
+            <p class="text-sm text-gray-300">09/03/2025</p>
+            <p class="text-sm text-gray-300">14/04/2026</p>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-primary/15 text-primary text-xs font-semibold border border-primary/15 w-fit"><i class="ph ph-check-circle text-xs"></i>Em dia</span>
+            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button class="btn-secondary h-8 px-3 text-xs" style="height:32px">Ver</button>
+            </div>
+          </div>
+
+          <!-- Row - Próxima -->
+          <div class="grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_auto] gap-4 px-6 py-5 items-center hover:bg-white/[0.02] transition-colors group">
+            <div class="flex items-center gap-3">
+              <img src="https://placecats.com/50/50" class="w-10 h-10 rounded-xl object-cover">
+              <div><p class="font-semibold text-white text-sm">Luna</p><p class="text-xs text-gray-500">Fernanda Lima</p></div>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white">Leucemia Felina</p>
+              <p class="text-xs text-gray-500 mt-0.5">Lote: LOT11223</p>
+            </div>
+            <p class="text-sm text-gray-300">03/06/2025</p>
+            <p class="text-sm text-yellow-400 font-medium">03/06/2026</p>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-yellow-500/15 text-yellow-400 text-xs font-semibold border border-yellow-500/15 w-fit"><i class="ph ph-clock text-xs"></i>Em 8 dias</span>
+            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button class="btn-secondary h-8 px-3 text-xs" style="height:32px">Agendar</button>
+            </div>
+          </div>
+
+          <!-- Row - Em dia -->
+          <div class="grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_auto] gap-4 px-6 py-5 items-center hover:bg-white/[0.02] transition-colors group">
+            <div class="flex items-center gap-3">
+              <img src="https://placedog.net/52" class="w-10 h-10 rounded-xl object-cover">
+              <div><p class="font-semibold text-white text-sm">Max</p><p class="text-xs text-gray-500">João Santos</p></div>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white">V10 Polivalente</p>
+              <p class="text-xs text-gray-500 mt-0.5">Lote: LOT44556</p>
+            </div>
+            <p class="text-sm text-gray-300">12/05/2025</p>
+            <p class="text-sm text-gray-300">12/05/2026</p>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-primary/15 text-primary text-xs font-semibold border border-primary/15 w-fit"><i class="ph ph-check-circle text-xs"></i>Em dia</span>
+            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button class="btn-secondary h-8 px-3 text-xs" style="height:32px">Ver</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL -->
+<div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="flex items-center justify-between p-7 pb-5">
+      <div><h2 class="text-xl font-bold text-white">Registrar Vacina</h2><p class="text-sm text-gray-400 mt-1">Registre uma aplicação de vacina</p></div>
+      <button onclick="closeModal()" class="w-9 h-9 rounded-xl bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white transition-colors"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="px-7 pb-7 space-y-4">
+      <div class="relative"><label class="modal-label">Pet</label>
+        <select class="modal-input appearance-none cursor-pointer"><option>Selecione o pet</option><option>Thor - Maria Silva</option><option>Luna - Fernanda Lima</option><option>Max - João Santos</option></select>
+        <i class="ph ph-caret-down absolute right-3 top-9 text-gray-500 pointer-events-none"></i>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="modal-label">Vacina</label><input type="text" placeholder="Nome da vacina" class="modal-input"></div>
+        <div><label class="modal-label">Fabricante</label><input type="text" placeholder="Fabricante" class="modal-input"></div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="modal-label">Lote</label><input type="text" placeholder="Número do lote" class="modal-input"></div>
+        <div><label class="modal-label">Data de aplicação</label><input type="text" placeholder="dd/mm/aaaa" class="modal-input"></div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="modal-label">Próximo reforço</label><input type="text" placeholder="dd/mm/aaaa" class="modal-input"></div>
+        <div class="relative"><label class="modal-label">Veterinário</label>
+          <select class="modal-input appearance-none cursor-pointer"><option>Selecione</option><option>Dr. Roberto Mendes</option><option>Dra. Ana Silva</option></select>
+          <i class="ph ph-caret-down absolute right-3 top-9 text-gray-500 pointer-events-none"></i>
+        </div>
+      </div>
+      <div><label class="modal-label">Observações</label><textarea rows="2" placeholder="Reações, observações pós-aplicação..." class="modal-input resize-none"></textarea></div>
+      <div class="flex gap-3 pt-2">
+        <button onclick="closeModal()" class="btn-secondary flex-1 justify-center">Cancelar</button>
+        <button class="btn-primary flex-1 justify-center">Registrar Vacina</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+</script>
+</body>
+</html>

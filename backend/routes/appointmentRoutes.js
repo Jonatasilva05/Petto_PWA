@@ -70,4 +70,43 @@ router.get('/usuario', authenticateToken, async (req, res) => {
     }
 });
 
+// NOVA Rota: Consultas de hoje para o Dashboard do Veterinário
+router.get('/hoje', authenticateToken, async (req, res) => {
+    try {
+        // Descobre o id_veterinario do usuário logado
+        const [vetResult] = await pool.execute('SELECT id_veterinario FROM veterinarios WHERE user_id = ?', [req.user.id]);
+        
+        if (vetResult.length === 0) {
+             return res.status(403).json({ message: 'Acesso negado. Apenas veterinários podem acessar esta rota.' });
+        }
+        
+        const idVeterinario = vetResult[0].id_veterinario;
+
+        const query = `
+            SELECT 
+                a.id_agendamento,
+                a.status,
+                DATE_FORMAT(a.data_hora, '%H:%i') as hora,
+                p.nome as pet_nome,
+                u.nome as tutor_nome,
+                v.nome as veterinario_nome
+            FROM agendamentos a
+            JOIN pets p ON a.id_pet = p.id_pet
+            LEFT JOIN usuarios u ON p.id_usuario = u.id
+            JOIN veterinarios v ON a.id_veterinario = v.id_veterinario
+            WHERE a.id_veterinario = ? 
+            AND DATE(a.data_hora) = CURDATE()
+            ORDER BY a.data_hora ASC
+        `;
+
+        const [consultas] = await pool.execute(query, [idVeterinario]);
+
+        res.json(consultas);
+
+    } catch (error) {
+        console.error('Erro ao buscar consultas de hoje:', error);
+        res.status(500).json({ message: 'Erro ao carregar agendamentos' });
+    }
+});
+
 module.exports = router;

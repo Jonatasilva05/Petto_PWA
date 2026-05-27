@@ -1,0 +1,201 @@
+PROJETO: Petto_PWA
+
+============================================================
+ESTRUTURA BACKEND
+============================================================
+
+backend/
+│   ├── .env
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── server.js
+│   ├── config/
+│   │   ├── db.js
+│   ├── data/
+│   │   ├── 18-05/
+│   │   │   ├── petto_pwa.sql
+│   │   ├── 18-05-V2/
+│   │   │   ├── petto_pwa.sql
+│   │   ├── 19-05/
+│   │   │   ├── petto_pwa.sql
+│   │   ├── 23-05/
+│   │   │   ├── petto_pwa.sql
+│   │   ├── 24-05/
+│   │   │   ├── petto_pwa.sql
+│   ├── routes/
+│   │   ├── appointmentRoutes.js
+│   │   ├── authRoutes.js
+│   │   ├── petRoutes.js
+│   │   ├── vetRoutes.js
+│   ├── utils/
+│   │   ├── validators.js
+
+
+============================================================
+ESTRUTURA FRONTEND
+============================================================
+
+frontend/
+│   ├── index.html
+│   ├── manifest.json
+│   ├── sw.js
+│   ├── assets/
+│   │   ├── backgrounds/
+│   │   │   ├── abracaCao.png
+│   │   │   ├── fundo_login.jpeg
+│   │   ├── image/
+│   │   │   ├── cachorro.png
+│   │   │   ├── fundo_login.jpeg
+│   │   ├── logo/
+│   │   │   ├── icon.jpg
+│   │   │   ├── iconBrancaSemFundoMaior.png
+│   │   │   ├── iconBrancaSemFundoMenor.png
+│   │   │   ├── iconBrancaSemFundoSemNome.png
+│   │   │   ├── iconSemFundoMaior.png
+│   │   │   ├── iconSemFundoMenorComNome.png
+│   │   │   ├── iconSemFundoSemNome.png
+│   ├── css/
+│   │   ├── style.css
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── recuperarSenha.js
+│   │   ├── controllers/
+│   │   │   ├── AuthController.js
+│   │   │   ├── PetController.js
+│   │   ├── models/
+│   │   │   ├── AuthModel.js
+│   │   │   ├── PetModel.js
+│   │   ├── view/
+│   │   │   ├── AuthView.js
+│   │   │   ├── PetView.js
+│   ├── pages/
+│   │   ├── carregamento.html
+│   │   ├── dashboard.html
+│   │   ├── mapa.html
+│   │   ├── perfil.html
+│   │   ├── assets/
+│   │   │   ├── image/
+│   │   │   │   ├── abracaCao.png
+│   │   │   │   ├── fundo_login.jpeg
+│   │   │   ├── logo/
+│   │   │   │   ├── icon.jpg
+│   │   │   │   ├── iconBrancaSemFundoMaior.png
+│   │   │   │   ├── iconBrancaSemFundoMenor.png
+│   │   │   │   ├── iconBrancaSemFundoSemNome.png
+│   │   │   │   ├── iconSemFundoMaior.png
+│   │   │   │   ├── iconSemFundoMenorComNome.png
+│   │   │   │   ├── iconSemFundoSemNome.png
+│   │   ├── auth/
+│   │   │   ├── cadastrarPet1.html
+│   │   │   ├── cadastrarPet2.html
+│   │   │   ├── cadastrarPet3.html
+│   │   │   ├── cadastrarPet4.html
+│   │   │   ├── registroTutor.html
+│   │   ├── components/
+│   │   │   ├── confirmSenhaNova.html
+│   │   │   ├── recupSenha1.html
+│   │   │   ├── recupSenha2.html
+│   │   │   ├── recupSenha3.html
+│   │   ├── css/
+│   │   │   ├── acompanhaPet.css
+│   │   │   ├── agendarConsulta.css
+│   │   │   ├── cadastrarPet1.css
+│   │   │   ├── cadastrarPet2.css
+│   │   │   ├── cadastrarPet3.css
+│   │   │   ├── cadastrarPet4.css
+│   │   │   ├── carregamento.css
+│   │   │   ├── confirmSenha.css
+│   │   │   ├── dadosPerfil.css
+│   │   │   ├── dashboard.css
+│   │   │   ├── editarPet.css
+│   │   │   ├── gerenciaArquivoPet.css
+│   │   │   ├── historicoPet.css
+│   │   │   ├── mapa.css
+│   │   │   ├── medicamentosPet.css
+│   │   │   ├── perfilPet.css
+│   │   │   ├── recupSenha1.css
+│   │   │   ├── recupSenha2.css
+│   │   │   ├── recupSenha3.css
+│   │   │   ├── registroTutor.css
+│   │   │   ├── vacinasPet.css
+│   │   ├── data/
+│   │   │   ├── databaseAlertMedi.json
+│   │   │   ├── databaseBreeds.json
+│   │   │   ├── databaseHealthReference.json
+│   │   │   ├── databaseInfoMed2.json
+│   │   │   ├── databaseMedi.json
+│   │   │   ├── databasePets.json
+│   │   │   ├── encyclopediaMedi.json
+│   │   │   ├── locais.json
+│   │   ├── docs/
+│   │   ├── historicoPet/
+│   │   │   ├── medicamentosPet.html
+│   │   │   ├── vacinasPet.html
+│   │   ├── js/
+│   │   │   ├── agendarConsulta.js
+│   │   │   ├── cadastrarPet1.js
+│   │   │   ├── cadastrarPet2.js
+│   │   │   ├── cadastrarPet3.js
+│   │   │   ├── cadastrarPet4.js
+│   │   │   ├── carregamento.js
+│   │   │   ├── configPerfil.js
+│   │   │   ├── dadosPerfil.js
+│   │   │   ├── dashboard.js
+│   │   │   ├── editarPet.js
+│   │   │   ├── exportCartPerfil.js
+│   │   │   ├── historicoPet.js
+│   │   │   ├── mapa.js
+│   │   │   ├── medicamentosPet.js
+│   │   │   ├── meusAgendamentos.js
+│   │   │   ├── perfil.js
+│   │   │   ├── perfilPet.js
+│   │   │   ├── planosPerfil.js
+│   │   │   ├── recupSenha1.js
+│   │   │   ├── recupSenha2.js
+│   │   │   ├── recupSenha3.js
+│   │   │   ├── segurancaPeril.js
+│   │   │   ├── vacinasPet.js
+│   │   ├── perfil/
+│   │   │   ├── configPerfil.html
+│   │   │   ├── dadosPerfil.html
+│   │   │   ├── exportCartPerfil.html
+│   │   │   ├── petsPerfil.html
+│   │   │   ├── planosPerfil.html
+│   │   │   ├── segurancaPerfil.html
+│   │   │   ├── sobrePerfil.html
+│   │   ├── pets/
+│   │   │   ├── acompanhaPet.html
+│   │   │   ├── agendarConsulta.html
+│   │   │   ├── editarPet.html
+│   │   │   ├── gerenciaArquivoPet.html
+│   │   │   ├── historicoPet.html
+│   │   │   ├── meusAgendamentos.html
+│   │   │   ├── perfilPet.html
+│   ├── uploads/
+│   │   ├── 1779111607640_143.jpeg
+│   │   ├── 1779199652527_523.jpeg
+│   │   ├── perfil/
+│   ├── veterinario/
+│   │   ├── agendamento.html
+│   │   ├── chat.html
+│   │   ├── dashboard.html
+│   │   ├── index2.html
+│   │   ├── perfilVet.html
+│   │   ├── pets.html
+│   │   ├── proccedimento2.html
+│   │   ├── procedimentos.html
+│   │   ├── prontuario.html
+│   │   ├── tutores.html
+│   │   ├── vacinas.html
+│   │   ├── vacinas2.html
+│   │   ├── css/
+│   │   │   ├── dashboard.css
+│   │   ├── js/
+│   │   │   ├── dashboard.js
+│   │   │   ├── controllers/
+│   │   │   │   ├── VetController.js
+│   │   │   ├── models/
+│   │   │   │   ├── VetModel.js
+│   │   │   ├── view/
+│   │   │   │   ├── VetView.js
+

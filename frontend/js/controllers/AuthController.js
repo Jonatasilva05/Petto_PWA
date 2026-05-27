@@ -20,26 +20,24 @@ export class AuthController {
             
             // Verifica se o usuário já está dentro da pasta /pages/
             const isInsidePages = window.location.pathname.includes('/pages/');
+            const currentPath = window.location.pathname;
 
             if (role === 'tutor') {
-                // Caminho para a tela de carregamento, em vez do dashboard direto
                 const loadingPath = isInsidePages ? './carregamento.html' : './pages/carregamento.html';
                 
-                // Impede loop infinito (só redireciona se não estiver já no carregamento ou no dashboard)
-                const currentPath = window.location.pathname;
                 if (!currentPath.includes('dashboard.html') && !currentPath.includes('carregamento.html')) {
                     window.location.href = loadingPath; 
                 }
             } else if (role === 'veterinario') {
-                // Se for veterinário (SPA na mesma página index)
-                if (this.view.sections.vet && !window.location.pathname.includes('dashboard.html')) {
-                    const userName = localStorage.getItem('user-name');
-                    this.view.setupDashboard(role, userName);
-                    this.loadVetDashboard();
+                // Define o caminho para a nova pasta separada do veterinário
+                const vetDashboardPath = isInsidePages ? '../veterinario/dashboard.html' : './veterinario/dashboard.html';
+                
+                // Impede loop infinito
+                if (!currentPath.includes('veterinario/dashboard.html')) {
+                    window.location.href = vetDashboardPath;
                 }
             }
         } else {
-            // NÃO ESTÁ LOGADO! Mostra a tela de login se ela existir
             if (this.view.sections.login) {
                 this.view.switchScreen('login');
             }
@@ -64,16 +62,14 @@ export class AuthController {
             const data = await this.model.login(email, senha);
             const userName = localStorage.getItem('user-name');
             
-            // Mostra o aviso
             this.view.showToast(`Olá, ${userName}!`, 'success');
             
-            // Segura o redirecionamento por 1 segundo (1000 milissegundos) para dar tempo de ver o Toast
             setTimeout(async () => {
                 if (data.role === 'tutor') {
                     window.location.href = './pages/carregamento.html'; 
                 } else if (data.role === 'veterinario') {
-                    this.view.setupDashboard(data.role, userName);
-                    await this.loadVetDashboard();
+                    // Redireciona diretamente para o arquivo isolado que criamos
+                    window.location.href = './veterinario/dashboard.html';
                 }
             }, 1000);
 

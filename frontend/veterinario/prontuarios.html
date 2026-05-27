@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+
+    <link rel="stylesheet" href="./css/prontuarios.css">
+
+    <title>Petto • Prontuários</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D09E',
+                        dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' }
+                    },
+                    boxShadow: { glow: '0 0 40px rgba(0, 208, 158, 0.12)' }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen w-full">
+
+        <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
+                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
+                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    </div>
+                </div>
+
+                <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
+                    <div>
+                        <p class="sidebar-title">VISÃO GERAL</p>
+                        <div class="space-y-1">
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
+                                Dashboard</a>
+                            <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
+                            <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">ROTINA CLÍNICA</p>
+                        <div class="space-y-1">
+                            <a href="agenda.html" class="sidebar-item">
+                                <i class="ph ph-calendar text-xl"></i> Agendamentos
+                                <div
+                                    class="ml-auto w-5 h-5 rounded-md bg-dark-800 text-gray-400 flex items-center justify-center text-[10px] font-bold">
+                                    4</div>
+                            </a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
+                                Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i>
+                                Vacinas</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">SISTEMA</p>
+                        <div class="space-y-1">
+                            <a href="procedimentos.html" class="sidebar-item">
+                                <i class="ph ph-heartbeat text-xl"></i> Centro Cirúrgico
+                            </a>
+                            <a href="mensagens.html" class="sidebar-item"><i
+                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
+                                Segurança & Acessos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="p-5 border-t border-dark-border shrink-0 bg-dark-900">
+                <div class="bg-[#051310] border border-[#0a241c] rounded-2xl p-4 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <i class="ph-fill ph-shield-check text-xl"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h4 class="text-sm font-semibold text-primary truncate">Ambiente Isolado</h4>
+                        <p class="text-[10px] text-gray-400 truncate">Firewall & 2FA Ativos</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
+            <header
+                class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Prontuários Eletrônicos</h2>
+                    <p class="text-gray-400 text-sm mt-1">Histórico clínico inalterável e seguro.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative hidden lg:block">
+                        <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="text" placeholder="ID, Pet ou Tutor..."
+                            class="input-base w-72 h-12 pl-11 pr-4 text-sm" />
+                    </div>
+                    <button
+                        class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold">
+                            J</div>
+                        <div class="text-left hidden sm:block">
+                            <p class="text-sm font-semibold leading-tight">Dr. Jhon</p>
+                        </div>
+                    </button>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-[1400px] mx-auto space-y-8 pb-12">
+
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-action bg-dark-800 border border-dark-border hover:bg-dark-700 text-white"><i
+                                    class="ph ph-funnel"></i> Todos os Registros</button>
+                            <button
+                                class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-gray-400"><i
+                                    class="ph ph-sort-descending"></i> Mais Recentes</button>
+                        </div>
+                        <button class="btn-action btn-primary"><i class="ph-bold ph-file-plus"></i> Novo
+                            Prontuário</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                        <!-- Registro Expandido -->
+                        <div class="glass-panel rounded-3xl p-8 card-hover">
+                            <div class="flex items-start justify-between mb-8">
+                                <div class="flex items-center gap-5">
+                                    <img src="https://placedog.net/100/100?id=2"
+                                        class="w-16 h-16 rounded-2xl object-cover border-2 border-dark-800" />
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <h2 class="text-2xl font-bold">Thor</h2>
+                                            <span
+                                                class="bg-primary/10 text-primary text-xs px-2.5 py-1 rounded-md border border-primary/20">Em
+                                                Tratamento</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400">Golden Retriever • Tutor: Maria Silva</p>
+                                    </div>
+                                </div>
+                                <button class="btn-icon w-10 h-10"><i class="ph ph-printer"></i></button>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-8">
+                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
+                                        Veterinário</p>
+                                    <p class="text-sm font-semibold">Dr. Jhon</p>
+                                </div>
+                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
+                                        Última Atualização</p>
+                                    <p class="text-sm font-semibold text-primary">Há 2 horas</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <p class="text-xs text-primary font-bold tracking-widest uppercase mb-1">Diagnóstico
+                                    </p>
+                                    <h4 class="text-lg font-semibold text-white">Traqueobronquite Infecciosa</h4>
+                                    <p class="text-sm text-gray-400 mt-2 leading-relaxed">Paciente apresentou tosse
+                                        persistente e irritação traqueal severa durante a noite. Ausculta pulmonar
+                                        limpa.</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <p class="text-xs text-primary font-bold tracking-widest uppercase mb-1">Tratamento
+                                        & Prescrição</p>
+                                    <h4 class="text-lg font-semibold text-white">Doxiciclina + Antitussígeno</h4>
+                                    <p class="text-sm text-gray-400 mt-2 leading-relaxed">Iniciado ciclo de antibiótico
+                                        por 10 dias. Orientada restrição de exercícios e hidratação contínua.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Registro Secundário -->
+                        <div class="glass-panel rounded-3xl p-8 card-hover">
+                            <div class="flex items-start justify-between mb-8">
+                                <div class="flex items-center gap-5">
+                                    <img src="https://placecats.com/100/100"
+                                        class="w-16 h-16 rounded-2xl object-cover border-2 border-dark-800" />
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <h2 class="text-2xl font-bold">Luna</h2>
+                                            <span
+                                                class="bg-blue-500/10 text-blue-400 text-xs px-2.5 py-1 rounded-md border border-blue-500/20">Alta
+                                                Médica</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400">Persa • Tutor: Fernanda Lima</p>
+                                    </div>
+                                </div>
+                                <button class="btn-icon w-10 h-10"><i class="ph ph-printer"></i></button>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-8">
+                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
+                                        Veterinário</p>
+                                    <p class="text-sm font-semibold">Dra. Ana Silva</p>
+                                </div>
+                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
+                                        Última Atualização</p>
+                                    <p class="text-sm font-semibold">14 Fev 2026</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-1">
+                                        Diagnóstico Final</p>
+                                    <h4 class="text-lg font-semibold text-white">Otite Externa Bacteriana Curada</h4>
+                                    <p class="text-sm text-gray-400 mt-2 leading-relaxed">Limpeza auricular finalizada.
+                                        Conduto auditivo sem sinais de inflamação ou secreção.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="./js/global.js"></script>
+</html>

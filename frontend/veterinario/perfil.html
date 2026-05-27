@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+    <meta name="referrer" content="no-referrer">
+
+    <link rel="stylesheet" href="./css/perfil.css">
+
+    <title>Petto • Segurança e Acessos</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D09E',
+                        dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' }
+                    },
+                    boxShadow: { glow: '0 0 40px rgba(0, 208, 158, 0.12)' }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen w-full">
+
+        <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
+                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
+                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    </div>
+                </div>
+
+                <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
+                    <div>
+                        <p class="sidebar-title">VISÃO GERAL</p>
+                        <div class="space-y-1">
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
+                                Dashboard</a>
+                            <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
+                            <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">ROTINA CLÍNICA</p>
+                        <div class="space-y-1">
+                            <a href="agenda.html" class="sidebar-item">
+                                <i class="ph ph-calendar text-xl"></i> Agendamentos
+                                <div
+                                    class="ml-auto w-5 h-5 rounded-md bg-dark-800 text-gray-400 flex items-center justify-center text-[10px] font-bold">
+                                    4</div>
+                            </a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
+                                Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i>
+                                Vacinas</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">SISTEMA</p>
+                        <div class="space-y-1">
+                            <a href="procedimentos.html" class="sidebar-item">
+                                <i class="ph ph-heartbeat text-xl"></i> Centro Cirúrgico
+                            </a>
+                            <a href="mensagens.html" class="sidebar-item"><i
+                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
+                                Segurança & Acessos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="p-5 border-t border-dark-border shrink-0 bg-dark-900">
+                <div class="bg-[#051310] border border-[#0a241c] rounded-2xl p-4 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <i class="ph-fill ph-shield-check text-xl"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h4 class="text-sm font-semibold text-primary truncate">Ambiente Isolado</h4>
+                        <p class="text-[10px] text-gray-400 truncate">Firewall & 2FA Ativos</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
+            <header
+                class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Centro de Segurança</h2>
+                    <p class="text-gray-400 text-sm mt-1">Gerencie firewalls, acessos do banco de dados e aparelhos de
+                        confiança.</p>
+                </div>
+                <button class="btn-action btn-primary"><i class="ph-bold ph-floppy-disk"></i> Salvar Políticas</button>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-[1200px] mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 pb-12">
+
+                    <!-- Coluna Esquerda: Defesas Ativas e IP -->
+                    <div class="space-y-8">
+
+                        <div class="glass-panel rounded-3xl p-8 border-l-4 border-l-primary">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-bold text-lg flex items-center gap-2"><i
+                                        class="ph-fill ph-firewall text-primary"></i> Firewall do Banco de Dados</h3>
+                                <span
+                                    class="bg-primary/10 text-primary text-xs px-2.5 py-1 rounded-md border border-primary/20 font-bold">STRICT
+                                    MODE</span>
+                            </div>
+
+                            <div class="space-y-5">
+                                <div
+                                    class="bg-dark-800 border border-dark-border rounded-2xl p-5 flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-sm font-bold text-white">Bloqueio de IP Externo</h4>
+                                        <p class="text-xs text-gray-400 mt-1">Rejeita qualquer acesso fora do Roteador
+                                            Wi-Fi autorizado.</p>
+                                    </div>
+                                    <div
+                                        class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                                        <input type="checkbox" name="toggle" id="toggleIP" checked
+                                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 right-0 border-[#00D09E]" />
+                                        <label for="toggleIP"
+                                            class="toggle-label block overflow-hidden h-6 rounded-full bg-[#00D09E] cursor-pointer"></label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label
+                                        class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">IP
+                                        do Roteador / Gateway Principal</label>
+                                    <div class="flex gap-3">
+                                        <input type="text" value="192.168.1.1" class="input-base text-gray-400"
+                                            disabled />
+                                        <button
+                                            class="btn-action bg-dark-800 border border-dark-border hover:bg-dark-700 w-12 p-0"><i
+                                                class="ph ph-pencil-simple text-lg"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-3xl p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-bold text-lg flex items-center gap-2"><i
+                                        class="ph-fill ph-key text-white"></i> Autenticação 2FA</h3>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-6">A proteção 2FA impede que façam login no App ou no
+                                Painel mesmo se a senha for vazada.</p>
+
+                            <div
+                                class="bg-dark-800 border border-dark-border rounded-2xl p-5 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl">
+                                        <i class="ph-fill ph-device-mobile"></i></div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-white">App Authenticator</h4>
+                                        <p class="text-xs text-primary mt-0.5">Ativado e Verificado</p>
+                                    </div>
+                                </div>
+                                <button
+                                    class="text-sm text-gray-400 hover:text-white transition-colors">Configurar</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Coluna Direita: Dispositivos de Confiança -->
+                    <div class="glass-panel rounded-3xl p-8">
+                        <h3 class="font-bold text-lg flex items-center gap-2 mb-2"><i
+                                class="ph-fill ph-devices text-white"></i> Dispositivos Confiáveis</h3>
+                        <p class="text-sm text-gray-400 mb-8">Hardware e ambientes com acesso irrestrito aprovado pelo
+                            Dr. Jhon.</p>
+
+                        <div class="space-y-4">
+                            <!-- Dispositivo 1: Notebook Base -->
+                            <div class="bg-dark-900 border border-primary/30 rounded-2xl p-5 flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-2xl shrink-0">
+                                    <i class="ph-fill ph-laptop"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-sm font-bold text-white truncate">Samsung Book NP550XDA</h4>
+                                        <span
+                                            class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded border border-primary/20">Sessão
+                                            Atual</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400 mt-1">Ambiente de Desenvolvimento: <span
+                                            class="text-white">WSL (Ubuntu) Docker Host</span></p>
+                                    <p class="text-[10px] text-gray-500 mt-2">Localização: Taquaritinga/Araraquara (IP
+                                        Local)</p>
+                                </div>
+                            </div>
+
+                            <!-- Dispositivo 2: Celular -->
+                            <div class="bg-dark-800 border border-dark-border rounded-2xl p-5 flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-dark-950 text-gray-400 border border-dark-border flex items-center justify-center text-2xl shrink-0">
+                                    <i class="ph-fill ph-device-mobile"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-sm font-bold text-white truncate">Smartphone Principal</h4>
+                                    </div>
+                                    <p class="text-xs text-gray-400 mt-1">Acesso PWA Petto</p>
+                                    <p class="text-[10px] text-gray-500 mt-2">Sincronizado há 2 horas</p>
+                                </div>
+                                <button class="text-red-400 hover:text-red-500 transition-colors"
+                                    title="Revogar Acesso"><i class="ph-fill ph-x-circle text-xl"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-dark-border">
+                            <button
+                                class="btn-action w-full bg-dark-800 border border-red-500/20 text-red-400 hover:bg-red-500/10">
+                                <i class="ph-bold ph-warning-octagon"></i> Desconectar todos os outros dispositivos
+                            </button>
+                            <p class="text-[10px] text-gray-500 text-center mt-3">Garante que ninguém além das sessões
+                                listadas acima acesse dados fora do app.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="./js/perfil.js"></script>
+<script src="./js/global.js"></script>
+</html>

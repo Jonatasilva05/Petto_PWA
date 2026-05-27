@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+
+    <link rel="stylesheet" href="./css/procedimentos.css">
+
+    <title>Petto • Centro Cirúrgico</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#00D09E', dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' } }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen w-full">
+
+        <!-- SIDEBAR -->
+        <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
+                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
+                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    </div>
+                </div>
+
+                <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
+                    <div>
+                        <p class="sidebar-title">VISÃO GERAL</p>
+                        <div class="space-y-1">
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
+                                Dashboard</a>
+                            <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
+                            <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">ROTINA CLÍNICA</p>
+                        <div class="space-y-1">
+                            <a href="agenda.html" class="sidebar-item">
+                                <i class="ph ph-calendar text-xl"></i> Agendamentos
+                                <div
+                                    class="ml-auto w-5 h-5 rounded-md bg-dark-800 text-gray-400 flex items-center justify-center text-[10px] font-bold">
+                                    4</div>
+                            </a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
+                                Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i>
+                                Vacinas</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sidebar-title">SISTEMA</p>
+                        <div class="space-y-1">
+                            <a href="procedimentos.html" class="sidebar-item">
+                                <i class="ph ph-heartbeat text-xl"></i> Centro Cirúrgico
+                            </a>
+                            <a href="mensagens.html" class="sidebar-item"><i
+                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
+                                Segurança & Acessos</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="p-5 border-t border-dark-border shrink-0 bg-dark-900">
+                <div class="bg-[#051310] border border-[#0a241c] rounded-2xl p-4 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <i class="ph-fill ph-shield-check text-xl"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h4 class="text-sm font-semibold text-primary truncate">Ambiente Isolado</h4>
+                        <p class="text-[10px] text-gray-400 truncate">Firewall & 2FA Ativos</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL -->
+        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-[#0a0505] to-dark-950 relative">
+            <header
+                class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
+                <div class="flex items-center gap-4">
+                    <div class="live-dot"></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white uppercase tracking-wide text-red-500">Cirurgia em
+                            Andamento</h2>
+                        <p class="text-gray-400 text-sm mt-1">Sala 1 • Equipamentos conectados</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="btn-action bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20"><i
+                            class="ph-bold ph-phone-call"></i> Acionar Equipe</button>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-[1400px] mx-auto grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+                    <!-- MONITORAMENTO VITAL -->
+                    <div class="xl:col-span-2 space-y-8">
+                        <!-- Header Paciente -->
+                        <div class="glass-panel rounded-[32px] p-8 border-l-4 border-l-red-500 flex items-start gap-8">
+                            <img src="https://placedog.net/250/250?id=5"
+                                class="w-32 h-32 rounded-3xl object-cover border-4 border-dark-800 shrink-0" />
+                            <div class="flex-1">
+                                <h1 class="text-4xl font-bold mb-2">Thor</h1>
+                                <p class="text-gray-400 text-lg mb-6">Golden Retriever • Extração Dentária Múltipla</p>
+
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="bg-dark-900 border border-dark-border rounded-2xl p-4">
+                                        <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2">
+                                            Frequência</p>
+                                        <div class="flex items-end gap-2 text-red-400">
+                                            <i class="ph-fill ph-heartbeat text-3xl"></i>
+                                            <span class="text-3xl font-bold">98</span><span
+                                                class="text-sm pb-1">bpm</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-dark-900 border border-dark-border rounded-2xl p-4">
+                                        <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2">
+                                            Oxigenação</p>
+                                        <div class="flex items-end gap-2 text-blue-400">
+                                            <i class="ph-fill ph-drop text-3xl"></i>
+                                            <span class="text-3xl font-bold">99</span><span
+                                                class="text-sm pb-1">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-dark-900 border border-dark-border rounded-2xl p-4">
+                                        <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2">
+                                            Temperatura</p>
+                                        <div class="flex items-end gap-2 text-yellow-400">
+                                            <i class="ph-fill ph-thermometer text-3xl"></i>
+                                            <span class="text-3xl font-bold">38.2</span><span
+                                                class="text-sm pb-1">°C</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Etapas -->
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="bg-primary/10 border border-primary/20 rounded-2xl p-5 text-center"><i
+                                    class="ph-fill ph-check-circle text-primary text-2xl mb-2"></i>
+                                <p class="text-sm font-semibold text-primary">Admissão</p>
+                            </div>
+                            <div class="bg-primary/10 border border-primary/20 rounded-2xl p-5 text-center"><i
+                                    class="ph-fill ph-check-circle text-primary text-2xl mb-2"></i>
+                                <p class="text-sm font-semibold text-primary">Anestesia</p>
+                            </div>
+                            <div
+                                class="bg-red-500/10 border border-red-500/30 rounded-2xl p-5 text-center ring-1 ring-red-500/50">
+                                <i class="ph-fill ph-scissors text-red-500 text-2xl mb-2"></i>
+                                <p class="text-sm font-semibold text-red-500">Cirurgia</p>
+                            </div>
+                            <div class="glass-panel rounded-2xl p-5 text-center opacity-50"><i
+                                    class="ph-fill ph-bed text-gray-400 text-2xl mb-2"></i>
+                                <p class="text-sm font-semibold text-gray-400">Recuperação</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LINHA DO TEMPO & EQUIPE -->
+                    <div class="space-y-8">
+                        <div class="glass-panel rounded-[32px] p-8">
+                            <h3 class="font-bold text-xl mb-6 flex items-center gap-2"><i
+                                    class="ph ph-clock text-gray-400"></i> Eventos</h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <h4 class="font-bold text-lg text-red-400">Incisão Inicial</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Extração do dente pré-molar iniciada.
+                                        Sangramento controlado.</p>
+                                    <span class="text-xs font-semibold text-gray-500 mt-2 block">Agora • 10:45</span>
+                                </div>
+                                <div class="timeline-item done">
+                                    <h4 class="font-bold text-lg text-primary">Indução Anestésica</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Propofol administrado. Paciente entubado com
+                                        sucesso.</p>
+                                    <span class="text-xs font-semibold text-gray-500 mt-2 block">Há 30 min •
+                                        10:15</span>
+                                </div>
+                                <div class="timeline-item done pb-0">
+                                    <h4 class="font-bold text-lg text-primary">Check-in</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Exames pré-operatórios validados por Dr. Jhon.
+                                    </p>
+                                    <span class="text-xs font-semibold text-gray-500 mt-2 block">Há 1h • 09:40</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-[32px] p-6">
+                            <h3 class="font-bold text-sm uppercase tracking-widest text-gray-500 mb-4">Equipe na Sala
+                            </h3>
+                            <div class="space-y-4">
+                                <div
+                                    class="flex items-center gap-4 bg-dark-800 p-3 rounded-2xl border border-dark-border">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold">
+                                        J</div>
+                                    <div>
+                                        <p class="text-sm font-bold">Dr. Jhon</p>
+                                        <p class="text-[10px] text-gray-400 uppercase">Cirurgião Chefe</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center gap-4 bg-dark-800 p-3 rounded-2xl border border-dark-border">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
+                                        RM</div>
+                                    <div>
+                                        <p class="text-sm font-bold">Dr. Roberto Mendes</p>
+                                        <p class="text-[10px] text-gray-400 uppercase">Anestesista</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="./js/global.js"></script>
+</html>
