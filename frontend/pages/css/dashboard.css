@@ -1,90 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-:root {
-    --primary-blue: #4890F0;
-    --primary-dark: #274472;
-    --bg-color: #f4f7fb;
-    --text-dark: #333;
-    --text-muted: #9aa5b1;
-}
-
-/* O corpo agora ocupa 100% da tela e a cor de fundo cinza foi removida */
-body, html {
-    background-color: var(--bg-color);
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Trava o fundo, o scroll acontece apenas no meio */
-}
-
-/* Sem limites (max-width), ocupa toda a largura do telemóvel */
-.mobile-frame {
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-/* --- Novo Cabeçalho Estilo Imagem --- */
-.header {
-    background-color: #264475; /* Cor extraída da sua imagem */
-    color: white;
-    padding: 16px 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.brand-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.header-logo {
-    width: 60px;
-    height: auto;
-}
-
-.fallback-logo {
-    font-size: 32px;
-    color: white;
-}
-
-.title-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.title-text h1 {
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: 0.5px;
-}
-
-.title-text p {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.85); /* Branco levemente transparente como na imagem */
-    margin: 0;
-    font-weight: 400;
-    margin-top: 2px;
-}
-
 .profile-icon {
     font-size: 30px;
     color: white;
@@ -94,51 +7,8 @@ body, html {
     cursor: pointer;
 }
 
-/* --- Estilo do Botão de Logout no novo cabeçalho --- */
-.btn-logout {
-    background: rgba(255, 255, 255, 0.15); /* Fundo levemente branco e transparente */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-}
-
 .btn-logout i {
     font-size: 14px;
-}
-
-.btn-logout:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.btn-logout:active {
-    transform: scale(0.95);
-}
-
-/* Garante que o header-content continue alinhado */
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.btn-logout:active { background: rgba(255,255,255,0.3); }
-
-/* --- Content --- */
-.content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto; /* Scroll do telemóvel fica aqui */
 }
 
 .section-title {
@@ -151,8 +21,10 @@ body, html {
 /* --- FAB (Botão flutuante) --- */
 .fab {
     position: absolute;
-    bottom: 85px; right: 20px;
-    width: 60px; height: 60px;
+    bottom: 85px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
     border-radius: 30px;
     background-color: var(--primary-blue);
     color: white;
@@ -166,61 +38,51 @@ body, html {
     z-index: 100;
 }
 
-/* --- Navegação Inferior --- */
-.bottom-nav {
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0 25px 0;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-    flex-shrink: 0;
-    z-index: 10;
-}
-
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.nav-item i { font-size: 22px; }
-.nav-item.active { color: var(--primary-dark); }
 
 /* --- Empty State (Ajuste da foto do cãozinho) --- */
-.empty-state { text-align: center; margin-top: 30px; }
-
-.empty-img { 
-    width: 120px; 
-    height: 120px; 
-    border-radius: 60px; /* Deixa a imagem redonda */
-    object-fit: cover; /* Evita que a foto fique esticada/amassada */
-    opacity: 0.9; 
-    margin-bottom: 15px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.empty-state {
+    text-align: center;
+    margin-top: 30px;
 }
 
-.empty-state h3 { color: var(--text-dark); margin-bottom: 5px; font-size: 18px; }
-.empty-state p { color: var(--text-muted); font-size: 13px; }
-
-.btn-primary { 
-    background: var(--primary-blue); 
-    color: white; 
-    border: none; 
-    padding: 14px 25px; 
-    border-radius: 25px; 
-    margin-top: 20px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    width: 100%; 
-    box-shadow: 0 4px 10px rgba(72,144,240,0.3); 
+.empty-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    /* Deixa a imagem redonda */
+    object-fit: cover;
+    /* Evita que a foto fique esticada/amassada */
+    opacity: 0.9;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.hidden { 
-    display: none !important; 
+
+.empty-state h3 {
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.btn-primary {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 25px;
+    margin-top: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(72, 144, 240, 0.3);
+}
+
+.hidden {
+    display: none !important;
 }
 
 /* --- Cartão do Pet --- */
@@ -229,7 +91,7 @@ body, html {
     padding: 15px;
     border-radius: 15px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .pet-info {
@@ -321,13 +183,14 @@ body, html {
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .pet-card-top .pet-img {
     width: 65px;
     height: 65px;
-    border-radius: 15px; /* Quadrado com cantos arredondados, igual a imagem */
+    border-radius: 15px;
+    /* Quadrado com cantos arredondados, igual a imagem */
     object-fit: cover;
 }
 
@@ -362,13 +225,13 @@ body, html {
     background: #ffffff;
     border-radius: 18px;
     padding: 15px 5px;
-    flex: 1;    
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -414,7 +277,7 @@ body, html {
     right: 0;
     top: 100%;
     background: white;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
     z-index: 10;
     width: 130px;

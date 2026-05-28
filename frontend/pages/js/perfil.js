@@ -68,3 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (nomeElement) nomeElement.innerText = "Usuário Offline";
         });
 });
+
+// Ação real do botão de Sair (Limpa o acesso para não logar direto)
+document.getElementById('btn-logout-perfil')?.addEventListener('click', () => {
+    localStorage.removeItem('auth-token-petto');
+    localStorage.removeItem('user-role');
+    localStorage.removeItem('user-name');
+    localStorage.removeItem('userId');
+    window.location.href = '../index.html'; // Volta para a tela de login
+});

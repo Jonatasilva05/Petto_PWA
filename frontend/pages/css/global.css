@@ -1,0 +1,178 @@
+/* =========================================
+   global.css - Estilos globais do Petto
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-blue: #4890F0;
+    --primary-dark: #274472;
+    --bg-color: #f4f7fb;
+    --text-dark: #333;
+    --text-muted: #9aa5b1;
+    --accent-orange: #ff9800;
+}
+
+body,
+html {
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mobile-frame {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* --- CABEÇALHO --- */
+.header {
+    background-color: #264475;
+    color: white;
+    padding: 16px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.brand-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-logo {
+    width: 60px;
+    height: auto;
+}
+
+.fallback-logo {
+    font-size: 32px;
+    color: white;
+}
+
+.title-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-text h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+}
+
+.title-text p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* Botão Sair do Cabeçalho */
+.btn-logout {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-logout:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- RODAPÉ (Navegação Inferior) --- */
+.bottom-nav {
+    background: #264475;
+    /* Mesma cor azul escura idêntica ao cabeçalho */
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 22px 0;
+    /* Ajuste fino para encaixar no frame mobile */
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+    /* Sombra invertida para dar profundidade */
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    /* Linha divisória extremamente sutil */
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.55);
+    /* Branco fosco para os itens inativos (não ficam perdidos) */
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-item i {
+    font-size: 22px;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* =========================================
+   SISTEMA DE DESTAQUE DO ÍCONE ATIVO
+   ========================================= */
+.nav-item.active {
+    color: #ffffff;
+    /* O texto do menu selecionado acende em Branco Puro */
+}
+
+.nav-item.active i {
+    color: #4890F0;
+    /* O Ícone ganha o azul claro vibrante da logo do Petto */
+    transform: translateY(-3px);
+    /* Efeito flutuante: o ícone sobe levemente de forma elegante */
+    text-shadow: 0 2px 10px rgba(72, 144, 240, 0.5);
+    /* Efeito neon sutil de iluminação traseira */
+}
+
+/* --- Ajuste geral de conteúdo --- */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    padding-bottom: 95px;
+}

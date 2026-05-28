@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com http://localhost:*; object-src 'none';">
     <meta name="referrer" content="no-referrer">
 
-    <link rel="stylesheet" href="./css/tutores.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
 
     <title>Petto • Clientes (Tutores)</title>
 
@@ -23,7 +23,7 @@
                         primary: '#00D09E',
                         dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' }
                     },
-                    boxShadow: { glow: '0 0 40px rgba(0, 208, 158, 0.12)' }
+                    boxShadow: { glow: '0 0 40px rgba(0, 208, 158, 0.12)', card: '0 25px 60px rgba(0, 0, 0, 0.35)' }
                 }
             }
         }
@@ -33,16 +33,21 @@
 <body>
     <div class="flex h-screen w-full">
 
+        <!-- SIDEBAR -->
         <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
             <div class="flex flex-col h-full overflow-hidden">
                 <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
-                    <div
-                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
-                        <i class="ph-bold ph-paw-print text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
-                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+                            <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Logo Petto"
+                                class="w-10 h-10 object-contain brightness-0 opacity-80">
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Petto</h2>
+                            <p class="text-xs font-bold text-primary tracking-widest uppercase mt-0.5">Página - Inicial
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -74,11 +79,10 @@
                     <div>
                         <p class="sidebar-title">SISTEMA</p>
                         <div class="space-y-1">
-                            <a href="procedimentos.html" class="sidebar-item">
-                                <i class="ph ph-heartbeat text-xl"></i> Centro Cirúrgico
-                            </a>
-                            <a href="mensagens.html" class="sidebar-item"><i
-                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="procedimentos.html" class="sidebar-item"><i class="ph ph-heartbeat text-xl"></i>
+                                Centro Cirúrgico</a>
+                            <a href="chat.html" class="sidebar-item"><i class="ph ph-chat-teardrop-text text-xl"></i>
+                                Mensagens</a>
                             <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
                                 Segurança & Acessos</a>
                         </div>
@@ -100,7 +104,10 @@
             </div>
         </aside>
 
+        <!-- ÁREA PRINCIPAL -->
         <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
+
+            <!-- HEADER PADRONIZADO -->
             <header
                 class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
                 <div>
@@ -108,21 +115,47 @@
                     <p class="text-gray-400 text-sm mt-1">Gerencie a comunicação e cadastros responsáveis pelos pets.
                     </p>
                 </div>
+
                 <div class="flex items-center gap-4">
                     <div class="relative hidden lg:block">
                         <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
                         <input type="text" placeholder="Buscar tutor, CPF ou telefone..."
-                            class="input-base w-72 h-12 pl-11 pr-4 text-sm" />
+                            class="input-base w-72 h-12 pl-11 pr-4 text-sm" autocomplete="off" />
                     </div>
-                    <button
-                        class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors">
-                        <div
-                            class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold">
-                            J</div>
-                        <div class="text-left hidden sm:block">
-                            <p class="text-sm font-semibold leading-tight">Dr. Jhon</p>
-                        </div>
+
+                    <div class="h-8 w-px bg-dark-border mx-2"></div>
+
+                    <button class="btn-icon relative">
+                        <i class="ph ph-bell"></i>
+                        <span
+                            class="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full border-2 border-[#151F25]"></span>
                     </button>
+
+                    <!-- MENU DE PERFIL PADRÃO -->
+                    <div class="relative" id="profile-menu-container">
+                        <button id="btn-profile-menu"
+                            class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors cursor-pointer">
+                            <div class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold"
+                                id="vet-profile-avatar">J</div>
+                            <div class="text-left hidden sm:block">
+                                <p class="text-sm font-semibold leading-tight" id="vet-profile-name">...</p>
+                                <p class="text-[10px] text-gray-400">CRMV Ativo</p>
+                            </div>
+                            <i class="ph ph-caret-down text-gray-500 ml-2"></i>
+                        </button>
+
+                        <div id="dropdown-profile"
+                            class="absolute right-0 mt-3 w-48 bg-dark-800 border border-dark-border rounded-xl shadow-card hidden flex-col overflow-hidden z-50 transform origin-top-right transition-all">
+                            <a href="perfil.html"
+                                class="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-dark-700 hover:text-white transition-colors border-b border-dark-border">
+                                <i class="ph ph-user text-lg"></i> Meu Perfil
+                            </a>
+                            <button id="btn-logout"
+                                class="flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 transition-colors w-full text-left">
+                                <i class="ph ph-sign-out text-lg"></i> Sair da Conta
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </header>
 
@@ -189,64 +222,6 @@
                                     <button class="btn-icon w-10 h-10"><i class="ph ph-pencil-simple"></i></button>
                                 </div>
                             </div>
-
-                            <!-- Tutor 2 -->
-                            <div
-                                class="grid grid-cols-[2fr_1.5fr_1.5fr_auto] gap-4 px-8 py-6 items-center card-hover glass-panel m-2 rounded-2xl border-none">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-lg">
-                                        FL</div>
-                                    <div>
-                                        <h4 class="font-bold text-white text-base">Fernanda Lima</h4>
-                                        <p class="text-xs text-gray-400 mt-0.5"><i class="ph-fill ph-map-pin"></i>
-                                            Araraquara, SP</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-300">(16) 99123-4567</p>
-                                    <p class="text-xs text-gray-500 mt-0.5">fernanda.lima@email.com</p>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span
-                                        class="bg-dark-800 text-gray-400 border border-dark-border px-2 py-1 rounded text-xs font-medium"><i
-                                            class="ph-fill ph-paw-print text-primary mr-1"></i> Luna</span>
-                                </div>
-                                <div class="flex gap-2 justify-end">
-                                    <button class="btn-icon w-10 h-10 hover:text-primary hover:border-primary"><i
-                                            class="ph ph-whatsapp-logo"></i></button>
-                                    <button class="btn-icon w-10 h-10"><i class="ph ph-pencil-simple"></i></button>
-                                </div>
-                            </div>
-
-                            <!-- Tutor 3 -->
-                            <div
-                                class="grid grid-cols-[2fr_1.5fr_1.5fr_auto] gap-4 px-8 py-6 items-center card-hover glass-panel m-2 rounded-2xl border-none">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center font-bold text-lg">
-                                        JS</div>
-                                    <div>
-                                        <h4 class="font-bold text-white text-base">João Santos</h4>
-                                        <p class="text-xs text-gray-400 mt-0.5"><i class="ph-fill ph-map-pin"></i>
-                                            Taquaritinga, SP</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-300">(16) 98765-4321</p>
-                                    <p class="text-xs text-gray-500 mt-0.5">jsantos@email.com</p>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span
-                                        class="bg-dark-800 text-gray-400 border border-dark-border px-2 py-1 rounded text-xs font-medium"><i
-                                            class="ph-fill ph-paw-print text-primary mr-1"></i> Max</span>
-                                </div>
-                                <div class="flex gap-2 justify-end">
-                                    <button class="btn-icon w-10 h-10 hover:text-primary hover:border-primary"><i
-                                            class="ph ph-whatsapp-logo"></i></button>
-                                    <button class="btn-icon w-10 h-10"><i class="ph ph-pencil-simple"></i></button>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -255,16 +230,18 @@
         </main>
     </div>
 
-    <!-- MODAL NOVO TUTOR -->
+    <!-- MODAL NOVO TUTOR (Com Transições) -->
     <div id="modalTutor"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-dark-900 border border-dark-border rounded-[32px] w-full max-w-2xl overflow-hidden shadow-card">
+        class="fixed inset-0 bg-dark-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div
+            class="glass-panel border border-dark-border rounded-[32px] w-full max-w-2xl overflow-hidden shadow-card transform scale-95 transition-transform duration-300">
             <div class="p-6 border-b border-dark-border flex items-center justify-between bg-dark-850">
                 <div>
                     <h3 class="text-xl font-bold text-white">Cadastrar Tutor</h3>
                     <p class="text-sm text-gray-400 mt-1">Registre o contato do responsável</p>
                 </div>
-                <button id="fecharModal" class="btn-icon w-10 h-10"><i class="ph ph-x"></i></button>
+                <button id="fecharModal" class="btn-icon w-10 h-10 hover:text-white transition-colors"><i
+                        class="ph ph-x"></i></button>
             </div>
 
             <form id="formTutor" class="p-8 space-y-6">
@@ -272,7 +249,7 @@
                     <div class="md:col-span-2">
                         <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Nome
                             Completo</label>
-                        <input type="text" class="input-base h-12 px-4" />
+                        <input type="text" class="input-base h-12 px-4" required />
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">CPF /
@@ -282,34 +259,27 @@
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">WhatsApp
                             / Telefone</label>
-                        <input type="tel" class="input-base h-12 px-4" />
+                        <input type="tel" class="input-base h-12 px-4" required />
                     </div>
                     <div class="md:col-span-2">
                         <label
                             class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">E-mail</label>
-                        <input type="email" class="input-base h-12 px-4" />
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Endereço
-                            Completo</label>
-                        <input type="text" class="input-base h-12 px-4 mb-3" placeholder="Rua e Número" />
-                        <div class="flex gap-3">
-                            <input type="text" class="input-base h-12 px-4 w-1/2" placeholder="Bairro" />
-                            <input type="text" class="input-base h-12 px-4 w-1/2" placeholder="Cidade - UF" />
-                        </div>
+                        <input type="email" class="input-base h-12 px-4" required />
                     </div>
                 </div>
 
-                <div class="flex justify-end gap-3 pt-4 border-t border-dark-border">
+                <div class="flex justify-end gap-3 pt-6 border-t border-dark-border">
                     <button type="button" id="cancelarModal"
-                        class="btn-action bg-transparent border border-dark-border hover:bg-dark-800">Cancelar</button>
-                    <button type="button" class="btn-action btn-primary"><i class="ph-bold ph-floppy-disk"></i> Salvar
+                        class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-white transition-colors">Cancelar</button>
+                    <button type="submit" class="btn-action btn-primary"><i class="ph-bold ph-floppy-disk"></i> Salvar
                         Tutor</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="./js/global.js"></script>
+    <script type="module" src="./js/tutores.js"></script>
 </body>
-<script src="./js/tutores.js"></script>
-<script src="./js/global.js"></script>
 </html>

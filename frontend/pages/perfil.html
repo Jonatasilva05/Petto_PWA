@@ -8,15 +8,22 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/global.css">
 </head>
 
 <body>
   <div class="mobile-frame">
 
-    <header class="header" style="justify-content: center; display: flex;">
-      <h1 class="text-xl font-semibold text-center text-white">
-        Minha Conta
-      </h1>
+    <header class="header">
+        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="brand-info" style="display: flex; gap: 15px; align-items: center;">
+                <img src="./assets/logo/iconBrancaSemFundoSemNome.png" alt="Petto Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" style="width: 60px;">
+                <div class="title-text">
+                    <h1 style="font-size: 22px; font-weight: 700; color: white; margin: 0; line-height: 1.1;">Petto</h1>
+                    <p style="font-size: 13px; color: rgba(255,255,255,0.85); margin: 2px 0 0 0;">Perfil - Sua Conta</p>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main class="content space-y-5" style="padding-bottom: 90px;">
@@ -113,7 +120,7 @@
             </div>
             <i class="fa-solid fa-chevron-right text-gray-300 text-sm"></i>
           </li>
-          <li onclick="window.location.href='../index.html'" class="flex items-center justify-between px-5 py-4 hover:bg-gray-50 cursor-pointer text-red-500 transition">
+          <li id="btn-logout-perfil" class="flex items-center justify-between px-5 py-4 hover:bg-gray-50 cursor-pointer text-red-500 transition">
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-right-from-bracket"></i>
               <span class="font-medium">
@@ -133,7 +140,6 @@
         <div class="nav-item" onclick="window.location.href='./pets/acompanhaPet.html'" style="cursor:pointer;"><i class="fa-solid fa-paw"></i><span>Pets</span></div>
         <div class="nav-item active"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
     </nav>
-
   </div>
 
   <script src="./js/perfil.js"></script>

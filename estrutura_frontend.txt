@@ -72,6 +72,7 @@ frontend/
 │   │   │   ├── dashboard.css
 │   │   │   ├── editarPet.css
 │   │   │   ├── gerenciaArquivoPet.css
+│   │   │   ├── global.css
 │   │   │   ├── historicoPet.css
 │   │   │   ├── mapa.css
 │   │   │   ├── medicamentosPet.css
@@ -139,22 +140,32 @@ frontend/
 │   │   ├── 1779199652527_523.jpeg
 │   │   ├── perfil/
 │   ├── veterinario/
-│   │   ├── agendamento.html
+│   │   ├── agenda.html
 │   │   ├── chat.html
 │   │   ├── dashboard.html
-│   │   ├── index2.html
-│   │   ├── perfilVet.html
+│   │   ├── perfil.html
 │   │   ├── pets.html
-│   │   ├── proccedimento2.html
 │   │   ├── procedimentos.html
-│   │   ├── prontuario.html
+│   │   ├── prontuarios.html
 │   │   ├── tutores.html
 │   │   ├── vacinas.html
-│   │   ├── vacinas2.html
 │   │   ├── css/
+│   │   │   ├── agenda.css
+│   │   │   ├── chat.css
 │   │   │   ├── dashboard.css
+│   │   │   ├── perfil.css
+│   │   │   ├── pets.css
+│   │   │   ├── procedimentos.css
+│   │   │   ├── prontuarios.css
+│   │   │   ├── tutores.css
+│   │   │   ├── vacinas.css
 │   │   ├── js/
+│   │   │   ├── agenda.js
 │   │   │   ├── dashboard.js
+│   │   │   ├── global.js
+│   │   │   ├── perfil.js
+│   │   │   ├── pets.js
+│   │   │   ├── tutores.js
 │   │   │   ├── controllers/
 │   │   │   │   ├── VetController.js
 │   │   │   ├── models/

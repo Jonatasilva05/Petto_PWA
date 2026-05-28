@@ -1,137 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-:root {
-    --primary-blue: #4890F0;
-    --primary-dark: #274472;
-    --bg-color: #f4f7fb;
-    --text-dark: #333;
-    --text-muted: #9aa5b1;
-    --accent-orange: #ff9800;
-}
-
-body, html {
-    background-color: var(--bg-color);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.mobile-frame {
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-/* =========================================
-   CABEÇALHO OFICIAL PETTO (IDÊNTICO AO DASHBOARD)
-   ========================================= */
-.header {
-    background-color: #264475;
-    color: white;
-    padding: 16px 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.brand-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.header-logo {
-    width: 60px;
-    height: auto;
-}
-
-.fallback-logo {
-    font-size: 32px;
-    color: white;
-}
-
-.title-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.title-text h1 {
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: 0.5px;
-}
-
-.title-text p {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    font-weight: 400;
-    margin-top: 2px;
-}
-
-/* Botão de Saída (Logout) */
-.btn-logout {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-}
-
 .btn-logout i {
     font-size: 14px;
-}
-
-.btn-logout:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.btn-logout:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 0.3);
 }
 
 /* =========================================
    CONTEÚDO E CARDS ESTILO LIGHT DO APP
    ========================================= */
-.content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    padding-bottom: 95px;
-}
-
 .card {
     background: white;
     border-radius: 20px;
     padding: 18px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     margin-bottom: 15px;
 }
 
@@ -139,7 +17,10 @@ body, html {
 .form-group {
     margin-bottom: 15px;
 }
-.form-group:last-child { margin-bottom: 0; }
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
 
 .form-group label {
     font-size: 13px;
@@ -148,6 +29,7 @@ body, html {
     display: block;
     margin-bottom: 6px;
 }
+
 .form-group label i {
     color: var(--primary-blue);
     margin-right: 4px;
@@ -174,6 +56,7 @@ body, html {
     font-size: 16px;
     margin-bottom: 15px;
 }
+
 .month-header i {
     color: var(--primary-blue);
     padding: 5px;
@@ -209,7 +92,11 @@ body, html {
     cursor: pointer;
     position: relative;
 }
-.day.muted { color: #ccc; }
+
+.day.muted {
+    color: #ccc;
+}
+
 .day.selected {
     background-color: var(--primary-blue) !important;
     color: white !important;
@@ -254,6 +141,7 @@ body, html {
     text-align: center;
     cursor: pointer;
 }
+
 .time-slot.active {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
@@ -274,55 +162,28 @@ body, html {
     box-shadow: 0 4px 10px rgba(72, 144, 240, 0.3);
 }
 
-/* Navegação Inferior */
-.bottom-nav {
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0 25px 0;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-    flex-shrink: 0;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    z-index: 10;
+.day.has-appointment {
+    position: relative;
+    font-weight: bold;
 }
 
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.nav-item i { font-size: 22px; }
-.nav-item.active { color: var(--primary-dark); }
-
-.day.has-appointment { position: relative; font-weight: bold; }
 .day.has-appointment::after {
-    content: ''; 
-    position: absolute; 
-    bottom: 5px; 
+    content: '';
+    position: absolute;
+    bottom: 5px;
     left: 50%;
-    transform: translateX(-50%); 
-    width: 6px; 
+    transform: translateX(-50%);
+    width: 6px;
     height: 6px;
     border-radius: 50%;
 }
-.status-green::after { background-color: #22c55e; }
-.status-red::after { background-color: #ef4444; }
 
-/* Adicione isso ao seu arquivo CSS */
-.header {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+.status-green::after {
+    background-color: #22c55e;
+}
+
+.status-red::after {
+    background-color: #ef4444;
 }
 
 .btn-back {
@@ -353,11 +214,16 @@ body, html {
     border-radius: 8px;
     margin-bottom: 10px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
-.status-green-item { border-left-color: #22c55e; }
-.status-red-item { border-left-color: #ef4444; }
+.status-green-item {
+    border-left-color: #22c55e;
+}
+
+.status-red-item {
+    border-left-color: #ef4444;
+}
 
 /* Classe ativada via JavaScript quando clicado no calendário */
 .appointment-item.highlighted {

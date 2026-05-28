@@ -1,13 +1,17 @@
 export class VetView {
     constructor() {
-        // Elementos das métricas
         this.metricPets = document.getElementById('metric-total-pets');
         this.metricTutores = document.getElementById('metric-total-tutores');
         this.metricConsultas = document.getElementById('metric-consultas-hoje');
         this.metricVacinas = document.getElementById('metric-vacinas-pendentes');
-        
-        // Container da lista
         this.consultasContainer = document.getElementById('consultas-hoje-container');
+
+        // Referências dos Modais
+        this.modalAgendamento = document.getElementById('modal-agendamento');
+        this.modalProntuario = document.getElementById('modal-prontuario');
+        
+        this.selectAgendamento = document.getElementById('agendamento-pet');
+        this.selectProntuario = document.getElementById('prontuario-pet');
     }
 
     // Atualiza os quatro cards de contadores no topo
@@ -56,6 +60,52 @@ export class VetView {
             `;
             this.consultasContainer.appendChild(card);
         });
+    }
+    
+    // ==========================================
+    // LÓGICA DOS MODAIS (ANIMAÇÃO)
+    // ==========================================
+    openModal(modalElement) {
+        if (!modalElement) return;
+        const panel = modalElement.querySelector('.glass-panel');
+        
+        // 1. Remove o display: none
+        modalElement.classList.remove('hidden');
+        
+        // 2. Pequeno delay para o navegador registrar a mudança antes de animar
+        setTimeout(() => {
+            modalElement.classList.remove('opacity-0');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+        }, 10);
+    }
+
+    closeModal(modalElement) {
+        if (!modalElement) return;
+        const panel = modalElement.querySelector('.glass-panel');
+        
+        // 1. Inicia a animação de saída
+        modalElement.classList.add('opacity-0');
+        panel.classList.remove('scale-100');
+        panel.classList.add('scale-95');
+
+        // 2. Aguarda a transição do Tailwind (300ms) para dar display: none
+        setTimeout(() => {
+            modalElement.classList.add('hidden');
+        }, 300);
+    }
+
+    // Preenche os <select> com a lista de pacientes do veterinário
+    renderPacientesSelects(pacientes) {
+        const defaultOption = '<option value="" disabled selected>Selecione o paciente...</option>';
+        let optionsHtml = defaultOption;
+
+        pacientes.forEach(p => {
+            optionsHtml += `<option value="${p.id_pet}">${this.escapeHTML(p.nome)} (Tutor: ${this.escapeHTML(p.nome_tutor)})</option>`;
+        });
+
+        if (this.selectAgendamento) this.selectAgendamento.innerHTML = optionsHtml;
+        if (this.selectProntuario) this.selectProntuario.innerHTML = optionsHtml;
     }
 
     escapeHTML(str) {

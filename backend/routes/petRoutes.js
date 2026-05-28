@@ -242,4 +242,54 @@ router.get('/:id/historico', authenticateToken, async (req, res) => {
     }
 });
 
+// NOVA Rota: Resumo de Conexões do Tutor (Dashboard)
+router.get('/minhas-conexoes', authenticateToken, async (req, res) => {
+    const userId = req.user.id;
+    
+    try {
+        // 1. Busca os veterinários/clínicas conectados a este tutor
+        const [veterinarios] = await pool.execute(`
+            SELECT v.nome as vet_nome, v.nome_clinica, v.telefone
+            FROM veterinarios v
+            JOIN vet_clientes vc ON v.id_veterinario = vc.id_veterinario
+            WHERE vc.id_usuario = ?
+        `, [userId]);
+
+        // 2. Busca os últimos procedimentos (prontuários e vacinas) feitos nos pets desse tutor
+        const [procedimentos] = await pool.execute(`
+            SELECT 
+                'Consulta' as tipo, 
+                pr.motivo as descricao, 
+                DATE_FORMAT(pr.data_consulta, '%d/%m/%Y') as data_formatada, 
+                pet.nome as pet_nome, 
+                v.nome as vet_nome
+            FROM prontuario pr
+            JOIN pets pet ON pr.id_pet = pet.id_pet
+            JOIN veterinarios v ON pr.id_veterinario = v.id_veterinario
+            WHERE pet.id_usuario = ?
+            
+            UNION ALL
+            
+            SELECT 
+                'Vacina' as tipo, 
+                vac.nome as descricao, 
+                DATE_FORMAT(vac.data_aplicacao, '%d/%m/%Y') as data_formatada, 
+                pet.nome as pet_nome, 
+                v.nome as vet_nome
+            FROM vacinas vac
+            JOIN pets pet ON vac.id_pet = pet.id_pet
+            LEFT JOIN veterinarios v ON vac.id_veterinario = v.id_veterinario
+            WHERE pet.id_usuario = ? AND vac.id_veterinario IS NOT NULL
+            
+            ORDER BY data_formatada DESC LIMIT 10
+        `, [userId, userId]);
+
+        res.status(200).json({ veterinarios, procedimentos });
+        
+    } catch (error) {
+        console.error("Erro ao carregar conexões:", error);
+        res.status(500).json({ message: 'Erro ao carregar os dados de conexão com a clínica.' });
+    }
+});
+
 module.exports = router;

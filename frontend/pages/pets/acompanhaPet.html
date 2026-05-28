@@ -9,19 +9,24 @@
     
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/acompanhaPet.css">
+    <link rel="stylesheet" href="../css/global.css">
 </head>
 <body>
 
 <div class="mobile-frame">
     <header class="header">
-        <div class="header-content">
-            <div class="brand-info">
-                <i class="fa-solid fa-chevron-left" style="font-size: 20px; color: white; cursor: pointer; margin-right: 15px;" onclick="window.location.href='../dashboard.html'"></i>
+        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="brand-info" style="display: flex; gap: 15px; align-items: center;">
+                <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Petto Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" style="width: 60px;">
                 <div class="title-text">
-                    <h1>Cirurgia do Thor</h1>
-                    <p>Acompanhamento em tempo real</p>
+                    <h1 style="font-size: 22px; font-weight: 700; color: white; margin: 0; line-height: 1.1;">Petto</h1>
+                    <p style="font-size: 13px; color: rgba(255,255,255,0.85); margin: 2px 0 0 0;">Pets - Acompanhamento</p>
                 </div>
             </div>
+            
+            <button id="btn-logout" class="btn-logout" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 15px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px);">
+                <i class="fa-solid fa-door-open"></i> Sair
+            </button>
         </div>
     </header>
 

@@ -44,7 +44,8 @@ router.post('/', authenticateToken, async (req, res) => {
 // Rota para listar veterinários na hora de escolher quem vai atender
 router.get('/veterinarios', authenticateToken, async (req, res) => {
     try {
-        const [vets] = await pool.execute('SELECT id_veterinario, nome, nome_clinica FROM veterinarios');
+        // O WHERE user_id IS NOT NULL garante que apenas veterinários com login no sistema sejam listados
+        const [vets] = await pool.execute('SELECT id_veterinario, nome, nome_clinica FROM veterinarios WHERE user_id IS NOT NULL');
         res.status(200).json(vets);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar veterinários.' });

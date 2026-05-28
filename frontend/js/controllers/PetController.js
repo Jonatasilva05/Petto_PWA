@@ -47,10 +47,87 @@ export class PetController {
                     });
                 }
             );
+
+            // NOVA CHAMADA: Carrega a clínica conectada e procedimentos!
+            await this.carregarConexaoVeterinaria();
+
         } catch (error) { 
             console.error(error.message); 
             this.view.renderPets([], () => {}, () => {}, () => {});
         }
+    }
+
+    // ==========================================
+    // MÉTODOS DE CONEXÃO COM O VETERINÁRIO
+    // ==========================================
+    async carregarConexaoVeterinaria() {
+        try {
+            const token = localStorage.getItem('auth-token-petto');
+            const response = await fetch('/api/pets/minhas-conexoes', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            
+            const dados = await response.json();
+            
+            // 1. Mostrar a Clínica Parceira
+            const conexaoContainer = document.getElementById('card-vet-conectado');
+            if (conexaoContainer && dados.veterinarios && dados.veterinarios.length > 0) {
+                const vet = dados.veterinarios[0]; // Pega a primeira clínica vinculada
+                const nomeVet = this.formatarNomeDoutor(vet.vet_nome);
+                
+                conexaoContainer.innerHTML = `
+                    <div style="background: rgba(72, 144, 240, 0.1); border: 1px solid rgba(72, 144, 240, 0.2); border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                        <div style="width: 48px; height: 48px; background: #4890F0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div>
+                            <p style="font-size: 10px; color: #4890F0; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Clínica Parceira</p>
+                            <h4 style="color: #333; font-weight: bold; font-size: 16px; margin: 2px 0;">${nomeVet}</h4>
+                            <p style="font-size: 12px; color: #9aa5b1; margin: 0;"><i class="fa-solid fa-house-medical"></i> ${vet.nome_clinica || 'Atendimento Integrado'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 2. Mostrar a Linha do Tempo (Últimos Procedimentos)
+            const listaProcedimentos = document.getElementById('lista-ultimos-procedimentos');
+            if (listaProcedimentos && dados.procedimentos && dados.procedimentos.length > 0) {
+                listaProcedimentos.innerHTML = '<h3 style="font-size: 14px; color: #9aa5b1; margin-bottom: 12px; font-weight: 600;">Últimos Procedimentos</h3>';
+                
+                dados.procedimentos.forEach(proc => {
+                    const isVacina = proc.tipo === 'Vacina';
+                    const icone = isVacina ? 'fa-syringe' : 'fa-notes-medical';
+                    const cor = isVacina ? '#4890F0' : '#f59e0b';
+                    const bgCor = isVacina ? 'rgba(72, 144, 240, 0.1)' : 'rgba(245, 158, 11, 0.1)';
+                    
+                    listaProcedimentos.innerHTML += `
+                        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                            <div style="width: 40px; height: 40px; border-radius: 12px; background: ${bgCor}; color: ${cor}; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">
+                                <i class="fa-solid ${icone}"></i>
+                            </div>
+                            <div>
+                                <p style="font-size: 14px; font-weight: bold; color: #333; margin: 0;">${proc.descricao}</p>
+                                <p style="font-size: 12px; color: #9aa5b1; margin: 2px 0 0 0;">
+                                    <i class="fa-solid fa-calendar-day"></i> ${proc.data_formatada} • ${proc.pet_nome}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        } catch (error) {
+            console.error("Erro ao carregar conexões da clínica", error);
+        }
+    }
+
+    formatarNomeDoutor(nomeRaw) {
+        if (!nomeRaw) return 'Veterinário';
+        if (nomeRaw.toLowerCase().startsWith('dr')) return nomeRaw;
+        
+        const firstName = nomeRaw.split(' ')[0].toLowerCase();
+        const nomesFemininos = ['thais', 'beatriz', 'raquel', 'carol', 'aline', 'maria', 'ana', 'sabrina'];
+        const isDra = firstName.endsWith('a') || nomesFemininos.includes(firstName);
+        return (isDra ? 'Dra. ' : 'Dr. ') + nomeRaw;
     }
 
     gerenciarPaginasDePerfil() {
@@ -562,4 +639,5 @@ export class PetController {
         
         return t;
     }
+    
 }
