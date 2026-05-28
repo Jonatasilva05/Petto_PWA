@@ -8,13 +8,23 @@
         content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com http://localhost:*; object-src 'none';">
     <meta name="referrer" content="no-referrer">
 
-    
+
     <link rel="stylesheet" href="./css/tutores.css">
 
     <title>Petto • Clientes (Tutores)</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Configuração global para que o alerta já nasça escuro
+        const Swal = window.Swal.mixin({
+            background: '#151F25',
+            color: '#ffffff',
+            confirmButtonColor: '#00D09E'
+        });
+    </script>
 
     <script>
         tailwind.config = {
@@ -211,9 +221,11 @@
     <div id="modalTutor"
         class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden items-center justify-center p-4 opacity-0 transition-all duration-300">
 
-        <div class="relative w-full max-w-5xl max-h-[95vh] rounded-[36px] overflow-hidden border border-white/10 bg-[#0B1114] shadow-[0_30px_120px_rgba(0,0,0,0.65)] flex flex-col lg:flex-row transform scale-95 transition-all duration-300">
+        <div
+            class="relative w-full max-w-5xl max-h-[95vh] rounded-[36px] overflow-hidden border border-white/10 bg-[#0B1114] shadow-[0_30px_120px_rgba(0,0,0,0.65)] flex flex-col lg:flex-row transform scale-95 transition-all duration-300">
 
-            <div class="absolute w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] top-[-120px] right-[-120px] pointer-events-none">
+            <div
+                class="absolute w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] top-[-120px] right-[-120px] pointer-events-none">
             </div>
 
             <div class="flex-1 p-8 lg:p-10 relative z-10 overflow-y-auto">
