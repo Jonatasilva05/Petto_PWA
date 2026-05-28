@@ -8,7 +8,8 @@
         content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com http://localhost:*; object-src 'none';">
     <meta name="referrer" content="no-referrer">
 
-    <link rel="stylesheet" href="./css/dashboard.css">
+    
+    <link rel="stylesheet" href="./css/tutores.css">
 
     <title>Petto • Clientes (Tutores)</title>
 
@@ -136,7 +137,7 @@
                         <button id="btn-profile-menu"
                             class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors cursor-pointer">
                             <div class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold"
-                                id="vet-profile-avatar">J</div>
+                                id="vet-profile-avatar">...</div>
                             <div class="text-left hidden sm:block">
                                 <p class="text-sm font-semibold leading-tight" id="vet-profile-name">...</p>
                                 <p class="text-[10px] text-gray-400">CRMV Ativo</p>
@@ -167,13 +168,13 @@
                             <div class="flex-1">
                                 <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-1">Total
                                     Tutores</p>
-                                <h3 class="text-2xl font-bold">187</h3>
+                                <h3 class="text-2xl font-bold" id="metric-total-tutores">...</h3>
                             </div>
                             <div class="w-px bg-dark-border"></div>
                             <div class="flex-1">
                                 <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-1">Novos esse
                                     mês</p>
-                                <h3 class="text-2xl font-bold text-primary">+14</h3>
+                                <h3 class="text-2xl font-bold text-primary" id="metric-novos-tutores">...</h3>
                             </div>
                         </div>
                         <button id="btnNovoTutor" class="btn-action btn-primary"><i class="ph-bold ph-plus"></i> Novo
@@ -193,34 +194,10 @@
                                 class="text-xs text-gray-500 font-semibold uppercase tracking-widest text-right">Ações</span>
                         </div>
 
-                        <div class="divide-y divide-dark-border">
-                            <!-- Tutor 1 -->
-                            <div
-                                class="grid grid-cols-[2fr_1.5fr_1.5fr_auto] gap-4 px-8 py-6 items-center card-hover glass-panel m-2 rounded-2xl border-none">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-lg">
-                                        MS</div>
-                                    <div>
-                                        <h4 class="font-bold text-white text-base">Maria Silva</h4>
-                                        <p class="text-xs text-gray-400 mt-0.5"><i class="ph-fill ph-map-pin"></i>
-                                            Taquaritinga, SP</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-300">(16) 99876-5432</p>
-                                    <p class="text-xs text-gray-500 mt-0.5">maria.silva@email.com</p>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span
-                                        class="bg-dark-800 text-gray-400 border border-dark-border px-2 py-1 rounded text-xs font-medium"><i
-                                            class="ph-fill ph-paw-print text-primary mr-1"></i> Thor</span>
-                                </div>
-                                <div class="flex gap-2 justify-end">
-                                    <button class="btn-icon w-10 h-10 hover:text-primary hover:border-primary"><i
-                                            class="ph ph-whatsapp-logo"></i></button>
-                                    <button class="btn-icon w-10 h-10"><i class="ph ph-pencil-simple"></i></button>
-                                </div>
+                        <div class="divide-y divide-dark-border" id="lista-tutores-container">
+                            <div class="p-8 text-center text-gray-500 flex flex-col items-center justify-center">
+                                <i class="ph-bold ph-spinner animate-spin text-2xl mb-2 text-primary"></i>
+                                <p>Carregando clientes...</p>
                             </div>
                         </div>
                     </div>
@@ -230,51 +207,437 @@
         </main>
     </div>
 
-    <!-- MODAL NOVO TUTOR (Com Transições) -->
+    <!-- MODAL NOVO TUTOR PREMIUM -->
     <div id="modalTutor"
-        class="fixed inset-0 bg-dark-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div
-            class="glass-panel border border-dark-border rounded-[32px] w-full max-w-2xl overflow-hidden shadow-card transform scale-95 transition-transform duration-300">
-            <div class="p-6 border-b border-dark-border flex items-center justify-between bg-dark-850">
-                <div>
-                    <h3 class="text-xl font-bold text-white">Cadastrar Tutor</h3>
-                    <p class="text-sm text-gray-400 mt-1">Registre o contato do responsável</p>
-                </div>
-                <button id="fecharModal" class="btn-icon w-10 h-10 hover:text-white transition-colors"><i
-                        class="ph ph-x"></i></button>
+        class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden items-center justify-center p-4 opacity-0 transition-all duration-300">
+
+        <div class="relative w-full max-w-5xl max-h-[95vh] rounded-[36px] overflow-hidden border border-white/10 bg-[#0B1114] shadow-[0_30px_120px_rgba(0,0,0,0.65)] flex flex-col lg:flex-row transform scale-95 transition-all duration-300">
+
+            <div class="absolute w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] top-[-120px] right-[-120px] pointer-events-none">
             </div>
 
-            <form id="formTutor" class="p-8 space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Nome
-                            Completo</label>
-                        <input type="text" class="input-base h-12 px-4" required />
+            <div class="flex-1 p-8 lg:p-10 relative z-10 overflow-y-auto">
+
+                <!-- HEADER -->
+                <div class="flex items-start justify-between mb-8">
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="w-16 h-16 rounded-3xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                            <i class="ph-fill ph-user-plus text-3xl"></i>
+                        </div>
+
+                        <div>
+                            <h2 class="text-3xl font-bold text-white tracking-tight">
+                                Novo Tutor
+                            </h2>
+
+                            <p class="text-gray-400 mt-2 max-w-md leading-relaxed">
+                                Cadastre responsáveis, organize pets e mantenha o histórico clínico centralizado.
+                            </p>
+                        </div>
+
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">CPF /
-                            Documento</label>
-                        <input type="text" class="input-base h-12 px-4" />
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">WhatsApp
-                            / Telefone</label>
-                        <input type="tel" class="input-base h-12 px-4" required />
-                    </div>
-                    <div class="md:col-span-2">
-                        <label
-                            class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">E-mail</label>
-                        <input type="email" class="input-base h-12 px-4" required />
-                    </div>
+
+                    <button id="fecharModal"
+                        class="w-12 h-12 rounded-2xl bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/30 transition-all">
+                        <i class="ph ph-x text-xl"></i>
+                    </button>
+
                 </div>
 
-                <div class="flex justify-end gap-3 pt-6 border-t border-dark-border">
-                    <button type="button" id="cancelarModal"
-                        class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-white transition-colors">Cancelar</button>
-                    <button type="submit" class="btn-action btn-primary"><i class="ph-bold ph-floppy-disk"></i> Salvar
-                        Tutor</button>
+                <!-- ETAPAS -->
+                <div class="flex items-center gap-3 mb-8">
+
+                    <div
+                        class="h-10 px-4 rounded-2xl bg-primary text-black font-semibold text-sm flex items-center gap-2">
+                        <i class="ph-fill ph-user"></i>
+                        Dados Pessoais
+                    </div>
+
+                    <div class="w-8 h-px bg-dark-border"></div>
+
+                    <div
+                        class="h-10 px-4 rounded-2xl bg-dark-800 border border-dark-border text-gray-400 text-sm flex items-center gap-2">
+                        <i class="ph-fill ph-map-pin"></i>
+                        Endereço
+                    </div>
+
+                    <div class="w-8 h-px bg-dark-border"></div>
+
+                    <div
+                        class="h-10 px-4 rounded-2xl bg-dark-800 border border-dark-border text-gray-400 text-sm flex items-center gap-2">
+                        <i class="ph-fill ph-paw-print"></i>
+                        Pets
+                    </div>
+
                 </div>
-            </form>
+
+                <!-- FORM -->
+                <form id="formTutor" class="space-y-8">
+
+                    <!-- DADOS PESSOAIS -->
+                    <div class="rounded-3xl border border-white/5 bg-white/[0.02] p-6 backdrop-blur-sm space-y-6">
+
+                        <div class="flex items-center gap-3 mb-2">
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                                <i class="ph-fill ph-identification-card"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="font-semibold text-white">
+                                    Dados do Responsável
+                                </h3>
+
+                                <p class="text-xs text-gray-500">
+                                    Informações principais do tutor
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                            <!-- NOME -->
+                            <div class="md:col-span-2">
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    Nome Completo
+                                </label>
+
+                                <div class="relative">
+
+                                    <i
+                                        class="ph ph-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+
+                                    <input type="text" id="tutor-nome" class="input-base h-14 pl-12 pr-4 text-white"
+                                        placeholder="Digite o nome do tutor" required>
+
+                                </div>
+
+                            </div>
+
+                            <!-- EMAIL -->
+                            <div class="md:col-span-2">
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    E-mail
+                                </label>
+
+                                <div class="relative">
+
+                                    <i
+                                        class="ph ph-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+
+                                    <input type="email" id="tutor-email" class="input-base h-14 pl-12 pr-4 text-white"
+                                        placeholder="email@exemplo.com">
+
+                                </div>
+
+                            </div>
+
+                            <!-- CPF -->
+                            <div>
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    CPF
+                                </label>
+
+                                <div class="relative">
+
+                                    <i
+                                        class="ph ph-identification-card absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+
+                                    <input type="text" id="tutor-cpf" class="input-base h-14 pl-12 pr-4 text-white"
+                                        placeholder="000.000.000-00">
+
+                                </div>
+
+                            </div>
+
+                            <!-- TELEFONE -->
+                            <div>
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    WhatsApp
+                                </label>
+
+                                <div class="relative">
+
+                                    <i
+                                        class="ph ph-whatsapp-logo absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+
+                                    <input type="tel" id="tutor-telefone" class="input-base h-14 pl-12 pr-4 text-white"
+                                        placeholder="(00) 00000-0000">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ENDEREÇO -->
+                    <div class="rounded-3xl border border-white/5 bg-white/[0.02] p-6 backdrop-blur-sm space-y-6">
+
+                        <div class="flex items-center gap-3 mb-2">
+
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400">
+                                <i class="ph-fill ph-map-pin-line"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="font-semibold text-white">
+                                    Endereço
+                                </h3>
+
+                                <p class="text-xs text-gray-500">
+                                    Localização do tutor
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                            <!-- CEP -->
+                            <div>
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    CEP
+                                </label>
+
+                                <div class="relative">
+
+                                    <i
+                                        class="ph ph-map-trifold absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+
+                                    <input type="text" id="tutor-cep" class="input-base h-14 pl-12 pr-4 text-white"
+                                        placeholder="00000-000">
+
+                                    <div id="cep-loader"
+                                        class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+                                        <i class="ph-bold ph-spinner animate-spin text-lg"></i>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- UF -->
+                            <div>
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    Estado
+                                </label>
+
+                                <select id="tutor-uf" class="input-base h-14 px-4 text-white appearance-none">
+
+                                    <option value="">Selecione</option>
+                                    <option value="SP">SP</option>
+                                    <option value="MG">MG</option>
+                                    <option value="RJ">RJ</option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- RUA -->
+                            <div class="md:col-span-2">
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    Rua e Número
+                                </label>
+
+                                <div class="relative">
+
+                                    <i
+                                        class="ph ph-house absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+
+                                    <input type="text" id="tutor-rua" class="input-base h-14 pl-12 pr-4 text-white"
+                                        placeholder="Ex: Rua das Flores, 120">
+
+                                </div>
+
+                            </div>
+
+                            <!-- BAIRRO -->
+                            <div>
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    Bairro
+                                </label>
+
+                                <input type="text" id="tutor-bairro" class="input-base h-14 px-4 text-white"
+                                    placeholder="Digite o bairro">
+
+                            </div>
+
+                            <!-- CIDADE -->
+                            <div>
+
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 block">
+                                    Cidade
+                                </label>
+
+                                <input type="text" id="tutor-cidade" class="input-base h-14 px-4 text-white"
+                                    placeholder="Digite a cidade">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="flex items-center justify-between gap-4 pt-2">
+
+                        <div class="flex items-center gap-3 text-sm text-gray-500">
+                            <i class="ph-fill ph-info text-primary"></i>
+                            Você poderá cadastrar os pets após salvar o tutor.
+                        </div>
+
+                        <div class="flex items-center gap-3">
+
+                            <button type="button" id="cancelarModal"
+                                class="h-14 px-6 rounded-2xl border border-dark-border bg-dark-800 text-white font-medium hover:bg-dark-700 transition-all">
+                                Cancelar
+                            </button>
+
+                            <button type="submit"
+                                class="h-14 px-7 rounded-2xl bg-primary text-black font-bold hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(0,208,158,0.35)] transition-all flex items-center gap-3">
+
+                                <i class="ph-fill ph-check-circle text-xl"></i>
+                                Salvar e Continuar
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- PREVIEW LATERAL -->
+            <div
+                class="hidden lg:flex w-[380px] border-l border-white/5 bg-gradient-to-b from-[#0F171B] to-[#091014] p-8 flex-col justify-between relative overflow-hidden">
+
+                <!-- GLOW -->
+                <div
+                    class="absolute w-[300px] h-[300px] bg-primary/10 rounded-full blur-[120px] bottom-[-100px] right-[-100px]">
+                </div>
+
+                <div class="relative z-10">
+
+                    <span
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/10">
+
+                        <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+
+                        Preview do Cadastro
+
+                    </span>
+
+                    <div class="mt-8 rounded-[32px] border border-white/5 bg-white/[0.03] p-6 backdrop-blur-xl">
+
+                        <div class="flex flex-col items-center text-center">
+
+                            <div
+                                class="w-24 h-24 rounded-[28px] bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center text-primary text-4xl font-bold shadow-[0_10px_50px_rgba(0,208,158,0.15)]">
+
+                                JS
+
+                            </div>
+
+                            <h3 class="mt-5 text-2xl font-bold text-white">
+                                João Silva
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Tutor Responsável
+                            </p>
+
+                        </div>
+
+                        <div class="space-y-4 mt-8">
+
+                            <div class="flex items-center gap-4 rounded-2xl bg-dark-800/70 border border-white/5 p-4">
+
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                                    <i class="ph-fill ph-phone text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-widest">
+                                        WhatsApp
+                                    </p>
+
+                                    <h4 class="text-sm font-semibold text-white">
+                                        (16) 99999-9999
+                                    </h4>
+                                </div>
+
+                            </div>
+
+                            <div class="flex items-center gap-4 rounded-2xl bg-dark-800/70 border border-white/5 p-4">
+
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                                    <i class="ph-fill ph-map-pin text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-widest">
+                                        Localização
+                                    </p>
+
+                                    <h4 class="text-sm font-semibold text-white">
+                                        Matão - SP
+                                    </h4>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mt-8 rounded-2xl border border-dashed border-primary/20 bg-primary/5 p-5">
+
+                            <div class="flex items-start gap-4">
+
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                                    <i class="ph-fill ph-paw-print text-xl"></i>
+                                </div>
+
+                                <div>
+
+                                    <h4 class="font-semibold text-white">
+                                        Próximo passo
+                                    </h4>
+
+                                    <p class="text-sm text-gray-400 leading-relaxed mt-2">
+                                        Após salvar o tutor, você poderá cadastrar pets, vacinas, consultas e
+                                        prontuários.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
 
@@ -282,4 +645,5 @@
     <script src="./js/global.js"></script>
     <script type="module" src="./js/tutores.js"></script>
 </body>
+
 </html>

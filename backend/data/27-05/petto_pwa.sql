@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/05/2026 às 02:54
+-- Tempo de geração: 28/05/2026 às 05:17
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -34,13 +34,6 @@ CREATE TABLE `agendamentos` (
   `data_hora` datetime NOT NULL,
   `status` varchar(20) DEFAULT 'agendado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `agendamentos`
---
-
-INSERT INTO `agendamentos` (`id_agendamento`, `id_pet`, `id_veterinario`, `data_hora`, `status`) VALUES
-(5, 132, 66, '2026-05-27 10:00:00', 'agendado');
 
 -- --------------------------------------------------------
 
@@ -99,8 +92,8 @@ CREATE TABLE `pets` (
 --
 
 INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_valor`, `idade_unidade`, `idade_meses`, `idade_dias`, `peso`, `sexo`, `cor`, `data_nascimento`, `foto_url`, `id_veterinario`) VALUES
-(50, 'Rex', 63, 'Cachorro', 'Pastor Alemão', 5, 'anos', NULL, NULL, 30, 'M', 'Preto e Bege', NULL, NULL, 65),
-(51, 'Thor', 64, 'Cachorro', 'Bulldog Francês', 4, 'anos', NULL, NULL, 12, 'M', 'Creme', NULL, NULL, 67),
+(50, 'Rex', 63, 'Cachorro', 'Pastor Alemão', 5, 'anos', NULL, NULL, 30, 'M', 'Preto e Bege', NULL, NULL, NULL),
+(51, 'Thor', 64, 'Cachorro', 'Bulldog Francês', 4, 'anos', NULL, NULL, 12, 'M', 'Creme', NULL, NULL, NULL),
 (54, 'Caramelo ', NULL, 'cachorro', 'chow_chow', 2, 'meses', NULL, NULL, NULL, 'M', 'Caramelo ', NULL, NULL, NULL),
 (56, 'Caraca', NULL, 'tartaruga', 'jabuti_piranga', 15, 'anos', NULL, NULL, 15, 'M', 'Verde', NULL, NULL, NULL),
 (59, 'Caramelo ', NULL, 'cachorro', 'chow_chow', 2, 'meses', NULL, NULL, NULL, 'M', 'Caramelado', NULL, NULL, NULL),
@@ -174,7 +167,8 @@ INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `telefone`, `endereco`, 
 (107, 'davisilva16y@gmail.com', '$2b$10$yV1H/0/y.nqUsTWioAJLWuZ/MRuS.5SQQKDZiQ0UwrRnZJUL1pdcW', 'Davi Silva', NULL, NULL, NULL, 'Caramelo', 'Preto', 'tutor', NULL),
 (108, 'testandoteste@gmail.com', '$2b$10$.29VFp9hB400tEf2rkz2v.52iPJqi8UIXIJ9FUSKhYc8dVT9E9JZe', 'Teste', NULL, NULL, NULL, 'Teste', 'Teste', 'tutor', NULL),
 (110, 'vet@petto.com', 'admin@123', 'Dr. João Silva Teste', NULL, NULL, NULL, 'Tigre', 'Azul', 'veterinario', '46935923077'),
-(111, 'petto@gmail.com', '$2b$10$Hyoqbwl0dETJ1eGAxYA12eAys0V1AsooHjCleuT6ZOmiyEZwekFPm', 'Jonatas', NULL, NULL, NULL, 'vet', 'vet', 'veterinario', '93080517083');
+(111, 'petto@gmail.com', '$2b$10$Hyoqbwl0dETJ1eGAxYA12eAys0V1AsooHjCleuT6ZOmiyEZwekFPm', 'Jonatas', NULL, NULL, NULL, 'vet', 'vet', 'veterinario', '93080517083'),
+(112, 'adminvet@gmail.com', '$2b$10$CoMrM1xdzUwAcujLLCtBAO4ZHr6Is0DrsF9CpLUT5nUi2S7qa/Lj2', 'Jonatas', NULL, NULL, NULL, 'tes', 'tes', 'veterinario', '66535782085');
 
 -- --------------------------------------------------------
 
@@ -232,13 +226,20 @@ CREATE TABLE `veterinarios` (
 --
 
 INSERT INTO `veterinarios` (`id_veterinario`, `nome`, `nome_clinica`, `tempo_experiencia`, `telefone`, `email`, `endereco`, `cep_clinica`, `bairro_clinica`, `numero_clinica`, `cpf`, `crmv`, `user_id`) VALUES
-(63, 'Dr. Lucas Oliveira', NULL, NULL, '(16) 98765-4321', 'lucas.oliveira@gmail.com', 'Flares, 723 - Taquaritinga/SP', NULL, NULL, NULL, '123.456.789-00', '12345-SP', NULL),
-(64, 'Dra. Ana Souza', NULL, NULL, '(16) 99876-5432', 'ana.souza@gmail.com', 'Avenida Brasil, 456 - Matão/SP', NULL, NULL, NULL, '987.654.321-99', '67891-SP', NULL),
-(65, 'Dr. Pedro Silva', NULL, NULL, '(16) 91234-5678', 'pedro.silva@gmail.com', 'Rua Acácias, 789 - Araraquara/SP', NULL, NULL, NULL, '456.789.123-22', '54321-SP', NULL),
-(66, 'Dra. Mariana Costa', NULL, NULL, '(16) 93456-7890', 'marianacosta@gmail.com', 'Alameda, 101 - Taquaritinga/SP', NULL, NULL, NULL, '789.123.456-33', '17223-SP', NULL),
-(67, 'Dr. Carlos Pereira', NULL, NULL, '(16) 94567-8901', 'carlos.pereira@gmail.com', 'Travessa, 55 - Taquaritinga/SP', NULL, NULL, NULL, '321.654.987-44', '33445-SP', NULL),
-(75, 'Dr. João Silva Teste', 'Clínica Veterinária VetCare', '5 anos', NULL, 'dr.joao@petto.com', NULL, NULL, NULL, NULL, '46935923077', '99999-SP', 110),
-(76, 'Jonatas', 'vetVeteria', NULL, NULL, 'petto@gmail.com', 'Rua Alderico Bussadori Filho', '15906-838', 'Jardim Maria Luiza I', '206', '93080517083', '99999-SP', 111);
+(76, 'Jonatas', 'vetVeteria', NULL, NULL, 'petto@gmail.com', 'Rua Alderico Bussadori Filho', '15906-838', 'Jardim Maria Luiza I', '206', '93080517083', '99999-SP', 111),
+(77, 'Jonatas', 'Admin Vet', NULL, NULL, 'adminvet@gmail.com', 'Rua José Mendes Ferreira Júnior', '15904-082', 'Parque Residencial Laranjeiras I', '214', '66535782085', '99969-SP', 112);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `vet_clientes`
+--
+
+CREATE TABLE `vet_clientes` (
+  `id_veterinario` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `data_vinculo` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
@@ -298,6 +299,13 @@ ALTER TABLE `veterinarios`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Índices de tabela `vet_clientes`
+--
+ALTER TABLE `vet_clientes`
+  ADD PRIMARY KEY (`id_veterinario`,`id_usuario`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -329,7 +337,7 @@ ALTER TABLE `prontuario`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT de tabela `vacinas`
@@ -341,7 +349,7 @@ ALTER TABLE `vacinas`
 -- AUTO_INCREMENT de tabela `veterinarios`
 --
 ALTER TABLE `veterinarios`
-  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Restrições para tabelas despejadas
@@ -387,6 +395,13 @@ ALTER TABLE `vacinas`
 --
 ALTER TABLE `veterinarios`
   ADD CONSTRAINT `veterinarios_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuarios` (`id`);
+
+--
+-- Restrições para tabelas `vet_clientes`
+--
+ALTER TABLE `vet_clientes`
+  ADD CONSTRAINT `vet_clientes_ibfk_1` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`) ON DELETE CASCADE,
+  ADD CONSTRAINT `vet_clientes_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
