@@ -16,6 +16,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Adicione estas linhas: -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Configuração global reescrevendo o objeto da janela com segurança
+        window.Swal = window.Swal.mixin({
+            background: '#151F25',
+            color: '#ffffff',
+            confirmButtonColor: '#00D09E'
+        });
+    </script>
+
     <script>
         tailwind.config = {
             theme: {

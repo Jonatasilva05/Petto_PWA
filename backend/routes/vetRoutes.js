@@ -23,6 +23,8 @@ const authenticateToken = (req, res, next) => {
 router.get('/pacientes', authenticateToken, async (req, res) => {
     try {
         const [vetResult] = await pool.execute('SELECT id_veterinario FROM veterinarios WHERE user_id = ?', [req.user.id]);
+        console.log("Veterinário logado (user_id):", req.user.id);
+        console.log("ID do Veterinário no banco:", vetResult.length > 0 ? vetResult[0].id_veterinario : "NENHUM");
         if (vetResult.length === 0) return res.status(403).json({ message: 'Perfil não encontrado.' });
         const idVet = vetResult[0].id_veterinario;
 

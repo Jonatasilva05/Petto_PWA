@@ -37,12 +37,14 @@
             <div class="flex flex-col h-full overflow-hidden">
                 <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
                     <div
-                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
-                        <i class="ph-bold ph-paw-print text-2xl"></i>
+                        class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+                        <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Logo Petto"
+                            class="w-10 h-10 object-contain brightness-0 opacity-80">
                     </div>
                     <div>
-                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
-                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Petto</h2>
+                        <p class="text-xs font-bold text-primary tracking-widest uppercase mt-0.5">Página - Pets
+                        </p>
                     </div>
                 </div>
 
@@ -189,46 +191,57 @@
     </div>
 
     <!-- MODAL SUPER CADASTRO DE PET (VETERINÁRIO) -->
-    <div id="modalPet" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-dark-900 border border-dark-border rounded-[32px] w-full max-w-4xl overflow-hidden shadow-card flex flex-col h-[85vh]">
-            
+    <div id="modalPet"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-dark-900 border border-dark-border rounded-[32px] w-full max-w-4xl overflow-hidden shadow-card flex flex-col h-[85vh]">
+
             <div class="p-6 border-b border-dark-border flex items-center justify-between bg-dark-850 shrink-0">
                 <div>
                     <h3 class="text-xl font-bold text-white">Cadastrar Pet & Histórico Clínico</h3>
-                    <p class="text-sm text-gray-400 mt-1">Crie o perfil do pet e adicione dados retroativos na ficha dele.</p>
+                    <p class="text-sm text-gray-400 mt-1">Crie o perfil do pet e adicione dados retroativos na ficha
+                        dele.</p>
                 </div>
                 <button id="fecharModal" class="btn-icon w-10 h-10"><i class="ph ph-x"></i></button>
             </div>
 
             <!-- Navegação de Abas -->
             <div class="flex border-b border-dark-border bg-dark-850 px-8 shrink-0">
-                <button class="tab-btn active px-4 py-3 text-sm font-bold text-primary border-b-2 border-primary" data-tab="dados-pet">
+                <button class="tab-btn active px-4 py-3 text-sm font-bold text-primary border-b-2 border-primary"
+                    data-tab="dados-pet">
                     1. Dados do Paciente
                 </button>
-                <button class="tab-btn px-4 py-3 text-sm font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-colors" data-tab="historico-clinico">
+                <button
+                    class="tab-btn px-4 py-3 text-sm font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition-colors"
+                    data-tab="historico-clinico">
                     2. Inserção Clínica (Opcional)
                 </button>
             </div>
 
             <!-- Corpo do Modal -->
             <form id="formSuperPet" class="flex-1 overflow-y-auto p-8 relative">
-                
+
                 <!-- ABA 1: DADOS DO PET -->
                 <div id="tab-dados-pet" class="space-y-6 block">
                     <div class="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-6">
-                        <label class="block text-xs font-semibold text-primary uppercase tracking-widest mb-2">Tutor Dono do Pet *</label>
-                        <select id="selectTutorNovoPet" class="input-base h-12 px-4 cursor-pointer text-white font-bold" required>
+                        <label class="block text-xs font-semibold text-primary uppercase tracking-widest mb-2">Tutor
+                            Dono do Pet *</label>
+                        <select id="selectTutorNovoPet" class="input-base h-12 px-4 cursor-pointer text-white font-bold"
+                            required>
                             <option value="" disabled selected>Carregando tutores da sua base...</option>
                         </select>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Nome do Pet *</label>
+                            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Nome
+                                do Pet *</label>
                             <input type="text" id="novoPetNome" class="input-base h-12 px-4" required />
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Espécie *</label>
+                            <label
+                                class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Espécie
+                                *</label>
                             <select id="novoPetEspecie" class="input-base h-12 px-4 cursor-pointer" required>
                                 <option value="" disabled selected>Selecione...</option>
                                 <option value="cachorro">Canina</option>
@@ -237,16 +250,20 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Raça</label>
+                            <label
+                                class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Raça</label>
                             <input type="text" id="novoPetRaca" placeholder="Ex: Poodle" class="input-base h-12 px-4" />
                         </div>
                         <div class="flex gap-4">
                             <div class="w-1/2">
-                                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Idade (Número)</label>
+                                <label
+                                    class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Idade
+                                    (Número)</label>
                                 <input type="number" id="novoPetIdadeNum" class="input-base h-12 px-4" />
                             </div>
                             <div class="w-1/2">
-                                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Unidade</label>
+                                <label
+                                    class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Unidade</label>
                                 <select id="novoPetIdadeUnidade" class="input-base h-12 px-4 cursor-pointer">
                                     <option value="anos">Anos</option>
                                     <option value="meses">Meses</option>
@@ -255,11 +272,14 @@
                         </div>
                         <div class="flex gap-4">
                             <div class="w-1/2">
-                                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Peso (kg)</label>
+                                <label
+                                    class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Peso
+                                    (kg)</label>
                                 <input type="number" step="0.1" id="novoPetPeso" class="input-base h-12 px-4" />
                             </div>
                             <div class="w-1/2">
-                                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Sexo</label>
+                                <label
+                                    class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Sexo</label>
                                 <select id="novoPetSexo" class="input-base h-12 px-4 cursor-pointer">
                                     <option value="M">Macho</option>
                                     <option value="F">Fêmea</option>
@@ -271,43 +291,56 @@
 
                 <!-- ABA 2: HISTÓRICO CLÍNICO -->
                 <div id="tab-historico-clinico" class="space-y-6 hidden">
-                    <p class="text-sm text-gray-400">Preencha apenas o que for necessário adicionar ao histórico base do paciente.</p>
-                    
+                    <p class="text-sm text-gray-400">Preencha apenas o que for necessário adicionar ao histórico base do
+                        paciente.</p>
+
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <!-- Prontuário Base -->
                         <div class="bg-dark-800 border border-dark-border p-5 rounded-2xl">
-                            <h4 class="text-white font-bold mb-4 flex items-center gap-2"><i class="ph-fill ph-file-text text-blue-400"></i> Consulta Inicial / Triage</h4>
+                            <h4 class="text-white font-bold mb-4 flex items-center gap-2"><i
+                                    class="ph-fill ph-file-text text-blue-400"></i> Consulta Inicial / Triage</h4>
                             <div class="space-y-4">
-                                <input type="text" id="histMotivo" placeholder="Motivo (Ex: Avaliação Geral)" class="input-base h-10 px-3 text-sm" />
-                                <textarea id="histDiagnostico" placeholder="Observações clínicas / Diagnóstico preliminar" class="input-base p-3 text-sm h-20 resize-none"></textarea>
+                                <input type="text" id="histMotivo" placeholder="Motivo (Ex: Avaliação Geral)"
+                                    class="input-base h-10 px-3 text-sm" />
+                                <textarea id="histDiagnostico"
+                                    placeholder="Observações clínicas / Diagnóstico preliminar"
+                                    class="input-base p-3 text-sm h-20 resize-none"></textarea>
                             </div>
                         </div>
 
                         <!-- Vacinas/Medicação Rápidas -->
                         <div class="bg-dark-800 border border-dark-border p-5 rounded-2xl">
-                            <h4 class="text-white font-bold mb-4 flex items-center gap-2"><i class="ph-fill ph-syringe text-primary"></i> Vacina Recente (Retroativa)</h4>
+                            <h4 class="text-white font-bold mb-4 flex items-center gap-2"><i
+                                    class="ph-fill ph-syringe text-primary"></i> Vacina Recente (Retroativa)</h4>
                             <div class="space-y-4">
-                                <input type="text" id="histVacinaNome" placeholder="Nome da Vacina (Ex: V10)" class="input-base h-10 px-3 text-sm" />
+                                <input type="text" id="histVacinaNome" placeholder="Nome da Vacina (Ex: V10)"
+                                    class="input-base h-10 px-3 text-sm" />
                                 <div>
-                                    <label class="block text-[10px] text-gray-500 uppercase font-bold mb-1">Data da Aplicação</label>
+                                    <label class="block text-[10px] text-gray-500 uppercase font-bold mb-1">Data da
+                                        Aplicação</label>
                                     <input type="date" id="histVacinaData" class="input-base h-10 px-3 text-sm" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Botões Fixos no Rodapé do Form -->
-                <div class="absolute bottom-0 left-0 right-0 bg-dark-850 border-t border-dark-border p-4 flex justify-between">
-                    <button type="button" id="cancelarModal" class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-gray-300">Cancelar</button>
-                    <button type="submit" id="btnSalvarSuperPet" class="btn-action btn-primary"><i class="ph-bold ph-floppy-disk"></i> Salvar Paciente na Base</button>
+                <div
+                    class="absolute bottom-0 left-0 right-0 bg-dark-850 border-t border-dark-border p-4 flex justify-between">
+                    <button type="button" id="cancelarModal"
+                        class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-gray-300">Cancelar</button>
+                    <button type="submit" id="btnSalvarSuperPet" class="btn-action btn-primary"><i
+                            class="ph-bold ph-floppy-disk"></i> Salvar Paciente na Base</button>
                 </div>
             </form>
         </div>
     </div>
-    
-    <div id="modalBuscaCPF" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-dark-900 border border-dark-border rounded-[32px] w-full max-w-lg overflow-hidden shadow-card transition-all duration-300 transform scale-95 opacity-0">
+
+    <div id="modalBuscaCPF"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-dark-900 border border-dark-border rounded-[32px] w-full max-w-lg overflow-hidden shadow-card transition-all duration-300 transform scale-95 opacity-0">
             <div class="p-6 border-b border-dark-border flex items-center justify-between bg-dark-850">
                 <div>
                     <h3 class="text-xl font-bold text-white">Vincular Tutor e Pets</h3>
@@ -328,31 +361,38 @@
                     </div>
 
                     <div>
-                        <input type="text" id="inputBusca" placeholder="Digite o CPF..." class="input-base h-12 px-4 w-full text-lg tracking-wide" required autocomplete="off" />
+                        <input type="text" id="inputBusca" placeholder="Digite o CPF..."
+                            class="input-base h-12 px-4 w-full text-lg tracking-wide" required autocomplete="off" />
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-dark-border">
-                        <button type="submit" id="btnBuscarTutor" class="btn-action btn-primary w-full"><i class="ph-bold ph-magnifying-glass"></i> Buscar Tutor</button>
+                        <button type="submit" id="btnBuscarTutor" class="btn-action btn-primary w-full"><i
+                                class="ph-bold ph-magnifying-glass"></i> Buscar Tutor</button>
                     </div>
                 </form>
 
                 <form id="formVincularPets" class="hidden space-y-6">
                     <div class="bg-dark-800 p-4 rounded-2xl border border-dark-border">
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Tutor Encontrado</p>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Tutor
+                            Encontrado</p>
                         <h4 class="text-lg font-bold text-white" id="resultadoTutorNome">...</h4>
                         <p class="text-sm text-gray-400" id="resultadoTutorDetalhe">...</p>
                         <input type="hidden" id="tutorIdSelecionado">
                     </div>
 
                     <div>
-                        <p class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Selecione os Pets para Vincular</p>
+                        <p class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Selecione os
+                            Pets para Vincular</p>
                         <div id="listaPetsResultado" class="space-y-3 max-h-48 overflow-y-auto pr-2">
-                            </div>
+                        </div>
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-dark-border">
-                        <button type="button" id="btnVoltarBusca" class="btn-action bg-dark-800 border border-dark-border hover:bg-dark-700 text-white"><i class="ph ph-arrow-left"></i> Voltar</button>
-                        <button type="submit" id="btnConfirmarVinculo" class="btn-action btn-primary flex-1"><i class="ph-bold ph-link"></i> Vincular Selecionados</button>
+                        <button type="button" id="btnVoltarBusca"
+                            class="btn-action bg-dark-800 border border-dark-border hover:bg-dark-700 text-white"><i
+                                class="ph ph-arrow-left"></i> Voltar</button>
+                        <button type="submit" id="btnConfirmarVinculo" class="btn-action btn-primary flex-1"><i
+                                class="ph-bold ph-link"></i> Vincular Selecionados</button>
                     </div>
                 </form>
             </div>
