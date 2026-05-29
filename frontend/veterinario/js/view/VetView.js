@@ -1,5 +1,7 @@
 export class VetView {
     constructor() {
+        this.selectAgendamentoTutor = document.getElementById('agendamento-tutor');
+        this.selectProntuarioTutor = document.getElementById('prontuario-tutor');
         this.metricPets = document.getElementById('metric-total-pets');
         this.metricTutores = document.getElementById('metric-total-tutores');
         this.metricConsultas = document.getElementById('metric-consultas-hoje');
@@ -9,7 +11,7 @@ export class VetView {
         // Referências dos Modais
         this.modalAgendamento = document.getElementById('modal-agendamento');
         this.modalProntuario = document.getElementById('modal-prontuario');
-        
+
         this.selectAgendamento = document.getElementById('agendamento-pet');
         this.selectProntuario = document.getElementById('prontuario-pet');
     }
@@ -37,8 +39,8 @@ export class VetView {
         }
 
         consultas.forEach(consulta => {
-            const statusClass = consulta.status === 'Confirmada' 
-                ? 'bg-[#064e3b]/40 text-brand border border-[#064e3b]' 
+            const statusClass = consulta.status === 'Confirmada'
+                ? 'bg-[#064e3b]/40 text-brand border border-[#064e3b]'
                 : 'bg-[#1e3a8a]/40 text-blue-400 border border-[#1e3a8a]';
 
             const card = document.createElement('div');
@@ -61,17 +63,17 @@ export class VetView {
             this.consultasContainer.appendChild(card);
         });
     }
-    
+
     // ==========================================
     // LÓGICA DOS MODAIS (ANIMAÇÃO)
     // ==========================================
     openModal(modalElement) {
         if (!modalElement) return;
         const panel = modalElement.querySelector('.glass-panel');
-        
+
         // 1. Remove o display: none
         modalElement.classList.remove('hidden');
-        
+
         // 2. Pequeno delay para o navegador registrar a mudança antes de animar
         setTimeout(() => {
             modalElement.classList.remove('opacity-0');
@@ -83,7 +85,7 @@ export class VetView {
     closeModal(modalElement) {
         if (!modalElement) return;
         const panel = modalElement.querySelector('.glass-panel');
-        
+
         // 1. Inicia a animação de saída
         modalElement.classList.add('opacity-0');
         panel.classList.remove('scale-100');
@@ -95,22 +97,40 @@ export class VetView {
         }, 300);
     }
 
-    // Preenche os <select> com a lista de pacientes do veterinário
-    renderPacientesSelects(pacientes) {
-        const defaultOption = '<option value="" disabled selected>Selecione o paciente...</option>';
+    // Renderiza a lista de Tutores únicos nos dropdowns principais
+    renderTutoresSelects(tutores) {
+        const defaultOption = '<option value="" disabled selected>Selecione o tutor...</option>';
         let optionsHtml = defaultOption;
 
-        pacientes.forEach(p => {
-            optionsHtml += `<option value="${p.id_pet}">${this.escapeHTML(p.nome)} (Tutor: ${this.escapeHTML(p.nome_tutor)})</option>`;
+        tutores.forEach(t => {
+            optionsHtml += `<option value="${t.id}">${this.escapeHTML(t.nome)}</option>`;
         });
 
-        if (this.selectAgendamento) this.selectAgendamento.innerHTML = optionsHtml;
-        if (this.selectProntuario) this.selectProntuario.innerHTML = optionsHtml;
+        if (this.selectAgendamentoTutor) this.selectAgendamentoTutor.innerHTML = optionsHtml;
+        if (this.selectProntuarioTutor) this.selectProntuarioTutor.innerHTML = optionsHtml;
+    }
+
+    // Atualiza dinamicamente a lista de pets com base no tutor que foi escolhido
+    renderPetsPorTutor(selectPetElement, pets) {
+        let optionsHtml = '';
+
+        if (pets.length === 0) {
+            optionsHtml = '<option value="" disabled selected>Este tutor não tem pets cadastrados.</option>';
+            selectPetElement.setAttribute('disabled', 'true');
+        } else {
+            optionsHtml = '<option value="" disabled selected>Selecione o paciente...</option>';
+            pets.forEach(p => {
+                optionsHtml += `<option value="${p.id_pet}">${this.escapeHTML(p.nome)} (${this.escapeHTML(p.raca)})</option>`;
+            });
+            selectPetElement.removeAttribute('disabled');
+        }
+
+        if (selectPetElement) selectPetElement.innerHTML = optionsHtml;
     }
 
     escapeHTML(str) {
         if (!str) return '';
-        return str.toString().replace(/[&<>'"]/g, 
+        return str.toString().replace(/[&<>'"]/g,
             tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])
         );
     }

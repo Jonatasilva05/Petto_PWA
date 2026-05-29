@@ -80,4 +80,13 @@ export class VetModel {
         if (!response.ok) throw new Error('Erro ao carregar perfil');
         return await response.json();
     }
+
+    async fetchPacientesGlobais() {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/vet/pacientes-globais`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error('Erro ao buscar base global');
+        return await response.json();
+    }
 }

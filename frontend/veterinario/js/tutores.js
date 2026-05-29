@@ -1,3 +1,12 @@
+import { VetModel } from './models/VetModel.js';
+import { VetView } from './view/VetView.js';
+import { VetController } from './controllers/VetController.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new VetController(new VetModel(), new VetView());
+    app.initDashboard();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
@@ -33,8 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
             panel.classList.remove('scale-100');
             panel.classList.add('scale-95');
         }
-        setTimeout(() => { 
-            modalTutor.classList.add('hidden'); 
+        setTimeout(() => {
+            modalTutor.classList.add('hidden');
             modalTutor.classList.remove('flex');
         }, 300);
     };
@@ -49,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formTutor) {
         formTutor.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const btnSubmit = formTutor.querySelector('button[type="submit"]');
             const originalBtnText = btnSubmit.innerHTML;
-            
+
             btnSubmit.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Cadastrando...';
             btnSubmit.disabled = true;
 
@@ -61,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: document.getElementById('tutor-email').value,
                 cpf: document.getElementById('tutor-cpf').value,
                 telefone: document.getElementById('tutor-telefone').value,
+                senha: document.getElementById('tutor-senha').value, // <-- NOVO CAMPO
                 endereco_completo: `${document.getElementById('tutor-rua').value}, ${document.getElementById('tutor-bairro').value} - ${document.getElementById('tutor-cidade').value}`
             };
 
@@ -78,24 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.message || 'Erro ao cadastrar.');
 
-                Swal.fire({ 
-                    icon: 'success', 
-                    title: 'Sucesso!', 
-                    text: 'Tutor cadastrado com sucesso!', 
-                    background: '#151F25', 
-                    color: '#fff' 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Tutor cadastrado com sucesso!',
+                    background: '#151F25',
+                    color: '#fff'
                 });
-                
-                closeModal(); 
+
+                closeModal();
                 formTutor.reset();
-                carregarListaTutores(); // Atualiza a tabela
+                carregarListaTutores();
+                atualizarMetricasTopo();
             } catch (error) {
-                Swal.fire({ 
-                    icon: 'error', 
-                    title: 'Erro', 
-                    text: error.message, 
-                    background: '#151F25', 
-                    color: '#fff' 
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: error.message,
+                    background: '#151F25',
+                    color: '#fff'
                 });
             } finally {
                 btnSubmit.innerHTML = originalBtnText;
@@ -105,51 +116,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 4. LÓGICA DE LISTAGEM (BUSCA TUTORES)
-    // ==========================================
-    async function carregarListaTutores() {
-        const listaTutoresContainer = document.getElementById('lista-tutores-container');
-        if (!listaTutoresContainer) return;
-        
-        try {
-            const token = localStorage.getItem('auth-token-petto');
-            const response = await fetch('/api/vet/tutores', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (!response.ok) throw new Error('Falha na busca.');
-            const tutores = await response.json();
-            
-            listaTutoresContainer.innerHTML = '';
-            if (tutores.length === 0) {
-                listaTutoresContainer.innerHTML = '<div class="p-8 text-center text-gray-500">Nenhum cliente encontrado.</div>';
-                return;
-            }
+// 4. LÓGICA DE LISTAGEM (BUSCA TUTORES)
+// ==========================================
+async function carregarListaTutores() {
+    const listaTutoresContainer = document.getElementById('lista-tutores-container');
+    if (!listaTutoresContainer) return;
+    
+    try {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch('/api/vet/tutores', {
+            headers: { 'Authorization': `Bearer ${token}` },
+            cache: 'no-store'
+        });
 
-            tutores.forEach(tutor => {
-                const iniciais = tutor.nome.substring(0, 2).toUpperCase();
-                const card = `
-                    <div class="grid grid-cols-[2fr_1.5fr_1.5fr_auto] gap-4 px-8 py-6 items-center card-hover glass-panel m-2 rounded-2xl border-none">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-lg">${iniciais}</div>
-                            <div>
-                                <h4 class="font-bold text-white text-base">${escapeHTML(tutor.nome)}</h4>
-                                <p class="text-xs text-gray-400"><i class="ph-fill ph-map-pin"></i> ${escapeHTML(tutor.endereco || 'Sem endereço')}</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-sm font-medium text-gray-300">${escapeHTML(tutor.telefone || 'Sem telefone')}</p>
-                            <p class="text-xs text-gray-500">${escapeHTML(tutor.email)}</p>
-                        </div>
-                        <div><span class="bg-dark-800 text-gray-400 px-2 py-1 rounded text-xs">${tutor.total_pets || 0} pets</span></div>
-                        <div class="flex gap-2 justify-end"><button class="btn-icon"><i class="ph ph-whatsapp-logo"></i></button></div>
-                    </div>`;
-                listaTutoresContainer.insertAdjacentHTML('beforeend', card);
-            });
-        } catch (error) {
-            console.error(error);
+        // Se o backend retornar erro (ex: 403, 404, 500), capturamos a mensagem
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Erro do servidor: ${response.status}`);
         }
-    }
 
+        const tutores = await response.json();
+        
+        listaTutoresContainer.innerHTML = ''; // Remove o spinner
+        
+        if (tutores.length === 0) {
+            listaTutoresContainer.innerHTML = '<div class="p-8 text-center text-gray-500">Nenhum cliente encontrado na sua clínica.</div>';
+            return;
+        }
+
+        tutores.forEach(tutor => {
+            // Prevenção caso o banco de dados retorne um nome nulo
+            const nomeSeguro = tutor.nome || 'Sem Nome';
+            const iniciais = nomeSeguro.substring(0, 2).toUpperCase();
+            
+            const card = `
+                <div class="grid grid-cols-[2fr_1.5fr_1.5fr_auto] gap-4 px-8 py-6 items-center card-hover glass-panel m-2 rounded-2xl border-none">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-lg">${iniciais}</div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">${escapeHTML(nomeSeguro)}</h4>
+                            <p class="text-xs text-gray-400"><i class="ph-fill ph-map-pin"></i> ${escapeHTML(tutor.endereco || 'Sem endereço')}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-300">${escapeHTML(tutor.telefone || 'Sem telefone')}</p>
+                        <p class="text-xs text-gray-500">${escapeHTML(tutor.email)}</p>
+                    </div>
+                    <div><span class="bg-dark-800 text-gray-400 px-2 py-1 rounded text-xs">${tutor.total_pets || 0} pets</span></div>
+                    <div class="flex gap-2 justify-end"><button class="btn-icon"><i class="ph ph-whatsapp-logo"></i></button></div>
+                </div>`;
+            listaTutoresContainer.insertAdjacentHTML('beforeend', card);
+        });
+    } catch (error) {
+        console.error('Falha ao carregar lista:', error);
+        // ISSO FAZ O SPINNER SUMIR E MOSTRA O ERRO REAL NA TELA
+        listaTutoresContainer.innerHTML = `
+            <div class="p-8 text-center text-red-400 flex flex-col items-center justify-center">
+                <i class="ph-bold ph-warning-circle text-4xl mb-3"></i>
+                <h3 class="font-bold text-lg mb-1">Ops! Ocorreu um erro</h3>
+                <p class="text-sm">${error.message}</p>
+                <button onclick="location.reload()" class="mt-5 text-sm bg-dark-800 hover:bg-dark-700 px-5 py-2 rounded-xl border border-dark-border transition-colors">Tentar Novamente</button>
+            </div>
+        `;
+    }
+}
 
     // ==========================================
     // 5. MÁSCARA E BUSCA AUTOMÁTICA DE CEP (ViaCEP)
@@ -237,6 +267,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function escapeHTML(str) {
         if (!str) return '';
         return str.toString().replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag]));
+    }
+
+    async function atualizarMetricasTopo() {
+        try {
+            const token = localStorage.getItem('auth-token-petto');
+            const response = await fetch('/api/vet/dashboard-metrics', {
+                headers: { 'Authorization': `Bearer ${token}` },
+                cache: 'no-store'
+            });
+            if (response.ok) {
+                const metrics = await response.json();
+                const metricTutores = document.getElementById('metric-total-tutores');
+                if (metricTutores) metricTutores.textContent = metrics.totalTutores;
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar contador:', error);
+        }
     }
 
     // Gatilho inicial ao abrir a página

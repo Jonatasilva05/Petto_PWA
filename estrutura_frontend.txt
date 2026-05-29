@@ -138,6 +138,7 @@ frontend/
 │   ├── uploads/
 │   │   ├── 1779111607640_143.jpeg
 │   │   ├── 1779199652527_523.jpeg
+│   │   ├── 92d651f550b3347780f21183ed177592.jpeg
 │   │   ├── perfil/
 │   ├── veterinario/
 │   │   ├── agenda.html

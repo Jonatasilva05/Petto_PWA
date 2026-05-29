@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Política de Segurança Estrita (Isolamento de Ambiente) -->
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com http://localhost:*; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net http://localhost:*; connect-src 'self' https: ws://localhost:*; object-src 'none';">
     <meta name="referrer" content="no-referrer">
 
     <link rel="stylesheet" href="./css/dashboard.css">
@@ -50,14 +49,17 @@
             <div class="flex flex-col h-full overflow-hidden">
                 <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
                     <div class="flex items-center gap-4">
-    <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-        <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Logo Petto" class="w-10 h-10 object-contain brightness-0 opacity-80">
-    </div>
-    <div>
-        <h2 class="text-2xl font-bold text-white tracking-tight">Petto</h2>
-        <p class="text-xs font-bold text-primary tracking-widest uppercase mt-0.5">Página - Inicial</p>
-    </div>
-</div>
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+                            <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Logo Petto"
+                                class="w-10 h-10 object-contain brightness-0 opacity-80">
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Petto</h2>
+                            <p class="text-xs font-bold text-primary tracking-widest uppercase mt-0.5">Página - Inicial
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <nav class="p-5 space-y-6 overflow-y-auto flex-1" id="main-nav">
@@ -432,13 +434,22 @@
                     </div>
 
                     <form id="form-agendamento" class="space-y-4">
+
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Escolha o Tutor</label>
+                            <select id="agendamento-tutor"
+                                class="input-base w-full h-12 px-4 bg-dark-800 border-dark-border rounded-xl text-white outline-none focus:border-blue-400 transition-colors"
+                                required>
+                                <option value="" disabled selected>Selecione o tutor...</option>
+                            </select>
+                        </div>
+
                         <div>
                             <label class="block text-xs font-medium text-gray-400 mb-1">Paciente (Pet)</label>
                             <select id="agendamento-pet"
-                                class="input-base w-full h-12 px-4 text-sm bg-dark-800 border-dark-border rounded-xl text-white outline-none focus:border-primary transition-colors"
-                                required>
-                                <option value="" disabled selected>Selecione o paciente...</option>
-                                <!-- Preenchido via JS -->
+                                class="input-base w-full h-12 px-4 bg-dark-800 border-dark-border rounded-xl text-white outline-none focus:border-blue-400 transition-colors"
+                                required disabled>
+                                <option value="" disabled selected>Aguardando seleção do tutor...</option>
                             </select>
                         </div>
 
@@ -476,12 +487,20 @@
                     <form id="form-prontuario" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
+                                <label class="block text-xs font-medium text-gray-400 mb-1">Escolha o Tutor</label>
+                                <select id="prontuario-tutor"
+                                    class="input-base w-full h-12 px-4 bg-dark-800 border-dark-border rounded-xl text-white outline-none focus:border-blue-400 transition-colors"
+                                    required>
+                                    <option value="" disabled selected>Selecione o tutor...</option>
+                                </select>
+                            </div>
+
+                            <div>
                                 <label class="block text-xs font-medium text-gray-400 mb-1">Paciente (Pet)</label>
                                 <select id="prontuario-pet"
-                                    class="input-base w-full h-12 px-4 text-sm bg-dark-800 border-dark-border rounded-xl text-white outline-none focus:border-blue-400 transition-colors"
-                                    required>
-                                    <option value="" disabled selected>Selecione o paciente...</option>
-                                    <!-- Preenchido via JS -->
+                                    class="input-base w-full h-12 px-4 bg-dark-800 border-dark-border rounded-xl text-white outline-none focus:border-blue-400 transition-colors"
+                                    required disabled>
+                                    <option value="" disabled selected>Aguardando seleção do tutor...</option>
                                 </select>
                             </div>
                             <div>
@@ -523,12 +542,7 @@
                 </div>
             </div>
         </main>
-
     </div>
-
-    <!-- Scripts Unificados -->
-
-
 </body>
 <script src="./js/global.js"></script>
 <script type="module" src="./js/dashboard.js"></script>

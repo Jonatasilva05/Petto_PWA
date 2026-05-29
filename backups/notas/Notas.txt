@@ -1,6 +1,0 @@
-agora inicie o servidor com 
-npm run dev em ver de start
-
------
-
-Finalizado a tela de cadastro e login e carregamento(tela de cadastro de veterinario ainda nao)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/05/2026 às 09:25
+-- Tempo de geração: 29/05/2026 às 06:06
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `agendamentos`
+--
+
+CREATE TABLE `agendamentos` (
+  `id_agendamento` int(11) NOT NULL,
+  `id_pet` int(11) NOT NULL,
+  `id_veterinario` int(11) NOT NULL,
+  `data_hora` datetime NOT NULL,
+  `status` varchar(20) DEFAULT 'agendado'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `agendamentos`
+--
+
+INSERT INTO `agendamentos` (`id_agendamento`, `id_pet`, `id_veterinario`, `data_hora`, `status`) VALUES
+(7, 135, 77, '2026-05-31 08:00:00', 'agendado'),
+(8, 136, 77, '2026-05-31 15:00:00', 'agendado');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `medicamentos`
 --
 
@@ -33,21 +55,21 @@ CREATE TABLE `medicamentos` (
   `id_pet` int(11) NOT NULL,
   `nome_medicamento` varchar(100) NOT NULL,
   `data_aplicacao` date DEFAULT NULL,
-  `data_desconhecida` tinyint(1) DEFAULT 0
+  `data_desconhecida` tinyint(1) DEFAULT 0,
+  `id_veterinario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `medicamentos`
 --
 
-INSERT INTO `medicamentos` (`id_medicamento`, `id_dataset`, `id_pet`, `nome_medicamento`, `data_aplicacao`, `data_desconhecida`) VALUES
-(1, NULL, 54, 'Vermífugo (Remédio para Verme - Comprimido Oral)', NULL, 1),
-(2, NULL, 59, 'Vermífugo (Remédio para Verme - Injetável)', NULL, 0),
-(3, NULL, 59, 'Vermífugo (Remédio para Verme - Comprimido Oral)', NULL, 0),
-(16, 'vermifugo_oral_cao_gato', 103, 'Vermífugo (Comprimido Oral)', NULL, 0),
-(17, 'antipulgas_carrapatos_cao_gato', 104, 'Antipulgas e Carrapatos (Oral/Tópico)', NULL, 0),
-(18, 'vermifugo_oral_cao_gato', 105, 'Vermífugo (Comprimido Oral)', NULL, 1),
-(22, 'vermifugo_oral_cao_gato', 117, 'Vermífugo (Comprimido Oral)', '2026-05-17', 0);
+INSERT INTO `medicamentos` (`id_medicamento`, `id_dataset`, `id_pet`, `nome_medicamento`, `data_aplicacao`, `data_desconhecida`, `id_veterinario`) VALUES
+(1, NULL, 54, 'Vermífugo (Remédio para Verme - Comprimido Oral)', NULL, 1, NULL),
+(2, NULL, 59, 'Vermífugo (Remédio para Verme - Injetável)', NULL, 0, NULL),
+(3, NULL, 59, 'Vermífugo (Remédio para Verme - Comprimido Oral)', NULL, 0, NULL),
+(16, 'vermifugo_oral_cao_gato', 103, 'Vermífugo (Comprimido Oral)', NULL, 0, NULL),
+(17, 'antipulgas_carrapatos_cao_gato', 104, 'Antipulgas e Carrapatos (Oral/Tópico)', NULL, 0, NULL),
+(18, 'vermifugo_oral_cao_gato', 105, 'Vermífugo (Comprimido Oral)', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -78,12 +100,12 @@ CREATE TABLE `pets` (
 --
 
 INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_valor`, `idade_unidade`, `idade_meses`, `idade_dias`, `peso`, `sexo`, `cor`, `data_nascimento`, `foto_url`, `id_veterinario`) VALUES
-(50, 'Rex', 63, 'Cachorro', 'Pastor Alemão', 5, 'anos', NULL, NULL, 30, 'M', 'Preto e Bege', NULL, NULL, 65),
-(51, 'Thor', 64, 'Cachorro', 'Bulldog Francês', 4, 'anos', NULL, NULL, 12, 'M', 'Creme', NULL, NULL, 67),
+(50, 'Rex', 63, 'Cachorro', 'Pastor Alemão', 5, 'anos', NULL, NULL, 30, 'M', 'Preto e Bege', NULL, NULL, NULL),
+(51, 'Thor', 64, 'Cachorro', 'Bulldog Francês', 4, 'anos', NULL, NULL, 12, 'M', 'Creme', NULL, NULL, NULL),
 (54, 'Caramelo ', NULL, 'cachorro', 'chow_chow', 2, 'meses', NULL, NULL, NULL, 'M', 'Caramelo ', NULL, NULL, NULL),
 (56, 'Caraca', NULL, 'tartaruga', 'jabuti_piranga', 15, 'anos', NULL, NULL, 15, 'M', 'Verde', NULL, NULL, NULL),
 (59, 'Caramelo ', NULL, 'cachorro', 'chow_chow', 2, 'meses', NULL, NULL, NULL, 'M', 'Caramelado', NULL, NULL, NULL),
-(73, 'Urso ', 81, 'cachorro', 'vira_lata', NULL, NULL, NULL, NULL, 7, 'M', 'Caramelo', '2025-05-22', NULL, NULL),
+(73, 'Urso ', NULL, 'cachorro', 'vira_lata', NULL, NULL, NULL, NULL, 7, 'M', 'Caramelo', '2025-05-22', NULL, NULL),
 (79, 'Rex', 85, 'cachorro', 'vira_lata', NULL, NULL, NULL, NULL, 5, 'M', 'branco', '2010-10-02', NULL, NULL),
 (80, 'Tico', 86, 'gato', 'vira_lata', NULL, NULL, NULL, NULL, 5, 'M', 'Laranja', '2020-05-10', NULL, NULL),
 (101, 'Tico', 95, 'gato', 'vira_lata', 3, 'anos', NULL, NULL, 4, 'M', 'Laranja', NULL, NULL, NULL),
@@ -91,7 +113,11 @@ INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_va
 (103, 'Luna', 96, 'cachorro', 'vira_lata', 6, 'anos', 1, NULL, NULL, 'F', NULL, NULL, NULL, NULL),
 (104, 'Sara', 97, 'cachorro', 'dachshund', NULL, NULL, NULL, NULL, NULL, 'F', 'Branca', '2003-03-11', '/uploads/ecb927684e6a7b49311a04bd166ccdc7.jpeg', NULL),
 (105, 'Gaia', 98, 'gato', 'sem_raca_definida', 7, 'meses', NULL, NULL, NULL, 'F', 'Cinza', NULL, NULL, NULL),
-(117, 'Uev', 102, 'cachorro', 'Airedale Terrier', NULL, 'anos', NULL, NULL, 12, 'M', 'Preto', '2026-05-11', NULL, NULL);
+(132, 'Mateus', NULL, 'outro', 'Não se aplica', NULL, 'anos', NULL, NULL, 100000, 'F', 'Branco ', '2000-09-02', NULL, NULL),
+(133, 'Simba', 114, 'gato', 'Sem Raça Definida', 5, 'anos', NULL, NULL, NULL, 'M', 'Amarelo ', NULL, NULL, NULL),
+(135, 'Teste', 115, 'gato', 'Abissínio', NULL, 'anos', NULL, NULL, 3, 'M', 'tes', '2026-05-28', '/uploads/92d651f550b3347780f21183ed177592.jpeg', NULL),
+(136, 'tes', 102, 'coelho', 'Angorá Inglês', NULL, 'anos', NULL, NULL, 1, 'M', 'dsa', '2026-03-03', NULL, NULL),
+(137, 'Not', 119, 'coelho', 'Bélier (Lop)', NULL, 'anos', NULL, NULL, 3, 'M', 'Branco', '2026-03-18', '/uploads/fe5cc16c428f1434be4c550c84f61aa9.jpeg', NULL);
 
 -- --------------------------------------------------------
 
@@ -137,21 +163,31 @@ INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `telefone`, `endereco`, 
 (62, 'admin@petto.com', '$2y$10$rTMhQ3aGT6HiLzv4L/EpOOBbYAsoqZ1ywF2j.BMvASqWR6WnLNMru', 'Admin', '(11) 90000-0000', 'São Paulo/SP', NULL, NULL, NULL, 'tutor', NULL),
 (63, 'joao.silva@gmail.com', '$2y$10$EDtGQWCxvtXwZkbgnEVXo.mCOOUQ2Tk9xgo/e30Qsv2KCNPNkDQvC', 'João Silva', '(21) 91234-5678', 'Rua das Flores, 23 - Taquaritinga/SP', NULL, NULL, NULL, 'tutor', NULL),
 (64, 'maria.costa@gmail.com', '$2y$10$isP.6FgvgXNZpVkdan4tnuWqfaks0GaMX9wvObZRAKGuTr6i5WhkK', 'Maria Costa', '(16) 98765-4321', 'Avenida Brasil, 456 - Matão/SP', NULL, NULL, NULL, 'tutor', NULL),
-(81, 'davisilva16y@gmail.com', '$2b$10$EmkG1mGTUcfFa.pyVeRkZ.C85c01nD0aPYa0slGivs4EZ/pe8/vPK', 'Davi Silva ', NULL, NULL, NULL, 'Caramelo', 'Preto ', 'tutor', NULL),
 (82, 'davisilva016y@gmail.com', '$2b$10$7N38aKAOhBdppHobNcqlbuZkX5bAfUgmI3vIrTV9VcUYH0mjcB36S', 'Davi ', NULL, NULL, NULL, 'CARAMELO ', 'Preto ', 'tutor', NULL),
 (83, 'morafabiana564@gmail.com', '$2b$10$71S4mo64JZfWUuXOnKeJV.2dLE50PN2PwPFNdXY57n.iWCd3.5woi', 'Fabiana ', NULL, NULL, NULL, 'Bethoven', 'Azul', 'tutor', NULL),
-(84, 'jhon@gmail.com', '$2b$10$tDY.AcUnElLX7iMehTwMyuUxV0tEK7cIknEI7mMXjyWjN2dfnswbO', 'Jhon', NULL, NULL, NULL, 'Tigre', 'Azul', 'tutor', NULL),
+(84, 'jhon@gmail.com', '$2b$10$tDY.AcUnElLX7iMehTwMyuUxV0tEK7cIknEI7mMXjyWjN2dfnswbO', 'Jonatas', '16999888005', 'R. José Mendes Ferreira Júnior, 214', NULL, 'Tigre', 'Azul', 'tutor', '00099107007'),
 (85, 'maicon354@gmail.com', '$2b$10$xLr92btjIlqzoCBWPfZxsOMSttKaFYrOvcuLaD4POBzhWJ391ul3y', 'Maicon', NULL, NULL, NULL, 'rex', 'azul', 'tutor', NULL),
 (86, 'stefanistraccini@gmail.com', '$2b$10$4yna7UzPShQtBzUUbUEDoeeHei.ild6CyqvAhID8rorquoTmJ2Kwy', 'Stefani', NULL, NULL, NULL, 'Tico', 'Rosa', 'tutor', NULL),
 (95, 'stefanistraccini93@gmail.com', '$2b$10$OxxgaMavHj.6KyBcfJAP4O7GYZQJbK6h/YE2Kb3uRGcsQ8o2zln1i', 'Stefani straccini', NULL, NULL, NULL, 'Tico', 'Pink', 'tutor', NULL),
 (96, 'thais.casagrande@fatectq.edu.br', '$2b$10$ceFfEdqDOr7791i1mbWPXOjrLbUsLCVkPbvmNQZKS08Dj6p.AVxoW', 'Thais', NULL, NULL, '/uploads/a56fc66edd924f22e3fcfb8ada5f4003.jpeg', 'Luna', 'Amarelo', 'veterinario', NULL),
 (97, 'sabrinarodriguesjesus4@gmail.com', '$2b$10$jE6SvLo83yayhsLVGV45F.OJrWd09ha.FRHBJS6/73OKCNRMpGUhi', 'Sabrina', NULL, NULL, '/uploads/df40833bdd3d6b18c97902712d5b49e0.jpeg', 'Theo', 'Azul', 'tutor', NULL),
 (98, 'bea@gmail.com', '$2b$10$lyBq0kFfS0R3hYARNjVwdePmBQc7rcXW0bJPiyz7c.ROfkecIJ/aC', 'Beatriz Silva', NULL, NULL, NULL, 'Gaia', 'Roxo', 'tutor', NULL),
-(99, 'davimoraes05@gmail.com', '$2b$10$jw.W9ZC5tNOmSwc9SkfF1.NwpASWFmN87SVX/HBGpjt4UddtvYMCu', 'Davi', NULL, NULL, NULL, 'Urso', 'Azul', 'veterinario', NULL),
 (101, 'maicon129@gmail.com', '$2b$10$8cXjEjnr40UD8GdQokdJE..VZzn0QMsHpcPMy7TULcWf7XkcbAwxm', 'Maicon Pivetta', NULL, NULL, NULL, 'Bolinha', 'Azul', 'tutor', NULL),
 (102, 'jonatasmoraes05@gmail.com', '$2b$10$3p0UybJRHei2oTa1UbP6l.Hy0PYlOsYUX2nq51j2BCj3MNjVaLxS.', 'Jônatas', NULL, NULL, NULL, 'Jonatas Silva', 'azul', 'tutor', NULL),
 (105, 'testando@gmail.com', '$2b$10$a8KF4jLwfugb69w6wD8ss.6Rd5UA7gz2N4p5NaA9ni5GSWnC3/OBy', 'Teste', NULL, NULL, NULL, 'Tigre', 'Azul', 'tutor', NULL),
-(106, 'vet@gmail.com', '$2b$10$B.7dfbOEwZ3quEFFm0Xn3e2uAgkdUrfiX3sG.j0Njhtuh2XK3tpv2', 'Vet', NULL, NULL, NULL, 'Tigre', 'Azul', 'veterinario', '46935923077');
+(106, 'vet@gmail.com', '$2b$10$B.7dfbOEwZ3quEFFm0Xn3e2uAgkdUrfiX3sG.j0Njhtuh2XK3tpv2', 'Vet', NULL, NULL, NULL, 'Tigre', 'Azul', 'veterinario', '46935923077'),
+(107, 'davisilva16y@gmail.com', '$2b$10$yV1H/0/y.nqUsTWioAJLWuZ/MRuS.5SQQKDZiQ0UwrRnZJUL1pdcW', 'Davi Silva', NULL, NULL, NULL, 'Caramelo', 'Preto', 'tutor', NULL),
+(108, 'testandoteste@gmail.com', '$2b$10$.29VFp9hB400tEf2rkz2v.52iPJqi8UIXIJ9FUSKhYc8dVT9E9JZe', 'Teste', NULL, NULL, NULL, 'Teste', 'Teste', 'tutor', NULL),
+(110, 'vet@petto.com', 'admin@123', 'Dr. João Silva Teste', NULL, NULL, NULL, 'Tigre', 'Azul', 'veterinario', '46935923077'),
+(111, 'petto@gmail.com', '$2b$10$Hyoqbwl0dETJ1eGAxYA12eAys0V1AsooHjCleuT6ZOmiyEZwekFPm', 'Jonatas', NULL, NULL, NULL, 'vet', 'vet', 'veterinario', '93080517083'),
+(112, 'adminvet@gmail.com', '$2b$10$CoMrM1xdzUwAcujLLCtBAO4ZHr6Is0DrsF9CpLUT5nUi2S7qa/Lj2', 'Jonatas', NULL, NULL, NULL, 'tes', 'tes', 'veterinario', '66535782085'),
+(113, 'testeste@gmail.cpm', '$2b$10$Bc7ZUE5WaT/xFtOK2opR.OylHVzz1DxmrFZxwEpEOjCCyj9/La9/K', 'teste', '(12) 56542-4569', 'Rua Alderico Bussadori Filho, , Jardim Maria Luiza I - Taquaritinga - SP', NULL, 'teste', 'teste', 'tutor', '54220367004'),
+(114, 'aline.luz@cps.sp.gov.br', '$2b$10$KEP/oxyXypr6L6lqh3JereN6pPbntj0VArzEU7/gACBIThtAWolWq', 'Aline Beatriz Ramos Luz Del Vechio', NULL, NULL, NULL, 'Simba', NULL, 'tutor', NULL),
+(115, 'maicon@gmail.com', '$2b$10$U7YyYgmYknWASaiA.adVD.YBF/VHaTkx7dQZSDd68lG.x54t9tJ2C', 'Maicon', NULL, NULL, NULL, 'Tigre', 'Azul', 'tutor', NULL),
+(116, 'abc@gmail.com', '$2b$10$zgSAcnkjM5e9b7csrwjwluaZbqgCU70VBgGKUolssInxzNL2h0MM6', 'Maicon', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '30895509032'),
+(117, 'davi@gmail.com', '$2b$10$orToyk9pC1tSXHTlQxgRYuMS2AYc7YPfP347ChffQuCTT/m3DIHv6', 'davi', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '86183879088'),
+(118, 'faby@gmail.com', '$2b$10$lWmtjl83yD9t/U80fwDRGe8uA03k4Fh55sW56/yJgrO/KceMZaT0.', 'faby', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '55969122041'),
+(119, 'clau@gmail.com', '$2b$10$PMLTlVCVjhGqpemHNg4NUOuSyJWMRpCAehFXKPLEvdd3m2tglQrmu', 'clau', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '55969122041');
 
 -- --------------------------------------------------------
 
@@ -166,21 +202,22 @@ CREATE TABLE `vacinas` (
   `data_aplicacao` date DEFAULT NULL,
   `proxima_aplicacao` date NOT NULL,
   `data_desconhecida` tinyint(1) DEFAULT 0,
-  `id_pet` int(11) NOT NULL
+  `id_pet` int(11) NOT NULL,
+  `id_veterinario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `vacinas`
 --
 
-INSERT INTO `vacinas` (`id_vacina`, `id_dataset`, `nome`, `data_aplicacao`, `proxima_aplicacao`, `data_desconhecida`, `id_pet`) VALUES
-(4, NULL, 'V10', '2025-06-26', '2026-06-26', 0, 50),
-(5, NULL, 'Antirrábica', '2025-06-21', '2026-06-21', 0, 51),
-(13, NULL, 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 0, 73),
-(15, NULL, 'Leucemia Felina (FeLV)', '2021-06-22', '0000-00-00', 0, 80),
-(22, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 1, 103),
-(23, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', NULL, '0000-00-00', 0, 104),
-(31, 'vacina_gripe_canina', 'Gripe Canina (Tosse dos Canis)', '2026-05-13', '0000-00-00', 0, 117);
+INSERT INTO `vacinas` (`id_vacina`, `id_dataset`, `nome`, `data_aplicacao`, `proxima_aplicacao`, `data_desconhecida`, `id_pet`, `id_veterinario`) VALUES
+(4, NULL, 'V10', '2025-06-26', '2026-06-26', 0, 50, NULL),
+(5, NULL, 'Antirrábica', '2025-06-21', '2026-06-21', 0, 51, NULL),
+(13, NULL, 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 0, 73, NULL),
+(15, NULL, 'Leucemia Felina (FeLV)', '2021-06-22', '0000-00-00', 0, 80, NULL),
+(22, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 1, 103, NULL),
+(23, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', NULL, '0000-00-00', 0, 104, NULL),
+(43, 'vacina_mixomatose_coelho', 'Vacina contra Mixomatose', '2026-04-23', '0000-00-00', 0, 137, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,22 +246,49 @@ CREATE TABLE `veterinarios` (
 --
 
 INSERT INTO `veterinarios` (`id_veterinario`, `nome`, `nome_clinica`, `tempo_experiencia`, `telefone`, `email`, `endereco`, `cep_clinica`, `bairro_clinica`, `numero_clinica`, `cpf`, `crmv`, `user_id`) VALUES
-(63, 'Dr. Lucas Oliveira', NULL, NULL, '(16) 98765-4321', 'lucas.oliveira@gmail.com', 'Flares, 723 - Taquaritinga/SP', NULL, NULL, NULL, '123.456.789-00', '12345-SP', NULL),
-(64, 'Dra. Ana Souza', NULL, NULL, '(16) 99876-5432', 'ana.souza@gmail.com', 'Avenida Brasil, 456 - Matão/SP', NULL, NULL, NULL, '987.654.321-99', '67891-SP', NULL),
-(65, 'Dr. Pedro Silva', NULL, NULL, '(16) 91234-5678', 'pedro.silva@gmail.com', 'Rua Acácias, 789 - Araraquara/SP', NULL, NULL, NULL, '456.789.123-22', '54321-SP', NULL),
-(66, 'Dra. Mariana Costa', NULL, NULL, '(16) 93456-7890', 'marianacosta@gmail.com', 'Alameda, 101 - Taquaritinga/SP', NULL, NULL, NULL, '789.123.456-33', '17223-SP', NULL),
-(67, 'Dr. Carlos Pereira', NULL, NULL, '(16) 94567-8901', 'carlos.pereira@gmail.com', 'Travessa, 55 - Taquaritinga/SP', NULL, NULL, NULL, '321.654.987-44', '33445-SP', NULL);
+(76, 'Jonatas', 'vetVeteria', NULL, NULL, 'petto@gmail.com', 'Rua Alderico Bussadori Filho', '15906-838', 'Jardim Maria Luiza I', '206', '93080517083', '99999-SP', 111),
+(77, 'Jonatas', 'Admin Vet', NULL, NULL, 'adminvet@gmail.com', 'Rua José Mendes Ferreira Júnior', '15904-082', 'Parque Residencial Laranjeiras I', '214', '66535782085', '99969-SP', 112);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `vet_clientes`
+--
+
+CREATE TABLE `vet_clientes` (
+  `id_veterinario` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `data_vinculo` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `vet_clientes`
+--
+
+INSERT INTO `vet_clientes` (`id_veterinario`, `id_usuario`, `data_vinculo`) VALUES
+(77, 113, '2026-05-29 03:42:57'),
+(77, 118, '2026-05-29 02:20:08'),
+(77, 119, '2026-05-29 02:45:31');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
+-- Índices de tabela `agendamentos`
+--
+ALTER TABLE `agendamentos`
+  ADD PRIMARY KEY (`id_agendamento`),
+  ADD KEY `id_pet` (`id_pet`),
+  ADD KEY `id_veterinario` (`id_veterinario`);
+
+--
 -- Índices de tabela `medicamentos`
 --
 ALTER TABLE `medicamentos`
   ADD PRIMARY KEY (`id_medicamento`),
-  ADD KEY `id_pet` (`id_pet`);
+  ADD KEY `id_pet` (`id_pet`),
+  ADD KEY `fk_medicamentos_veterinario` (`id_veterinario`);
 
 --
 -- Índices de tabela `pets`
@@ -253,7 +317,8 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `vacinas`
   ADD PRIMARY KEY (`id_vacina`),
-  ADD KEY `id_pet` (`id_pet`);
+  ADD KEY `id_pet` (`id_pet`),
+  ADD KEY `fk_vacinas_veterinario` (`id_veterinario`);
 
 --
 -- Índices de tabela `veterinarios`
@@ -263,20 +328,33 @@ ALTER TABLE `veterinarios`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Índices de tabela `vet_clientes`
+--
+ALTER TABLE `vet_clientes`
+  ADD PRIMARY KEY (`id_veterinario`,`id_usuario`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `agendamentos`
+--
+ALTER TABLE `agendamentos`
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `medicamentos`
 --
 ALTER TABLE `medicamentos`
-  MODIFY `id_medicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_medicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de tabela `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT de tabela `prontuario`
@@ -288,28 +366,36 @@ ALTER TABLE `prontuario`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT de tabela `vacinas`
 --
 ALTER TABLE `vacinas`
-  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de tabela `veterinarios`
 --
 ALTER TABLE `veterinarios`
-  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Restrições para tabelas despejadas
 --
 
 --
+-- Restrições para tabelas `agendamentos`
+--
+ALTER TABLE `agendamentos`
+  ADD CONSTRAINT `agendamentos_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pets` (`id_pet`) ON DELETE CASCADE,
+  ADD CONSTRAINT `agendamentos_ibfk_2` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`) ON DELETE CASCADE;
+
+--
 -- Restrições para tabelas `medicamentos`
 --
 ALTER TABLE `medicamentos`
+  ADD CONSTRAINT `fk_medicamentos_veterinario` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `medicamentos_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pets` (`id_pet`) ON DELETE CASCADE;
 
 --
@@ -330,6 +416,7 @@ ALTER TABLE `prontuario`
 -- Restrições para tabelas `vacinas`
 --
 ALTER TABLE `vacinas`
+  ADD CONSTRAINT `fk_vacinas_veterinario` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `vacinas_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pets` (`id_pet`) ON DELETE CASCADE;
 
 --
@@ -337,6 +424,13 @@ ALTER TABLE `vacinas`
 --
 ALTER TABLE `veterinarios`
   ADD CONSTRAINT `veterinarios_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuarios` (`id`);
+
+--
+-- Restrições para tabelas `vet_clientes`
+--
+ALTER TABLE `vet_clientes`
+  ADD CONSTRAINT `vet_clientes_ibfk_1` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`) ON DELETE CASCADE,
+  ADD CONSTRAINT `vet_clientes_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
