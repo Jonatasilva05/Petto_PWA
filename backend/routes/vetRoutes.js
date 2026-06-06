@@ -319,10 +319,15 @@ router.get('/agenda', authenticateToken, async (req, res) => {
     }
 });
 
-// Rota: Buscar todos os pets que já tiveram algum histórico clínico no sistema
+// Rota: Buscar pacientes para a barra de pesquisa (Apenas os vinculados ao Vet logado)
 router.get('/pacientes-globais', authenticateToken, async (req, res) => {
     try {
-        // Esta query ignora a tabela vet_clientes e olha para o histórico real
+        // 1. Pega o ID do veterinário logado para garantir o isolamento dos dados
+        const [vetResult] = await pool.execute('SELECT id_veterinario FROM veterinarios WHERE user_id = ?', [req.user.id]);
+        if (vetResult.length === 0) return res.status(403).json({ message: 'Perfil não encontrado.' });
+        const idVet = vetResult[0].id_veterinario;
+
+        // 2. Busca com as regras exatas de negócio
         const sql = `
             SELECT DISTINCT 
                 p.id_pet, 
@@ -332,14 +337,22 @@ router.get('/pacientes-globais', authenticateToken, async (req, res) => {
                 u.nome as tutor_nome 
             FROM pets p
             LEFT JOIN usuarios u ON p.id_usuario = u.id
-            WHERE EXISTS (
-                SELECT 1 FROM agendamentos a WHERE a.id_pet = p.id_pet
-                UNION
-                SELECT 1 FROM prontuario pr WHERE pr.id_pet = p.id_pet
-            )
-            ORDER BY u.nome ASC`;
+            LEFT JOIN vet_clientes vc ON u.id = vc.id_usuario AND vc.id_veterinario = ?
+            WHERE 
+                vc.id_veterinario IS NOT NULL -- Tutor está vinculado à clínica
+                OR p.id_veterinario = ? -- Pet foi cadastrado direto pelo vet
+                OR EXISTS (
+                    SELECT 1 FROM agendamentos a 
+                    WHERE a.id_pet = p.id_pet AND a.id_veterinario = ?
+                )
+                OR EXISTS (
+                    SELECT 1 FROM prontuario pr 
+                    WHERE pr.id_pet = p.id_pet AND pr.id_veterinario = ?
+                )
+            ORDER BY p.nome ASC`;
 
-        const [pacientes] = await pool.execute(sql);
+        // Passamos o idVet 4 vezes para preencher todos os pontos de interrogação (?) da query
+        const [pacientes] = await pool.execute(sql, [idVet, idVet, idVet, idVet]);
         res.status(200).json(pacientes);
     } catch (error) {
         console.error('Erro ao buscar base global:', error);

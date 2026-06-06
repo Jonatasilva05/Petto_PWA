@@ -142,11 +142,14 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <div class="relative hidden lg:block">
-                        <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                        <input type="text" placeholder="Buscar pacientes, prontuários..."
-                            class="input-base w-72 h-12 pl-11 pr-4 text-sm" autocomplete="off" />
-                    </div>
+                    <div class="relative hidden lg:block" id="search-container">
+    <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+    <input type="text" id="input-busca" placeholder="Buscar pacientes, tutores..."
+        class="input-base w-72 h-12 pl-11 pr-4 text-sm focus:border-primary transition-colors" autocomplete="off" />
+    
+    <div id="dropdown-busca" class="absolute left-0 top-full mt-2 w-full bg-dark-800 border border-dark-border rounded-xl shadow-card hidden flex-col overflow-hidden z-50 max-h-80 overflow-y-auto">
+        </div>
+</div>
 
                     <div class="h-8 w-px bg-dark-border mx-2"></div>
 

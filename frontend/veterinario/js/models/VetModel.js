@@ -89,4 +89,55 @@ export class VetModel {
         if (!response.ok) throw new Error('Erro ao buscar base global');
         return await response.json();
     }
-}
+
+    // Envia os dados do Super Modal (Pet + Histórico Clínico)
+    async salvarSuperPet(payload) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/vet/cadastro-pet-tutor`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Erro ao cadastrar paciente na base.');
+        return data;
+    }
+
+    // Busca o tutor e seus pets pelo CPF ou E-mail
+    async buscarTutor(tipo, termo) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/vet/buscar-tutor`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify({ tipo, termo })
+        });
+        
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Erro ao buscar tutor.');
+        return data;
+    }
+
+    // Envia os IDs do tutor e dos pets selecionados para vinculá-los ao veterinário logado
+    async vincularTutorPets(id_tutor, pets_ids) {
+        const token = localStorage.getItem('auth-token-petto');
+        const response = await fetch(`${this.apiUrl}/vet/vincular-tutor-pets`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify({ id_tutor, pets_ids })
+        });
+        
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Erro ao vincular pets.');
+        return data;
+    }
+} 

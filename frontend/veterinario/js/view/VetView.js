@@ -8,6 +8,9 @@ export class VetView {
         this.metricVacinas = document.getElementById('metric-vacinas-pendentes');
         this.consultasContainer = document.getElementById('consultas-hoje-container');
 
+        this.inputBusca = document.getElementById('input-busca');
+        this.dropdownBusca = document.getElementById('dropdown-busca');
+
         // Referências dos Modais
         this.modalAgendamento = document.getElementById('modal-agendamento');
         this.modalProntuario = document.getElementById('modal-prontuario');
@@ -126,6 +129,50 @@ export class VetView {
         }
 
         if (selectPetElement) selectPetElement.innerHTML = optionsHtml;
+    }
+
+    // Alterna a visibilidade do dropdown de busca
+    toggleDropdownBusca(mostrar) {
+        if (!this.dropdownBusca) return;
+        if (mostrar) {
+            this.dropdownBusca.classList.remove('hidden');
+            this.dropdownBusca.classList.add('flex');
+        } else {
+            this.dropdownBusca.classList.add('hidden');
+            this.dropdownBusca.classList.remove('flex');
+        }
+    }
+
+    // Renderiza os resultados encontrados
+    renderResultadosBusca(resultados) {
+        if (!this.dropdownBusca) return;
+
+        if (resultados.length === 0) {
+            this.dropdownBusca.innerHTML = `
+                <div class="p-4 text-sm text-gray-400 text-center flex flex-col items-center gap-2">
+                    <i class="ph ph-magnifying-glass text-2xl"></i>
+                    Nenhum resultado encontrado.
+                </div>`;
+            return;
+        }
+
+        let html = '';
+        resultados.forEach(item => {
+            html += `
+                <a href="pets.html?id=${item.id_pet}" class="flex items-center gap-3 p-3 hover:bg-dark-700 transition-colors border-b border-dark-border last:border-0 cursor-pointer">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                        <i class="ph-fill ph-paw-print"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-sm font-medium text-white truncate">${this.escapeHTML(item.pet_nome)} <span class="text-xs text-gray-500 font-normal">(${this.escapeHTML(item.raca)})</span></p>
+                        <p class="text-xs text-gray-400 truncate">Tutor: ${this.escapeHTML(item.tutor_nome)}</p>
+                    </div>
+                    <i class="ph ph-caret-right text-gray-500"></i>
+                </a>
+            `;
+        });
+
+        this.dropdownBusca.innerHTML = html;
     }
 
     escapeHTML(str) {

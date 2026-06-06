@@ -16,12 +16,15 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Rota para salvar o agendamento
 router.post('/', authenticateToken, async (req, res) => {
     const { id_pet, id_veterinario, data_hora } = req.body;
+    
+    // Validação de Segurança Back-end
+    const dataEscolhida = new Date(data_hora);
+    const agora = new Date();
 
-    if (!id_pet || !id_veterinario || !data_hora) {
-        return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+    if (dataEscolhida < agora) {
+        return res.status(400).json({ message: 'Data ou horário inválido (passado).' });
     }
 
     try {
