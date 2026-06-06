@@ -6,7 +6,7 @@ body {
     font-family: 'Inter', sans-serif;
     background: #05080A;
     color: white;
-    overflow: hidden;
+    overflow: hidden; 
     -webkit-font-smoothing: antialiased;
 }
 

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETTO - Loading</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           RESET & GLOBAL
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* =========================================
+           BACKGROUND (SUTIL)
+           ========================================= */
+        .background {
+            position: fixed;
+            inset: 0;
+            /* O rgba() com 0.95 deixa uma camada branca quase sólida, 
+               fazendo a imagem de fundo aparecer apenas como uma textura bem suave */
+            background: linear-gradient(rgba(255, 255, 255, 0.567), rgba(255, 255, 255, 0.95)), url("./carregarVet.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* =========================================
+           ELEMENTOS DECORATIVOS
+           ========================================= */
+        .floating {
+            position: absolute;
+            color: #7db8ff;
+            opacity: 0.25;
+            font-size: 70px;
+            animation: float 7s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .p1 { top: 50px; left: 10%; }
+        .p2 { top: 80px; right: 15%; }
+        .p3 { bottom: 180px; left: 12%; }
+        .p4 { bottom: 220px; right: 10%; }
+
+        .heart {
+            color: #7ad3c1;
+            opacity: 0.35;
+            font-size: 50px;
+            position: absolute;
+        }
+        
+        .heart.h1 { top: 120px; left: 30%; }
+        .heart.h2 { top: 120px; right: 30%; }
+
+        /* =========================================
+           CONTAINER PRINCIPAL
+           ========================================= */
+        .container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* =========================================
+           HEADER (LOGO & BRAND)
+           ========================================= */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5vh;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo img {
+            width: 120px;
+        }
+
+        .brand {
+            margin-top: 20px;
+            font-size: 4rem;
+            font-weight: 800;
+            color: #1f4a85;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .brand span {
+            color: #56c3a4;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.4rem;
+            color: #374151;
+            text-align: center;
+        }
+
+        .subtitle strong {
+            color: #4f8cff;
+        }
+
+        /* =========================================
+           CARDS DE VALORES
+           ========================================= */
+        .values {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            background:rgba(255, 255, 255, 0.768), rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .item {
+            flex: 1 1 200px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .item:not(:last-child) {
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .item h3 {
+            color: #1f3f6d;
+            font-size: 1.1rem;
+        }
+
+        /* Breakpoint Responsivo */
+        @media (max-width: 768px) {
+            .item:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            }
+            .floating {
+                display: none; 
+            }
+            .brand {
+                font-size: 3rem;
+            }
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+            .logo img {
+                width: 90px;
+            }
+        }
+
+        /* =========================================
+           FOOTER E JORNADA DO PROGRESSO
+           ========================================= */
+        footer {
+            position: absolute;
+            bottom: 30px;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        /* Trilha que segura a casa, a barra e a clínica */
+        .journey-track {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espaçamento entre os ícones e a barra */
+        }
+
+        .place-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .place-icon img {
+            width: 60px; /* Tamanho reduzido para parecer um ícone de mapa */
+            max-width: 100%;
+        }
+
+        .place-icon span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* Área onde a barra de fato acontece */
+        .progress-area {
+            flex-grow: 1; /* Faz a barra ocupar todo o espaço restante entre as imagens */
+            position: relative;
+        }
+
+        .progress {
+            width: 100%;
+            height: 22px;
+            border-radius: 50px;
+            background: #dce7f7;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #3b82f6, #45c18d);
+            transition: width 0.1s linear;
+        }
+
+        .dog {
+            position: absolute;
+            left: 0;
+            top: -40px;
+            font-size: 45px;
+            animation: walk 1s infinite alternate;
+            transition: left 0.1s linear;
+        }
+
+        @keyframes walk {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        .copy {
+            text-align: center;
+            margin-top: 35px;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        /* Ajustes Mobile para a Jornada */
+        @media (max-width: 480px) {
+            .place-icon img { width: 45px; }
+            .place-icon span { display: none; /* Esconde os textos da casa/clínica no mobile para não amontoar */ }
+            .dog { font-size: 35px; top: -30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fundo Sutil -->
+    <div class="background"></div>
+
+    <!-- Efeitos Decorativos -->
+    <div class="floating p1">🐾</div>
+    <div class="floating p2">🐾</div>
+    <div class="floating p3">🐾</div>
+    <div class="floating p4">🐾</div>
+    <div class="floating heart h1">💚</div>
+    <div class="floating heart h2">🤍</div>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+
+        <header>
+            <div class="logo">
+                <img src="./iconSemFundoSemNome.png" alt="Logo Petto">
+            </div>
+
+            <h1 class="brand">PE<span>TT</span>O</h1>
+
+            <p class="subtitle">Tudo o que <strong>seu pet</strong> precisa.</p>
+        </header>
+
+        <section class="values">
+            <div class="item">
+                <div class="icon">🛡️</div>
+                <h3>Proteção</h3>
+            </div>
+            <div class="item">
+                <div class="icon">💚</div>
+                <h3>Empatia</h3>
+            </div>
+            <div class="item">
+                <div class="icon">👁️</div>
+                <h3>Transparência</h3>
+            </div>
+            <div class="item">
+                <div class="icon">📅</div>
+                <h3>Organização</h3>
+            </div>
+        </section>
+
+        <footer>
+            <div class="progress-text">
+                <span>Preparando tudo...</span>
+                <span id="percent">0%</span>
+            </div>
+
+            <!-- Jornada: Casa -> Barra -> Clínica -->
+            <div class="journey-track">
+                
+                <div class="place-icon">
+                    <img src="casa.png" alt="Casa do Tutor">
+                    <span>Casa</span>
+                </div>
+
+                <div class="progress-area">
+                    <div class="progress">
+                        <div class="progress-fill" id="fill"></div>
+                    </div>
+                    <div class="dog" id="dog">🐕</div>
+                </div>
+
+                <div class="place-icon">
+                    <img src="clinica.png" alt="Clínica Veterinária">
+                    <span>Clínica</span>
+                </div>
+
+            </div>
+
+            <div class="copy">
+                PETTO &copy; 2026
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Script de Carregamento -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let progress = 0;
+
+            const fill = document.getElementById("fill");
+            const percent = document.getElementById("percent");
+            const dog = document.getElementById("dog");
+
+            const timer = setInterval(() => {
+                progress++;
+
+                fill.style.width = `${progress}%`;
+                percent.innerHTML = `${progress}%`;
+
+                // Posiciona o cachorro subtraindo metade do tamanho dele (aprox 25px) 
+                // para que o bico/focinho fique alinhado com o fim da barra preenchida
+                dog.style.left = `calc(${progress}% - 25px)`;
+
+                if (progress >= 100) {
+                    clearInterval(timer);
+
+                    setTimeout(() => {
+                        // window.location.href = "dashboard.html";
+                        console.log("Loading completo! Indo para o dashboard...");
+                    }, 600);
+                }
+            }, 40);
+        });
+    </script>
+
+</body>
+</html>

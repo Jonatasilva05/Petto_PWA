@@ -35,92 +35,190 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     carregarPacientes();
 
-    async function carregarPacientes() {
-        const container = document.getElementById('lista-pets');
-        const token = localStorage.getItem('auth-token-petto');
-        if (!container) return;
+    // Dicionário de labels baseado no seu databasePets.json
+const labelsEspecies = {
+    "cachorro": "Cães 🐶",
+    "gato": "Gatos 🐈",
+    "coelho": "Coelhos 🐇",
+    "passaro": "Pássaros 🐦",
+    "roedor": "Roedores 🐹",
+    "peixe": "Peixes 🐠",
+    "reptil": "Répteis 🦎",
+    "tartaruga": "Tartarugas 🐢",
+    "furao": "Furões 🦡",
+    "outro": "Outros"
+};
 
-        try {
-            const response = await fetch('/api/vet/pacientes', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+// Variável para guardar os dados e poder filtrar depois na tela
+let pacientesGlobais = []; 
 
-            if (!response.ok) throw new Error('Erro ao carregar dados do servidor.');
-            const pacientes = await response.json();
+// Modificando a função de carregar
+async function carregarPacientes() {
+    const container = document.getElementById('lista-pets');
+    const token = localStorage.getItem('auth-token-petto');
+    if (!container) return;
 
-            if (pacientes.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full text-center py-16 border border-dashed border-dark-border rounded-3xl bg-dark-900/40 p-8">
-                        <div class="w-16 h-16 bg-dark-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-gray-500 text-2xl">
-                            <i class="ph ph-paw-print"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-1">Nenhum pet na sua base de dados</h4>
-                        <p class="text-sm text-gray-400 max-w-md mx-auto mb-6">Você só verá os pets de tutores vinculados à sua conta. Use a busca por CPF para vincular um tutor existente.</p>
-                    </div>`;
-                return;
+    try {
+        const response = await fetch('/api/vet/pacientes', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
+        });
 
-            container.innerHTML = pacientes.map(pet => {
-                let fotoURL = pet.foto_url;
-                if (!fotoURL) {
-                    fotoURL = (pet.especie && pet.especie.toLowerCase() === 'gato') ? 'https://placecats.com/500/300' : 'https://placedog.net/500/300';
-                }
+        if (!response.ok) throw new Error('Erro ao carregar dados do servidor.');
+        
+        // Salva os dados do banco na variável global
+        pacientesGlobais = await response.json(); 
 
-                const racaExibir = pet.raca || 'Sem raça definida';
-                const idadeExibir = pet.idade_valor ? `${pet.idade_valor} ${pet.idade_unidade}` : 'Idade N/I';
-                const pesoExibir = pet.peso ? `${pet.peso}kg` : 'N/I';
-
-                return `
-                <div class="glass-panel rounded-3xl p-0 card-hover flex flex-col overflow-hidden border border-dark-border bg-dark-900">
-                    <div class="pet-cover h-40 relative overflow-hidden">
-                        <img src="${fotoURL}" class="w-full h-full object-cover" />
-                        <div class="pet-overlay absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-900/40 to-transparent"></div>
-                        <div class="absolute top-4 right-4 z-10"><span class="badge badge-green"><i class="ph-fill ph-check-circle"></i> Sincronizado</span></div>
+        if (pacientesGlobais.length === 0) {
+            container.innerHTML = `
+                <div class="col-span-full text-center py-16 border border-dashed border-dark-border rounded-3xl bg-dark-900/40 p-8">
+                    <div class="w-16 h-16 bg-dark-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-gray-500 text-2xl">
+                        <i class="ph ph-paw-print"></i>
                     </div>
-                    <div class="p-6 pt-0 flex-1 flex flex-col relative">
-                        <div class="flex justify-between items-start">
-                            <div class="w-20 h-20 rounded-2xl overflow-hidden border-4 border-dark-950 -mt-10 relative z-10 bg-dark-800">
-                                <img src="${fotoURL}" class="w-full h-full object-cover" />
-                            </div>
-                            <div class="flex gap-2 mt-4">
-                                <button onclick="editarPet(${pet.id_pet})" class="w-10 h-10 rounded-xl bg-dark-800 border border-dark-border text-gray-400 hover:text-primary transition-colors flex items-center justify-center">
-                                    <i class="ph ph-pencil-simple"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 mb-6">
-                            <h3 class="text-2xl font-bold text-white tracking-tight">${pet.pet_nome}</h3>
-                            <p class="text-sm text-gray-400 mt-1">${racaExibir} • ${idadeExibir}</p>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3 mb-6">
-                            <div class="bg-dark-800 border border-dark-border rounded-xl p-3">
-                                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Tutor(a)</p>
-                                <p class="text-sm font-medium text-white truncate" title="${pet.tutor_nome}">${pet.tutor_nome}</p>
-                            </div>
-                            <div class="bg-dark-800 border border-dark-border rounded-xl p-3">
-                                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Peso</p>
-                                <p class="text-sm font-medium text-white">${pesoExibir}</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-auto pt-4 border-t border-dark-border flex items-center justify-between">
-                            <span class="text-xs text-gray-500 flex items-center gap-1"><i class="ph ph-shield-check text-primary"></i> Prontuário Ativo</span>
-                            <button class="text-primary text-sm font-semibold hover:text-white transition-colors flex items-center gap-1">Prontuário <i class="ph-bold ph-arrow-right text-xs"></i></button>
-                        </div>
-                    </div>
+                    <h4 class="text-lg font-bold text-white mb-1">Nenhum pet na sua base de dados</h4>
+                    <p class="text-sm text-gray-400 max-w-md mx-auto mb-6">Você só verá os pets de tutores vinculados à sua conta. Use a busca por CPF para vincular um tutor existente.</p>
                 </div>`;
-            }).join('');
-
-        } catch (error) {
-            container.innerHTML = `<div class="col-span-full text-center py-12 text-red-400"><i class="ph ph-warning text-2xl"></i><p class="mt-2">Erro ao conectar com a API.</p></div>`;
+            document.getElementById('filtros-especie').innerHTML = ''; // Limpa filtros se não tiver pet
+            return;
         }
+
+        // Renderiza os botões dinamicamente e depois a lista completa
+        renderizarFiltros(pacientesGlobais);
+        renderizarListaPets(pacientesGlobais); // Renderiza todos inicialmente
+
+    } catch (error) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-red-400"><i class="ph ph-warning text-2xl"></i><p class="mt-2">Erro ao conectar com a API.</p></div>`;
     }
+}
+
+// -----------------------------------------------------
+// FUNÇÃO PARA CRIAR OS BOTÕES DE FILTRO DINAMICAMENTE
+// -----------------------------------------------------
+function renderizarFiltros(pacientes) {
+    const containerFiltros = document.getElementById('filtros-especie');
+    if (!containerFiltros) return;
+
+    // 1. Descobrir quais espécies únicas existem nos pets retornados
+    const especiesPresentes = [...new Set(pacientes.map(p => p.especie ? p.especie.toLowerCase() : 'outro'))];
+
+    // 2. Criar botão "Todos"
+    let htmlFiltros = `
+        <button onclick="filtrarPets('todos')" id="btn-filtro-todos" 
+                class="btn-filtro px-4 py-2 rounded-lg bg-primary/15 text-primary text-sm font-medium transition-colors whitespace-nowrap">
+            Todos (${pacientes.length})
+        </button>`;
+
+    // 3. Criar os botões apenas para as espécies presentes
+    especiesPresentes.forEach(especie => {
+        // Conta quantos pets dessa espécie existem
+        const qtd = pacientes.filter(p => (p.especie || 'outro').toLowerCase() === especie).length;
+        
+        // Busca o nome bonito no dicionário (ex: "Cães 🐶")
+        const label = labelsEspecies[especie] || especie.charAt(0).toUpperCase() + especie.slice(1);
+        
+        htmlFiltros += `
+            <button onclick="filtrarPets('${especie}')" id="btn-filtro-${especie}" 
+                    class="btn-filtro px-4 py-2 rounded-lg text-gray-400 text-sm font-medium hover:text-white transition-colors whitespace-nowrap">
+                ${label} (${qtd})
+            </button>`;
+    });
+
+    containerFiltros.innerHTML = htmlFiltros;
+}
+
+// -----------------------------------------------------
+// FUNÇÃO PARA FILTRAR OS CARDS NA TELA
+// -----------------------------------------------------
+window.filtrarPets = function(especieAlvo) {
+    // 1. Muda a cor visual do botão ativo
+    document.querySelectorAll('.btn-filtro').forEach(btn => {
+        btn.classList.remove('bg-primary/15', 'text-primary');
+        btn.classList.add('text-gray-400');
+    });
+    
+    const btnAtivo = document.getElementById(`btn-filtro-${especieAlvo}`);
+    if (btnAtivo) {
+        btnAtivo.classList.remove('text-gray-400');
+        btnAtivo.classList.add('bg-primary/15', 'text-primary');
+    }
+
+    // 2. Filtra a lista global
+    if (especieAlvo === 'todos') {
+        renderizarListaPets(pacientesGlobais);
+    } else {
+        const filtrados = pacientesGlobais.filter(p => (p.especie || 'outro').toLowerCase() === especieAlvo);
+        renderizarListaPets(filtrados);
+    }
+}
+
+// -----------------------------------------------------
+// FUNÇÃO PARA DESENHAR OS CARDS
+// -----------------------------------------------------
+function renderizarListaPets(listaParaRenderizar) {
+    const container = document.getElementById('lista-pets');
+    if (!container) return;
+    
+    if (listaParaRenderizar.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500"><p>Nenhum paciente encontrado para este filtro.</p></div>`;
+        return;
+    }
+
+    container.innerHTML = listaParaRenderizar.map(pet => {
+        let fotoURL = pet.foto_url;
+        if (!fotoURL) {
+            fotoURL = (pet.especie && pet.especie.toLowerCase() === 'gato') ? 'https://placecats.com/500/300' : 'https://placedog.net/500/300';
+        }
+
+        const racaExibir = pet.raca || 'Sem raça definida';
+        const idadeExibir = pet.idade_valor ? `${pet.idade_valor} ${pet.idade_unidade}` : 'Idade N/I';
+        const pesoExibir = pet.peso ? `${pet.peso}kg` : 'N/I';
+
+        return `
+        <div class="glass-panel rounded-3xl p-0 card-hover flex flex-col overflow-hidden border border-dark-border bg-dark-900">
+            <div class="pet-cover h-40 relative overflow-hidden">
+                <img src="${fotoURL}" class="w-full h-full object-cover" />
+                <div class="pet-overlay absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-900/40 to-transparent"></div>
+                <div class="absolute top-4 right-4 z-10"><span class="badge badge-green"><i class="ph-fill ph-check-circle"></i> Sincronizado</span></div>
+            </div>
+            <div class="p-6 pt-0 flex-1 flex flex-col relative">
+                <div class="flex justify-between items-start">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden border-4 border-dark-950 -mt-10 relative z-10 bg-dark-800">
+                        <img src="${fotoURL}" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <button onclick="editarPet(${pet.id_pet})" class="w-10 h-10 rounded-xl bg-dark-800 border border-dark-border text-gray-400 hover:text-primary transition-colors flex items-center justify-center">
+                            <i class="ph ph-pencil-simple"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-4 mb-6">
+                    <h3 class="text-2xl font-bold text-white tracking-tight">${pet.pet_nome}</h3>
+                    <p class="text-sm text-gray-400 mt-1">${racaExibir} • ${idadeExibir}</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="bg-dark-800 border border-dark-border rounded-xl p-3">
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Tutor(a)</p>
+                        <p class="text-sm font-medium text-white truncate" title="${pet.tutor_nome}">${pet.tutor_nome}</p>
+                    </div>
+                    <div class="bg-dark-800 border border-dark-border rounded-xl p-3">
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Peso</p>
+                        <p class="text-sm font-medium text-white">${pesoExibir}</p>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-4 border-t border-dark-border flex items-center justify-between">
+                    <span class="text-xs text-gray-500 flex items-center gap-1"><i class="ph ph-shield-check text-primary"></i> Prontuário Ativo</span>
+                    <button class="text-primary text-sm font-semibold hover:text-white transition-colors flex items-center gap-1">Prontuário <i class="ph-bold ph-arrow-right text-xs"></i></button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
 
     // ==========================================
     // 2. MODAL VINCULAR POR CPF
@@ -266,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) { }
     }
-
+ 
     document.getElementById('formSuperPet')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const payload = {

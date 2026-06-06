@@ -4,7 +4,7 @@ export class AuthController {
         this.view = view;
         this.petController = petController; // Guarda a referência
 
-        this.view.bindLoginEvent(this.handleLogin.bind(this));  
+        this.view.bindLoginEvent(this.handleLogin.bind(this));
         this.view.bindRegisterFinal(this.handleRegisterSubmit.bind(this));
         this.view.bindCepInput(this.handleCepCheck.bind(this));
         this.view.bindPasswordInput(this.handlePasswordCheck.bind(this));
@@ -17,24 +17,16 @@ export class AuthController {
     async checkSession() {
         if (this.model.isLoggedIn()) {
             const role = localStorage.getItem('user-role');
-            
-            // Verifica se o usuário já está dentro da pasta /pages/
             const isInsidePages = window.location.pathname.includes('/pages/');
             const currentPath = window.location.pathname;
 
-            if (role === 'tutor') {
+            // Tanto tutor quanto veterinário vão para a mesma tela de carregamento
+            if (role === 'tutor' || role === 'veterinario') {
                 const loadingPath = isInsidePages ? './carregamento.html' : './pages/carregamento.html';
-                
+
+                // Impede loop se já estiver na página correta
                 if (!currentPath.includes('dashboard.html') && !currentPath.includes('carregamento.html')) {
-                    window.location.href = loadingPath; 
-                }
-            } else if (role === 'veterinario') {
-                // Define o caminho para a nova pasta separada do veterinário
-                const vetDashboardPath = isInsidePages ? '../veterinario/dashboard.html' : './veterinario/dashboard.html';
-                
-                // Impede loop infinito
-                if (!currentPath.includes('veterinario/dashboard.html')) {
-                    window.location.href = vetDashboardPath;
+                    window.location.href = loadingPath;
                 }
             }
         } else {
@@ -43,7 +35,7 @@ export class AuthController {
             }
         }
     }
-    
+
 
     handleLogout() {
         this.model.logout();
@@ -52,7 +44,7 @@ export class AuthController {
     }
 
     async handleLogin(e) {
-        if (e) e.preventDefault(); 
+        if (e) e.preventDefault();
 
         const { email, senha } = this.view.getLoginData();
         if (!email || !senha) return this.view.showToast('Campos obrigatórios!', 'error');
@@ -61,15 +53,14 @@ export class AuthController {
         try {
             const data = await this.model.login(email, senha);
             const userName = localStorage.getItem('user-name');
-            
+
             this.view.showToast(`Olá, ${userName}!`, 'success');
-            
+
             setTimeout(async () => {
                 if (data.role === 'tutor') {
-                    window.location.href = './pages/carregamento.html'; 
+                    window.location.href = './pages/carregamento.html';
                 } else if (data.role === 'veterinario') {
-                    // Redireciona diretamente para o arquivo isolado que criamos
-                    window.location.href = './veterinario/dashboard.html';
+                    window.location.href = './pages/carregamento.html';
                 }
             }, 1000);
 
@@ -79,7 +70,7 @@ export class AuthController {
             this.view.setLoading('btn-login', false);
         }
     }
-    
+
     async loadVetDashboard() {
         this.view.switchScreen('vet');
         try {
@@ -137,11 +128,11 @@ export class AuthController {
         try {
             await this.model.cadastrar(data);
             this.view.showToast('Sucesso! Redirecionando para login...', 'success');
-            
+
             // Aguarda 1.5 segundos para o usuário ler o Toast, depois volta pra login
             setTimeout(() => {
                 window.location.href = '../../index.html';
-            }, 1500); 
+            }, 1500);
 
         } catch (e) {
             this.view.showToast(e.message, 'error');

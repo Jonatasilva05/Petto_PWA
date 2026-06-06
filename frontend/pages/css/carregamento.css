@@ -580,3 +580,35 @@ body{
     }
 
 }
+
+/* ==========================================
+   ESTILOS EXCLUSIVOS PARA O MODO VETERINÁRIO 
+   ========================================== */
+
+/* Altera o fundo aplicando a imagem carregarVet.png que está na sua pasta de backgrounds */
+.mobile-frame.vet-mode {
+    background: linear-gradient(rgba(244,247,251,0.85), rgba(244,247,251,0.90)), url("../assets/backgrounds/carregarVet.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Modifica a cor do "TT" mesclado para iniciar com o verde pet-green */
+.mobile-frame.vet-mode .double-t {
+    background: linear-gradient(90deg, var(--pet-green), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Altera o gradiente e a sombra da barra de progresso para tons verdes */
+.mobile-frame.vet-mode .progress-bar {
+    background: linear-gradient(90deg, var(--pet-green), var(--primary-dark));
+    box-shadow: 0 0 10px rgba(85, 194, 122, 0.4);
+}
+
+/* Garante que os novos ícones médicos também usem o gradiente correto */
+.mobile-frame.vet-mode .feature-item i {
+    background: linear-gradient(180deg, var(--pet-green), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

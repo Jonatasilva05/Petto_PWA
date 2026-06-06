@@ -5,6 +5,7 @@ frontend/
 │   ├── assets/
 │   │   ├── backgrounds/
 │   │   │   ├── abracaCao.png
+│   │   │   ├── carregarVet.png
 │   │   │   ├── fundo_login.jpeg
 │   │   ├── image/
 │   │   │   ├── cachorro.png
@@ -39,6 +40,9 @@ frontend/
 │   │   ├── assets/
 │   │   │   ├── image/
 │   │   │   │   ├── abracaCao.png
+│   │   │   │   ├── carregarVet.png
+│   │   │   │   ├── casa.png
+│   │   │   │   ├── clinica.png
 │   │   │   │   ├── fundo_login.jpeg
 │   │   │   ├── logo/
 │   │   │   │   ├── icon.jpg
@@ -139,6 +143,7 @@ frontend/
 │   │   ├── 1779111607640_143.jpeg
 │   │   ├── 1779199652527_523.jpeg
 │   │   ├── 92d651f550b3347780f21183ed177592.jpeg
+│   │   ├── fe5cc16c428f1434be4c550c84f61aa9.jpeg
 │   │   ├── perfil/
 │   ├── veterinario/
 │   │   ├── agenda.html
@@ -160,6 +165,15 @@ frontend/
 │   │   │   ├── prontuarios.css
 │   │   │   ├── tutores.css
 │   │   │   ├── vacinas.css
+│   │   ├── data/
+│   │   │   ├── databaseAlertMedi.json
+│   │   │   ├── databaseBreeds.json
+│   │   │   ├── databaseHealthReference.json
+│   │   │   ├── databaseInfoMed2.json
+│   │   │   ├── databaseMedi.json
+│   │   │   ├── databasePets.json
+│   │   │   ├── encyclopediaMedi.json
+│   │   │   ├── locais.json
 │   │   ├── js/
 │   │   │   ├── agenda.js
 │   │   │   ├── dashboard.js

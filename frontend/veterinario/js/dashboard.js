@@ -5,4 +5,4 @@ import { VetController } from './controllers/VetController.js';
 document.addEventListener('DOMContentLoaded', () => {
     const app = new VetController(new VetModel(), new VetView());
     app.initDashboard();
-});
+}); 

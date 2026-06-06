@@ -1,6 +1,7 @@
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -10,15 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Fonte mais moderna e amigável -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <link rel="stylesheet" href="./css/carregamento.css">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
     <div class="mobile-frame">
 
@@ -35,67 +37,49 @@
 
         <div class="content">
 
-            <!-- LOGO -->
             <div class="logo-wrapper">
                 <img src="./assets/logo/iconSemFundoSemNome.png" alt="PETTO">
             </div>
 
-            <!-- TITULO -->
             <h1 class="brand-title">
                 PE<span class="double-t">TT</span>O
             </h1>
 
-            <!-- SUBTITULO -->
-            <p class="subtitle">
+            <p class="subtitle" id="brand-subtitle">
                 Tudo o que <span>seu pet</span> precisa.
             </p>
 
-            <!-- FEATURES -->
-            <div class="features">
-
+            <div class="features" id="features-container">
                 <div class="feature-item">
                     <i class="fa-solid fa-shield-heart"></i>
                     <p>Proteção</p>
                 </div>
-
                 <div class="feature-divider"></div>
-
                 <div class="feature-item">
                     <i class="fa-solid fa-heart"></i>
                     <p>Empatia</p>
                 </div>
-
                 <div class="feature-divider"></div>
-
                 <div class="feature-item">
                     <i class="fa-solid fa-eye"></i>
                     <p>Transparência</p>
                 </div>
-
                 <div class="feature-divider"></div>
-
                 <div class="feature-item">
                     <i class="fa-solid fa-calendar-check"></i>
                     <p>Organização</p>
                 </div>
-
             </div>
 
-            <!-- LOADING -->
             <div class="loading-area">
-
                 <div class="loading-top">
-
-                    <span class="loading-text">
+                    <span class="loading-text" id="loading-text">
                         Carregando...
                     </span>
-
                     <span class="loading-percent" id="percent">
                         0%
                     </span>
-
                 </div>
-
                 <div class="progress-container">
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
@@ -110,5 +94,6 @@
 
     <script src="./js/carregamento.js"></script>
 
-    </body>
-    </html>
+</body>
+
+</html>
