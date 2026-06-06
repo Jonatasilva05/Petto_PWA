@@ -246,7 +246,7 @@ function renderizarListaPets(listaParaRenderizar) {
 
     const radiosTipoBusca = document.querySelectorAll('input[name="tipoBusca"]');
     const inputBusca = document.getElementById('inputBusca');
-    radiosTipoBusca.forEach(radio => {
+    radiosTipoBusca.forEach(radio => { 
         radio.addEventListener('change', (e) => {
             inputBusca.value = '';
             inputBusca.placeholder = e.target.value === 'cpf' ? 'Digite o CPF...' : 'Digite o E-mail...';
