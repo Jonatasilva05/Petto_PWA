@@ -1,0 +1,451 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #05080A;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B1114;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #26343C;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00D09E44;
+}
+
+.glass-panel {
+    background: linear-gradient(135deg, #11181D 0%, #0f1a20 100%);
+    border: 1px solid #26343C;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.step-card {
+    background: #0B1114;
+    border: 1px solid #26343C;
+    border-radius: 16px;
+    transition: all 0.2s;
+}
+
+.step-card.active {
+    border-color: #00D09E44;
+    box-shadow: 0 0 0 1px #00D09E22, 0 0 24px rgba(0, 208, 158, 0.08);
+}
+
+.species-btn {
+    background: #0B1114;
+    border: 1px solid #26343C;
+    border-radius: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 500;
+    user-select: none;
+}
+
+.species-btn:hover {
+    border-color: #00D09E55;
+    background: #0f1e1a;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.species-btn.selected {
+    border-color: #00D09E;
+    background: linear-gradient(135deg, #001a14, #002a1e);
+    color: #00D09E;
+    box-shadow: 0 0 20px rgba(0, 208, 158, 0.15);
+}
+
+.species-btn .species-icon {
+    font-size: 26px;
+    line-height: 1;
+}
+
+.categoria-header {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4b5563;
+    padding: 12px 0 6px;
+    border-bottom: 1px solid #1a2830;
+    margin-bottom: 8px;
+}
+
+.sintoma-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+    background: transparent;
+}
+
+.sintoma-check:hover {
+    background: #11181D;
+    border-color: #26343C;
+}
+
+.sintoma-check.checked {
+    background: #001a14;
+    border-color: #00D09E33;
+}
+
+.sintoma-check input[type="checkbox"] {
+    display: none;
+}
+
+.check-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid #26343C;
+    background: #0B1114;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.sintoma-check.checked .check-box {
+    background: #00D09E;
+    border-color: #00D09E;
+}
+
+.check-icon {
+    display: none;
+    color: #05080A;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.sintoma-check.checked .check-icon {
+    display: block;
+}
+
+.sintoma-label {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    line-height: 1.4;
+}
+
+.sintoma-check.checked .sintoma-label {
+    color: #fff;
+}
+
+.doenca-card {
+    background: #0B1114;
+    border: 1px solid #26343C;
+    border-radius: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.doenca-card:hover {
+    border-color: #26343C88;
+    background: #11181D;
+}
+
+.doenca-card.selected {
+    border-color: #00D09E;
+    background: linear-gradient(135deg, #001a14, #002a1e);
+    box-shadow: 0 0 16px rgba(0, 208, 158, 0.1);
+}
+
+.match-bar-bg {
+    background: #1D2A31;
+    border-radius: 99px;
+    height: 4px;
+    overflow: hidden;
+}
+
+.match-bar-fill {
+    background: linear-gradient(90deg, #00D09E, #00ffcc);
+    border-radius: 99px;
+    height: 100%;
+    transition: width 0.6s ease;
+}
+
+.badge-urgente {
+    background: #3d0a0a;
+    border: 1px solid #7f1d1d;
+    color: #fca5a5;
+}
+
+.badge-zoonose {
+    background: #2d1b00;
+    border: 1px solid #78350f;
+    color: #fcd34d;
+}
+
+.badge-leve {
+    background: #0a1a1a;
+    border: 1px solid #134e4a;
+    color: #6ee7b7;
+}
+
+.badge-moderada {
+    background: #1a1a0a;
+    border: 1px solid #713f12;
+    color: #fde68a;
+}
+
+.badge-alta {
+    background: #1a0a0a;
+    border: 1px solid #7f1d1d;
+    color: #fca5a5;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00D09E, #00b386);
+    color: #05080A;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0, 208, 158, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-ghost {
+    background: #0B1114;
+    color: #9ca3af;
+    border: 1px solid #26343C;
+    border-radius: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-ghost:hover {
+    background: #11181D;
+    color: #fff;
+    border-color: #4b5563;
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #26343C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4b5563;
+    background: #0B1114;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.step-dot.active {
+    border-color: #00D09E;
+    color: #00D09E;
+    background: #001a14;
+}
+
+.step-dot.done {
+    border-color: #00D09E;
+    background: #00D09E;
+    color: #05080A;
+}
+
+.step-line {
+    height: 2px;
+    width: 40px;
+    background: #26343C;
+    transition: background 0.3s;
+}
+
+.step-line.done {
+    background: #00D09E44;
+}
+
+.search-input {
+    background: #0B1114;
+    border: 1px solid #26343C;
+    border-radius: 10px;
+    padding: 10px 14px 10px 36px;
+    color: #e2e8f0;
+    font-size: 13.5px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.18s;
+}
+
+.search-input:focus {
+    border-color: #00D09E55;
+}
+
+.search-input::placeholder {
+    color: #4b5563;
+}
+
+.tag-sintoma {
+    background: #001a14;
+    border: 1px solid #00D09E33;
+    color: #00D09E;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tag-sintoma button {
+    color: #00D09E88;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.tag-sintoma button:hover {
+    color: #00D09E;
+}
+
+.diagnostico-final-textarea {
+    background: #0B1114;
+    border: 1px solid #26343C;
+    border-radius: 12px;
+    padding: 14px;
+    color: #e2e8f0;
+    font-size: 14px;
+    width: 100%;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.18s;
+    font-family: inherit;
+}
+
+.diagnostico-final-textarea:focus {
+    border-color: #00D09E55;
+}
+
+.fade-in {
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(5, 8, 10, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-box {
+    background: #11181D;
+    border: 1px solid #26343C;
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 540px;
+    width: 90%;
+    transform: scale(0.95);
+    transition: transform 0.25s;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.open .modal-box {
+    transform: scale(1);
+}
+
+.resultado-copy-btn {
+    background: #1D2A31;
+    border: 1px solid #26343C;
+    color: #9ca3af;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s;
+}
+
+.resultado-copy-btn:hover {
+    background: #26343C;
+    color: #fff;
+}

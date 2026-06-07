@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = new VetController(new VetModel(), new VetView());
     app.initDashboard();
 });
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
@@ -116,36 +116,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-// 4. LÓGICA DE LISTAGEM (BUSCA TUTORES)
-// ==========================================
-async function carregarListaTutores() {
-    const listaTutoresContainer = document.getElementById('lista-tutores-container');
-    if (!listaTutoresContainer) return;
-    
-    try {
-        const token = localStorage.getItem('auth-token-petto');
-        const response = await fetch('/api/vet/tutores', {
-            headers: { 'Authorization': `Bearer ${token}` },
-            cache: 'no-store'
-        });
+    // 4. LÓGICA DE LISTAGEM E BUSCA (TUTORES)
+    // ==========================================
+    let todosTutores = []; // Guarda a lista original para o filtro funcionar
 
-        // Se o backend retornar erro (ex: 403, 404, 500), capturamos a mensagem
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message || `Erro do servidor: ${response.status}`);
-        }
-
-        const tutores = await response.json();
+    // Extraímos a renderização para uma função separada para reaproveitamento
+    function renderizarListaTutores(tutoresParaRenderizar) {
+        const listaTutoresContainer = document.getElementById('lista-tutores-container');
+        if (!listaTutoresContainer) return;
         
-        listaTutoresContainer.innerHTML = ''; // Remove o spinner
+        listaTutoresContainer.innerHTML = ''; // Remove spinner ou resultados antigos
         
-        if (tutores.length === 0) {
-            listaTutoresContainer.innerHTML = '<div class="p-8 text-center text-gray-500">Nenhum cliente encontrado na sua clínica.</div>';
+        if (tutoresParaRenderizar.length === 0) {
+            listaTutoresContainer.innerHTML = '<div class="p-8 text-center text-gray-500">Nenhum cliente encontrado na busca.</div>';
             return;
         }
 
-        tutores.forEach(tutor => {
-            // Prevenção caso o banco de dados retorne um nome nulo
+        tutoresParaRenderizar.forEach(tutor => {
             const nomeSeguro = tutor.nome || 'Sem Nome';
             const iniciais = nomeSeguro.substring(0, 2).toUpperCase();
             
@@ -160,26 +147,77 @@ async function carregarListaTutores() {
                     </div>
                     <div>
                         <p class="text-sm font-medium text-gray-300">${escapeHTML(tutor.telefone || 'Sem telefone')}</p>
-                        <p class="text-xs text-gray-500">${escapeHTML(tutor.email)}</p>
+                        <p class="text-xs text-gray-500">${escapeHTML(tutor.email || 'Sem e-mail')}</p>
                     </div>
                     <div><span class="bg-dark-800 text-gray-400 px-2 py-1 rounded text-xs">${tutor.total_pets || 0} pets</span></div>
                     <div class="flex gap-2 justify-end"><button class="btn-icon"><i class="ph ph-whatsapp-logo"></i></button></div>
                 </div>`;
             listaTutoresContainer.insertAdjacentHTML('beforeend', card);
         });
-    } catch (error) {
-        console.error('Falha ao carregar lista:', error);
-        // ISSO FAZ O SPINNER SUMIR E MOSTRA O ERRO REAL NA TELA
-        listaTutoresContainer.innerHTML = `
-            <div class="p-8 text-center text-red-400 flex flex-col items-center justify-center">
-                <i class="ph-bold ph-warning-circle text-4xl mb-3"></i>
-                <h3 class="font-bold text-lg mb-1">Ops! Ocorreu um erro</h3>
-                <p class="text-sm">${error.message}</p>
-                <button onclick="location.reload()" class="mt-5 text-sm bg-dark-800 hover:bg-dark-700 px-5 py-2 rounded-xl border border-dark-border transition-colors">Tentar Novamente</button>
-            </div>
-        `;
     }
-}
+
+    async function carregarListaTutores() {
+        const listaTutoresContainer = document.getElementById('lista-tutores-container');
+        if (!listaTutoresContainer) return;
+        
+        try {
+            const token = localStorage.getItem('auth-token-petto');
+            const response = await fetch('/api/vet/tutores', {
+                headers: { 'Authorization': `Bearer ${token}` },
+                cache: 'no-store'
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || `Erro do servidor: ${response.status}`);
+            }
+
+            // Salva os dados na variável e renderiza
+            todosTutores = await response.json();
+            renderizarListaTutores(todosTutores);
+
+        } catch (error) {
+            console.error('Falha ao carregar lista:', error);
+            listaTutoresContainer.innerHTML = `
+                <div class="p-8 text-center text-red-400 flex flex-col items-center justify-center">
+                    <i class="ph-bold ph-warning-circle text-4xl mb-3"></i>
+                    <h3 class="font-bold text-lg mb-1">Ops! Ocorreu um erro</h3>
+                    <p class="text-sm">${error.message}</p>
+                    <button onclick="location.reload()" class="mt-5 text-sm bg-dark-800 hover:bg-dark-700 px-5 py-2 rounded-xl border border-dark-border transition-colors">Tentar Novamente</button>
+                </div>
+            `;
+        }
+    }
+
+    // Evento de Busca em Tempo Real
+    const inputBuscaTutores = document.getElementById('input-busca-tutores');
+    
+    if (inputBuscaTutores) {
+        inputBuscaTutores.addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase().trim();
+            
+            // Se apagar a busca, volta a lista completa
+            if (!termo) {
+                renderizarListaTutores(todosTutores);
+                return;
+            }
+
+            // Filtra por Nome, CPF, Telefone ou E-mail
+            const tutoresFiltrados = todosTutores.filter(tutor => {
+                const nome = (tutor.nome || '').toLowerCase();
+                const cpf = (tutor.cpf || '').toLowerCase();
+                const telefone = (tutor.telefone || '').toLowerCase();
+                const email = (tutor.email || '').toLowerCase();
+
+                return nome.includes(termo) || 
+                       cpf.includes(termo) || 
+                       telefone.includes(termo) || 
+                       email.includes(termo);
+            });
+
+            renderizarListaTutores(tutoresFiltrados);
+        });
+    }
 
     // ==========================================
     // 5. MÁSCARA E BUSCA AUTOMÁTICA DE CEP (ViaCEP)

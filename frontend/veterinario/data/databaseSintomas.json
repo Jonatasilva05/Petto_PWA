@@ -1,0 +1,471 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "descricao": "Base de dados de sintomas por espécie com doenças associadas. Cada espécie possui uma lista de sintomas possíveis com suas categorias e as doenças que podem estar relacionadas a cada combinação de sintomas.",
+    "como_usar": "Filtrar por 'especie' para obter apenas os sintomas relevantes. Selecionar múltiplos sintomas e cruzar com o campo 'doencas_associadas' para sugerir diagnósticos diferenciais.",
+    "categorias_sintoma": ["Sistêmico", "Digestivo", "Respiratório", "Neurológico", "Dermatológico", "Musculoesquelético", "Urinário", "Reprodutivo", "Ocular", "Auricular", "Cardiovascular", "Comportamental"]
+  },
+  "sintomas": [
+    {
+      "id": "sint_febre",
+      "label": "Febre (hipertermia)",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao", "reptil", "tartaruga"],
+      "doencas_associadas": ["Cinomose", "Parvovirose", "Leptospirose", "Erliquiose", "Babesiose", "Panleukopenia Felina", "PIF (Peritonite Infecciosa Felina)", "Calicivirose Felina", "Rinotraqueíte Felina", "Infecção Bacteriana Sistêmica", "Toxoplasmose", "Abscesso Interno", "Sepse"]
+    },
+    {
+      "id": "sint_hipotermia",
+      "label": "Hipotermia (temperatura baixa)",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao", "reptil", "tartaruga", "passaro"],
+      "doencas_associadas": ["Choque", "Sepse", "Hipoglicemia", "Hipotireoidismo", "Insuficiência Cardíaca", "Intoxicação"]
+    },
+    {
+      "id": "sint_apatia",
+      "label": "Apatia / Letargia / Prostração",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao", "reptil", "tartaruga", "passaro"],
+      "doencas_associadas": ["Anemia", "Parvovirose", "Cinomose", "Leptospirose", "Erliquiose", "Panleukopenia Felina", "PIF", "Doença Renal Crônica", "Insuficiência Hepática", "Hipoglicemia", "Dor Crônica", "Doença Cardíaca", "Intoxicação"]
+    },
+    {
+      "id": "sint_anorexia",
+      "label": "Anorexia / Recusa alimentar",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao", "reptil", "tartaruga", "passaro"],
+      "doencas_associadas": ["Gastroenterite", "Parvovirose", "Panleukopenia Felina", "Lipidose Hepática Felina", "Doença Renal Crônica", "Doença Dentária", "Obstrução Intestinal", "Dor Aguda", "Estresse", "Neoplasia", "Anorexia por Estase Gastrointestinal (coelho)"]
+    },
+    {
+      "id": "sint_perda_peso",
+      "label": "Perda de peso progressiva",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao", "reptil", "tartaruga", "passaro"],
+      "doencas_associadas": ["Diabetes Mellitus", "Hipertireoidismo Felino", "Insuficiência Pancreática Exócrina", "Doença Inflamatória Intestinal (DII)", "Neoplasia", "Doença Renal Crônica", "Parasitismo Intestinal", "PIF", "Leishmaniose"]
+    },
+    {
+      "id": "sint_poliuria_polidipsia",
+      "label": "Beber muita água / Urinar muito (PU/PD)",
+      "categoria": "Urinário",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Diabetes Mellitus", "Doença Renal Crônica", "Hiperadrenocorticismo (Cushing)", "Hipercalcemia", "Insuficiência Hepática", "Diabetes Insipidus", "Piometra", "Insuficiência Adrenal"]
+    },
+    {
+      "id": "sint_vomito",
+      "label": "Vômito",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Gastrite", "Gastroenterite", "Parvovirose", "Pancreatite", "Obstrução por Corpo Estranho", "Intussuscepção", "Insuficiência Renal", "Hiperadrenocorticismo", "Peritonite", "Doença Inflamatória Intestinal", "Intoxicação", "Torção Gástrica (GDV)"]
+    },
+    {
+      "id": "sint_regurgitacao",
+      "label": "Regurgitação (sem náusea, passivo)",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Megaesôfago", "Obstrução Esofágica", "Hérnia de Hiato", "Corpo Estranho Esofágico", "Acalásia Cricofaríngea"]
+    },
+    {
+      "id": "sint_diarreia_liquida",
+      "label": "Diarreia líquida / aquosa",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao"],
+      "doencas_associadas": ["Parvovirose", "Panleukopenia Felina", "Gastroenterite Viral", "Coccidiose", "Giardiase", "Salmonelose", "Enterite Hemorrágica", "Estase Gastrointestinal Infecciosa (coelho)", "Disbiose Intestinal"]
+    },
+    {
+      "id": "sint_diarreia_com_sangue",
+      "label": "Diarreia com sangue (hematoquezia/melena)",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "furao", "coelho"],
+      "doencas_associadas": ["Parvovirose", "Enterite Hemorrágica", "Intussuscepção", "Ulcera Gástrica", "Parasitismo Intestinal (ancilostomíase)", "Coagulopatia", "Neoplasia Intestinal", "Infecção por Clostridium"]
+    },
+    {
+      "id": "sint_constipacao",
+      "label": "Constipação / Obstipação",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "coelho", "roedor", "furao", "reptil", "tartaruga"],
+      "doencas_associadas": ["Megacólon (gato)", "Obstrução Intestinal", "Desidratação", "Corpo Estranho Intestinal", "Hiperplasia Prostática (cão macho)", "Massa Pélvica", "Dieta Pobre em Fibras", "Estase Gastrointestinal (coelho)"]
+    },
+    {
+      "id": "sint_distensao_abdominal",
+      "label": "Abdômen distendido / Barriga inchada",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Torção Gástrica (GDV)", "Ascite", "PIF Efusiva", "Insuficiência Cardíaca Congestiva", "Neoplasia Abdominal", "Piometra", "Estase Gastrointestinal (coelho)", "Gestação", "Obstrução Intestinal"]
+    },
+    {
+      "id": "sint_ictericia",
+      "label": "Icterícia (pele/mucosas amarelas)",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "furao", "coelho"],
+      "doencas_associadas": ["Leptospirose", "Hepatite Infecciosa Canina", "Insuficiência Hepática", "Lipidose Hepática Felina", "Babesiose", "Toxicidade Hepática", "Colangiohepatite", "Doença Hemolítica", "PIF", "Neoplasia Hepática"]
+    },
+    {
+      "id": "sint_tosse",
+      "label": "Tosse (seca, produtiva, persistente)",
+      "categoria": "Respiratório",
+      "especies": ["cachorro", "gato", "furao", "passaro", "coelho"],
+      "doencas_associadas": ["Traqueobronquite Infecciosa (Tosse dos Canis)", "Pneumonia", "Bronquite Crônica", "Asma Felina", "Dirofilariose (Verme do Coração)", "Insuficiência Cardíaca Esquerda", "Colapso de Traqueia (raças braquicefálicas)", "Corpo Estranho", "Neoplasia Pulmonar", "Micoplasmose (passaro)"]
+    },
+    {
+      "id": "sint_dispneia",
+      "label": "Dificuldade respiratória / Dispneia",
+      "categoria": "Respiratório",
+      "especies": ["cachorro", "gato", "coelho", "furao", "passaro", "roedor"],
+      "doencas_associadas": ["Pneumonia", "Edema Pulmonar", "Derrame Pleural", "Insuficiência Cardíaca", "Asma Felina", "Anemia Grave", "Pneumotórax", "PIF Efusiva", "Neoplasia Torácica", "Pasteurellose (coelho)", "Micoplasmose (passaro)"]
+    },
+    {
+      "id": "sint_espirros",
+      "label": "Espirros frequentes / Descarga nasal",
+      "categoria": "Respiratório",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor"],
+      "doencas_associadas": ["Rinotraqueíte Felina (Herpesvírus)", "Calicivirose Felina", "Gripe Canina", "Corpo Estranho Nasal", "Rinite Alérgica", "Sinusite", "Pasteurellose (coelho)", "Pneumonia"]
+    },
+    {
+      "id": "sint_secrecao_ocular",
+      "label": "Secreção ocular / Olho vermelho / Epifora",
+      "categoria": "Ocular",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor", "passaro"],
+      "doencas_associadas": ["Conjuntivite Bacteriana", "Conjuntivite Viral (Herpesvírus Felino)", "Calicivirose", "Úlcera de Córnea", "Glaucoma", "Entrópio", "Obstrução do Ducto Nasolacrimal", "Clamidiose Felina", "Encefalitozoonose (coelho)"]
+    },
+    {
+      "id": "sint_opacidade_ocular",
+      "label": "Opacidade ocular / Catarata / Olho branco",
+      "categoria": "Ocular",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Catarata", "Uveíte", "Glaucoma", "Encefalitozoonose (coelho)", "Leishmaniose", "Diabetes Mellitus", "Toxoplasmose", "Neoplasia Ocular"]
+    },
+    {
+      "id": "sint_coceira",
+      "label": "Coceira intensa / Prurido",
+      "categoria": "Dermatológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor"],
+      "doencas_associadas": ["Dermatite Alérgica", "Dermatite Atópica", "Sarna (Sarcóptica ou Notoédrica)", "Dermatofitose (Micose)", "Alergia Alimentar", "Alergia a Pulgas (DAPP)", "Otite", "Demodicose", "Alergias Ambientais"]
+    },
+    {
+      "id": "sint_alopecia",
+      "label": "Queda de pelo / Alopecia",
+      "categoria": "Dermatológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor"],
+      "doencas_associadas": ["Dermatofitose (Ringworm)", "Demodicose", "Sarna Sarcóptica", "Hiperadrenocorticismo (Cushing)", "Hipotireoidismo", "Doença Adrenal (furão)", "Alergia", "Dermatite por Lamber", "Endocrinopatia"]
+    },
+    {
+      "id": "sint_lesoes_pele",
+      "label": "Lesões de pele (crostas, pústulas, eritema)",
+      "categoria": "Dermatológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor", "reptil", "tartaruga"],
+      "doencas_associadas": ["Piodermite", "Dermatofitose", "Demodicose", "Leishmaniose", "Pênfigo", "Vasculite", "Dermatomiosite", "Tumor Cutâneo", "Abscesso"]
+    },
+    {
+      "id": "sint_convulsoes",
+      "label": "Convulsões / Crises epilépticas",
+      "categoria": "Neurológico",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Epilepsia Idiopática", "Cinomose (fase neurológica)", "Encefalite", "Toxoplasmose", "PIF", "Encefalitozoonose (coelho)", "Hipoglicemia", "Intoxicação por Chumbo/Pesticidas", "Neoplasia Cerebral", "Insuficiência Hepática (encefalopatia)"]
+    },
+    {
+      "id": "sint_ataxia",
+      "label": "Ataxia / Desequilíbrio / Andar cambaleante",
+      "categoria": "Neurológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "passaro"],
+      "doencas_associadas": ["Cinomose (fase neurológica)", "Vestibulite", "Meningoencefalite", "Encefalitozoonose (coelho)", "Toxoplasmose", "AVC", "Hérnia de Disco (DDIV)", "Otite Média/Interna", "Intoxicação", "Hipovitaminose B1 (tiamina)"]
+    },
+    {
+      "id": "sint_paralisia",
+      "label": "Paralisia / Paresia de membros",
+      "categoria": "Neurológico",
+      "especies": ["cachorro", "gato", "coelho"],
+      "doencas_associadas": ["Hérnia de Disco Intervertebral (DDIV)", "Traumatismo Medular", "Mielopatia Degenerativa", "Fibrocartilaginous Embolism (FCE)", "Neoplasia Medular", "Encefalitozoonose (coelho)", "Polineuropatia"]
+    },
+    {
+      "id": "sint_head_tilt",
+      "label": "Head tilt / Inclinação de cabeça",
+      "categoria": "Neurológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "passaro", "roedor"],
+      "doencas_associadas": ["Otite Média/Interna", "Síndrome Vestibular Idiopática", "Encefalitozoonose (coelho)", "Acidente Vascular Cerebral", "Neoplasia", "Toxoplasmose", "Listeriose"]
+    },
+    {
+      "id": "sint_tremores",
+      "label": "Tremores musculares",
+      "categoria": "Neurológico",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Hipoglicemia", "Hipocalcemia (Eclâmpsia)", "Intoxicação", "Cinomose", "Síndrome de Tremor Generalizado (cão branco)", "Hipotermia", "Dor Intensa", "Distúrbio Eletrolítico"]
+    },
+    {
+      "id": "sint_disuria",
+      "label": "Dificuldade para urinar / Disúria",
+      "categoria": "Urinário",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Cistite", "Urolitíase (Cálculo Urinário)", "Obstrução Uretral (FLUTD)", "Hiperplasia Prostática", "Neoplasia da Bexiga", "Estenose Uretral", "Prostatite"]
+    },
+    {
+      "id": "sint_hematuria",
+      "label": "Sangue na urina (Hematúria)",
+      "categoria": "Urinário",
+      "especies": ["cachorro", "gato", "furao", "coelho"],
+      "doencas_associadas": ["Cistite Hemorrágica", "Urolitíase", "Pielonefrite", "Trauma", "Coagulopatia", "Neoplasia da Bexiga/Rim", "Leptospirose", "Erliquiose"]
+    },
+    {
+      "id": "sint_secrecao_vaginal",
+      "label": "Secreção vaginal / Descarga vulvar",
+      "categoria": "Reprodutivo",
+      "especies": ["cachorro", "gato", "furao", "coelho"],
+      "doencas_associadas": ["Piometra (URGÊNCIA)", "Metrite", "Vaginite", "Endometrite", "Neoplasia Uterina", "Resíduo de Placenta"]
+    },
+    {
+      "id": "sint_cio_prolongado",
+      "label": "Cio prolongado / Estro persistente",
+      "categoria": "Reprodutivo",
+      "especies": ["furao"],
+      "doencas_associadas": ["Aplasia Medular por Hiperestrogenismo (FATAL em furões fêmeas)", "Tumor Ovariano", "Quisto Ovariano"]
+    },
+    {
+      "id": "sint_claudicacao",
+      "label": "Claudicação / Mancar / Dificuldade de locomoção",
+      "categoria": "Musculoesquelético",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Displasia Coxofemoral", "Ruptura de Ligamento Cruzado (CCL)", "Artrite/Osteoartrite", "Panosteíte", "Osteossarcoma", "Luxação de Patela", "Traumatismo", "Erliquiose (artrite)"]
+    },
+    {
+      "id": "sint_fraqueza_membros",
+      "label": "Fraqueza / Cansaço fácil nos membros",
+      "categoria": "Musculoesquelético",
+      "especies": ["cachorro", "gato", "coelho", "furao", "reptil", "tartaruga"],
+      "doencas_associadas": ["Doença Metabólica Óssea (MBD - répteis)", "Hipocalcemia", "Anemia", "Doença Cardíaca", "Miastenia Gravis", "Polimiosite", "Hipotireoidismo", "Hiperadrenocorticismo"]
+    },
+    {
+      "id": "sint_linfonodo_aumentado",
+      "label": "Linfonodos aumentados / Caroços no pescoço/virilha",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Linfoma (Linfossarcoma)", "Leishmaniose", "Erliquiose", "Bartonellose (Doença da Arranhadura do Gato)", "Abscesso Linfonodal", "Histoplasmose", "Blastomicose", "Infecção Bacteriana Local"]
+    },
+    {
+      "id": "sint_palidez_mucosas",
+      "label": "Mucosas pálidas / Palidez",
+      "categoria": "Cardiovascular",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Anemia Hemolítica", "Babesiose", "Erliquiose", "Hemorragia Interna", "Hipoplasia Medular", "Choque", "Insuficiência Cardíaca", "Intoxicação por Cebola/Alho", "Doença de Von Willebrand"]
+    },
+    {
+      "id": "sint_mucosas_cianosadas",
+      "label": "Mucosas azuladas / Cianose",
+      "categoria": "Cardiovascular",
+      "especies": ["cachorro", "gato", "coelho", "furao", "passaro"],
+      "doencas_associadas": ["Insuficiência Cardíaca Grave", "Pneumonia Grave", "Anemia Grave", "Edema Pulmonar", "Pneumotórax", "Cardiopatia Congênita", "Tromboembolismo Pulmonar"]
+    },
+    {
+      "id": "sint_tosse_cardiaca",
+      "label": "Tosse noturna / Intolerância ao exercício",
+      "categoria": "Cardiovascular",
+      "especies": ["cachorro", "gato"],
+      "doencas_associadas": ["Insuficiência Cardíaca Congestiva", "Cardiomiopatia Dilatada", "Cardiomiopatia Hipertrófica (gato)", "Endocardiose Mitral", "Dirofilariose"]
+    },
+    {
+      "id": "sint_ascite",
+      "label": "Ascite / Líquido na barriga",
+      "categoria": "Cardiovascular",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Insuficiência Cardíaca Direita", "Hipertensão Portal", "PIF Efusiva", "Cirrose Hepática", "Neoplasia", "Hipoalbuminemia", "Doença Renal"]
+    },
+    {
+      "id": "sint_otite",
+      "label": "Coceira na orelha / Sacudir a cabeça / Secreção auricular",
+      "categoria": "Auricular",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Otite Externa Bacteriana", "Otite por Malassezia", "Otodectes (Ácaros de Ouvido)", "Otite Média", "Corpo Estranho Auricular", "Otohematoma", "Alergia Alimentar/Ambiental", "Pólipo Nasofaríngeo (gato)"]
+    },
+    {
+      "id": "sint_ptialismo",
+      "label": "Salivação excessiva / Sialorreia",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "furao", "coelho"],
+      "doencas_associadas": ["Náusea", "Doença Oral/Dentária", "Corpo Estranho Esofágico", "Intoxicação", "Raiva", "Epilepsia", "Doença Renal (uremia)", "Calicivirose (úlceras orais)", "Doença Dentária (coelho)"]
+    },
+    {
+      "id": "sint_halitose",
+      "label": "Mau hálito (Halitose)",
+      "categoria": "Digestivo",
+      "especies": ["cachorro", "gato", "furao", "coelho"],
+      "doencas_associadas": ["Doença Periodontal", "Insuficiência Renal (odor urêmico)", "Insuficiência Hepática", "Diabetes (odor adocicado/acetona)", "Megaesôfago", "Neoplasia Oral"]
+    },
+    {
+      "id": "sint_epistaxe",
+      "label": "Sangramento nasal (Epistaxe)",
+      "categoria": "Respiratório",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Erliquiose", "Trombocitopenia", "Coagulopatia", "Leishmaniose", "Neoplasia Nasal", "Trauma", "Hipertensão Arterial", "Aspergilose (nasal)"]
+    },
+    {
+      "id": "sint_polifagia",
+      "label": "Fome excessiva / Polifagia",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Diabetes Mellitus", "Hiperadrenocorticismo (Cushing)", "Hipertireoidismo Felino", "Insuficiência Pancreática Exócrina", "Uso de Corticóides", "Verminose Intestinal"]
+    },
+    {
+      "id": "sint_polifagia_com_emagrecimento",
+      "label": "Comer muito mas emagrecer",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Diabetes Mellitus", "Hipertireoidismo Felino", "Insuficiência Pancreática Exócrina", "Neoplasia"]
+    },
+    {
+      "id": "sint_edema_membros",
+      "label": "Edema / Inchaço em membros",
+      "categoria": "Cardiovascular",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Insuficiência Cardíaca", "Hipoproteinemia", "Obstrução Linfática", "Vasculite", "Trombose"]
+    },
+    {
+      "id": "sint_pio_olho",
+      "label": "Pus no olho / Úlcera de córnea",
+      "categoria": "Ocular",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Conjuntivite Bacteriana", "Úlcera de Córnea", "Panoftalmite", "Herpesvírus Felino", "Clamidiose", "Trauma Ocular"]
+    },
+    {
+      "id": "sint_vocaliza_dor",
+      "label": "Vocalização de dor / Choro ao tocar",
+      "categoria": "Musculoesquelético",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Hérnia de Disco", "Trauma", "Artrite Aguda", "Peritonite", "Otite Aguda", "Orquiepididimite", "Urolitíase", "Distensão Gástrica", "Fratura"]
+    },
+    {
+      "id": "sint_defeitos_coagulacao",
+      "label": "Sangramento espontâneo / Hematomas",
+      "categoria": "Sistêmico",
+      "especies": ["cachorro", "gato", "furao"],
+      "doencas_associadas": ["Intoxicação por Raticida (Rodenticidas)", "Erliquiose", "Doença de Von Willebrand", "Trombocitopenia Imunomediada", "Coagulopatia por Consumo (CIVD)", "Leucemia"]
+    },
+    {
+      "id": "sint_massas_subcutaneas",
+      "label": "Caroços / Nódulos / Massas palpáveis",
+      "categoria": "Dermatológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor"],
+      "doencas_associadas": ["Tumor de Mastócito", "Lipoma", "Fibrossarcoma", "Tumor Mamário", "Abscesso", "Tumor de Baço", "Linfoma", "Carcinoma de Células Escamosas", "Insulinoma (furão)"]
+    },
+    {
+      "id": "sint_pelagem_opaca",
+      "label": "Pelagem opaca / Pelos arrepiados / Penas eriçadas",
+      "categoria": "Dermatológico",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor", "passaro"],
+      "doencas_associadas": ["Desnutrição", "Parasitismo", "Doença Crônica", "Hipotireoidismo", "Má absorção Intestinal", "PBFD (Doença do Bico e Penas - passaro)", "Psitacose (passaro)"]
+    },
+    {
+      "id": "sint_dentes_longos",
+      "label": "Dentes longos / Dificuldade de mastigar",
+      "categoria": "Digestivo",
+      "especies": ["coelho", "roedor"],
+      "doencas_associadas": ["Maloclusão Dentária (Sobrecrescimento dental)", "Abscesso Dentário", "Spur Dentário (esporas molares)", "Deficiência de Vitamina C (cobaia)"]
+    },
+    {
+      "id": "sint_estase_gi",
+      "label": "Barriga inchada sem fezes / Parou de comer e beber",
+      "categoria": "Digestivo",
+      "especies": ["coelho", "roedor"],
+      "doencas_associadas": ["Estase Gastrointestinal (GI Stasis - EMERGÊNCIA em coelhos)", "Obstrução por Tricobezoar (bola de pelo)", "Intussuscepção", "Enterite Hemorrágica"]
+    },
+    {
+      "id": "sint_diarreia_cecal_coelho",
+      "label": "Fezes moles / Diarreia cecal (coelho)",
+      "categoria": "Digestivo",
+      "especies": ["coelho"],
+      "doencas_associadas": ["Disbiose por Dieta Rica em Carboidratos", "Coccidiose Hepática/Intestinal", "Clostridiose", "Estresse", "Dieta Inadequada (excesso de ração pellet, falta de feno)"]
+    },
+    {
+      "id": "sint_bico_deformado",
+      "label": "Bico deformado / Crescimento anormal do bico",
+      "categoria": "Dermatológico",
+      "especies": ["passaro"],
+      "doencas_associadas": ["Sarna do Bico (Knemidokoptes)", "PBFD (Doença do Bico e Penas)", "Deficiência Nutricional", "Trauma"]
+    },
+    {
+      "id": "sint_fezes_escuras_passaro",
+      "label": "Fezes escuras / Verdes / Uratos alterados (pássaro)",
+      "categoria": "Digestivo",
+      "especies": ["passaro"],
+      "doencas_associadas": ["Psitacose/Clamidiose", "Aspergilose", "Doença Hepática", "Giardiase Aviária", "Macrorhabdus (AGY)"]
+    },
+    {
+      "id": "sint_penas_quebradas",
+      "label": "Quebrar penas / Arrancar penas / Penas destruídas",
+      "categoria": "Comportamental",
+      "especies": ["passaro"],
+      "doencas_associadas": ["PBFD (Doença do Bico e Penas)", "Picacismo por Estresse / Tédio", "Parasitismo (piolhos)", "Alergias", "Deficiência Nutricional"]
+    },
+    {
+      "id": "sint_descamacao_reptil",
+      "label": "Dificuldade de muda / Ecdise incompleta (réptil)",
+      "categoria": "Dermatológico",
+      "especies": ["reptil"],
+      "doencas_associadas": ["Disecdise por Baixa Umidade", "Desnutrição", "Parasitismo Externo", "Infecção Cutânea"]
+    },
+    {
+      "id": "sint_boca_aberta_reptil",
+      "label": "Abrir a boca / Respiração de boca aberta (réptil)",
+      "categoria": "Respiratório",
+      "especies": ["reptil", "tartaruga"],
+      "doencas_associadas": ["Pneumonia", "Infecção Respiratória Bacteriana", "Temperatura Inadequada", "Vírus Respiratório (Nidovírus)"]
+    },
+    {
+      "id": "sint_casco_amolecido",
+      "label": "Casco amolecido / Deformado (tartaruga)",
+      "categoria": "Musculoesquelético",
+      "especies": ["tartaruga"],
+      "doencas_associadas": ["Doença Metabólica Óssea (MBD)", "Deficiência de Cálcio/UVB", "Raquitismo", "Hipovitaminose A"]
+    },
+    {
+      "id": "sint_andar_circular",
+      "label": "Andar em círculos / Comportamento compulsivo",
+      "categoria": "Comportamental",
+      "especies": ["cachorro", "gato", "coelho", "furao", "roedor"],
+      "doencas_associadas": ["Síndrome Vestibular", "Meningoencefalite", "Encefalitozoonose", "Neoplasia Cerebral", "Head Tilt", "Estresse / Tédio (roedor)"]
+    },
+    {
+      "id": "sint_agressividade_repentina",
+      "label": "Agressividade / Mudança de comportamento súbita",
+      "categoria": "Comportamental",
+      "especies": ["cachorro", "gato", "coelho", "furao"],
+      "doencas_associadas": ["Raiva (EMERGÊNCIA - Zoonose)", "Dor Aguda", "Encefalite", "Neoplasia Cerebral", "Hipotireoidismo", "Hiperadrenocorticismo", "Encefalitozoonose (coelho)"]
+    },
+    {
+      "id": "sint_hipersalivacao_furao",
+      "label": "Hipersalivação / Fraqueza aguda episódica (furão)",
+      "categoria": "Sistêmico",
+      "especies": ["furao"],
+      "doencas_associadas": ["Insulinoma (Tumor de Pâncreas - muito comum em furões)", "Hipoglicemia"]
+    },
+    {
+      "id": "sint_distensao_vulvar_furao",
+      "label": "Vulva inchada fora de época (furão fêmea)",
+      "categoria": "Reprodutivo",
+      "especies": ["furao"],
+      "doencas_associadas": ["Cio Persistente por Doença Adrenal", "Tumor Ovariano", "Hiperestrogenismo (risco fatal se não tratado)"]
+    }
+  ],
+  "doencas": [
+    { "id": "doenca_cinomose", "nome": "Cinomose", "especies": ["cachorro", "furao"], "gravidade": "alta", "zoonose": false, "urgencia": false },
+    { "id": "doenca_parvovirose", "nome": "Parvovirose", "especies": ["cachorro"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_leptospirose", "nome": "Leptospirose", "especies": ["cachorro"], "gravidade": "alta", "zoonose": true, "urgencia": true },
+    { "id": "doenca_erliquiose", "nome": "Erliquiose", "especies": ["cachorro"], "gravidade": "alta", "zoonose": false, "urgencia": false },
+    { "id": "doenca_babesiose", "nome": "Babesiose", "especies": ["cachorro"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_panleukopenia", "nome": "Panleukopenia Felina", "especies": ["gato"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_pif", "nome": "PIF (Peritonite Infecciosa Felina)", "especies": ["gato"], "gravidade": "alta", "zoonose": false, "urgencia": false },
+    { "id": "doenca_calicivirose", "nome": "Calicivirose Felina", "especies": ["gato"], "gravidade": "moderada", "zoonose": false, "urgencia": false },
+    { "id": "doenca_rinotraqueite", "nome": "Rinotraqueíte Felina (Herpesvírus)", "especies": ["gato"], "gravidade": "moderada", "zoonose": false, "urgencia": false },
+    { "id": "doenca_hiperestrogenismo_furao", "nome": "Aplasia Medular por Hiperestrogenismo", "especies": ["furao"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_insulinoma_furao", "nome": "Insulinoma (furão)", "especies": ["furao"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_estase_gi_coelho", "nome": "Estase Gastrointestinal (coelho)", "especies": ["coelho"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_encefalitozoonose", "nome": "Encefalitozoonose (coelho)", "especies": ["coelho"], "gravidade": "alta", "zoonose": false, "urgencia": false },
+    { "id": "doenca_mbd_reptil", "nome": "Doença Metabólica Óssea (MBD)", "especies": ["reptil", "tartaruga", "passaro"], "gravidade": "moderada", "zoonose": false, "urgencia": false },
+    { "id": "doenca_pbfd", "nome": "PBFD (Doença do Bico e Penas)", "especies": ["passaro"], "gravidade": "alta", "zoonose": false, "urgencia": false },
+    { "id": "doenca_raiva", "nome": "Raiva", "especies": ["cachorro", "gato", "furao"], "gravidade": "alta", "zoonose": true, "urgencia": true },
+    { "id": "doenca_leishmaniose", "nome": "Leishmaniose", "especies": ["cachorro"], "gravidade": "alta", "zoonose": true, "urgencia": false },
+    { "id": "doenca_torção_gastrica", "nome": "Torção Gástrica (GDV)", "especies": ["cachorro"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_piometra", "nome": "Piometra", "especies": ["cachorro", "gato", "furao", "coelho"], "gravidade": "alta", "zoonose": false, "urgencia": true },
+    { "id": "doenca_diabetes", "nome": "Diabetes Mellitus", "especies": ["cachorro", "gato", "furao"], "gravidade": "moderada", "zoonose": false, "urgencia": false },
+    { "id": "doenca_cushing", "nome": "Hiperadrenocorticismo (Cushing)", "especies": ["cachorro"], "gravidade": "moderada", "zoonose": false, "urgencia": false },
+    { "id": "doenca_ddiv", "nome": "Hérnia de Disco Intervertebral (DDIV)", "especies": ["cachorro", "gato"], "gravidade": "moderada", "zoonose": false, "urgencia": true },
+    { "id": "doenca_linfoma", "nome": "Linfoma / Linfossarcoma", "especies": ["cachorro", "gato", "furao"], "gravidade": "alta", "zoonose": false, "urgencia": false },
+    { "id": "doenca_asma_felina", "nome": "Asma Felina", "especies": ["gato"], "gravidade": "moderada", "zoonose": false, "urgencia": false },
+    { "id": "doenca_tosse_canis", "nome": "Traqueobronquite Infecciosa (Tosse dos Canis)", "especies": ["cachorro"], "gravidade": "leve", "zoonose": false, "urgencia": false }
+  ]
+}

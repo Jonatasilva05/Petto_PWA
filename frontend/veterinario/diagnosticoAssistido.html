@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petto • Diagnóstico Assistido</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <link rel="stylesheet" href="./css/diagnosticoAssistido.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#00D09E",
+            dark: {
+              950: "#05080A",
+              900: "#0B1114",
+              850: "#11181D",
+              800: "#151F25",
+              700: "#1D2A31",
+              border: "#26343C",
+            },
+          },
+          boxShadow: { glow: "0 0 40px rgba(0, 208, 158, 0.12)" },
+        },
+      },
+    };
+  </script>
+
+</head>
+
+<body class="min-h-screen">
+
+<!-- ═══════════════════════════════════════════════════════════
+     MODAL PRINCIPAL
+════════════════════════════════════════════════════════════ -->
+<div id="modal-diagnostico" class="modal-overlay">
+  <div class="modal-box">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+          <i class="ph ph-brain text-xl text-primary"></i>
+        </div>
+        <div>
+          <h2 class="text-lg font-bold text-white">Diagnóstico Assistido</h2>
+          <p class="text-xs text-gray-500">Sugestão inteligente por sintomas</p>
+        </div>
+      </div>
+      <button id="btn-close-modal" class="w-8 h-8 rounded-lg bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:bg-dark-700 transition-colors text-sm">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+
+    <!-- Steps indicator -->
+    <div class="flex items-center mb-8" id="steps-indicator">
+      <div class="step-indicator mx-auto">
+        <div class="step-dot done" id="dot-1">1</div>
+        <div class="step-line" id="line-1-2"></div>
+        <div class="step-dot" id="dot-2">2</div>
+        <div class="step-line" id="line-2-3"></div>
+        <div class="step-dot" id="dot-3">3</div>
+        <div class="step-line" id="line-3-4"></div>
+        <div class="step-dot" id="dot-4">4</div>
+      </div>
+    </div>
+    <div class="flex justify-between text-[10px] text-gray-600 uppercase tracking-widest mb-6 -mt-4">
+      <span class="w-8 text-center">Espécie</span>
+      <span class="w-8 text-center" style="margin-left:40px">Sintomas</span>
+      <span class="w-8 text-center" style="margin-left:40px">Diagnóst.</span>
+      <span class="w-8 text-center" style="margin-left:40px">Finalizar</span>
+    </div>
+
+    <!-- ─── STEP 1: Escolher Espécie ─── -->
+    <div id="step-1" class="fade-in">
+      <p class="text-sm text-gray-400 mb-4">Qual a espécie do paciente?</p>
+      <div class="grid grid-cols-4 gap-2 mb-6" id="especies-grid">
+        <!-- gerado por JS -->
+      </div>
+      <div class="flex justify-end">
+        <button id="btn-step1-next" class="btn-primary" disabled>
+          Próximo <i class="ph ph-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── STEP 2: Sintomas ─── -->
+    <div id="step-2" class="hidden fade-in">
+      <div class="flex items-center justify-between mb-3">
+        <p class="text-sm text-gray-400">Marque todos os sintomas observados:</p>
+        <span id="count-sintomas" class="text-xs text-primary font-semibold">0 selecionados</span>
+      </div>
+
+      <!-- Search sintomas -->
+      <div class="relative mb-4">
+        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+        <input type="text" id="search-sintomas" class="search-input" placeholder="Filtrar sintomas..." />
+      </div>
+
+      <!-- Tags sintomas selecionados -->
+      <div id="tags-container" class="flex flex-wrap gap-2 mb-3 hidden"></div>
+
+      <!-- Lista de sintomas por categoria -->
+      <div id="sintomas-lista" class="max-h-72 overflow-y-auto pr-1 space-y-1">
+        <!-- gerado por JS -->
+      </div>
+
+      <div class="flex justify-between mt-5">
+        <button id="btn-step2-back" class="btn-ghost"><i class="ph ph-arrow-left"></i> Voltar</button>
+        <button id="btn-step2-next" class="btn-primary" disabled>
+          Ver Sugestões <i class="ph ph-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── STEP 3: Diagnósticos Sugeridos ─── -->
+    <div id="step-3" class="hidden fade-in">
+      <div class="flex items-center gap-2 mb-1">
+        <i class="ph ph-sparkle text-primary"></i>
+        <p class="text-sm text-gray-300 font-medium">Diagnósticos diferenciais sugeridos:</p>
+      </div>
+      <p class="text-xs text-gray-600 mb-4">Ordenados por relevância. Selecione o(s) que confirmar ou pule caso nenhum se aplique.</p>
+
+      <div id="doencas-sugeridas" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+        <!-- gerado por JS -->
+      </div>
+
+      <div class="flex justify-between mt-5">
+        <button id="btn-step3-back" class="btn-ghost"><i class="ph ph-arrow-left"></i> Voltar</button>
+        <button id="btn-step3-next" class="btn-primary">
+          Continuar <i class="ph ph-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── STEP 4: Finalizar ─── -->
+    <div id="step-4" class="hidden fade-in">
+      <div class="space-y-4">
+
+        <!-- Resumo dos sintomas -->
+        <div class="bg-dark-900 border border-dark-border rounded-xl p-4">
+          <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2">Sintomas Registrados</p>
+          <div id="resumo-sintomas" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <!-- Diagnóstico selecionado ou campo livre -->
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <label class="text-sm text-gray-300 font-semibold">Diagnóstico / Hipótese Diagnóstica</label>
+            <span id="badge-diagnostico-selecionado" class="hidden text-xs bg-primary/10 text-primary border border-primary/20 rounded-md px-2 py-0.5">
+              Sugestão aceita
+            </span>
+          </div>
+          <textarea id="campo-diagnostico" class="diagnostico-final-textarea" placeholder="Ex: Traqueobronquite Infecciosa (Tosse dos Canis)&#10;Descreva o diagnóstico definitivo ou hipótese..."></textarea>
+        </div>
+
+        <!-- Alertas urgência/zoonose -->
+        <div id="alertas-urgencia" class="hidden space-y-2"></div>
+
+        <!-- Botão copiar resultado -->
+        <div class="flex items-center justify-between pt-2">
+          <button id="btn-copiar-resultado" class="resultado-copy-btn">
+            <i class="ph ph-copy"></i> Copiar resumo
+          </button>
+          <div class="flex gap-2">
+            <button id="btn-step4-back" class="btn-ghost"><i class="ph ph-arrow-left"></i> Voltar</button>
+            <button id="btn-finalizar" class="btn-primary">
+              <i class="ph ph-check-circle"></i> Aplicar ao Prontuário
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="min-h-screen flex items-center justify-center p-8" id="demo-page">
+  <div class="text-center space-y-6">
+    <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center mx-auto">
+      <i class="ph ph-brain text-4xl text-primary"></i>
+    </div>
+    <div>
+      <h1 class="text-3xl font-bold text-white mb-2">Diagnóstico Assistido</h1>
+      <p class="text-gray-400 max-w-md mx-auto">Módulo inteligente de sugestão diagnóstica por sintomas. Integrado ao sistema Petto.</p>
+    </div>
+    <button id="btn-demo-open" class="btn-primary mx-auto">
+      <i class="ph ph-play"></i> Testar Módulo
+    </button>
+    <p class="text-xs text-gray-600">Este módulo é integrado ao prontuário clínico. Ver integração no código.</p>
+  </div>
+</div>
+<script src="./js/diagnosticoAssistido.js"></script>
+</body>
+</html>

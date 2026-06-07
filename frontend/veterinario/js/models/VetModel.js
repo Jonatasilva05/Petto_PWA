@@ -140,4 +140,13 @@ export class VetModel {
         if (!response.ok) throw new Error(data.message || 'Erro ao vincular pets.');
         return data;
     }
+
+    async getProntuariosList() {
+    const token = localStorage.getItem('auth-token-petto');
+    const response = await fetch(`${this.apiUrl}/vet/prontuarios`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!response.ok) throw new Error('Erro ao buscar lista de prontuários');
+    return await response.json();
+}
 } 

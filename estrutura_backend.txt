@@ -6,13 +6,9 @@ backend/
 │   ├── config/
 │   │   ├── db.js
 │   ├── data/
-│   │   ├── 23-05/
-│   │   │   ├── petto_pwa.sql
-│   │   ├── 24-05/
-│   │   │   ├── petto_pwa.sql
-│   │   ├── 27-05/
-│   │   │   ├── petto_pwa.sql
-│   │   ├── 28-05/
+│   │   ├── 06-06/
+│   │   │   ├── petto_pwa .sql
+│   │   ├── 07-06/
 │   │   │   ├── petto_pwa.sql
 │   │   ├── 28-05V2/
 │   │   │   ├── petto_pwa.sql

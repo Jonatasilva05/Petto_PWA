@@ -279,7 +279,7 @@ body {
 /* fim de semana */
 
 .day-picker.weekend {
-    opacity: .55;
+    opacity: .55; 
 }
 
 .day-picker.weekend span:last-child {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/05/2026 às 05:17
+-- Tempo de geração: 07/06/2026 às 14:33
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -35,6 +35,17 @@ CREATE TABLE `agendamentos` (
   `status` varchar(20) DEFAULT 'agendado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Despejando dados para a tabela `agendamentos`
+--
+
+INSERT INTO `agendamentos` (`id_agendamento`, `id_pet`, `id_veterinario`, `data_hora`, `status`) VALUES
+(7, 135, 77, '2026-05-31 08:00:00', 'agendado'),
+(8, 136, 77, '2026-05-31 15:00:00', 'agendado'),
+(9, 136, 77, '2026-05-29 08:00:00', 'agendado'),
+(10, 137, 77, '2026-06-15 09:30:00', 'Confirmada'),
+(11, 136, 77, '2026-06-10 10:00:00', 'agendado');
+
 -- --------------------------------------------------------
 
 --
@@ -56,9 +67,6 @@ CREATE TABLE `medicamentos` (
 --
 
 INSERT INTO `medicamentos` (`id_medicamento`, `id_dataset`, `id_pet`, `nome_medicamento`, `data_aplicacao`, `data_desconhecida`, `id_veterinario`) VALUES
-(1, NULL, 54, 'Vermífugo (Remédio para Verme - Comprimido Oral)', NULL, 1, NULL),
-(2, NULL, 59, 'Vermífugo (Remédio para Verme - Injetável)', NULL, 0, NULL),
-(3, NULL, 59, 'Vermífugo (Remédio para Verme - Comprimido Oral)', NULL, 0, NULL),
 (16, 'vermifugo_oral_cao_gato', 103, 'Vermífugo (Comprimido Oral)', NULL, 0, NULL),
 (17, 'antipulgas_carrapatos_cao_gato', 104, 'Antipulgas e Carrapatos (Oral/Tópico)', NULL, 0, NULL),
 (18, 'vermifugo_oral_cao_gato', 105, 'Vermífugo (Comprimido Oral)', NULL, 1, NULL);
@@ -94,10 +102,6 @@ CREATE TABLE `pets` (
 INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_valor`, `idade_unidade`, `idade_meses`, `idade_dias`, `peso`, `sexo`, `cor`, `data_nascimento`, `foto_url`, `id_veterinario`) VALUES
 (50, 'Rex', 63, 'Cachorro', 'Pastor Alemão', 5, 'anos', NULL, NULL, 30, 'M', 'Preto e Bege', NULL, NULL, NULL),
 (51, 'Thor', 64, 'Cachorro', 'Bulldog Francês', 4, 'anos', NULL, NULL, 12, 'M', 'Creme', NULL, NULL, NULL),
-(54, 'Caramelo ', NULL, 'cachorro', 'chow_chow', 2, 'meses', NULL, NULL, NULL, 'M', 'Caramelo ', NULL, NULL, NULL),
-(56, 'Caraca', NULL, 'tartaruga', 'jabuti_piranga', 15, 'anos', NULL, NULL, 15, 'M', 'Verde', NULL, NULL, NULL),
-(59, 'Caramelo ', NULL, 'cachorro', 'chow_chow', 2, 'meses', NULL, NULL, NULL, 'M', 'Caramelado', NULL, NULL, NULL),
-(73, 'Urso ', NULL, 'cachorro', 'vira_lata', NULL, NULL, NULL, NULL, 7, 'M', 'Caramelo', '2025-05-22', NULL, NULL),
 (79, 'Rex', 85, 'cachorro', 'vira_lata', NULL, NULL, NULL, NULL, 5, 'M', 'branco', '2010-10-02', NULL, NULL),
 (80, 'Tico', 86, 'gato', 'vira_lata', NULL, NULL, NULL, NULL, 5, 'M', 'Laranja', '2020-05-10', NULL, NULL),
 (101, 'Tico', 95, 'gato', 'vira_lata', 3, 'anos', NULL, NULL, 4, 'M', 'Laranja', NULL, NULL, NULL),
@@ -105,7 +109,11 @@ INSERT INTO `pets` (`id_pet`, `nome`, `id_usuario`, `especie`, `raca`, `idade_va
 (103, 'Luna', 96, 'cachorro', 'vira_lata', 6, 'anos', 1, NULL, NULL, 'F', NULL, NULL, NULL, NULL),
 (104, 'Sara', 97, 'cachorro', 'dachshund', NULL, NULL, NULL, NULL, NULL, 'F', 'Branca', '2003-03-11', '/uploads/ecb927684e6a7b49311a04bd166ccdc7.jpeg', NULL),
 (105, 'Gaia', 98, 'gato', 'sem_raca_definida', 7, 'meses', NULL, NULL, NULL, 'F', 'Cinza', NULL, NULL, NULL),
-(132, 'Mateus', NULL, 'outro', 'Não se aplica', NULL, 'anos', NULL, NULL, 100000, 'F', 'Branco ', '2000-09-02', NULL, NULL);
+(133, 'Simba', 114, 'gato', 'Sem Raça Definida', 5, 'anos', NULL, NULL, NULL, 'M', 'Amarelo ', NULL, NULL, NULL),
+(135, 'Teste', 115, 'gato', 'Abissínio', NULL, 'anos', NULL, NULL, 3, 'M', 'tes', '2026-05-28', '/uploads/92d651f550b3347780f21183ed177592.jpeg', NULL),
+(136, 'tes', 102, 'coelho', 'Angorá Inglês', NULL, 'anos', NULL, NULL, 1, 'M', 'dsa', '2026-03-03', NULL, NULL),
+(137, 'Not', 119, 'coelho', 'Bélier (Lop)', NULL, 'anos', NULL, NULL, 3, 'M', 'Branco', '2026-03-18', '/uploads/fe5cc16c428f1434be4c550c84f61aa9.jpeg', NULL),
+(138, 'Bob', 102, 'cachorro', 'Chow Chow', NULL, 'anos', NULL, NULL, 3, 'M', 'Caramelo', '2026-04-01', '/uploads/00dc2974e6fa74e9343f455aa6b81053.jpeg', 77);
 
 -- --------------------------------------------------------
 
@@ -168,7 +176,14 @@ INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `telefone`, `endereco`, 
 (108, 'testandoteste@gmail.com', '$2b$10$.29VFp9hB400tEf2rkz2v.52iPJqi8UIXIJ9FUSKhYc8dVT9E9JZe', 'Teste', NULL, NULL, NULL, 'Teste', 'Teste', 'tutor', NULL),
 (110, 'vet@petto.com', 'admin@123', 'Dr. João Silva Teste', NULL, NULL, NULL, 'Tigre', 'Azul', 'veterinario', '46935923077'),
 (111, 'petto@gmail.com', '$2b$10$Hyoqbwl0dETJ1eGAxYA12eAys0V1AsooHjCleuT6ZOmiyEZwekFPm', 'Jonatas', NULL, NULL, NULL, 'vet', 'vet', 'veterinario', '93080517083'),
-(112, 'adminvet@gmail.com', '$2b$10$CoMrM1xdzUwAcujLLCtBAO4ZHr6Is0DrsF9CpLUT5nUi2S7qa/Lj2', 'Jonatas', NULL, NULL, NULL, 'tes', 'tes', 'veterinario', '66535782085');
+(112, 'adminvet@gmail.com', '$2b$10$CoMrM1xdzUwAcujLLCtBAO4ZHr6Is0DrsF9CpLUT5nUi2S7qa/Lj2', 'Jonatas', NULL, NULL, NULL, 'tes', 'tes', 'veterinario', '66535782085'),
+(113, 'testeste@gmail.cpm', '$2b$10$Bc7ZUE5WaT/xFtOK2opR.OylHVzz1DxmrFZxwEpEOjCCyj9/La9/K', 'teste', '(12) 56542-4569', 'Rua Alderico Bussadori Filho, , Jardim Maria Luiza I - Taquaritinga - SP', NULL, 'teste', 'teste', 'tutor', '54220367004'),
+(114, 'aline.luz@cps.sp.gov.br', '$2b$10$KEP/oxyXypr6L6lqh3JereN6pPbntj0VArzEU7/gACBIThtAWolWq', 'Aline Beatriz Ramos Luz Del Vechio', NULL, NULL, NULL, 'Simba', NULL, 'tutor', NULL),
+(115, 'maicon@gmail.com', '$2b$10$U7YyYgmYknWASaiA.adVD.YBF/VHaTkx7dQZSDd68lG.x54t9tJ2C', 'Maicon', NULL, NULL, NULL, 'Tigre', 'Azul', 'tutor', NULL),
+(116, 'abc@gmail.com', '$2b$10$zgSAcnkjM5e9b7csrwjwluaZbqgCU70VBgGKUolssInxzNL2h0MM6', 'Maicon', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '30895509032'),
+(117, 'davi@gmail.com', '$2b$10$orToyk9pC1tSXHTlQxgRYuMS2AYc7YPfP347ChffQuCTT/m3DIHv6', 'davi', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '86183879088'),
+(118, 'faby@gmail.com', '$2b$10$lWmtjl83yD9t/U80fwDRGe8uA03k4Fh55sW56/yJgrO/KceMZaT0.', 'faby', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '55969122041'),
+(119, 'clau@gmail.com', '$2b$10$PMLTlVCVjhGqpemHNg4NUOuSyJWMRpCAehFXKPLEvdd3m2tglQrmu', 'clau', '(12) 56542-4569', 'Rua José Mendes Ferreira Júnior, , Parque Residencial Laranjeiras I - Taquaritinga - SP', NULL, NULL, NULL, 'tutor', '55969122041');
 
 -- --------------------------------------------------------
 
@@ -194,10 +209,11 @@ CREATE TABLE `vacinas` (
 INSERT INTO `vacinas` (`id_vacina`, `id_dataset`, `nome`, `data_aplicacao`, `proxima_aplicacao`, `data_desconhecida`, `id_pet`, `id_veterinario`) VALUES
 (4, NULL, 'V10', '2025-06-26', '2026-06-26', 0, 50, NULL),
 (5, NULL, 'Antirrábica', '2025-06-21', '2026-06-21', 0, 51, NULL),
-(13, NULL, 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 0, 73, NULL),
 (15, NULL, 'Leucemia Felina (FeLV)', '2021-06-22', '0000-00-00', 0, 80, NULL),
 (22, 'vacina_v10_cao', 'Polivalente V8 ou V10 (Cinomose, Parvovirose, etc.)', NULL, '0000-00-00', 1, 103, NULL),
-(23, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', NULL, '0000-00-00', 0, 104, NULL);
+(23, 'vacina_rabica_cao_gato', 'Antirrábica (Raiva)', NULL, '0000-00-00', 0, 104, NULL),
+(43, 'vacina_mixomatose_coelho', 'Vacina contra Mixomatose', '2026-04-23', '0000-00-00', 0, 137, NULL),
+(44, 'vacina_gripe_canina', 'Gripe Canina / Tosse dos Canis (Bordetella + Parainfluenza)', '2026-06-04', '0000-00-00', 0, 138, NULL);
 
 -- --------------------------------------------------------
 
@@ -240,6 +256,16 @@ CREATE TABLE `vet_clientes` (
   `id_usuario` int(11) NOT NULL,
   `data_vinculo` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `vet_clientes`
+--
+
+INSERT INTO `vet_clientes` (`id_veterinario`, `id_usuario`, `data_vinculo`) VALUES
+(77, 102, '2026-06-06 03:57:14'),
+(77, 113, '2026-05-29 03:42:57'),
+(77, 118, '2026-05-29 02:20:08'),
+(77, 119, '2026-05-29 02:45:31');
 
 --
 -- Índices para tabelas despejadas
@@ -313,7 +339,7 @@ ALTER TABLE `vet_clientes`
 -- AUTO_INCREMENT de tabela `agendamentos`
 --
 ALTER TABLE `agendamentos`
-  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `medicamentos`
@@ -325,7 +351,7 @@ ALTER TABLE `medicamentos`
 -- AUTO_INCREMENT de tabela `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de tabela `prontuario`
@@ -337,13 +363,13 @@ ALTER TABLE `prontuario`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT de tabela `vacinas`
 --
 ALTER TABLE `vacinas`
-  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_vacina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de tabela `veterinarios`

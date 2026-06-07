@@ -1,14 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; object-src 'none';">
+        content="default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net http://localhost:*; connect-src 'self' https: ws://localhost:*; object-src 'none';">
     <meta name="referrer" content="no-referrer">
 
-    <link rel="stylesheet" href="./css/prontuarios.css">
+    <link rel="stylesheet" href="./css/prontuarios.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.Swal = window.Swal.mixin({
+            background: '#151F25',
+            color: '#ffffff',
+            confirmButtonColor: '#00D09E'
+        });
+    </script>
 
     <title>Petto • Prontuários</title>
 
@@ -20,29 +29,39 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#00D09E',
-                        dark: { 950: '#05080A', 900: '#0B1114', 850: '#11181D', 800: '#151F25', 700: '#1D2A31', border: '#26343C' }
+                        primary: "#00D09E",
+                        dark: {
+                            950: "#05080A",
+                            900: "#0B1114",
+                            850: "#11181D",
+                            800: "#151F25",
+                            700: "#1D2A31",
+                            border: "#26343C",
+                        },
                     },
-                    boxShadow: { glow: '0 0 40px rgba(0, 208, 158, 0.12)' }
-                }
-            }
-        }
+                    boxShadow: { glow: "0 0 40px rgba(0, 208, 158, 0.12)" },
+                },
+            },
+        };
     </script>
 </head>
 
 <body>
     <div class="flex h-screen w-full">
-
         <aside class="w-72 bg-dark-900 border-r border-dark-border flex flex-col justify-between z-20 shrink-0">
             <div class="flex flex-col h-full overflow-hidden">
                 <div class="h-24 px-6 flex items-center gap-4 border-b border-dark-border shrink-0">
-                    <div
-                        class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-dark-950 shadow-glow">
-                        <i class="ph-bold ph-paw-print text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl tracking-tight">Petto</h1>
-                        <p class="text-xs text-primary font-medium tracking-wide">WORKSPACE PWA</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+                            <img src="../assets/logo/iconBrancaSemFundoSemNome.png" alt="Logo Petto"
+                                class="w-10 h-10 object-contain brightness-0 opacity-80">
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Petto</h2>
+                            <p class="text-xs font-bold text-primary tracking-widest uppercase mt-0.5">Página - Prontuários
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -50,8 +69,7 @@
                     <div>
                         <p class="sidebar-title">VISÃO GERAL</p>
                         <div class="space-y-1">
-                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i>
-                                Dashboard</a>
+                            <a href="dashboard.html" class="sidebar-item"><i class="ph ph-squares-four text-xl"></i> Dashboard</a>
                             <a href="tutores.html" class="sidebar-item"><i class="ph ph-users text-xl"></i> Tutores</a>
                             <a href="pets.html" class="sidebar-item"><i class="ph ph-paw-print text-xl"></i> Pets</a>
                         </div>
@@ -61,14 +79,10 @@
                         <div class="space-y-1">
                             <a href="agenda.html" class="sidebar-item">
                                 <i class="ph ph-calendar text-xl"></i> Agendamentos
-                                <div
-                                    class="ml-auto w-5 h-5 rounded-md bg-dark-800 text-gray-400 flex items-center justify-center text-[10px] font-bold">
-                                    4</div>
+                                <div class="ml-auto w-5 h-5 rounded-md bg-dark-800 text-gray-400 flex items-center justify-center text-[10px] font-bold">4</div>
                             </a>
-                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i>
-                                Prontuários</a>
-                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i>
-                                Vacinas</a>
+                            <a href="prontuarios.html" class="sidebar-item"><i class="ph ph-file-text text-xl"></i> Prontuários</a>
+                            <a href="vacinas.html" class="sidebar-item"><i class="ph ph-syringe text-xl"></i> Vacinas</a>
                         </div>
                     </div>
                     <div>
@@ -77,10 +91,8 @@
                             <a href="procedimentos.html" class="sidebar-item">
                                 <i class="ph ph-heartbeat text-xl"></i> Centro Cirúrgico
                             </a>
-                            <a href="mensagens.html" class="sidebar-item"><i
-                                    class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
-                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i>
-                                Segurança & Acessos</a>
+                            <a href="mensagens.html" class="sidebar-item"><i class="ph ph-chat-teardrop-text text-xl"></i> Mensagens</a>
+                            <a href="perfil.html" class="sidebar-item"><i class="ph ph-shield-check text-xl"></i> Segurança & Acessos</a>
                         </div>
                     </div>
                 </nav>
@@ -88,8 +100,7 @@
 
             <div class="p-5 border-t border-dark-border shrink-0 bg-dark-900">
                 <div class="bg-[#051310] border border-[#0a241c] rounded-2xl p-4 flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
                         <i class="ph-fill ph-shield-check text-xl"></i>
                     </div>
                     <div class="min-w-0">
@@ -100,139 +111,230 @@
             </div>
         </aside>
 
-        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
-            <header
-                class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
+        <main class="flex-1 flex flex-col min-w-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 relative">
+            <header class="h-24 border-b border-dark-border px-8 flex items-center justify-between shrink-0 bg-dark-900/60 backdrop-blur-xl z-10 sticky top-0">
                 <div>
                     <h2 class="text-2xl font-bold text-white">Prontuários Eletrônicos</h2>
                     <p class="text-gray-400 text-sm mt-1">Histórico clínico inalterável e seguro.</p>
                 </div>
+
                 <div class="flex items-center gap-4">
-                    <div class="relative hidden lg:block">
+                    <div class="relative hidden lg:block" id="search-container">
                         <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                        <input type="text" placeholder="ID, Pet ou Tutor..."
-                            class="input-base w-72 h-12 pl-11 pr-4 text-sm" />
-                    </div>
-                    <button
-                        class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors">
-                        <div
-                            class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold">
-                            J</div>
-                        <div class="text-left hidden sm:block">
-                            <p class="text-sm font-semibold leading-tight">Dr. Jhon</p>
+                        <input type="text" id="input-busca" placeholder="Buscar pacientes, tutores..."
+                            class="input-base w-72 h-12 pl-11 pr-4 text-sm focus:border-primary transition-colors"
+                            autocomplete="off" />
+
+                        <div id="dropdown-busca"
+                            class="absolute left-0 top-full mt-2 w-full bg-dark-800 border border-dark-border rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.35)] hidden flex-col overflow-hidden z-50 max-h-80 overflow-y-auto">
                         </div>
+                    </div>
+
+                    <div class="h-8 w-px bg-dark-border mx-2"></div>
+
+                    <button class="btn-icon relative">
+                        <i class="ph ph-bell"></i>
+                        <span class="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full border-2 border-[#151F25]"></span>
                     </button>
+
+                    <div class="relative" id="profile-menu-container">
+                        <button id="btn-profile-menu" class="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-2xl border border-dark-border bg-dark-800 hover:bg-dark-700 transition-colors cursor-pointer">
+                            <div class="w-9 h-9 rounded-xl bg-dark-950 text-primary flex items-center justify-center font-bold">J</div>
+                            <div class="text-left hidden sm:block">
+                                <p class="text-sm font-semibold leading-tight" id="vet-profile-name">Carregando...</p>
+                                <p class="text-[10px] text-gray-400">CRMV Ativo</p>
+                            </div>
+                            <i class="ph ph-caret-down text-gray-500 ml-2"></i>
+                        </button>
+
+                        <div id="dropdown-profile" class="absolute right-0 mt-3 w-48 bg-dark-800 border border-dark-border rounded-xl shadow-[0_25px_60px_rgba(0,0,0,0.35)] hidden flex-col overflow-hidden z-50 transform origin-top-right transition-all">
+                            <a href="perfil.html" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-dark-700 hover:text-white transition-colors border-b border-dark-border">
+                                <i class="ph ph-user text-lg"></i> Meu Perfil
+                            </a>
+                            <button id="btn-logout" class="flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 transition-colors w-full text-left">
+                                <i class="ph ph-sign-out text-lg"></i> Sair da Conta
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </header>
 
             <div class="flex-1 overflow-y-auto p-8">
                 <div class="max-w-[1400px] mx-auto space-y-8 pb-12">
-
+                    
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div class="flex gap-2">
-                            <button
-                                class="btn-action bg-dark-800 border border-dark-border hover:bg-dark-700 text-white"><i
-                                    class="ph ph-funnel"></i> Todos os Registros</button>
-                            <button
-                                class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-gray-400"><i
-                                    class="ph ph-sort-descending"></i> Mais Recentes</button>
+                            <button class="btn-action bg-dark-800 border border-dark-border hover:bg-dark-700 text-white">
+                                <i class="ph ph-funnel"></i> Todos os Registros
+                            </button>
+                            <button class="btn-action bg-transparent border border-dark-border hover:bg-dark-800 text-gray-400">
+                                <i class="ph ph-sort-descending"></i> Mais Recentes
+                            </button>
                         </div>
-                        <button class="btn-action btn-primary"><i class="ph-bold ph-file-plus"></i> Novo
-                            Prontuário</button>
+                        <button id="btn-open-prontuario" class="btn-primary btn-action h-12">
+                            <i class="ph-bold ph-plus"></i> Novo Prontuário
+                        </button>
                     </div>
 
-                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                        <!-- Registro Expandido -->
-                        <div class="glass-panel rounded-3xl p-8 card-hover">
-                            <div class="flex items-start justify-between mb-8">
-                                <div class="flex items-center gap-5">
-                                    <img src="https://placedog.net/100/100?id=2"
-                                        class="w-16 h-16 rounded-2xl object-cover border-2 border-dark-800" />
-                                    <div>
-                                        <div class="flex items-center gap-3 mb-1">
-                                            <h2 class="text-2xl font-bold">Thor</h2>
-                                            <span
-                                                class="bg-primary/10 text-primary text-xs px-2.5 py-1 rounded-md border border-primary/20">Em
-                                                Tratamento</span>
-                                        </div>
-                                        <p class="text-sm text-gray-400">Golden Retriever • Tutor: Maria Silva</p>
-                                    </div>
-                                </div>
-                                <button class="btn-icon w-10 h-10"><i class="ph ph-printer"></i></button>
-                            </div>
+                    <div id="container-prontuarios" class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                        <div class="col-span-full text-center py-12 text-gray-500">
+                            <i class="ph ph-spinner animate-spin text-3xl text-primary"></i>
+                            <p class="mt-2 text-sm">Buscando histórico clínico de pacientes...</p>
+                        </div>
+                    </div>
 
-                            <div class="grid grid-cols-2 gap-4 mb-8">
-                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
-                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
-                                        Veterinário</p>
-                                    <p class="text-sm font-semibold">Dr. Jhon</p>
-                                </div>
-                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
-                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
-                                        Última Atualização</p>
-                                    <p class="text-sm font-semibold text-primary">Há 2 horas</p>
-                                </div>
-                            </div>
+                </div>
+            </div>
 
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <p class="text-xs text-primary font-bold tracking-widest uppercase mb-1">Diagnóstico
-                                    </p>
-                                    <h4 class="text-lg font-semibold text-white">Traqueobronquite Infecciosa</h4>
-                                    <p class="text-sm text-gray-400 mt-2 leading-relaxed">Paciente apresentou tosse
-                                        persistente e irritação traqueal severa durante a noite. Ausculta pulmonar
-                                        limpa.</p>
+            <div id="modal-prontuario" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-dark-950/80 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+                <div class="modal-prontuario-content glass-panel transform scale-95 transition-transform duration-300">
+
+                    <div class="modal-header">
+                        <div class="modal-title-group">
+                            <div class="modal-icon">
+                                <i class="ph-fill ph-file-plus"></i>
+                            </div>
+                            <div>
+                                <h3>Novo Prontuário Clínico</h3>
+                                <p>Registre consultas, diagnósticos e tratamentos do paciente.</p>
+                            </div>
+                        </div>
+                        <button id="btn-close-prontuario" type="button" class="modal-close">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+
+                    <form id="form-prontuario" class="modal-form">
+                        <div class="form-section">
+                            <span class="section-title"><i class="ph ph-user"></i> Identificação</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label>Tutor</label>
+                                    <select id="prontuario-tutor" class="input-base w-full" required></select>
                                 </div>
-                                <div class="timeline-item">
-                                    <p class="text-xs text-primary font-bold tracking-widest uppercase mb-1">Tratamento
-                                        & Prescrição</p>
-                                    <h4 class="text-lg font-semibold text-white">Doxiciclina + Antitussígeno</h4>
-                                    <p class="text-sm text-gray-400 mt-2 leading-relaxed">Iniciado ciclo de antibiótico
-                                        por 10 dias. Orientada restrição de exercícios e hidratação contínua.</p>
+                                <div>
+                                    <label>Paciente (Pet)</label>
+                                    <select id="prontuario-pet" class="input-base w-full" disabled required></select>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Registro Secundário -->
-                        <div class="glass-panel rounded-3xl p-8 card-hover">
-                            <div class="flex items-start justify-between mb-8">
-                                <div class="flex items-center gap-5">
-                                    <img src="https://placecats.com/100/100"
-                                        class="w-16 h-16 rounded-2xl object-cover border-2 border-dark-800" />
-                                    <div>
-                                        <div class="flex items-center gap-3 mb-1">
-                                            <h2 class="text-2xl font-bold">Luna</h2>
-                                            <span
-                                                class="bg-blue-500/10 text-blue-400 text-xs px-2.5 py-1 rounded-md border border-blue-500/20">Alta
-                                                Médica</span>
-                                        </div>
-                                        <p class="text-sm text-gray-400">Persa • Tutor: Fernanda Lima</p>
-                                    </div>
-                                </div>
-                                <button class="btn-icon w-10 h-10"><i class="ph ph-printer"></i></button>
+                        <div class="form-section">
+                            <span class="section-title"><i class="ph ph-calendar"></i> Consulta</span>
+                            <div>
+                                <label>Data da Consulta</label>
+                                <input type="date" id="prontuario-data" class="input-base w-full" required>
                             </div>
-
-                            <div class="grid grid-cols-2 gap-4 mb-8">
-                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
-                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
-                                        Veterinário</p>
-                                    <p class="text-sm font-semibold">Dra. Ana Silva</p>
-                                </div>
-                                <div class="bg-dark-800 border border-dark-border rounded-2xl p-4">
-                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-1">
-                                        Última Atualização</p>
-                                    <p class="text-sm font-semibold">14 Fev 2026</p>
-                                </div>
+                            <div>
+                                <label>Motivo da Consulta</label>
+                                <input type="text" id="prontuario-motivo" class="input-base w-full" placeholder="Ex.: Retorno pós-cirúrgico" required>
                             </div>
+                        </div>
 
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-1">
-                                        Diagnóstico Final</p>
-                                    <h4 class="text-lg font-semibold text-white">Otite Externa Bacteriana Curada</h4>
-                                    <p class="text-sm text-gray-400 mt-2 leading-relaxed">Limpeza auricular finalizada.
-                                        Conduto auditivo sem sinais de inflamação ou secreção.</p>
-                                </div>
+                        <div class="form-section">
+    <div class="flex items-center justify-between">
+        <span class="section-title"><i class="ph ph-heartbeat"></i> Avaliação Clínica</span>
+        <button type="button" id="btn-abrir-diagnostico" class="btn-action bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 h-8 px-3 text-xs rounded-lg transition-colors">
+            <i class="ph-fill ph-brain text-sm"></i> Diagnóstico Assistido
+        </button>
+    </div>
+    <div>
+        <label>Diagnóstico (Presuntivo / Definitivo)</label>
+        <textarea id="prontuario-diagnostico" class="input-base w-full textarea-large" required></textarea>
+    </div>
+    <div>
+        <label>Tratamento Prescrito</label>
+        <textarea id="prontuario-tratamento" class="input-base w-full textarea-large" required></textarea>
+    </div>
+</div>
+
+                        <div class="modal-footer">
+                            <button type="button" id="btn-close-prontuario-footer" class="btn-secondary-modal">Cancelar</button>
+                            <button type="submit" class="btn-primary-modal">
+                                <i class="ph ph-floppy-disk"></i> Salvar Prontuário
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+<div id="modal-diagnostico" class="modal-overlay">
+                <div class="modal-box">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                                <i class="ph ph-brain text-xl text-primary"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold text-white">Diagnóstico Assistido</h2>
+                                <p class="text-xs text-gray-500">Sugestão inteligente por sintomas</p>
+                            </div>
+                        </div>
+                        <button id="btn-close-modal-diag" type="button" class="w-8 h-8 rounded-lg bg-dark-800 border border-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:bg-dark-700 transition-colors text-sm">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center mb-8" id="steps-indicator">
+                        <div class="step-indicator mx-auto">
+                            <div class="step-dot done" id="dot-1">1</div><div class="step-line" id="line-1-2"></div>
+                            <div class="step-dot" id="dot-2">2</div><div class="step-line" id="line-2-3"></div>
+                            <div class="step-dot" id="dot-3">3</div><div class="step-line" id="line-3-4"></div>
+                            <div class="step-dot" id="dot-4">4</div>
+                        </div>
+                    </div>
+
+                    <div id="step-1" class="fade-in">
+                        <p class="text-sm text-gray-400 mb-4">Qual a espécie do paciente?</p>
+                        <div class="grid grid-cols-4 gap-2 mb-6" id="especies-grid"></div>
+                        <div class="flex justify-end">
+                            <button type="button" id="btn-step1-next" class="btn-primary" disabled>Próximo <i class="ph ph-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div id="step-2" class="hidden fade-in">
+                        <div class="flex items-center justify-between mb-3">
+                            <p class="text-sm text-gray-400">Marque todos os sintomas:</p>
+                            <span id="count-sintomas" class="text-xs text-primary font-semibold">0 selecionados</span>
+                        </div>
+                        <div class="relative mb-4">
+                            <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                            <input type="text" id="search-sintomas" class="search-input" placeholder="Filtrar sintomas..." />
+                        </div>
+                        <div id="tags-container" class="flex flex-wrap gap-2 mb-3 hidden"></div>
+                        <div id="sintomas-lista" class="max-h-72 overflow-y-auto pr-1 space-y-1"></div>
+                        <div class="flex justify-between mt-5">
+                            <button type="button" id="btn-step2-back" class="btn-ghost"><i class="ph ph-arrow-left"></i> Voltar</button>
+                            <button type="button" id="btn-step2-next" class="btn-primary" disabled>Ver Sugestões <i class="ph ph-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div id="step-3" class="hidden fade-in">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="ph ph-sparkle text-primary"></i><p class="text-sm text-gray-300 font-medium">Diagnósticos sugeridos:</p>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Selecione o(s) que confirmar ou pule.</p>
+                        <div id="doencas-sugeridas" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+                        <div class="flex justify-between mt-5">
+                            <button type="button" id="btn-step3-back" class="btn-ghost"><i class="ph ph-arrow-left"></i> Voltar</button>
+                            <button type="button" id="btn-step3-next" class="btn-primary">Continuar <i class="ph ph-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div id="step-4" class="hidden fade-in">
+                        <div class="space-y-4">
+                            <div class="bg-dark-900 border border-dark-border rounded-xl p-4">
+                                <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2">Sintomas Registrados</p>
+                                <div id="resumo-sintomas" class="flex flex-wrap gap-1.5"></div>
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-300 font-semibold mb-2 block">Hipótese Diagnóstica</label>
+                                <textarea id="campo-diagnostico" class="diagnostico-final-textarea" placeholder="Descreva o diagnóstico..."></textarea>
+                            </div>
+                            <div id="alertas-urgencia" class="hidden space-y-2"></div>
+                            <div class="flex items-center justify-between pt-2">
+                                <button type="button" id="btn-step4-back" class="btn-ghost"><i class="ph ph-arrow-left"></i> Voltar</button>
+                                <button type="button" id="btn-finalizar-diag" class="btn-primary"><i class="ph ph-check-circle"></i> Aplicar ao Prontuário</button>
                             </div>
                         </div>
                     </div>
@@ -242,4 +344,8 @@
     </div>
 </body>
 <script src="./js/global.js"></script>
+
+<script src="./js/diagnosticoAssistido.js"></script>
+
+<script type="module" src="./js/prontuarios.js"></script>
 </html>

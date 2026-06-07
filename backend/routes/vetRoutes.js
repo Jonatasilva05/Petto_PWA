@@ -426,4 +426,43 @@ router.post('/cadastro-pet-tutor', authenticateToken, async (req, res) => {
     }
 });
 
+// ==========================================
+// ROTA: GET /api/vet/prontuarios
+// Busca todos os prontuários dos pacientes do veterinário logado
+// ==========================================
+router.get('/prontuarios', authenticateToken, async (req, res) => {
+    try {
+        const [vetResult] = await pool.execute('SELECT id_veterinario FROM veterinarios WHERE user_id = ?', [req.user.id]);
+        
+        if (vetResult.length === 0) {
+            return res.status(403).json({ message: 'Acesso negado. Perfil de veterinário não encontrado.' });
+        }
+
+        const idVeterinario = vetResult[0].id_veterinario;
+
+        const query = `
+            SELECT 
+                pr.id, 
+                pr.data_consulta, 
+                pr.motivo, 
+                pr.diagnostico, 
+                pr.tratamento,
+                p.nome AS pet_nome,
+                u.nome AS tutor_nome
+            FROM prontuario pr
+            JOIN pets p ON pr.id_pet = p.id_pet
+            JOIN usuarios u ON p.id_usuario = u.id
+            WHERE pr.id_veterinario = ?
+            ORDER BY pr.data_consulta DESC, pr.id DESC
+        `;
+
+        const [prontuarios] = await pool.execute(query, [idVeterinario]);
+        
+        res.status(200).json(prontuarios);
+    } catch (error) {
+        console.error('Erro ao listar prontuários:', error);
+        res.status(500).json({ message: 'Erro interno ao buscar prontuários.' });
+    }
+});
+
 module.exports = router;

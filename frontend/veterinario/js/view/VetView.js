@@ -17,6 +17,44 @@ export class VetView {
 
         this.selectAgendamento = document.getElementById('agendamento-pet');
         this.selectProntuario = document.getElementById('prontuario-pet');
+        this.containerProntuarios = document.getElementById('container-prontuarios');
+    }
+
+    // Novo método
+    renderListaProntuarios(prontuarios) {
+        if (!this.containerProntuarios) return;
+        this.containerProntuarios.innerHTML = '';
+
+        if (prontuarios.length === 0) {
+            this.containerProntuarios.innerHTML = `<p class="text-gray-400 text-center w-full col-span-full">Nenhum prontuário encontrado.</p>`;
+            return;
+        }
+
+        prontuarios.forEach(pront => {
+            const card = document.createElement('div');
+            card.className = 'glass-panel rounded-3xl p-8 card-hover';
+            card.innerHTML = `
+            <div class="flex items-start justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold">${this.escapeHTML(pront.pet_nome)}</h2>
+                    <p class="text-sm text-gray-400">Tutor: ${this.escapeHTML(pront.tutor_nome)}</p>
+                </div>
+                <button class="btn-icon w-10 h-10"><i class="ph ph-printer"></i></button>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p class="text-xs text-primary font-bold tracking-widest uppercase mb-1">Motivo</p>
+                    <h4 class="text-lg font-semibold text-white">${this.escapeHTML(pront.motivo)}</h4>
+                </div>
+                <div class="timeline-item">
+                    <p class="text-xs text-primary font-bold tracking-widest uppercase mb-1">Diagnóstico</p>
+                    <h4 class="text-lg font-semibold text-white">${this.escapeHTML(pront.diagnostico)}</h4>
+                    <p class="text-sm text-gray-400 mt-2">${this.escapeHTML(pront.tratamento)}</p>
+                </div>
+            </div>
+        `;
+            this.containerProntuarios.appendChild(card);
+        });
     }
 
     // Atualiza os quatro cards de contadores no topo

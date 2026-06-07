@@ -140,6 +140,7 @@ frontend/
 │   │   │   ├── meusAgendamentos.html
 │   │   │   ├── perfilPet.html
 │   ├── uploads/
+│   │   ├── 00dc2974e6fa74e9343f455aa6b81053.jpeg
 │   │   ├── 1779111607640_143.jpeg
 │   │   ├── 1779199652527_523.jpeg
 │   │   ├── 92d651f550b3347780f21183ed177592.jpeg
@@ -149,6 +150,7 @@ frontend/
 │   │   ├── agenda.html
 │   │   ├── chat.html
 │   │   ├── dashboard.html
+│   │   ├── diagnosticoAssistido.html
 │   │   ├── perfil.html
 │   │   ├── pets.html
 │   │   ├── procedimentos.html
@@ -172,6 +174,7 @@ frontend/
 │   │   │   ├── databaseInfoMed2.json
 │   │   │   ├── databaseMedi.json
 │   │   │   ├── databasePets.json
+│   │   │   ├── databaseSintomas.json
 │   │   │   ├── encyclopediaMedi.json
 │   │   │   ├── locais.json
 │   │   ├── js/
@@ -180,6 +183,7 @@ frontend/
 │   │   │   ├── global.js
 │   │   │   ├── perfil.js
 │   │   │   ├── pets.js
+│   │   │   ├── prontuarios.js
 │   │   │   ├── tutores.js
 │   │   │   ├── controllers/
 │   │   │   │   ├── VetController.js
